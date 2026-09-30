@@ -1,7 +1,7 @@
 {
   "version": "CROSSVENUE_TAKER_IMBALANCE_DIVERGENCE_V3",
   "rule_frozen_at": 1790788001.7366178,
-  "last_processed_bucket": 5969293,
+  "last_processed_bucket": 5969354,
   "last_signal_ts": {},
   "pending": [],
   "resolved": [],

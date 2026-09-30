@@ -1,0 +1,205 @@
+{
+  "history": [
+    {
+      "ts": 1790788001.7400188,
+      "gold_curve_pct": 1.0207948462886751,
+      "silver_curve_pct": 2.5870484868206978,
+      "gold_silver_ratio": 68.69834038398959,
+      "sber_curve_pct": 3.4325185972369887,
+      "sber_perp_front_pct": -2.8551186680836005,
+      "gold_perp_oi": 1636554.0,
+      "silver_perp_oi": 80956.0,
+      "sber_perp_oi": 232020.0
+    },
+    {
+      "ts": 1790803364.5651104,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790803666.4373095,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790803967.9293437,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790804269.588473,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790804571.0804515,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790804872.557805,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790805174.181376,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790805475.819258,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790805777.4603999,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790806079.2688167,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    },
+    {
+      "ts": 1790806380.8785822,
+      "gold_curve_pct": 1.1328087970423617,
+      "silver_curve_pct": 2.650837534558459,
+      "gold_silver_ratio": 68.62254025044723,
+      "sber_curve_pct": 3.4873428925473515,
+      "sber_perp_front_pct": -2.8677642060541686,
+      "gold_perp_oi": 1629572.0,
+      "silver_perp_oi": 80710.0,
+      "sber_perp_oi": 232148.0
+    }
+  ],
+  "last_source_ts": 1790806380.8785822,
+  "sample_count": 12,
+  "stats": {
+    "gold_curve_pct": {
+      "n": 12,
+      "last": 1.1328087970423617,
+      "mean": 1.1234743011462212,
+      "min": 1.0207948462886751,
+      "max": 1.1328087970423617,
+      "delta": 0.0
+    },
+    "silver_curve_pct": {
+      "n": 12,
+      "last": 2.650837534558459,
+      "mean": 2.6455217805803124,
+      "min": 2.5870484868206978,
+      "max": 2.650837534558459,
+      "delta": 0.0
+    },
+    "gold_silver_ratio": {
+      "n": 12,
+      "last": 68.62254025044723,
+      "mean": 68.62885692824243,
+      "min": 68.62254025044723,
+      "max": 68.69834038398959,
+      "delta": 0.0
+    },
+    "sber_curve_pct": {
+      "n": 12,
+      "last": 3.4873428925473515,
+      "mean": 3.482774201271488,
+      "min": 3.4325185972369887,
+      "max": 3.4873428925473515,
+      "delta": 0.0
+    },
+    "sber_perp_front_pct": {
+      "n": 12,
+      "last": -2.8677642060541686,
+      "mean": -2.8667104112232877,
+      "min": -2.8677642060541686,
+      "max": -2.8551186680836005,
+      "delta": 0.0
+    },
+    "gold_perp_oi": {
+      "n": 12,
+      "last": 1629572.0,
+      "mean": 1630153.8333333333,
+      "min": 1629572.0,
+      "max": 1636554.0,
+      "delta": 0.0
+    },
+    "silver_perp_oi": {
+      "n": 12,
+      "last": 80710.0,
+      "mean": 80730.5,
+      "min": 80710.0,
+      "max": 80956.0,
+      "delta": 0.0
+    },
+    "sber_perp_oi": {
+      "n": 12,
+      "last": 232148.0,
+      "mean": 232137.33333333334,
+      "min": 232020.0,
+      "max": 232148.0,
+      "delta": 0.0
+    }
+  },
+  "last_refresh": 1790806664.5861795
+}
