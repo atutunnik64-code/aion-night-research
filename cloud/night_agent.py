@@ -1,5 +1,9 @@
 from __future__ import annotations
-import asyncio, signal, time, os, os
+import asyncio, signal, time, os
+from pathlib import Path
+
+ROOT=Path(__file__).resolve().parents[1]
+(ROOT/"data").mkdir(parents=True,exist_ok=True)
 
 # Public-data research only. No broker keys, no live execution.
 from app.services.moex_futures_collector import moex_futures_collector
