@@ -1,5 +1,5 @@
-﻿from __future__ import annotations
-import asyncio, signal, time, os
+from __future__ import annotations
+import asyncio, signal, time, os, os
 
 # Public-data research only. No broker keys, no live execution.
 from app.services.moex_futures_collector import moex_futures_collector
@@ -50,9 +50,13 @@ async def main():
         except NotImplementedError:
             pass
     await _start_all()
+    duration=max(0,int(os.getenv("AION_NIGHT_DURATION_SEC","0") or 0))
+    deadline=time.monotonic()+duration if duration else None
     try:
         while not STOP.is_set():
-            await asyncio.sleep(30)
+            if deadline and time.monotonic()>=deadline:
+                break
+            await asyncio.sleep(5 if duration else 30)
     finally:
         await _stop_all()
         print('NIGHT_AGENT_STOPPED', flush=True)
