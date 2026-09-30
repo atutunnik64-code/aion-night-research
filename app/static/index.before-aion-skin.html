@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>AION Crypto Radar</title>
+<style>
+:root{font-family:Inter,Segoe UI,Arial,sans-serif;background:#0b0d10;color:#eef2f7}body{margin:0}.wrap{max-width:1180px;margin:auto;padding:28px}.top{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-size:28px;font-weight:800}.muted{color:#8f9baa}.badge{background:#15231a;color:#77e69b;padding:7px 10px;border-radius:999px;font-size:12px;font-weight:700}.panel{background:#11151a;border:1px solid #232a33;border-radius:18px;padding:18px;margin-top:18px}.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center}input{background:#0d1116;border:1px solid #303947;color:white;border-radius:10px;padding:11px 12px;width:180px}button{border:0;border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer}.primary{background:white;color:#111}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}.stat{background:#0d1116;border:1px solid #232a33;border-radius:14px;padding:14px}.n{font-size:22px;font-weight:800}.cards{display:grid;gap:12px;margin-top:12px}.card{background:#0d1116;border:1px solid #232a33;border-radius:14px;padding:16px}.profit{color:#77e69b;font-weight:800;font-size:20px}.route{font-family:ui-monospace,Consolas,monospace;font-size:13px;overflow:auto;white-space:nowrap;padding:8px 0}.steps{font-size:12px;color:#aab4c3;line-height:1.7}.empty{color:#8f9baa;padding:24px 0;text-align:center}@media(max-width:700px){.stats{grid-template-columns:1fr 1fr}.top{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+ <div class="top"><div><div class="brand">AION Crypto Radar</div><div class="muted">Поиск исполнимых крипто-связок после комиссий и проскальзывания</div></div><div class="badge">PAPER MODE · БЕЗ АВТОТОРГОВЛИ</div></div>
+ <div class="panel">
+  <div class="controls"><label>Стартовый объём, USDT <input id="amount" type="number" value="10000" min="1"></label><button class="primary" onclick="scan()">Найти связки</button><span id="status" class="muted">Готов к сканированию</span></div>
+  <div class="stats"><div class="stat"><div class="muted">Связок</div><div id="count" class="n">0</div></div><div class="stat"><div class="muted">Рёбер графа</div><div id="edges" class="n">0</div></div><div class="stat"><div class="muted">Сканирований</div><div id="scans" class="n">0</div></div><div class="stat"><div class="muted">Режим</div><div class="n">Paper</div></div></div>
+ </div>
+ <div class="panel"><b>Найденные возможности</b><div id="cards" class="cards"><div class="empty">Нажмите «Найти связки»</div></div></div>
+</div>
+<script>
+async function scan(){
+ const amount=Number(document.getElementById('amount').value||10000); const status=document.getElementById('status'); status.textContent='Сканирование…';
+ try{const r=await fetch('/api/scan?amount='+encodeURIComponent(amount)); const d=await r.json();
+ document.getElementById('count').textContent=d.opportunities.length; document.getElementById('edges').textContent=d.edge_count; document.getElementById('scans').textContent=d.scan_count;
+ const cards=document.getElementById('cards'); cards.innerHTML='';
+ if(!d.opportunities.length){cards.innerHTML='<div class="empty">При текущих данных прибыльных циклов нет</div>'}
+ d.opportunities.forEach(o=>{const el=document.createElement('div'); el.className='card'; el.innerHTML=`<div class="profit">+${o.profit_pct}% · +${o.profit_amount.toFixed(2)}</div><div class="route">${o.nodes.join(' → ')}</div><div class="steps">${o.hops} шагов · ETA ${o.eta_seconds} сек · итог ${o.final_amount.toFixed(2)}<br>${o.steps.map(s=>`${s.kind.toUpperCase()}: ${s.from} → ${s.to}`).join('<br>')}</div>`; cards.appendChild(el)});
+ status.textContent='Готово';
+ }catch(e){status.textContent='Ошибка сканирования'; console.error(e)}
+}
+scan();
+</script></body></html>

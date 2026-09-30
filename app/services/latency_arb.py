@@ -1,0 +1,195 @@
+from __future__ import annotations
+import time, statistics
+from collections import defaultdict
+from app.services.network_registry import network_registry
+from app.services.latency_leadlag_tracker_v1 import latency_leadlag_tracker_v1
+from app.services.latency_leadlag_tracker_v2 import latency_leadlag_tracker_v2
+
+class LatencyArbEngine:
+    def __init__(self):
+        self.quotes = {}
+        self.signals = {}
+        self.sample_count = 0
+        self.last_scan = 0.0
+
+    @staticmethod
+    def _pair_key(edge):
+        m=edge.meta or {}
+        base,quote=m.get('base'),m.get('quote')
+        return (base,quote) if base and quote else None
+
+    @staticmethod
+    def _sig(x):
+        return '|'.join([x['base'],x['quote'],x['slow_venue'],x['fast_venue'],x['direction']])
+
+    @staticmethod
+    def _speed_score(q):
+        update=float(q.get('update_ewma_ms') or 9999)
+        transport=float(q.get('transport_ms') or 9999)
+        age=float(q.get('quote_age_ms') or 9999)
+        return min(update,15000)*0.35 + min(transport,15000)*0.15 + min(age,15000)*0.50
+    def observe(self, edges, health, requested_amount):
+        now=time.time(); self.sample_count+=1; self.last_scan=now
+        health_map={x.get('name'):x for x in health}
+        grouped=defaultdict(dict)
+        for e in edges:
+            if e.kind!='trade': continue
+            key=self._pair_key(e)
+            if not key: continue
+            m=e.meta or {}; v=e.src.venue
+            row=grouped[key].setdefault(v,{'venue':v,'base':key[0],'quote':key[1]})
+            row['fee_rate']=float(e.fee_rate or 0); row['symbol']=m.get('symbol'); row['exchange_ts_ms']=m.get('exchange_ts_ms')
+            if m.get('side')=='buy':
+                row['ask']=float(m.get('best_ask') or (1/e.rate)); row['ask_qty']=float(m.get('l1_qty') or 0)
+            elif m.get('side')=='sell':
+                row['bid']=float(m.get('best_bid') or e.rate); row['bid_qty']=float(m.get('l1_qty') or e.capacity or 0)
+        current=[]
+        for pair,venues in grouped.items():
+            for venue,q in venues.items():
+                if not all(q.get(k,0)>0 for k in ('bid','ask','bid_qty','ask_qty')): continue
+                state_key=(venue,*pair); prev=self.quotes.get(state_key); changed=True
+                if prev: changed=(prev['bid']!=q['bid'] or prev['ask']!=q['ask'])
+                changed_at=now if changed or not prev else prev['changed_at']
+                updates=(prev.get('updates',0)+1) if changed and prev else (1 if changed else prev.get('updates',0))
+                interval=((now-prev['changed_at'])*1000) if changed and prev else None
+                ewma=(interval if interval else (prev.get('update_ewma_ms') if prev else None))
+                if interval and prev and prev.get('update_ewma_ms'):
+                    ewma=prev['update_ewma_ms']*0.7+interval*0.3
+                h=health_map.get(venue,{})
+                observed_age=max(0,(now-changed_at)*1000); age=observed_age; age_source='observed_change'
+                try:
+                    ts=float(q.get('exchange_ts_ms') or 0); ex_age=now*1000-ts
+                    if ts>0 and 0<=ex_age<=120000: age=ex_age; age_source='exchange_ts'
+                except Exception: pass
+                q.update({'changed_at':changed_at,'seen_at':now,'updates':updates,
+                          'update_ewma_ms':ewma,'transport_ms':float(h.get('latency_ms') or 9999),
+                          'quote_age_ms':age,'quote_age_source':age_source,'mid':(q['bid']+q['ask'])/2})
+                self.quotes[state_key]=q; current.append(q)
+        return self._detect(current,float(requested_amount),now)
+
+    def _detect(self, current, requested, now):
+        pairs=defaultdict(list)
+        for q in current: pairs[(q['base'],q['quote'])].append(q)
+        found=[]
+        for (base,quote),rows in pairs.items():
+            if len(rows)<3: continue
+            ranked=sorted(rows,key=self._speed_score)
+            fast_pool=ranked[:min(4,max(2,len(ranked)//2))]
+            ref_mid=statistics.median([x['mid'] for x in fast_pool])
+            for slow in rows:
+                alternatives=[x for x in fast_pool if x['venue']!=slow['venue']]
+                if not alternatives: continue
+                found.extend(self._direction_rows(base,quote,slow,alternatives,ref_mid,requested,now))
+        found.sort(key=lambda x:(x['net_profit'],x['net_pct']),reverse=True)
+        seen={self._sig(x) for x in found}
+        for sig,state in list(self.signals.items()):
+            if sig not in seen and now-state.get('last_seen',0)>20: self.signals.pop(sig,None)
+        return found
+    def _direction_rows(self,base,quote,slow,fast_pool,ref_mid,requested,now):
+        out=[]; fast_bid=max(fast_pool,key=lambda x:x['bid']); fast_ask=min(fast_pool,key=lambda x:x['ask'])
+        median_fast_age=statistics.median([x['quote_age_ms'] for x in fast_pool])
+        for direction,fast in (('BUY_SLOW_SELL_FAST',fast_bid),('SELL_SLOW_BUY_FAST',fast_ask)):
+            if slow['venue']==fast['venue']: continue
+            slow_fee=float(slow['fee_rate']); fast_fee=float(fast['fee_rate'])
+            if direction=='BUY_SLOW_SELL_FAST':
+                if slow['ask']>=fast['bid'] or slow['mid']>=ref_mid: continue
+                quote_in=min(requested,slow['ask']*slow['ask_qty'],fast['bid_qty']*slow['ask']/max(1e-9,1-slow_fee))
+                if quote_in<10: continue
+                base_qty=quote_in/slow['ask']*(1-slow_fee); quote_out=base_qty*fast['bid']*(1-fast_fee)
+                net=quote_out-quote_in; gross=(fast['bid']/slow['ask']-1)*100
+            else:
+                if slow['bid']<=fast['ask'] or slow['mid']<=ref_mid: continue
+                base_qty=min(slow['bid_qty'],fast['ask_qty']*(1-fast_fee),requested*(1-fast_fee)/fast['ask'])
+                if base_qty<=0: continue
+                quote_in=base_qty*fast['ask']/max(1e-9,1-fast_fee)
+                if quote_in<10: continue
+                quote_out=base_qty*slow['bid']*(1-slow_fee); net=quote_out-quote_in; gross=(slow['bid']/fast['ask']-1)*100
+            net_pct=(net/quote_in*100) if quote_in else -999
+            if net_pct<=0.01: continue
+            lag_ms=max(0.0,slow['quote_age_ms']-median_fast_age)
+            speed_ratio=self._speed_score(slow)/max(1.0,self._speed_score(fast))
+            slow_up=slow.get('update_ewma_ms'); fast_up=fast.get('update_ewma_ms')
+            cadence=bool(slow_up and fast_up and slow_up>fast_up*1.35 and lag_ms>=250)
+            evidence=bool(lag_ms>=700 or cadence)
+            row={'base':base,'quote':quote,'direction':direction,'slow_venue':slow['venue'],'fast_venue':fast['venue'],
+                 'slow_bid':slow['bid'],'slow_ask':slow['ask'],'fast_bid':fast['bid'],'fast_ask':fast['ask'],
+                 'reference_mid':ref_mid,'quote_in':round(quote_in,8),'base_qty':round(base_qty,8),
+                 'quote_out':round(quote_out,8),'gross_pct':round(gross,5),'net_pct':round(net_pct,5),
+                 'net_profit':round(net,8),'slow_quote_age_ms':round(slow['quote_age_ms'],1),
+                 'fast_quote_age_ms':round(fast['quote_age_ms'],1),'observed_lag_ms':round(lag_ms,1),
+                 'slow_transport_ms':round(slow['transport_ms'],1),'fast_transport_ms':round(fast['transport_ms'],1),
+                 'speed_ratio':round(speed_ratio,3),'slow_symbol':slow.get('symbol'),'fast_symbol':fast.get('symbol'),
+                 'slow_fee_pct':round(slow_fee*100,5),'fast_fee_pct':round(fast_fee*100,5),'latency_evidence':bool(evidence)}
+            sig=self._sig(row); state=self.signals.get(sig)
+            if evidence:
+                if state and now-state.get('last_seen',0)<=20:
+                    confirms=state.get('confirmations',1)+1; first=state.get('first_seen',now); max_net=max(state.get('max_net_pct',net_pct),net_pct)
+                else: confirms=1; first=now; max_net=net_pct
+                row['latency_state']='STABLE' if confirms>=4 and now-first>=15 else ('CONFIRMED' if confirms>=2 else 'FLASH')
+                self.signals[sig]={'last_seen':now,'first_seen':first,'confirmations':confirms,'max_net_pct':max_net}
+            else:
+                confirms=0; first=now; max_net=net_pct; row['latency_state']='SPREAD_ONLY'
+            row['signature']=sig; row['confirmations']=confirms; row['first_seen']=first; row['age_seconds']=round(now-first,2); row['max_net_pct']=round(max_net,5)
+            out.append(row)
+        return out
+    async def verify(self, rows):
+        if not rows: return []
+        await network_registry.refresh()
+        await network_registry.ensure_coinex_assets([x['base'] for x in rows if 'CoinEx' in (x['slow_venue'],x['fast_venue'])])
+        out=[]
+        for row in rows:
+            z=dict(row); direction=z['direction']; base=z['base']; quote=z['quote']; qty=float(z['base_qty']); qamt=float(z['quote_in'])
+            if direction=='BUY_SLOW_SELL_FAST':
+                br=network_registry.best_transfer(z['slow_venue'],z['fast_venue'],base,qty)
+                qr=network_registry.best_transfer(z['fast_venue'],z['slow_venue'],quote,qamt)
+            else:
+                br=network_registry.best_transfer(z['fast_venue'],z['slow_venue'],base,qty)
+                qr=network_registry.best_transfer(z['slow_venue'],z['fast_venue'],quote,qamt)
+            z['base_rebalance']=br; z['quote_rebalance']=qr
+            z['identity_verified']=bool(br.get('ok'))
+            z['repeatable']=bool(br.get('ok') and qr.get('ok'))
+            base_fee=float(br.get('fee') or 0.0) if br.get('ok') else 0.0
+            quote_fee=float(qr.get('fee') or 0.0) if qr.get('ok') else 0.0
+            ref=float(z.get('reference_mid') or 0.0)
+            base_fee_quote=base_fee*ref
+            quote_fee_quote=quote_fee if str(quote).upper() in {'USD','USDT','USDC','FDUSD','DAI'} else 0.0
+            rebalance_cost=base_fee_quote+quote_fee_quote
+            qin=max(1e-12,float(z.get('quote_in') or 0.0))
+            confirms=max(1,int(z.get('confirmations') or 1))
+            batch_cycles=max(1,min(8,confirms//2 or 1))
+            amortized_cost=rebalance_cost/batch_cycles
+            single_net=float(z.get('net_profit') or 0.0)-rebalance_cost
+            batched_net=float(z.get('net_profit') or 0.0)-amortized_cost
+            z['rebalance_cost_single_quote']=round(rebalance_cost,8)
+            z['rebalance_batch_cycles']=batch_cycles
+            z['rebalance_cost_amortized_quote']=round(amortized_cost,8)
+            z['all_in_single_net_profit']=round(single_net,8)
+            z['all_in_single_net_pct']=round(single_net/qin*100.0,5)
+            z['all_in_batched_net_profit']=round(batched_net,8)
+            z['all_in_batched_net_pct']=round(batched_net/qin*100.0,5)
+            z['all_in_assumption']='PREFUNDED_INVENTORY_WITH_BATCHED_REBALANCE'
+            z['latency_ready']=bool(z.get('latency_evidence') and z['latency_state'] in {'CONFIRMED','STABLE'} and z['identity_verified'] and batched_net>0)
+            if z['repeatable'] and batched_net>0: z['execution_status']='LATENCY_REPEATABLE_BATCHED_ALL_IN_POSITIVE'
+            elif z['repeatable']: z['execution_status']='LATENCY_REPEATABLE_BUT_BATCHED_REBALANCE_NEGATIVE'
+            elif z['latency_ready']: z['execution_status']='LATENCY_READY_REBALANCE_PENDING'
+            elif z['latency_state']=='FLASH': z['execution_status']='LATENCY_FLASH'
+            else: z['execution_status']='IDENTITY_OR_NETWORK_PENDING'
+            out.append(z)
+        out.sort(key=lambda x:(x.get('repeatable',False),x.get('latency_ready',False),x['net_profit'],x['net_pct']),reverse=True)
+        latency_leadlag_tracker_v1.observe(out)
+        latency_leadlag_tracker_v2.observe(out)
+        return out
+
+    def speed_table(self):
+        by=defaultdict(list)
+        for q in self.quotes.values(): by[q['venue']].append(q)
+        rows=[]
+        for venue,qs in by.items():
+            ages=[x.get('quote_age_ms',0) for x in qs]; transports=[x.get('transport_ms',0) for x in qs]
+            updates=[x.get('update_ewma_ms') for x in qs if x.get('update_ewma_ms')]
+            rows.append({'venue':venue,'pairs':len(qs),'median_quote_age_ms':round(statistics.median(ages),1) if ages else None,
+                         'median_transport_ms':round(statistics.median(transports),1) if transports else None,
+                         'median_update_ms':round(statistics.median(updates),1) if updates else None})
+        return sorted(rows,key=lambda x:(x['median_update_ms'] or 999999,x['median_transport_ms'] or 999999))
+
+latency_arb=LatencyArbEngine()

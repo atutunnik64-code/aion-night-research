@@ -1,0 +1,373 @@
+from __future__ import annotations
+import sqlite3,time,json
+from pathlib import Path
+from app.services.risk_manager import risk_manager
+from app.services.opportunity_memory import memory
+from app.services.live_executor import live_executor
+from app.services.order_rules import order_rules_registry
+from app.services.depth_guard import depth_guard
+from app.services.demo_executor import demo_executor
+from app.services.trading_mode import trading_mode
+from app.services.hot_book_cache import hot_book_cache
+from app.services.arbitrage_shadow_whitelist import arbitrage_shadow_whitelist
+
+DB_PATH=Path(__file__).parents[2]/'data'/'executions.sqlite3'
+DB_PATH.parent.mkdir(parents=True,exist_ok=True)
+
+class ExecutionEngine:
+    def __init__(self):
+        self.db=sqlite3.connect(DB_PATH,check_same_thread=False)
+        self.db.row_factory=sqlite3.Row
+        self.mode='PAPER_AUTO'
+        self.enabled=True
+        self.live_enabled=False
+        self.max_notional=1000.0
+        self.db.execute('''CREATE TABLE IF NOT EXISTS executions(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, ts REAL, strategy TEXT, signature TEXT,
+          status TEXT, score REAL, notional REAL, net_pct REAL, expected_profit REAL,
+          realized_profit REAL, duration_ms REAL, payload TEXT)''')
+        self.db.execute('''CREATE TABLE IF NOT EXISTS execution_decisions(
+          id INTEGER PRIMARY KEY AUTOINCREMENT, ts REAL, environment TEXT, strategy TEXT, signature TEXT,
+          outcome TEXT, stage TEXT, reason TEXT, notional REAL, net_pct REAL, payload TEXT)''')
+        cols={r['name'] for r in self.db.execute('PRAGMA table_info(executions)').fetchall()}
+        if 'environment' not in cols:
+            self.db.execute("ALTER TABLE executions ADD COLUMN environment TEXT DEFAULT 'PAPER'")
+        self.db.commit()
+
+    def _decision(self,row,mode,outcome,stage,reason,notional=0.0,net_pct=None,payload=None,environment=None):
+        env=environment or self._environment(); sig=(row or {}).get('signature') or f'{mode}|unknown'
+        try:net=float(net_pct if net_pct is not None else risk_manager.net_pct(row or {},mode))
+        except Exception:net=0.0
+        body={'row':{k:v for k,v in (row or {}).items() if not str(k).startswith('_')}}
+        if payload is not None:body['detail']=payload
+        self.db.execute('INSERT INTO execution_decisions(ts,environment,strategy,signature,outcome,stage,reason,notional,net_pct,payload) VALUES(?,?,?,?,?,?,?,?,?,?)',
+            (time.time(),env,mode,sig,str(outcome),str(stage),str(reason),float(notional or 0),net,json.dumps(body,ensure_ascii=False,default=str)))
+        self.db.commit()
+
+    def decision_summary(self,limit=100,hours=24):
+        env=self._environment(); cutoff=time.time()-max(1,float(hours))*3600.0
+        groups={}
+        for r in self.db.execute('SELECT outcome,reason,COUNT(*) c FROM execution_decisions WHERE environment=? AND ts>=? GROUP BY outcome,reason ORDER BY c DESC',(env,cutoff)).fetchall():
+            groups.setdefault(r['outcome'],[]).append({'reason':r['reason'],'count':int(r['c'] or 0)})
+        recent=[dict(r) for r in self.db.execute('SELECT id,ts,environment,strategy,signature,outcome,stage,reason,notional,net_pct FROM execution_decisions WHERE environment=? ORDER BY id DESC LIMIT ?',(env,int(limit))).fetchall()]
+        total=sum(x['count'] for rows in groups.values() for x in rows); executed=sum(x['count'] for x in groups.get('EXECUTED',[]))
+        return {'environment':env,'hours':hours,'total':total,'executed':executed,'skipped':sum(x['count'] for x in groups.get('SKIPPED',[])),
+                'failed':sum(x['count'] for x in groups.get('FAILED',[])),'groups':groups,'recent':recent}
+
+    def _history(self,row,mode):
+        sig=f"{mode}|{row.get('signature')}" if not str(row.get('signature','')).startswith(mode+'|') else row.get('signature')
+        for x in memory.leaderboard(limit=500,min_hits=1):
+            if x.get('signature')==sig or x.get('signature')==row.get('signature'):
+                return x
+        return {}
+
+    @staticmethod
+    def _notional(row,mode,limit):
+        if mode in {'LATENCY','CLASSIC'}: raw=float(row.get('quote_in') or 0)
+        else: raw=float(row.get('start_amount') or 0)
+        return max(0.0,min(limit,raw))
+
+    @staticmethod
+    def _environment():
+        mode=str(trading_mode.mode or 'PAPER').upper()
+        return mode if mode in {'PAPER','DEMO','LIVE'} else 'PAPER'
+
+    def _record_external(self,row,mode,notional,hist,result,environment):
+        score=float(row.get('aion_score') or hist.get('aion_score') or 0)
+        depth=result.get('depth') or {}; net=float(depth.get('sustainable_net_pct') or risk_manager.executable_net_pct(row,mode))
+        exp=notional*net/100.0; sig=row.get('signature') or f'{mode}|{time.time()}'
+        status=result.get('status') or 'UNKNOWN'
+        raw_realized=result.get('realized_profit_estimate')
+        realized=float(raw_realized) if raw_realized is not None else 0.0
+        signal_mono=float(row.get('_ws_signal_detected_mono') or 0)
+        signal_to_record_ms=(time.monotonic()-signal_mono)*1000.0 if signal_mono else None
+        route={k:v for k,v in row.items() if k!='_ws_signal_detected_mono'}
+        result={**result,'strategy':mode,'signature':sig,'score':score,'notional':notional,'net_pct':net,'environment':environment,
+                'row':route,'signal_source':row.get('signal_source'),'signal_book_age_ms':row.get('signal_book_age_ms'),
+                'signal_to_record_ms':round(signal_to_record_ms,1) if signal_to_record_ms is not None else None}
+        self.db.execute('INSERT INTO executions(ts,strategy,signature,status,score,notional,net_pct,expected_profit,realized_profit,duration_ms,payload,environment) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',
+            (time.time(),mode,sig,status,score,notional,net,exp,realized,float(result.get('duration_ms') or 0),json.dumps(result,ensure_ascii=False,default=str),environment))
+        self.db.commit(); success=status=='FILLED_BOTH'; risk_manager.release(row,success)
+        post_send=status in {'FILLED_BOTH','FAILED_BOTH','PARTIAL_HEDGED_PAUSED','PARTIAL_UNHEDGED_KILL','EXECUTION_EXCEPTION'}
+        if post_send:risk_manager.record_outcome(success)
+        if not success:risk_manager.mark(row)
+        self._decision(row,mode,'EXECUTED' if success else 'FAILED','execution_result',status,notional,net,
+                       {'realized_profit':realized,'kill_switch':bool(result.get('kill_switch'))},environment)
+        return result
+
+    def _simulate(self,row,mode,notional):
+        start=time.time()
+        net=risk_manager.executable_net_pct(row,mode)
+        profit=notional*net/100.0
+        if mode=='LATENCY': legs=2
+        else: legs=max(2,len(row.get('steps') or []))
+        duration_ms=max(5.0,float(row.get('observed_lag_ms') or 0)*0.03 + legs*18.0)
+        return {'status':'FILLED','realized_profit':profit,'duration_ms':duration_ms,
+                'legs':legs,'execution':'simultaneous' if legs==2 else 'coordinated'}
+
+    def execute_rows(self,rows,mode):
+        if not self.enabled:return []
+        opened=[]; daily=self.daily_pnl(); open_count=0
+        for row in rows:
+            hist=self._history(row,mode)
+            ok,reason=risk_manager.allow(row,mode,hist,open_count,daily)
+            if not ok:continue
+            notional=self._notional(row,mode,min(self.max_notional,risk_manager.max_notional))
+            if notional<10:continue
+            score=float(row.get('aion_score') or hist.get('aion_score') or 0)
+            net=risk_manager.executable_net_pct(row,mode)
+            sim=self._simulate(row,mode,notional)
+            exp=notional*net/100.0
+            sig=row.get('signature') or f'{mode}|{time.time()}'
+            payload={'reason':reason,'history':hist,'row':row,'sim':sim}
+            self.db.execute('INSERT INTO executions(ts,strategy,signature,status,score,notional,net_pct,expected_profit,realized_profit,duration_ms,payload) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+                (time.time(),mode,sig,sim['status'],score,notional,net,exp,sim['realized_profit'],sim['duration_ms'],json.dumps(payload,ensure_ascii=False,default=str)))
+            risk_manager.mark(row); daily+=sim['realized_profit']; open_count+=1
+            opened.append({'strategy':mode,'signature':sig,'status':sim['status'],'score':round(score,1),
+                           'notional':round(notional,2),'net_pct':round(net,5),
+                           'realized_profit':round(sim['realized_profit'],6),'duration_ms':round(sim['duration_ms'],1)})
+        self.db.commit(); return opened
+
+
+    async def _execute_paper_depth(self,rows,mode):
+        if not self.enabled:return []
+        opened=[]; daily=self.daily_pnl(); open_count=0
+        for row in rows:
+            hist=self._history(row,mode); ok,_=risk_manager.allow(row,mode,hist,open_count,daily)
+            if not ok: continue
+            if not risk_manager.claim(row): continue
+            notional=self._notional(row,mode,min(self.max_notional,risk_manager.max_notional))
+            if notional<10:
+                risk_manager.release(row); continue
+            legs=live_executor.plan(row,mode,notional)
+            depth_started=time.time()
+            depth=await depth_guard.assess_legs(legs)
+            duration_ms=(time.time()-depth_started)*1000
+            if not depth.get('ok'):
+                risk_manager.release(row); continue
+            depth=depth_guard.sustainable(row,mode,notional,depth)
+            if not depth.get('ok'):
+                risk_manager.release(row); continue
+            net=float(depth.get('sustainable_net_pct') or 0); profit=notional*net/100.0
+            score=float(row.get('aion_score') or hist.get('aion_score') or 0); sig=row.get('signature') or f'{mode}|{time.time()}'
+            payload={'history':hist,'row':row,'depth':depth,'execution':'paper_depth_vwap'}
+            self.db.execute('INSERT INTO executions(ts,strategy,signature,status,score,notional,net_pct,expected_profit,realized_profit,duration_ms,payload) VALUES(?,?,?,?,?,?,?,?,?,?,?)',
+                (time.time(),mode,sig,'FILLED',score,notional,net,profit,profit,duration_ms,json.dumps(payload,ensure_ascii=False,default=str)))
+            risk_manager.release(row,True); daily+=profit; open_count+=1
+            opened.append({'strategy':mode,'signature':sig,'status':'FILLED','score':round(score,1),'notional':round(notional,2),'net_pct':round(net,5),'realized_profit':round(profit,6),'depth_confirmed':True,'duration_ms':round(duration_ms,1)})
+        self.db.commit(); return opened
+
+
+    async def probe_rows_auto(self,rows,mode='LATENCY'):
+        if not rows:return []
+        env=self._environment()
+        limit=min(self.max_notional,risk_manager.max_notional)
+        async def optimize(row):
+            hinted=float(row.get('signal_best_notional') or 0)
+            base=hinted if hinted>=10 else self._notional(row,mode,limit)
+            cap=min(limit,max(10.0,float(row.get('signal_capacity_quote') or limit)))
+            values=[cap,cap*.75,cap*.5,cap*.35,base*1.5,base*1.25,base,base*.8,base*.6,250,175,125,100,75,50,35,25,20,15,12.5,10]
+            amounts=sorted({round(float(x),8) for x in values if 10<=float(x)<=cap+1e-9},reverse=True)
+            sets=[]; valid=[]
+            for amount in amounts:
+                legs=live_executor.plan(row,mode,amount)
+                if len(legs)==2:sets.append(legs); valid.append(amount)
+            if not sets:return {'best':None,'reasons':{'PLAN_INVALID':1}}
+            hot_mode=self._environment() in {'DEMO','LIVE'} and mode in {'LATENCY','CLASSIC'}
+            if hot_mode:
+                depths=depth_guard.assess_cached_leg_sets(sets)
+                if not depths:return {'best':None,'reasons':{'WS_CACHE_MISS':1}}
+            else:depths=await depth_guard.assess_leg_sets(sets)
+            best=None; reasons={}
+            for amount,depth in zip(valid,depths):
+                if not depth.get('ok'):
+                    st=str(depth.get('status') or 'DEPTH_REJECTED'); reasons[st]=reasons.get(st,0)+1; continue
+                depth=depth_guard.sustainable(row,mode,amount,depth)
+                if not depth.get('ok'):
+                    st=str(depth.get('status') or 'SUSTAINABLE_REJECTED'); reasons[st]=reasons.get(st,0)+1; continue
+                net=float(depth.get('sustainable_net_pct') or 0); profit=amount*net/100.0
+                if best is None or (profit,net)>(best[0],best[1]):best=(profit,net,amount,depth)
+            return {'best':best,'reasons':reasons}
+        prepared=[]
+        for row in rows:
+            wl_ok,wl_reason=arbitrage_shadow_whitelist.allow(row,mode,env)
+            if not wl_ok:
+                self._decision(row,mode,'SKIPPED','shadow_whitelist',wl_reason,environment=env)
+                continue
+            sig=row.get('signature') or str(row)
+            if sig in risk_manager.inflight:
+                self._decision(row,mode,'SKIPPED','candidate_gate','INFLIGHT')
+                continue
+            prepared.append((row,self._history(row,mode)))
+        if not prepared:return []
+        warm=[]
+        for row,_ in prepared[:40]:
+            legs=live_executor.plan(row,mode,min(limit,1000.0))
+            if len(legs)==2:warm.extend(legs)
+        hot_book_cache.watch_legs(warm)
+        optimized=await __import__('asyncio').gather(*[optimize(x[0]) for x in prepared],return_exceptions=True)
+        opened=[]; daily=self.daily_pnl(); open_count=0
+        for (row,hist),probe in zip(prepared,optimized):
+            if isinstance(probe,Exception):
+                self._decision(row,mode,'SKIPPED','hot_probe','PROBE_EXCEPTION',payload=str(probe)[:250])
+                continue
+            detail=probe if isinstance(probe,dict) else {'best':probe,'reasons':{}}
+            best=detail.get('best'); reasons=detail.get('reasons') or {}
+            if not best:
+                reason=max(reasons,key=lambda k:reasons[k]) if reasons else 'NO_SUSTAINABLE_DEPTH_OR_WS'
+                self._decision(row,mode,'SKIPPED','hot_probe',reason,payload={'probe_reasons':reasons})
+                continue
+            profit,live_net,notional,depth=best
+            if mode=='CLASSIC':
+                verified=dict(row); verified['net_pct']=live_net; verified['net_profit']=profit
+                row=memory.observe_one(verified,'CLASSIC'); hist=row.get('history') or hist
+            gate=dict(row)
+            if mode in {'LATENCY','CLASSIC'}:gate['net_pct']=live_net+risk_manager.execution_buffer_pct
+            ok,reason=risk_manager.allow(gate,mode,hist,open_count,daily)
+            if not ok:
+                self._decision(row,mode,'SKIPPED','risk_gate',reason,notional,live_net)
+                continue
+            if not risk_manager.claim(row):
+                self._decision(row,mode,'SKIPPED','claim','INFLIGHT',notional,live_net)
+                continue
+            try:
+                env=self._environment()
+                if env=='LIVE':
+                    if not live_executor.armed():
+                        self._decision(row,mode,'SKIPPED','executor_gate','LIVE_NOT_ARMED',notional,live_net,environment=env); risk_manager.release(row); continue
+                    result=await live_executor.execute(row,mode,notional)
+                    if not result.get('responses'):
+                        self._decision(row,mode,'SKIPPED','executor_presend',result.get('status') or 'NO_ORDER_SENT',notional,live_net,result,env); risk_manager.release(row); continue
+                    opened.append(self._record_external(row,mode,notional,hist,result,'LIVE')); open_count+=1; continue
+                if env=='DEMO':
+                    result=await demo_executor.execute(row,mode,notional)
+                    if not result.get('responses'):
+                        self._decision(row,mode,'SKIPPED','executor_presend',result.get('status') or 'NO_ORDER_SENT',notional,live_net,result,env); risk_manager.release(row); continue
+                    opened.append(self._record_external(row,mode,notional,hist,result,'DEMO')); open_count+=1; continue
+                score=float(row.get('aion_score') or hist.get('aion_score') or 0); sig=row.get('signature') or f'{mode}|{time.time()}'
+                payload={'history':hist,'row':row,'depth':depth,'execution':'paper_hot_probe_sustainable_optimized','optimized_notional':notional}
+                self.db.execute('INSERT INTO executions(ts,strategy,signature,status,score,notional,net_pct,expected_profit,realized_profit,duration_ms,payload,environment) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)',(time.time(),mode,sig,'FILLED',score,notional,live_net,profit,profit,0.0,json.dumps(payload,ensure_ascii=False,default=str),'PAPER'))
+                self.db.commit(); daily+=profit; open_count+=1
+                opened.append({'strategy':mode,'signature':sig,'status':'FILLED','score':score,'notional':notional,'net_pct':live_net,'realized_profit':profit,'sustainable_confirmed':True,'hot_probe':True,'optimized':True,'environment':'PAPER'})
+                self._decision(row,mode,'EXECUTED','paper_fill','FILLED',notional,live_net,{'realized_profit':profit},'PAPER')
+                risk_manager.release(row,True)
+            finally:risk_manager.release(row,False)
+            if open_count>=risk_manager.max_open:break
+        return opened
+
+    async def _strict_presend_gate(self,row,mode,notional,env):
+        legs=live_executor.plan(row,mode,notional)
+        if len(legs)!=2:return {'ok':False,'reason':'PLAN_INVALID'}
+        hot_book_cache.watch_legs(legs,priority=250,ttl=90)
+        lim=hot_book_cache.execution_stale_after
+        hits=[hot_book_cache.get(x.get('venue'),x.get('symbol'),lim) for x in legs]
+        initial_ready=all(hits); wait_started=time.perf_counter()
+        if not initial_ready:
+            warm_timeout=.65 if mode in {'FULL_NOW','BATCH_READY'} else .08
+            await hot_book_cache.wait_for_legs(legs,timeout=warm_timeout,max_age=lim)
+            hits=[hot_book_cache.get(x.get('venue'),x.get('symbol'),lim) for x in legs]
+        warm_wait_ms=(time.perf_counter()-wait_started)*1000.0 if not initial_ready else 0.0
+        if not all(hits):
+            ages=[hot_book_cache.age_info(x.get('venue'),x.get('symbol')) for x in legs]
+            source_stale=any(a and a.get('source_age_ms') is not None and float(a['source_age_ms'])>lim*1000.0 for a in ages)
+            return {'ok':False,'reason':'UNIFIED_SOURCE_BOOK_STALE' if source_stale else 'UNIFIED_WS_NOT_READY','warm_wait_ms':round(warm_wait_ms,1),'initial_ready':False,'book_ages':ages}
+        age=max(float(x[2]) for x in hits); hard_ms=lim*1000.0
+        required=300.0 if env=='DEMO' else 120.0; headroom=max(0.0,hard_ms-age); freshness_recovered=False
+        if headroom<required and mode in {'FULL_NOW','BATCH_READY'}:
+            freshness_recovered=await hot_book_cache.wait_for_fresh_age(legs,max_age=max(.05,lim-required/1000.0),timeout=.45)
+            hits=[hot_book_cache.get(x.get('venue'),x.get('symbol'),lim) for x in legs]
+            if all(hits): age=max(float(x[2]) for x in hits); headroom=max(0.0,hard_ms-age)
+        if headroom<required:return {'ok':False,'reason':'UNIFIED_FRESHNESS_HEADROOM_LOW','book_age_ms':age,'headroom_ms':headroom,'required_headroom_ms':required,'freshness_recovered':freshness_recovered}
+        depth=depth_guard.assess_execution_cached_legs(legs)
+        if not depth.get('ok'):return {'ok':False,'reason':str(depth.get('status') or 'UNIFIED_DEPTH_REJECTED'),'depth':depth}
+        depth=depth_guard.sustainable(row,mode,notional,depth)
+        if not depth.get('ok'):return {'ok':False,'reason':str(depth.get('status') or 'UNIFIED_SUSTAINABLE_REJECTED'),'depth':depth}
+        return {'ok':True,'legs':legs,'depth':depth,'book_age_ms':age,'headroom_ms':headroom,'warm_wait_ms':round(warm_wait_ms,1),'initial_ready':bool(initial_ready),'freshness_recovered':freshness_recovered}
+
+    async def execute_rows_auto(self,rows,mode):
+        if mode in {'LATENCY','CLASSIC'}:return await self.probe_rows_auto(rows,mode)
+        env=self._environment()
+        if env=='PAPER':return await self._execute_paper_depth(rows,mode)
+        if env=='LIVE' and not live_executor.armed():return []
+        if env=='DEMO' and not demo_executor.armed():return []
+        executor=live_executor if env=='LIVE' else demo_executor
+        opened=[]; daily=self.daily_pnl(env); open_count=0
+        for row in rows:
+            hist=self._history(row,mode); ok,reason=risk_manager.allow(row,mode,hist,open_count,daily)
+            if not ok:
+                self._decision(row,mode,'SKIPPED','risk_gate',reason)
+                continue
+            notional=self._notional(row,mode,min(self.max_notional,risk_manager.max_notional))
+            if notional<10:
+                self._decision(row,mode,'SKIPPED','notional_gate','NOTIONAL_TOO_LOW',notional); continue
+            gate=await self._strict_presend_gate(row,mode,notional,env)
+            if not gate.get('ok'):
+                self._decision(row,mode,'SKIPPED','unified_presend',gate.get('reason') or 'UNIFIED_PRESEND_REJECTED',notional,payload=gate,environment=env); continue
+            if not risk_manager.claim(row):
+                self._decision(row,mode,'SKIPPED','claim','INFLIGHT',notional,environment=env)
+                continue
+            result=await executor.execute(row,mode,notional)
+            if not result.get('responses'):
+                self._decision(row,mode,'SKIPPED','executor_presend',result.get('status') or 'NO_ORDER_SENT',notional,payload=result,environment=env); risk_manager.release(row); continue
+            saved=self._record_external(row,mode,notional,hist,result,env)
+            opened.append(saved); open_count+=1
+            if saved.get('status')=='FILLED_BOTH':daily+=float(saved.get('realized_profit_estimate') or 0)
+            if saved.get('kill_switch'):break
+        return opened
+
+    def daily_pnl(self,environment=None):
+        cutoff=time.time()-86400; environment=environment or self._environment()
+        r=self.db.execute('SELECT COALESCE(SUM(realized_profit),0) p FROM executions WHERE ts>=? AND realized_profit IS NOT NULL AND environment=?',(cutoff,environment)).fetchone()
+        return float(r['p'] or 0)
+
+    def summary(self,limit=50):
+        env=self._environment()
+        raw=self.db.execute('SELECT id,ts,strategy,signature,status,score,notional,net_pct,expected_profit,realized_profit,duration_ms,payload,environment FROM executions WHERE environment=? ORDER BY id DESC LIMIT ?',(env,limit)).fetchall()
+        rows=[]
+        for r in raw:
+            x=dict(r); payload=x.pop('payload',None) or ''
+            x['depth_confirmed']='paper_depth_vwap' in payload or '"depth_verified": true' in payload or '"depth_verified":true' in payload
+            x['sustainable_confirmed']='sustainable_net_pct' in payload
+            try:
+                pd=json.loads(payload); d=pd.get('depth') or pd.get('result',{}).get('depth') or {}; route=pd.get('row') or {}
+                x['rebalance_overhead_pct']=d.get('rebalance_overhead_pct'); x['sustainable_net_pct']=d.get('sustainable_net_pct')
+                x['rebalance_batch_cycles_used']=d.get('rebalance_batch_cycles_used'); x['backend']=pd.get('backend')
+                x['book_source']=d.get('book_source'); x['book_age_ms']=d.get('book_age_ms'); x['book_ages']=d.get('book_ages') or []
+                x['execution_book_age_ms']=pd.get('execution_book_age_ms') if pd.get('execution_book_age_ms') is not None else d.get('book_age_ms')
+                x['strict_ws_compliant']=bool(x['book_source']=='WS_CACHE' and x['execution_book_age_ms'] is not None and float(x['execution_book_age_ms'])<=hot_book_cache.execution_stale_after*1000.0)
+                x['fill_verified']=pd.get('fill_verified'); x['shadow_fill']=bool(pd.get('shadow_fill'))
+                x['realized_pnl_source']=pd.get('realized_pnl_source')
+                x['next_cycle_eligible']=pd.get('next_cycle_eligible')
+                x['lifecycle']=pd.get('lifecycle') or []
+                inv=pd.get('inventory') or {}; x['inventory_source']=pd.get('inventory_source') or inv.get('source') or ((inv.get('last_settlement') or {}).get('source')); x['inventory_deltas']=inv.get('deltas') or ((inv.get('last_settlement') or {}).get('deltas'))
+                rec=pd.get('recovery') or {}; x['recovery_status']=rec.get('status')
+                x['signal_source']=pd.get('signal_source'); x['signal_book_age_ms']=pd.get('signal_book_age_ms'); x['signal_to_record_ms']=pd.get('signal_to_record_ms')
+                x['shadow_first_net_pct']=d.get('shadow_first_net_pct'); x['shadow_second_net_pct']=d.get('shadow_second_net_pct'); x['shadow_latency_ms']=d.get('shadow_latency_ms')
+                if route: x['route']=route
+            except Exception: pass
+            rows.append(x)
+        env=self._environment(); cutoff=time.time()-86400
+        a=self.db.execute('SELECT COUNT(*) c,COALESCE(SUM(realized_profit),0) p,COALESCE(AVG(net_pct),0) n,COALESCE(AVG(duration_ms),0) d FROM executions WHERE environment=?',(env,)).fetchone()
+        v=self.db.execute("SELECT COUNT(*) c,COALESCE(SUM(realized_profit),0) p,COALESCE(AVG(net_pct),0) n FROM executions WHERE environment=? AND (payload LIKE '%paper_depth_vwap%' OR payload LIKE '%depth_verified%')",(env,)).fetchone()
+        vd=self.db.execute("SELECT COALESCE(SUM(realized_profit),0) p FROM executions WHERE ts>=? AND environment=? AND (payload LIKE '%paper_depth_vwap%' OR payload LIKE '%depth_verified%')",(cutoff,env)).fetchone()
+        sv=self.db.execute("SELECT COUNT(*) c,COALESCE(SUM(realized_profit),0) p,COALESCE(AVG(net_pct),0) n FROM executions WHERE environment=? AND payload LIKE '%sustainable_net_pct%'",(env,)).fetchone()
+        svd=self.db.execute("SELECT COALESCE(SUM(realized_profit),0) p FROM executions WHERE ts>=? AND environment=? AND payload LIKE '%sustainable_net_pct%'",(cutoff,env)).fetchone()
+        strategy_stats={}
+        for r in self.db.execute('SELECT strategy,COUNT(*) c,COALESCE(SUM(realized_profit),0) p,COALESCE(AVG(net_pct),0) n FROM executions WHERE environment=? GROUP BY strategy',(env,)).fetchall():
+            strategy_stats[r['strategy']]={'count':int(r['c'] or 0),'profit':round(float(r['p'] or 0),6),'avg_net_pct':round(float(r['n'] or 0),5)}
+        environment_stats={}
+        for r in self.db.execute('SELECT environment,COUNT(*) c,COALESCE(SUM(realized_profit),0) p FROM executions GROUP BY environment').fetchall():
+            environment_stats[r['environment']]={'count':int(r['c'] or 0),'profit':round(float(r['p'] or 0),6)}
+        tm=trading_mode.status()
+        return {'enabled':self.enabled,'mode':tm['effective_mode'],'environment':env,'trading_mode':tm,
+                'live_enabled':live_executor.armed(),'live':live_executor.status(),'demo':demo_executor.status(),
+                'execution_count':int(a['c'] or 0),'environment_profit':round(float(a['p'] or 0),6),
+                'avg_net_pct':round(float(a['n'] or 0),5),'avg_duration_ms':round(float(a['d'] or 0),1),
+                'daily_pnl':round(float(svd['p'] or 0),6),'raw_daily_pnl':round(self.daily_pnl(env),6),
+                'sustainable_verified':{'count':int(sv['c'] or 0),'profit':round(float(sv['p'] or 0),6),'daily_pnl':round(float(svd['p'] or 0),6),'avg_net_pct':round(float(sv['n'] or 0),5)},
+                'depth_verified':{'count':int(v['c'] or 0),'profit':round(float(v['p'] or 0),6),'daily_pnl':round(float(vd['p'] or 0),6),'avg_net_pct':round(float(v['n'] or 0),5),'min_net_pct':depth_guard.min_net_pct,'safety_buffer_pct':depth_guard.safety_buffer_pct},
+                'strategy_stats':strategy_stats,'environment_stats':environment_stats,'risk':{
+                    'min_score':risk_manager.min_score,'min_net_pct':risk_manager.min_net_pct,
+                    'max_notional':risk_manager.max_notional,'max_daily_loss':risk_manager.max_daily_loss,'execution_buffer_pct':risk_manager.execution_buffer_pct,'max_trades_per_hour':risk_manager.max_trades_per_hour,'consecutive_failures':risk_manager.consecutive_failures,'failure_pause_until':risk_manager.failure_pause_until,'mode_score_floor':risk_manager.min_score_by_mode,'mode_net_floor':risk_manager.min_net_by_mode,'mode_cooldown_seconds':risk_manager.cooldown_by_mode,'anti_grid_martingale_policy':risk_manager.anti_martingale_status()},'decisions':self.decision_summary(25),'recent':rows}
+
+execution_engine=ExecutionEngine()

@@ -1,0 +1,217 @@
+from __future__ import annotations
+import asyncio, json, math, time
+from pathlib import Path
+import numpy as np, pandas as pd
+from app.services.raven_challenger_shadow import raven_challenger_shadow, RavenChallengerShadow
+
+ROOT=Path(__file__).parents[2]
+STATE=ROOT/'data'/'raven_v47_shadow_state.json'
+V24_RESULT=ROOT/'data'/'raven_turbo_highbeta_v24_results.json'
+V47_RESULT=ROOT/'data'/'raven_v47_protected_cash_filler_results.json'
+SQ_RESULT=ROOT/'data'/'raven_squeeze_v9_results.json'
+SQ_CACHE=ROOT/'data'/'raven_cache'
+V24_SYMBOLS=['BTCUSDT','ETHUSDT','SOLUSDT','SUIUSDT','NEARUSDT','APTUSDT','INJUSDT','TIAUSDT','SEIUSDT','WIFUSDT','PEPEUSDT','FLOKIUSDT','ARBUSDT','OPUSDT','AAVEUSDT','RUNEUSDT','JUPUSDT']
+SQ_SYMBOLS=['BTCUSDT','ETHUSDT','SOLUSDT','XRPUSDT','LINKUSDT','AVAXUSDT','DOGEUSDT','ADAUSDT']
+COST24=.0012; COSTSQ=.0011; FUND=.00005
+
+class RavenV47Shadow:
+    def __init__(self):
+        self.enabled=True;self.interval=1800.0;self.task=None;self.last_refresh=None;self.last_error=None;self.latest={}
+        self.v24_cfg=json.loads(V24_RESULT.read_text(encoding='utf-8'))['chosen_cfg']
+        r47=json.loads(V47_RESULT.read_text(encoding='utf-8'));self.alpha=float(r47['chosen_alpha']);self.long_stop=r47['chosen_long_stop'];self.short_stop=r47['chosen_short_stop']
+        self.sq_cfg=json.loads(SQ_RESULT.read_text(encoding='utf-8'))['chosen_from_train'];self.state=self._load()
+    def _blank(self):
+        return {'strategy':'v47','started_at':time.time(),'equity':100.0,'benchmark_equity':100.0,
+                'v24_weights':{},'squeeze_weights':{},'benchmark_weights':{},'v24_cycle_factor':1.0,
+                'last_bar_ts':None,'last_closes':{},'last_v24_slot':None,'observation_count':0,
+                'active_observation_count':0,'rebalance_count':0,'stop_count':0,'costs':0.0,'funding':0.0,
+                'benchmark_costs':0.0,'benchmark_funding':0.0,'equity_history':[],'benchmark_history':[],'events':[]}
+    def _load(self):
+        try:return json.loads(STATE.read_text(encoding='utf-8'))
+        except Exception:return self._blank()
+    def _save(self):
+        STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+    @staticmethod
+    def _dict_turn(old,new):
+        keys=set(old)|set(new);return sum(abs(float(new.get(k,0))-float(old.get(k,0))) for k in keys)
+    @staticmethod
+    def _merge(a,b):
+        out={}
+        for src in (a,b):
+            for k,v in src.items():out[k]=out.get(k,0.0)+float(v)
+        return {k:v for k,v in out.items() if abs(v)>1e-12}
+    @staticmethod
+    def _dd(hist):
+        vals=[float(x.get('equity',100.0)) for x in hist]
+        if not vals:return 0.0
+        peak=vals[0];worst=0.0
+        for v in vals:peak=max(peak,v);worst=min(worst,v/peak-1 if peak else 0)
+        return worst*100.0
+    async def _sq_frame(self,symbol,reuse=None):
+        x=pd.read_csv(SQ_CACHE/f'{symbol}_1h_720d.csv');x['ts']=pd.to_datetime(x.ts,utc=True)
+        hist=x.set_index('ts').resample('8h').agg({'open':'first','high':'max','low':'min','close':'last','base_vol':'sum'}).dropna()
+        if reuse is not None and not reuse.empty:
+            return pd.concat([hist,reuse]).loc[lambda z:~z.index.duplicated(keep='last')].sort_index()
+        fresh=pd.DataFrame();last_exc=None
+        for attempt,delay in enumerate((1.0,2.0,4.0,6.0),1):
+            try:
+                fresh=await raven_challenger_shadow._latest4h(symbol)
+                if not fresh.empty:break
+            except Exception as exc:last_exc=exc
+            await asyncio.sleep(delay)
+        if fresh.empty:
+            if (pd.Timestamp.now(tz='UTC')-hist.index.max()).total_seconds()>43200:raise RuntimeError(f'V47_FRESH_STALE:{symbol}:{last_exc}')
+            return hist
+        fr=RavenChallengerShadow._resample8(fresh[['ts','open','high','low','close','base_vol']])
+        return pd.concat([hist,fr]).loc[lambda z:~z.index.duplicated(keep='last')].sort_index()
+
+    async def _sq_frames(self,vframes=None):
+        out={}
+        for s in SQ_SYMBOLS:
+            reuse=(vframes or {}).get(s)
+            out[s]=await self._sq_frame(s,reuse)
+            if reuse is None:await asyncio.sleep(.35)
+        return out
+
+    def _squeeze_target(self,frames):
+        idx=frames['BTCUSDT'].index
+        for s in SQ_SYMBOLS:idx=idx.intersection(frames[s].index)
+        c=pd.DataFrame({s:frames[s].loc[idx,'close'] for s in SQ_SYMBOLS});h=pd.DataFrame({s:frames[s].loc[idx,'high'] for s in SQ_SYMBOLS});l=pd.DataFrame({s:frames[s].loc[idx,'low'] for s in SQ_SYMBOLS});r=c.pct_change().fillna(0)
+        bull={};bear={};width={};atrp={};hh={};ll={};vol={}
+        for s in SQ_SYMBOLS:
+            cs=c[s];hs=h[s];ls=l[s];rs=r[s];e24=cs.ewm(span=24,adjust=False).mean();e96=cs.ewm(span=96,adjust=False).mean();bull[s]=e24>e96;bear[s]=e24<e96
+            ma=cs.rolling(20).mean();sd=cs.rolling(20).std(ddof=0);width[s]=(4*sd/ma).replace([np.inf,-np.inf],np.nan)
+            pc=cs.shift(1);tr=pd.concat([(hs-ls),(hs-pc).abs(),(ls-pc).abs()],axis=1).max(axis=1);atrp[s]=(tr.ewm(alpha=1/14,adjust=False).mean()/cs).replace([np.inf,-np.inf],np.nan)
+            hh[s]=hs.shift(1).rolling(20).max();ll[s]=ls.shift(1).rolling(20).min();vol[s]=rs.rolling(30).std()
+        armed={s:0 for s in SQ_SYMBOLS};last=np.zeros(len(SQ_SYMBOLS));target=.45/math.sqrt(365*3);cfg=self.sq_cfg
+        for i in range(max(180,len(idx)-500),len(idx)):
+            w=np.zeros(len(SQ_SYMBOLS));up=sum(bool(bull[s].iloc[i]) for s in SQ_SYMBOLS);dn=sum(bool(bear[s].iloc[i]) for s in SQ_SYMBOLS)
+            for s in SQ_SYMBOLS:
+                q=width[s].iloc[max(0,i-120):i].quantile(cfg['q']);sq=np.isfinite(q) and float(width[s].iloc[i])<q and float(atrp[s].iloc[i])<float(atrp[s].iloc[max(0,i-60):i].median())
+                if sq:armed[s]=cfg['arm']
+                elif armed[s]>0:armed[s]-=1
+            longs=[];shorts=[]
+            for j,s in enumerate(SQ_SYMBOLS):
+                if armed[s]<=0:continue
+                px=float(c[s].iloc[i]);vv=max(float(vol[s].iloc[i]),1e-6)
+                if bool(bull[s].iloc[i]) and px>float(hh[s].iloc[i]) and up>=cfg['bull_min']:longs.append(((px/float(hh[s].iloc[i])-1)/vv,j,vv))
+                if bool(bear[s].iloc[i]) and px<float(ll[s].iloc[i]) and dn>=cfg['bear_min']:shorts.append(((float(ll[s].iloc[i])/px-1)/vv,j,vv))
+            if longs:
+                for _,j,vv in sorted(longs,reverse=True)[:cfg['topn']]:w[j]=min(cfg['cap']/cfg['topn'],target/vv/cfg['topn'])
+            elif shorts:
+                for _,j,vv in sorted(shorts,reverse=True)[:cfg['topn']]:w[j]=-cfg['short_frac']*min(cfg['cap']/cfg['topn'],target/vv/cfg['topn'])
+            if not np.any(w):w=last*cfg['decay']
+            last=w
+        return {s:float(last[j]) for j,s in enumerate(SQ_SYMBOLS) if abs(float(last[j]))>1e-12},idx[-1],{s:float(c[s].iloc[-1]) for s in SQ_SYMBOLS}
+    @staticmethod
+    def _leg_return(weights,old_px,new_px,fund_all=False):
+        r=0.0
+        for s,w in weights.items():
+            a=float(old_px.get(s) or 0);b=float(new_px.get(s) or 0)
+            if a>0 and b>0:r+=float(w)*(b/a-1.0)
+        gross=sum(abs(float(w)) for w in weights.values()) if fund_all else sum(abs(float(w)) for w in weights.values() if float(w)<0)
+        return r-gross*FUND
+
+    def _apply_cost(self,turn,cost_rate,key):
+        frac=max(0.0,float(turn)*float(cost_rate));eq=float(self.state[key])
+        paid=eq*frac;self.state[key]=eq*max(.01,1.0-frac);return paid,frac
+
+    def _initialise_bar(self,bar_ts,closes,v24_target,sq_raw,regime):
+        slot=int(pd.Timestamp(bar_ts).timestamp()//86400);sq={s:self.alpha*float(w) for s,w in sq_raw.items()} if not v24_target else {}
+        t24=self._dict_turn({},v24_target);tsq=self._dict_turn({},sq);tb=self._dict_turn({},v24_target)
+        p1,f1=self._apply_cost(t24,COST24,'equity');p2,f2=self._apply_cost(tsq,COSTSQ,'equity');pb,fb=self._apply_cost(tb,COST24,'benchmark_equity')
+        self.state.update({'v24_weights':v24_target,'squeeze_weights':sq,'benchmark_weights':v24_target,'last_bar_ts':str(bar_ts),'last_closes':closes,'last_v24_slot':slot,'v24_cycle_factor':max(.01,1-f1),'rebalance_count':1})
+        self.state['costs']+=p1+p2;self.state['benchmark_costs']+=pb
+        self.state['events'].append({'ts':time.time(),'bar_ts':str(bar_ts),'event':'START','regime':regime,'v24':v24_target,'squeeze':sq})
+
+    def _record(self,bar_ts,regime):
+        eq=float(self.state['equity']);be=float(self.state['benchmark_equity'])
+        self.state['equity_history']=(self.state.get('equity_history') or [])[-999:]+[{'ts':time.time(),'bar_ts':str(bar_ts),'equity':eq,'regime':regime}]
+        self.state['benchmark_history']=(self.state.get('benchmark_history') or [])[-999:]+[{'ts':time.time(),'bar_ts':str(bar_ts),'equity':be}]
+        self.state['events']=(self.state.get('events') or [])[-199:]
+    def _advance_bar(self,bar_ts,closes,v24_target,sq_raw,regime):
+        old_px=self.state.get('last_closes') or {};v24=dict(self.state.get('v24_weights') or {});sq=dict(self.state.get('squeeze_weights') or {});bench=dict(self.state.get('benchmark_weights') or {})
+        r24=self._leg_return(v24,old_px,closes,True);rsq=self._leg_return(sq,old_px,closes,False);rb=self._leg_return(bench,old_px,closes,True)
+        eq0=float(self.state['equity']);be0=float(self.state['benchmark_equity']);self.state['equity']=eq0*max(.01,1+r24+rsq);self.state['benchmark_equity']=be0*max(.01,1+rb)
+        self.state['funding']+=eq0*(sum(abs(float(x)) for x in v24.values())+sum(abs(float(x)) for x in sq.values() if float(x)<0))*FUND
+        self.state['benchmark_funding']+=be0*sum(abs(float(x)) for x in bench.values())*FUND
+        self.state['v24_cycle_factor']=float(self.state.get('v24_cycle_factor') or 1.0)*max(.01,1+r24)
+        slot=int(pd.Timestamp(bar_ts).timestamp()//86400);scheduled=self.state.get('last_v24_slot')!=slot;d24=dict(v24);stopped=False
+        if scheduled:d24=dict(v24_target);self.state['v24_cycle_factor']=1.0
+        elif v24:
+            mode='LONG' if sum(v24.values())>0 else 'SHORT';stop=self.long_stop if mode=='LONG' else self.short_stop
+            if stop is not None and self.state['v24_cycle_factor']-1<=float(stop):
+                d24={};stopped=True;self.state['stop_count']=int(self.state.get('stop_count') or 0)+1;self.state['v24_cycle_factor']=1.0
+        ds={s:self.alpha*float(w) for s,w in sq_raw.items()} if not d24 else {};db=dict(v24_target) if scheduled else bench
+        t24=self._dict_turn(v24,d24);tsq=self._dict_turn(sq,ds);tb=self._dict_turn(bench,db)
+        frac=t24*COST24+tsq*COSTSQ;paid=float(self.state['equity'])*frac;self.state['equity']*=max(.01,1-frac);self.state['costs']+=paid
+        bfrac=tb*COST24;bpaid=float(self.state['benchmark_equity'])*bfrac;self.state['benchmark_equity']*=max(.01,1-bfrac);self.state['benchmark_costs']+=bpaid
+        if scheduled:self.state['v24_cycle_factor']*=max(.01,1-t24*COST24);self.state['last_v24_slot']=slot
+        self.state.update({'v24_weights':d24,'squeeze_weights':ds,'benchmark_weights':db,'last_bar_ts':str(bar_ts),'last_closes':closes})
+        self.state['rebalance_count']=int(self.state.get('rebalance_count') or 0)+1
+        if stopped:self.state['events'].append({'ts':time.time(),'bar_ts':str(bar_ts),'event':'V24_STOP','cycle_return_pct':round((float(self.state['v24_cycle_factor'])-1)*100,4)})
+        return {'scheduled_v24':scheduled,'stopped':stopped,'v24_bar_pct':r24*100,'squeeze_bar_pct':rsq*100,'benchmark_bar_pct':rb*100,'turn_v24':t24,'turn_squeeze':tsq}
+    def _snapshot_at(self,vframes,sqframes,bar_ts):
+        vf={sym:fr[fr.index<=bar_ts] for sym,fr in vframes.items()}
+        sf={sym:fr[fr.index<=bar_ts] for sym,fr in sqframes.items()}
+        idx,c,bull,bear,score,vol=RavenChallengerShadow._features(vf)
+        vtarget,regime,up,dn,bt,rs,vr,btc_m,_=RavenChallengerShadow._target(idx,c,bull,bear,score,vol,self.v24_cfg,None)
+        sqraw,sq_ts,sq_closes=self._squeeze_target(sf)
+        if pd.Timestamp(bt)!=pd.Timestamp(bar_ts) or pd.Timestamp(sq_ts)!=pd.Timestamp(bar_ts):
+            raise RuntimeError(f'V47_SNAPSHOT_MISMATCH:{bar_ts}:{bt}:{sq_ts}')
+        closes={sym:float(c[sym].iloc[-1]) for sym in V24_SYMBOLS};closes.update(sq_closes)
+        meta={'bar_ts':bt,'regime':regime,'breadth_up':up,'breadth_down':dn,'risk_scale':rs,'vol_ratio':vr,'btc_momentum_72h_pct':btc_m*100}
+        return vtarget,sqraw,closes,meta
+
+    async def refresh(self):
+        try:
+            vframes,_=await raven_challenger_shadow._frames();await asyncio.sleep(.75);sqframes=await self._sq_frames(vframes)
+            vi=vframes['BTCUSDT'].index
+            for sym in V24_SYMBOLS:vi=vi.intersection(vframes[sym].index)
+            si=sqframes['BTCUSDT'].index
+            for sym in SQ_SYMBOLS:si=si.intersection(sqframes[sym].index)
+            bars=vi.intersection(si).sort_values();latest_bar=bars.max();previous=self.state.get('last_bar_ts')
+            pending=[] if previous is None else list(bars[bars>pd.Timestamp(previous)])
+            if len(pending)>90:raise RuntimeError(f'V47_REPLAY_TOO_LARGE:{len(pending)}')
+            advance=None;meta=None;vtarget={};sqraw={}
+            if previous is None:
+                vtarget,sqraw,closes,meta=self._snapshot_at(vframes,sqframes,latest_bar)
+                self._initialise_bar(latest_bar,closes,vtarget,sqraw,meta['regime']);self.state['observation_count']=1
+                if self._merge(vtarget,{s:self.alpha*w for s,w in sqraw.items()} if not vtarget else {}):self.state['active_observation_count']=1
+                self._record(latest_bar,meta['regime']);self._save()
+            else:
+                for bt in pending:
+                    vtarget,sqraw,closes,meta=self._snapshot_at(vframes,sqframes,bt)
+                    advance=self._advance_bar(bt,closes,vtarget,sqraw,meta['regime'])
+                    self.state['observation_count']=int(self.state.get('observation_count') or 0)+1
+                    if self._merge(self.state.get('v24_weights') or {},self.state.get('squeeze_weights') or {}):self.state['active_observation_count']=int(self.state.get('active_observation_count') or 0)+1
+                    self._record(bt,meta['regime'])
+                if pending:self._save()
+                else:vtarget,sqraw,closes,meta=self._snapshot_at(vframes,sqframes,latest_bar)
+            self.last_error=None;self.last_refresh=time.time();bt=meta['bar_ts']
+            self.latest={'ok':True,'bar_ts':str(bt),'regime':meta['regime'],'breadth_up':meta['breadth_up'],'breadth_down':meta['breadth_down'],'risk_scale':round(meta['risk_scale'],4),'vol_ratio':round(meta['vol_ratio'],4),'btc_momentum_72h_pct':round(meta['btc_momentum_72h_pct'],4),'alpha':self.alpha,'v24_target':vtarget,'squeeze_raw':sqraw,'advance':advance,'data_common_bar':str(bt),'replayed_bars':len(pending)}
+        except Exception as exc:
+            self.last_error=str(exc)[:500];self.last_refresh=time.time()
+        return self.status()
+
+    def status(self):
+        eq=float(self.state.get('equity') or 100.0);be=float(self.state.get('benchmark_equity') or 100.0);ret=eq-100.0;bret=be-100.0;age=max(0.0,(time.time()-float(self.state.get('started_at') or time.time()))/3600.0);obs=int(self.state.get('observation_count') or 0)
+        vw=self.state.get('v24_weights') or {};sw=self.state.get('squeeze_weights') or {};combined=self._merge(vw,sw)
+        return {'ok':self.last_error is None,'mode':'PAPER_SHADOW','strategy':'v47','enabled':self.enabled,'equity':round(eq,6),'return_pct':round(ret,4),'max_dd_pct':round(self._dd(self.state.get('equity_history') or []),4),'benchmark':'v24_same_8h_clock','benchmark_equity':round(be,6),'benchmark_return_pct':round(bret,4),'benchmark_max_dd_pct':round(self._dd(self.state.get('benchmark_history') or []),4),'relative_edge_pct':round(ret-bret,4),'comparison_age_hours':round(age,2),'comparison_phase':'WARMUP' if obs<6 or age<48 else 'REVIEW_READY','comparison_ready':bool(obs>=6 and age>=48),'observation_count':obs,'active_observation_count':int(self.state.get('active_observation_count') or 0),'rebalance_count':int(self.state.get('rebalance_count') or 0),'stop_count':int(self.state.get('stop_count') or 0),'costs':round(float(self.state.get('costs') or 0),8),'funding':round(float(self.state.get('funding') or 0),8),'v24_weights':vw,'squeeze_weights':sw,'combined_weights':combined,'gross_exposure':round(sum(abs(float(x)) for x in combined.values()),4),'alpha':self.alpha,'long_stop':self.long_stop,'short_stop':self.short_stop,'last_bar_ts':self.state.get('last_bar_ts'),'last_refresh':self.last_refresh,'last_error':self.last_error,'latest':self.latest,'live_promotion_enabled':False}
+
+    async def start(self):
+        if self.task and not self.task.done():return
+        self.task=asyncio.create_task(self._loop(),name='raven-v47-shadow')
+    async def stop(self):
+        if self.task and not self.task.done():
+            self.task.cancel()
+            try:await self.task
+            except BaseException:pass
+        self.task=None;self._save()
+    async def _loop(self):
+        await asyncio.sleep(60.0)
+        while True:
+            if self.enabled:await self.refresh()
+            await asyncio.sleep(max(300.0,self.interval))
+
+raven_v47_shadow=RavenV47Shadow()

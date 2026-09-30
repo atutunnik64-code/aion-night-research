@@ -1,0 +1,486 @@
+from __future__ import annotations
+from app.http_shared import SHARED_SSL_CONTEXT
+import httpx, asyncio, json, time
+from websockets.legacy.client import connect
+from app.connectors.base import ExchangeConnector
+from app.models.domain import Node, Edge
+from app.services.coinex_bbo import coinex_bbo
+from app.services.gate_bbo import gate_bbo
+from app.services.binance_bbo import binance_bbo
+
+
+CORE_ASSETS = {
+    'BTC','ETH','SOL','XRP','BNB','DOGE','ADA','TRX','AVAX','LINK','LTC','BCH','DOT','TON','XLM','UNI',
+    'NEAR','APT','SUI','ETC','ATOM','FIL','ICP','ARB','OP','PEPE','SHIB','AAVE','HBAR','ALGO','VET','MATIC',
+    'POL','INJ','TIA','SEI','WIF','BONK','FLOKI','ENA','JUP','RUNE','KAS','MKR','CRV','LDO','GRT','SAND','MANA'
+}
+QUOTE_ASSETS = ('USDT','USDC','FDUSD','USD','EUR','BTC','ETH','BNB')
+START_ASSETS = {'USDT','USDC','FDUSD','USD','EUR'}
+CYCLE_ASSETS = CORE_ASSETS | set(QUOTE_ASSETS)
+
+
+def _valid_base(base: str) -> bool:
+    b = str(base or '').upper()
+    if not b or len(b) > 24:
+        return False
+    # BTC/ETH/BNB can be both quote assets and normal tradable base assets.
+    # Stable/fiat quote assets remain excluded as base here; they have a separate scanner.
+    if b in QUOTE_ASSETS and b not in CORE_ASSETS:
+        return False
+    blocked = ('UP','DOWN','BULL','BEAR','3L','3S','5L','5S')
+    return not any(b.endswith(x) for x in blocked)
+
+
+def _plain_pair(symbol: str):
+    text = str(symbol or '').upper()
+    for quote in sorted(QUOTE_ASSETS, key=len, reverse=True):
+        if text.endswith(quote) and len(text) > len(quote):
+            base = text[:-len(quote)]
+            if _valid_base(base) and base != quote:
+                return base, quote
+    return None
+
+def _split_pair(symbol: str, sep: str):
+    parts = str(symbol or '').upper().split(sep)
+    if len(parts) != 2:
+        return None
+    base, quote = parts
+    if _valid_base(base) and quote in QUOTE_ASSETS and base != quote:
+        return base, quote
+    return None
+
+
+class BulkTickerConnector(ExchangeConnector):
+    fee_rate = 0.001
+    timeout = 12.0
+
+    async def _rows(self, client: httpx.AsyncClient) -> list[dict]:
+        raise NotImplementedError
+
+    async def get_edges(self, notional_usd: float) -> list[Edge]:
+        async with httpx.AsyncClient(timeout=self.timeout, follow_redirects=True, verify=SHARED_SSL_CONTEXT) as client:
+            rows = await self._rows(client)
+        edges: list[Edge] = []
+        for row in rows:
+            try:
+                base, quote = row['base'], row['quote']
+                bid, ask = float(row['bid']), float(row['ask'])
+                bid_qty, ask_qty = float(row['bid_qty']), float(row['ask_qty'])
+                fee = float(row.get('fee_rate', self.fee_rate))
+            except (KeyError, TypeError, ValueError):
+                continue
+            if bid <= 0 or ask <= 0 or bid_qty <= 0 or ask_qty <= 0 or ask < bid:
+                continue
+            bnode, qnode = Node(self.name, base), Node(self.name, quote)
+            common = {
+                'symbol': row['symbol'], 'base': base, 'quote': quote, 'source': row.get('source','public_l1'),
+                'fee_assumption': fee, 'fee_source': row.get('fee_source','exchange_default'),
+                'liquidity_verified': True, 'exchange_ts_ms': row.get('exchange_ts_ms'),
+            }
+            edges.append(Edge(qnode,bnode,'trade',1/ask,fee,slippage_rate=0.0,capacity=ask*ask_qty,
+                              meta={**common,'side':'buy','best_ask':ask,'l1_qty':ask_qty}))
+            edges.append(Edge(bnode,qnode,'trade',bid,fee,slippage_rate=0.0,capacity=bid_qty,
+                              meta={**common,'side':'sell','best_bid':bid,'l1_qty':bid_qty}))
+        return edges
+
+
+class BinancePublicConnector(BulkTickerConnector):
+    name = 'Binance'
+    async def _rows(self, client):
+        await binance_bbo.wait_ready(0.30); out=[]
+        snap=binance_bbo.snapshot(3.0)
+        if len(snap)<100:
+            r=await client.get('https://data-api.binance.vision/api/v3/ticker/bookTicker'); r.raise_for_status(); snap={str(x.get('symbol','')).upper():{'symbol':x.get('symbol'),'bid':x.get('bidPrice'),'ask':x.get('askPrice'),'bid_qty':x.get('bidQty'),'ask_qty':x.get('askQty')} for x in r.json()}
+        for x in snap.values():
+            pair=_plain_pair(x.get('symbol'))
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('bid'),'ask':x.get('ask'),'bid_qty':x.get('bid_qty'),'ask_qty':x.get('ask_qty'),'exchange_ts_ms':x.get('exchange_ts_ms'),'source':'public_ws_bbo'})
+        return out
+
+
+class BybitPublicConnector(BulkTickerConnector):
+    name = 'Bybit'
+    async def _rows(self, client):
+        r = await client.get('https://api.bybit.com/v5/market/tickers', params={'category':'spot'}); r.raise_for_status()
+        d=r.json(); out=[]
+        if d.get('retCode') != 0: raise RuntimeError(d.get('retMsg','Bybit error'))
+        for x in d.get('result',{}).get('list',[]):
+            pair=_plain_pair(x.get('symbol'))
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('bid1Price'),'ask':x.get('ask1Price'),'bid_qty':x.get('bid1Size'),'ask_qty':x.get('ask1Size')})
+        return out
+
+
+class OkxPublicConnector(BulkTickerConnector):
+    name = 'OKX'
+    async def _rows(self, client):
+        r = await client.get('https://www.okx.com/api/v5/market/tickers', params={'instType':'SPOT'}); r.raise_for_status()
+        d=r.json(); out=[]
+        if str(d.get('code')) != '0': raise RuntimeError(d.get('msg','OKX error'))
+        for x in d.get('data',[]):
+            pair=_split_pair(x.get('instId'), '-')
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['instId'],'bid':x.get('bidPx'),'ask':x.get('askPx'),'bid_qty':x.get('bidSz'),'ask_qty':x.get('askSz'),'exchange_ts_ms':x.get('ts')})
+        return out
+
+
+class MexcPublicConnector(BulkTickerConnector):
+    name = 'MEXC'
+    async def _rows(self, client):
+        r = await client.get('https://api.mexc.com/api/v3/ticker/bookTicker'); r.raise_for_status(); out=[]
+        for x in r.json():
+            pair=_plain_pair(x.get('symbol'))
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('bidPrice'),'ask':x.get('askPrice'),'bid_qty':x.get('bidQty'),'ask_qty':x.get('askQty')})
+        return out
+
+class KucoinPublicConnector(BulkTickerConnector):
+    name = 'KuCoin'
+    async def _rows(self, client):
+        r = await client.get('https://api.kucoin.com/api/v1/market/allTickers'); r.raise_for_status()
+        d=r.json(); out=[]
+        if d.get('code') != '200000': raise RuntimeError('KuCoin API error')
+        for x in d.get('data',{}).get('ticker',[]):
+            pair=_split_pair(x.get('symbol'), '-')
+            if not pair: continue
+            fee=x.get('takerFeeRate') or self.fee_rate
+            out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('buy'),'ask':x.get('sell'),'bid_qty':x.get('bestBidSize'),'ask_qty':x.get('bestAskSize'),'fee_rate':fee,'fee_source':'public_pair_taker'})
+        return out
+
+
+class BitgetPublicConnector(BulkTickerConnector):
+    name = 'Bitget'
+    async def _rows(self, client):
+        r=None
+        for attempt in range(3):
+            try:
+                r=await client.get('https://api.bitget.com/api/v2/spot/market/tickers'); r.raise_for_status(); break
+            except Exception:
+                if attempt==2: raise
+                await asyncio.sleep(.35*(attempt+1))
+        d=r.json(); out=[]
+        if d.get('code') != '00000': raise RuntimeError(d.get('msg','Bitget API error'))
+        for x in d.get('data',[]):
+            pair=_plain_pair(x.get('symbol'))
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('bidPr'),'ask':x.get('askPr'),'bid_qty':x.get('bidSz'),'ask_qty':x.get('askSz'),'exchange_ts_ms':x.get('ts')})
+        return out
+
+
+class BingxPublicConnector(BulkTickerConnector):
+    name = 'BingX'
+    async def _rows(self, client):
+        r = await client.get('https://open-api.bingx.com/openApi/spot/v1/ticker/bookTicker'); r.raise_for_status()
+        d=r.json(); out=[]
+        if d.get('code') != 0: raise RuntimeError(str(d.get('msg','BingX API error')))
+        for x in d.get('data',[]):
+            pair=_split_pair(x.get('symbol'), '-')
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('bidPrice'),'ask':x.get('askPrice'),'bid_qty':x.get('bidVolume'),'ask_qty':x.get('askVolume'),'exchange_ts_ms':x.get('time')})
+        return out
+
+
+class BitmartPublicConnector(BulkTickerConnector):
+    name = 'BitMart'
+    async def _rows(self, client):
+        r = await client.get('https://api-cloud.bitmart.com/spot/quotation/v3/tickers'); r.raise_for_status()
+        d=r.json(); out=[]
+        if d.get('code') != 1000: raise RuntimeError(str(d.get('message','BitMart API error')))
+        for x in d.get('data',[]):
+            if not isinstance(x,list) or len(x) < 13: continue
+            pair=_split_pair(x[0], '_')
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x[0],'bid':x[8],'bid_qty':x[9],'ask':x[10],'ask_qty':x[11],'exchange_ts_ms':x[12]})
+        return out
+
+
+class HtxPublicConnector(BulkTickerConnector):
+    name = 'HTX'
+    async def _rows(self, client):
+        r = await client.get('https://api.huobi.pro/market/tickers'); r.raise_for_status()
+        d=r.json(); out=[]
+        if d.get('status') not in (None,'ok'): raise RuntimeError(str(d.get('err-msg','HTX API error')))
+        for x in d.get('data',[]):
+            pair=_plain_pair(str(x.get('symbol','')).upper())
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':str(x['symbol']).upper(),'bid':x.get('bid'),'ask':x.get('ask'),'bid_qty':x.get('bidSize'),'ask_qty':x.get('askSize'),'exchange_ts_ms':d.get('ts')})
+        return out
+
+
+class KrakenPublicConnector(BulkTickerConnector):
+    name = 'Kraken'
+    async def _rows(self, client):
+        pairs_r, ticker_r = await __import__('asyncio').gather(
+            client.get('https://api.kraken.com/0/public/AssetPairs'),
+            client.get('https://api.kraken.com/0/public/Ticker'))
+        pairs_r.raise_for_status(); ticker_r.raise_for_status()
+        pd=pairs_r.json(); td=ticker_r.json(); out=[]
+        if pd.get('error') or td.get('error'): raise RuntimeError('Kraken API error')
+        meta={}
+        for key,x in pd.get('result',{}).items():
+            ws=x.get('wsname')
+            if not ws or '/' not in ws: continue
+            base,quote=[z.upper() for z in ws.split('/',1)]
+            if base=='XBT': base='BTC'
+            if base=='XDG': base='DOGE'
+            if quote=='XBT': quote='BTC'
+            if _valid_base(base) and quote in QUOTE_ASSETS and base!=quote: meta[key]=(base,quote,x.get('altname') or key)
+        for key,x in td.get('result',{}).items():
+            m=meta.get(key)
+            if not m: continue
+            try: ask=x['a']; bid=x['b']
+            except Exception: continue
+            out.append({'base':m[0],'quote':m[1],'symbol':m[2],'bid':bid[0],'ask':ask[0],'bid_qty':bid[2] if len(bid)>2 else bid[1],'ask_qty':ask[2] if len(ask)>2 else ask[1]})
+        return out
+
+
+
+def _bitfinex_norm(code: str) -> str:
+    c=str(code or '').upper()
+    return {'UST':'USDT','UDC':'USDC','DSH':'DASH','IOT':'IOTA','ALG':'ALGO','ATO':'ATOM','OPX':'OP','BCHN':'BCH','WBT':'WBTC'}.get(c,c)
+
+class BitfinexPublicConnector(BulkTickerConnector):
+    name = 'Bitfinex'
+    fee_rate = 0.002
+    async def _rows(self, client):
+        pair_r,ticker_r=await __import__('asyncio').gather(
+            client.get('https://api-pub.bitfinex.com/v2/conf/pub:list:pair:exchange'),
+            client.get('https://api-pub.bitfinex.com/v2/tickers',params={'symbols':'ALL'}))
+        pair_r.raise_for_status(); ticker_r.raise_for_status(); meta={}
+        pairs=(pair_r.json() or [[]])[0]
+        internal_quotes=('UST','UDC','USD','EUR','BTC','ETH')
+        for code in pairs:
+            c=str(code).upper()
+            if c.startswith('TEST'): continue
+            if ':' in c: base_raw,quote_raw=c.split(':',1)
+            else:
+                quote_raw=next((q for q in internal_quotes if c.endswith(q) and len(c)>len(q)),None)
+                if not quote_raw: continue
+                base_raw=c[:-len(quote_raw)]
+            base,quote=_bitfinex_norm(base_raw),_bitfinex_norm(quote_raw)
+            if _valid_base(base) and quote in QUOTE_ASSETS and base!=quote: meta['T'+c]=(base,quote,c)
+        out=[]
+        for x in ticker_r.json():
+            if not isinstance(x,list) or len(x)<5: continue
+            m=meta.get(str(x[0]).upper())
+            if not m: continue
+            out.append({'base':m[0],'quote':m[1],'symbol':m[2],'bid':x[1],'bid_qty':x[2],'ask':x[3],'ask_qty':x[4],'fee_rate':self.fee_rate,'fee_source':'bitfinex_default_0.20pct'})
+        return out
+
+class GatePublicConnector(BulkTickerConnector):
+    name = 'Gate.io'
+    fee_rate = 0.002
+    async def _rows(self, client):
+        await gate_bbo.wait_ready(4.0); out=[]
+        for market,x in gate_bbo.snapshot(15.0).items():
+            pair=_split_pair(market,'_')
+            if not pair:continue
+            out.append({'base':pair[0],'quote':pair[1],'symbol':market,'bid':x.get('b'),'ask':x.get('a'),'bid_qty':x.get('B'),'ask_qty':x.get('A'),'exchange_ts_ms':x.get('t'),'fee_rate':self.fee_rate,'fee_source':'gate_default_0.20pct'})
+        return out
+
+
+class CoinWPublicConnector(BulkTickerConnector):
+    name = 'CoinW'
+    fee_rate = 0.001
+    timeout = 15.0
+    _wanted_cache={}
+    _wanted_cache_mono=0.0
+    async def _rows(self, client):
+        wanted=dict(self.__class__._wanted_cache) if self.__class__._wanted_cache and time.monotonic()-self.__class__._wanted_cache_mono<900 else {}
+        if not wanted:
+            last=None
+            for attempt in range(3):
+                try:
+                    r=await client.get('https://api.coinw.com/api/v1/public',params={'command':'returnTicker'}); r.raise_for_status(); last=r; break
+                except Exception:
+                    if attempt==2: raise
+                    await asyncio.sleep(.35*(attempt+1))
+            d=last.json(); data=d.get('data') or {}
+            if str(d.get('code'))!='200': raise RuntimeError(str(d.get('msg','CoinW ticker error')))
+            ranked=[]
+            for sym,x in data.items():
+                pair=_split_pair(sym,'_')
+                if not pair or not _valid_base(pair[0]) or pair[1] not in START_ASSETS: continue
+                code=str((x or {}).get('id') or '')
+                try:vol=float((x or {}).get('baseVolume') or 0)
+                except Exception:vol=0.0
+                if code:ranked.append((vol,code,sym,pair))
+            for _,code,sym,pair in sorted(ranked,reverse=True)[:60]: wanted[code]=(sym,pair)
+            if wanted:
+                self.__class__._wanted_cache=dict(wanted); self.__class__._wanted_cache_mono=time.monotonic()
+        rows=[]; received=set()
+        try:
+            async with connect('wss://ws.futurescw.com',open_timeout=4,close_timeout=2,ping_interval=20,ping_timeout=10,max_size=2**22) as ws:
+                for code in wanted:
+                    await ws.send(json.dumps({'event':'sub','params':{'biz':'exchange','type':'depth_snapshot','pairCode':code}})); await asyncio.sleep(.02)
+                end=time.monotonic()+5.5
+                while time.monotonic()<end and len(received)<len(wanted):
+                    try:raw=await asyncio.wait_for(ws.recv(),timeout=.8)
+                    except asyncio.TimeoutError:continue
+                    msg=json.loads(raw) if isinstance(raw,str) else raw
+                    if msg.get('type')!='depth_snapshot':continue
+                    code=str(msg.get('pairCode') or ''); meta=wanted.get(code)
+                    if not meta or code in received:continue
+                    x=msg.get('data') or {}
+                    if isinstance(x,str):
+                        try:x=json.loads(x)
+                        except Exception:continue
+                    bids=x.get('bids') or []; asks=x.get('asks') or []
+                    if not bids or not asks:continue
+                    sym,pair=meta; received.add(code)
+                    rows.append({'base':pair[0],'quote':pair[1],'symbol':sym,'bid':bids[0][0],'bid_qty':bids[0][1],
+                                 'ask':asks[0][0],'ask_qty':asks[0][1],'exchange_ts_ms':x.get('time'),
+                                 'fee_rate':self.fee_rate,'fee_source':'coinw_base_taker_0.10pct','source':'public_ws_depth_snapshot'})
+        except Exception:
+            pass
+        missing=[v for k,v in wanted.items() if k not in received][:6]
+        if missing:
+            sem=asyncio.Semaphore(6)
+            async def fallback(item):
+                sym,pair=item
+                async with sem:
+                    try:
+                        rr=await client.get('https://api.coinw.com/api/v1/public',params={'command':'returnOrderBook','symbol':sym,'size':20}); rr.raise_for_status()
+                        z=rr.json(); book=z.get('data') or {}; bids=book.get('bids') or []; asks=book.get('asks') or []
+                        if str(z.get('code'))!='200' or not bids or not asks:return None
+                        return {'base':pair[0],'quote':pair[1],'symbol':sym,'bid':bids[0][0],'bid_qty':bids[0][1],
+                                'ask':asks[0][0],'ask_qty':asks[0][1],'fee_rate':self.fee_rate,
+                                'fee_source':'coinw_base_taker_0.10pct','source':'public_rest_depth20_fallback'}
+                    except Exception:return None
+            extra=await asyncio.gather(*[fallback(x) for x in missing]); rows.extend(x for x in extra if x)
+        return rows
+
+
+class CoinExPublicConnector(BulkTickerConnector):
+    name = 'CoinEx'
+    fee_rate = 0.002
+    async def _rows(self, client):
+        await coinex_bbo.wait_ready(4.0); out=[]
+        for market,x in coinex_bbo.snapshot(15.0).items():
+            pair=_plain_pair(market)
+            if not pair: continue
+            out.append({'base':pair[0],'quote':pair[1],'symbol':market,
+                        'bid':x.get('best_bid_price'),'ask':x.get('best_ask_price'),
+                        'bid_qty':x.get('best_bid_size'),'ask_qty':x.get('best_ask_size'),'exchange_ts_ms':x.get('updated_at'),
+                        'fee_rate':self.fee_rate,'fee_source':'coinex_vip0_0.20pct'})
+        return out
+
+class XtPublicConnector(BulkTickerConnector):
+    name = 'XT'
+    fee_rate = 0.002
+    timeout = 16.0
+    async def _rows(self, client):
+        r=await client.get('https://sapi.xt.com/v4/public/ticker/book',params={'tags':'spot'}); r.raise_for_status()
+        d=r.json(); out=[]
+        if int(d.get('rc',-1)) != 0: raise RuntimeError(str(d.get('mc','XT API error')))
+        for x in d.get('result') or []:
+            pair=_split_pair(x.get('s'),'_')
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['s'],'bid':x.get('bp'),'ask':x.get('ap'),
+                                 'bid_qty':x.get('bq'),'ask_qty':x.get('aq'),'exchange_ts_ms':x.get('t'),
+                                 'fee_rate':self.fee_rate,'fee_source':'conservative_scan_0.20pct'})
+        return out
+
+class PoloniexPublicConnector(BulkTickerConnector):
+    name = 'Poloniex'
+    fee_rate = 0.002
+    timeout = 12.0
+    async def _rows(self, client):
+        r=await client.get('https://api.poloniex.com/markets/ticker24h'); r.raise_for_status(); out=[]
+        for x in r.json() or []:
+            pair=_split_pair(x.get('symbol'),'_')
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x['symbol'],'bid':x.get('bid'),'ask':x.get('ask'),
+                                 'bid_qty':x.get('bidQuantity'),'ask_qty':x.get('askQuantity'),'exchange_ts_ms':x.get('ts'),
+                                 'fee_rate':self.fee_rate,'fee_source':'conservative_scan_0.20pct'})
+        return out
+
+class ToobitPublicConnector(BulkTickerConnector):
+    name = 'Toobit'
+    fee_rate = 0.002
+    timeout = 12.0
+    async def _rows(self, client):
+        r=await client.get('https://api.toobit.com/quote/v1/ticker/bookTicker'); r.raise_for_status(); out=[]
+        for x in r.json() or []:
+            pair=_plain_pair(x.get('s'))
+            if pair: out.append({'base':pair[0],'quote':pair[1],'symbol':x.get('s'),'bid':x.get('b'),'ask':x.get('a'),
+                                 'bid_qty':x.get('bq'),'ask_qty':x.get('aq'),'exchange_ts_ms':x.get('t'),
+                                 'fee_rate':self.fee_rate,'fee_source':'conservative_scan_0.20pct'})
+        return out
+
+class WhitebitDiscoveryConnector(BulkTickerConnector):
+    name = 'WhiteBIT'
+    fee_rate = 0.001
+    timeout = 18.0
+    async def _rows(self, client):
+        r=await client.get('https://whitebit.com/api/v4/public/markets'); r.raise_for_status()
+        markets=[x for x in r.json() or [] if x.get('type')=='spot' and x.get('tradesEnabled') and x.get('stock') in CORE_ASSETS and x.get('money') in START_ASSETS]
+        sem=asyncio.Semaphore(24)
+        async def one(x):
+            async with sem:
+                try:
+                    z=await client.get(f"https://whitebit.com/api/v4/public/orderbook/{x['name']}",params={'limit':1,'level':0}); z.raise_for_status(); d=z.json()
+                    bid=(d.get('bids') or [[None,None]])[0]; ask=(d.get('asks') or [[None,None]])[0]
+                    return {'base':x['stock'],'quote':x['money'],'symbol':x['name'],'bid':bid[0],'bid_qty':bid[1],'ask':ask[0],'ask_qty':ask[1],
+                            'exchange_ts_ms':float(d.get('timestamp') or 0)*1000,'fee_rate':float(x.get('takerFee') or self.fee_rate),'fee_source':'whitebit_market_taker'}
+                except Exception:return None
+        rows=await asyncio.gather(*[one(x) for x in markets])
+        return [x for x in rows if x]
+
+
+class LBankPublicConnector(BulkTickerConnector):
+    name = 'LBank'
+    fee_rate = 0.002
+    timeout = 12.0
+    _pairs_cache=[]
+    _pairs_cache_mono=0.0
+    async def _rows(self, client):
+        wanted=list(self.__class__._pairs_cache) if self.__class__._pairs_cache and time.monotonic()-self.__class__._pairs_cache_mono<900 else []
+        if not wanted:
+            r=await client.get('https://api.lbank.info/v2/currencyPairs.do',timeout=5.0); r.raise_for_status(); d=r.json()
+            if str(d.get('result')).lower()!='true': raise RuntimeError(str(d.get('msg','LBank pairs error')))
+            for sym in d.get('data') or []:
+                pair=_split_pair(sym,'_')
+                if pair and pair[0] in CORE_ASSETS and pair[1] in START_ASSETS:wanted.append((str(sym).lower(),pair))
+            self.__class__._pairs_cache=list(wanted); self.__class__._pairs_cache_mono=time.monotonic()
+        sem=asyncio.Semaphore(8)
+        async def one(item):
+            sym,pair=item
+            async with sem:
+                try:
+                    z=await client.get('https://api.lbank.info/v2/supplement/ticker/bookTicker.do',params={'symbol':sym},timeout=4.0); z.raise_for_status(); x=z.json()
+                    if str(x.get('result')).lower()!='true':return None
+                    b=x.get('data') or {}
+                    return {'base':pair[0],'quote':pair[1],'symbol':sym,'bid':b.get('bidPrice'),'bid_qty':b.get('bidQty'),
+                            'ask':b.get('askPrice'),'ask_qty':b.get('askQty'),'exchange_ts_ms':x.get('ts'),
+                            'fee_rate':self.fee_rate,'fee_source':'conservative_scan_0.20pct'}
+                except Exception:return None
+        rows=await asyncio.gather(*[one(x) for x in wanted])
+        return [x for x in rows if x]
+
+class BitruePublicConnector(BulkTickerConnector):
+    name = 'Bitrue'
+    fee_rate = 0.002
+    timeout = 12.0
+    _symbols_cache=[]
+    _symbols_cache_mono=0.0
+    async def _rows(self, client):
+        wanted=list(self.__class__._symbols_cache) if self.__class__._symbols_cache and time.monotonic()-self.__class__._symbols_cache_mono<900 else []
+        if not wanted:
+            r=await client.get('https://openapi.bitrue.com/api/v1/exchangeInfo',timeout=7.0); r.raise_for_status(); d=r.json()
+            for x in d.get('symbols') or []:
+                base=str(x.get('baseAsset') or '').upper(); quote=str(x.get('quoteAsset') or '').upper()
+                if str(x.get('status') or '').upper()=='TRADING' and base in CORE_ASSETS and quote in START_ASSETS:
+                    wanted.append((str(x.get('symbol') or '').upper(),base,quote))
+            wanted.sort(key=lambda x:(0 if x[2]=='USDT' else 1,x[0])); wanted=wanted[:65]
+            self.__class__._symbols_cache=list(wanted); self.__class__._symbols_cache_mono=time.monotonic()
+        sem=asyncio.Semaphore(8)
+        async def one(item):
+            sym,base,quote=item
+            async with sem:
+                try:
+                    z=await client.get('https://openapi.bitrue.com/api/v1/ticker/bookTicker',params={'symbol':sym},timeout=4.0); z.raise_for_status(); b=z.json()
+                    if not isinstance(b,dict) or b.get('code'):return None
+                    return {'base':base,'quote':quote,'symbol':sym,'bid':b.get('bidPrice'),'bid_qty':b.get('bidQty'),
+                            'ask':b.get('askPrice'),'ask_qty':b.get('askQty'),
+                            'fee_rate':self.fee_rate,'fee_source':'conservative_scan_0.20pct'}
+                except Exception:return None
+        rows=await asyncio.gather(*[one(x) for x in wanted])
+        return [x for x in rows if x]
+
+LIVE_CONNECTOR_CLASSES = [BinancePublicConnector, BybitPublicConnector, OkxPublicConnector, MexcPublicConnector, KucoinPublicConnector, BitgetPublicConnector, BingxPublicConnector, BitmartPublicConnector, HtxPublicConnector, KrakenPublicConnector, BitfinexPublicConnector, CoinWPublicConnector, CoinExPublicConnector, GatePublicConnector, XtPublicConnector, PoloniexPublicConnector, ToobitPublicConnector]
+DISCOVERY_CONNECTOR_CLASSES = [*LIVE_CONNECTOR_CLASSES, WhitebitDiscoveryConnector, LBankPublicConnector, BitruePublicConnector]
+
+
+
+

@@ -1,0 +1,62 @@
+﻿from __future__ import annotations
+import asyncio, signal, time, os
+
+# Public-data research only. No broker keys, no live execution.
+from app.services.moex_futures_collector import moex_futures_collector
+from app.services.moex_futures_shadow import moex_futures_shadow
+from app.services.moex_feature_registry_v3 import moex_feature_registry
+from app.services.moex_futures_universe import moex_futures_universe
+from app.services.moex_universe_structure_v1 import moex_universe_structure_v1
+from app.services.moex_universe_features_v1 import moex_universe_features_v1
+from app.services.moex_spread_research_v1 import moex_spread_research_v1
+from app.services.moex_spread_paper_v1 import moex_spread_paper_v1
+
+from app.services.funding_oi_state_transition_shadow import funding_oi_state_transition_shadow
+from app.services.funding_dislocation_persistence_v3 import funding_dislocation_persistence_v3
+from app.services.crossvenue_oi_migration_shadow_v2 import crossvenue_oi_migration_shadow_v2
+from app.services.crossvenue_perp_taker_collector_v2 import crossvenue_perp_taker_collector_v2
+from app.services.crossvenue_taker_imbalance_divergence_shadow_v3 import crossvenue_taker_imbalance_divergence_shadow_v3
+
+STOP = asyncio.Event()
+SERVICES = [
+    moex_futures_collector, moex_futures_shadow, moex_feature_registry,
+    moex_futures_universe, moex_universe_structure_v1, moex_universe_features_v1,
+    moex_spread_research_v1,
+    funding_oi_state_transition_shadow, funding_dislocation_persistence_v3,
+    crossvenue_oi_migration_shadow_v2, crossvenue_perp_taker_collector_v2,
+    crossvenue_taker_imbalance_divergence_shadow_v3,
+]
+
+async def _start_all():
+    for svc in SERVICES:
+        fn = getattr(svc, 'start', None)
+        if fn:
+            await fn()
+    print(f'NIGHT_AGENT_STARTED services={len(SERVICES)} ts={time.time():.0f}', flush=True)
+
+async def _stop_all():
+    for svc in reversed(SERVICES):
+        fn = getattr(svc, 'stop', None)
+        if fn:
+            try:
+                await fn()
+            except Exception as exc:
+                print(f'STOP_WARN {type(svc).__name__}: {exc}', flush=True)
+async def main():
+    loop = asyncio.get_running_loop()
+    for sig in (signal.SIGINT, signal.SIGTERM):
+        try:
+            loop.add_signal_handler(sig, STOP.set)
+        except NotImplementedError:
+            pass
+    await _start_all()
+    try:
+        while not STOP.is_set():
+            await asyncio.sleep(30)
+    finally:
+        await _stop_all()
+        print('NIGHT_AGENT_STOPPED', flush=True)
+
+if __name__ == '__main__':
+    asyncio.run(main())
+

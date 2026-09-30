@@ -1,0 +1,1390 @@
+import asyncio
+from pathlib import Path
+import os, faulthandler
+if os.getenv('AION_TRACE_HANG')=='1':
+    _trace_path=Path(__file__).parents[1]/'data'/'hang_trace.log'
+    _trace_file=open(_trace_path,'a',encoding='utf-8',buffering=1)
+    faulthandler.dump_traceback_later(3,repeat=True,file=_trace_file)
+from typing import Literal
+from fastapi import FastAPI, Query, Body
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from app.services.radar import radar
+from app.services.coinex_bbo import coinex_bbo
+from app.services.opportunity_memory import memory
+from app.services.automation import AutomationController
+from app.services.paper_engine import paper_engine
+from app.services.capital_manager import capital_manager
+from app.services.execution_engine import execution_engine
+from app.services.risk_manager import risk_manager
+from app.services.live_executor import live_executor
+from app.services.private_trading import reload_live_credentials, verify_live_credentials
+from app.services.autopilot import autopilot
+from app.services.inventory_guard import inventory_guard
+from app.services.demo_executor import demo_executor
+from app.services.demo_trading import bybit_apply_demo_funds, reload_demo_credentials, verify_demo_credentials
+from app.services.demo_wallet import demo_wallet
+from app.services.trading_mode import trading_mode
+from app.services.depth_guard import depth_guard
+from app.services.hot_book_cache import hot_book_cache
+from app.services.hot_signal_engine import hot_signal_engine
+from app.services.order_rules import order_rules_registry
+from app.services.coinw_bitget_audit import coinw_bitget_audit
+from app.services.wide_hunt_audit import wide_hunt_audit
+from app.services.inventory_manager import inventory_manager
+from app.services.synthetic_inventory import synthetic_inventory
+from app.services.basis_funding import basis_funding_scanner
+from app.services.triangle_scanner import triangle_scanner
+from app.services.stablecoin_scanner import stablecoin_scanner
+from app.services.strategy_portfolio import strategy_portfolio
+from app.services.rebalance_netting import rebalance_netting
+from app.services.raven_engine import raven_engine
+from app.services.raven_universal_shadow import raven_universal_shadow
+from app.services.raven_turbo_shadow import raven_turbo_shadow
+from app.services.raven_evolution_manager import raven_evolution_manager
+from app.services.raven_challenger_lab import raven_challenger_lab
+from app.services.raven_challenger_shadow import raven_challenger_shadow
+from app.services.raven_v47_shadow import raven_v47_shadow
+from app.services.raven_v42_funding_shadow import raven_v42_funding_shadow
+from app.services.raven_positioning_v55_shadow import raven_positioning_v55_shadow
+from app.services.raven_blend_v58_shadow import raven_blend_v58_shadow
+from app.services.raven_v60_cash_overlay_shadow import raven_v60_cash_overlay_shadow
+from app.services.raven_v61_allocator_shadow import raven_v61_allocator_shadow
+from app.services.raven_smart_positioning_v61_shadow import raven_smart_positioning_v61_shadow
+from app.services.raven_smartpos_g2_drop_toppos_shadow import raven_smartpos_g2_drop_toppos_shadow
+from app.services.raven_v63_microstructure_shadow_v2 import raven_v63_microstructure_shadow_v2 as raven_v63_microstructure_shadow
+from app.services.raven_v64_short_veto_shadow import raven_v64_short_veto_shadow
+from app.services.raven_v76_robust_short_veto_shadow import raven_v76_robust_short_veto_shadow
+from app.services.raven_v70_regime_shadow import raven_v70_regime_shadow
+from app.services.raven_v83_sparse_squeeze_shadow import raven_v83_sparse_squeeze_shadow
+from app.services.raven_v94_bybit_short_sizing_shadow import raven_v94_bybit_short_sizing_shadow
+from app.services.raven_v98_crowding_funding_shadow import raven_v98_crowding_funding_shadow
+from app.services.raven_v102_sparse_cash_filler_shadow import raven_v102_sparse_cash_filler_shadow
+from app.services.raven_v103_regime_composite_shadow import raven_v103_regime_composite_shadow
+from app.services.raven_v105_bk_finite_arbitrage_shadow import raven_v105_bk_finite_arbitrage_shadow
+from app.services.raven_v79_cash_aware_ensemble_shadow import raven_v79_cash_aware_ensemble_shadow
+from app.services.raven_v80_slow_micro_shadow import raven_v80_slow_micro_shadow
+from app.services.raven_capital_allocator import raven_capital_allocator
+from app.services.arbitrage_paper_tracker import arbitrage_paper_tracker
+from app.services.basis_funding_paper import basis_funding_paper
+from app.services.crossvenue_spot_perp_shadow import crossvenue_spot_perp_shadow
+from app.services.crossvenue_spot_perp_shadow_v2 import crossvenue_spot_perp_shadow_v2
+from app.services.reverse_close_hunter import reverse_close_hunter
+from app.services.global_capital_manager import global_capital_manager
+from app.services.perp_funding_spread import perp_funding_spread_scanner
+from app.services.perp_funding_spread_paper import perp_funding_spread_paper
+from app.services.market_alpha_history import market_alpha_history
+from app.services.positioning_history import positioning_history
+from app.services.options_surface_shadow import options_surface_shadow
+from app.services.options_ivrv_package_shadow import options_ivrv_package_shadow
+from app.services.options_relative_vol_shadow import options_relative_vol_shadow
+from app.services.options_term_structure_shadow import options_term_structure_shadow
+from app.services.options_skew_shadow import options_skew_shadow
+from app.services.options_perp_hedge_shadow import options_perp_hedge_shadow
+from app.services.alpha_network_manager import alpha_network_manager
+from app.services.aftershock_v2_shadow import aftershock_v2_shadow
+from app.services.aftershock_expanded_shadow import aftershock_expanded_shadow
+from app.services.profit_branch_network import profit_branch_network
+from app.services.raven_v70_variant_pool import raven_v70_variant_pool
+from app.services.raven_v83_variant_pool import raven_v83_variant_pool
+from app.services.profit_variant_research_worker import profit_variant_research_worker
+from app.services.research_archive_miner import research_archive_miner
+from app.services.trade_postmortem_analyzer import trade_postmortem_analyzer
+from app.services.profit_portfolio_allocator import profit_portfolio_allocator
+from app.services.crowding_dislocation_v2_shadow import crowding_dislocation_v2_shadow
+from app.services.idio_vol_rotation_shadow import idio_vol_rotation_shadow
+from app.services.idio_skew_rotation_shadow import idio_skew_rotation_shadow
+from app.services.profit_history_ledger import profit_history_ledger
+from app.services.research_frontier import research_frontier
+from app.services.research_opportunity_radar import research_opportunity_radar
+from app.services.research_frontier_history import research_frontier_history
+from app.services.arbitrage_venue_dependency_monitor import arbitrage_venue_dependency_monitor
+from app.services.futures_forward_worker import futures_forward_worker
+from app.services.futures_data_integrity import futures_data_integrity
+from app.services.futures_extension import futures_extension_policy
+
+app = FastAPI(title='AION Crypto Radar', version='0.11.58')
+STATIC = Path(__file__).parent / 'static'
+automation = AutomationController(radar)
+app.mount('/static', StaticFiles(directory=STATIC), name='static')
+
+@app.get('/')
+async def index():
+    return FileResponse(
+        STATIC / 'index.html',
+        headers={
+            'Cache-Control':'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma':'no-cache',
+            'Expires':'0',
+        },
+    )
+
+@app.get('/api/health')
+async def health():
+    tm=trading_mode.status()
+    return {'ok': True, 'name':'AION Crypto Radar', 'version':'0.11.58',
+            'mode':tm['effective_mode'], 'requested_mode':tm['mode'], 'sources':['live','demo']}
+
+@app.get('/api/research/futures-standard')
+async def futures_standard_status():
+    return futures_extension_policy.status()
+
+@app.get('/api/scan')
+async def scan(amount: float = Query(10000.0, gt=0, le=1_000_000), source: Literal['live','demo'] = 'live'):
+    if source=='live':
+        snap=automation.latest_broad
+        if snap:
+            return {**snap,'served_from_auto':True,'snapshot_amount':automation.amount,'requested_amount':amount}
+        return {'ready':False,'reason':'AUTO_SCAN_NOT_READY','requested_amount':amount,'source_mode':source}
+    return await radar.scan(amount, source)
+
+@app.post('/api/scan/refresh')
+async def scan_refresh(amount: float = Query(10000.0, gt=0, le=1_000_000), source: Literal['live','demo'] = 'live'):
+    if source=='live':
+        async with automation.market_lock:
+            return await radar.scan(amount, source)
+    return await radar.scan(amount, source)
+
+@app.get('/api/hot')
+async def hot():
+    if automation.enabled and automation.latest_hot:
+        return {**automation.latest_hot,'served_from_auto':True}
+    return await radar.hot_scan()
+
+@app.get('/api/pilot/coinw-bitget')
+async def coinw_bitget_pilot(amount: float = Query(25.0, ge=10, le=1000)):
+    return await coinw_bitget_audit.run(amount)
+
+@app.get('/api/pilot/coinw-bitget/last')
+async def coinw_bitget_pilot_last():
+    return coinw_bitget_audit.snapshot()
+
+@app.get('/api/pilot/wide')
+async def wide_hunt_pilot(amount: float = Query(25.0, ge=10, le=1000)):
+    return await wide_hunt_audit.run(amount)
+
+@app.get('/api/pilot/wide/last')
+async def wide_hunt_pilot_last():
+    return wide_hunt_audit.snapshot()
+
+@app.get('/api/strategy/stablecoin')
+async def stablecoin_status():
+    return stablecoin_scanner.status()
+
+@app.get('/api/strategy/netting')
+async def netting_status():
+    broad=automation.latest_broad or {}
+    rows=list(broad.get('full_loop_opportunities') or [])+list(broad.get('series_ready_opportunities') or [])
+    return rebalance_netting.plan(rows)
+
+def _strategy_portfolio_snapshot():
+    broad=automation.latest_broad or {}
+    tradeable=list(broad.get('full_loop_opportunities') or [])+list(broad.get('series_ready_opportunities') or [])
+    live_status=live_executor.status()
+    quarantined=set(live_status.get('live_quarantined_venues') or [])
+    live_venues=[v for v in (live_status.get('verified_ready') or []) if v not in quarantined]
+    return strategy_portfolio.snapshot(
+        classic=tradeable,
+        basis=basis_funding_scanner.status().get('opportunities') or [],
+        triangles=triangle_scanner.status().get('opportunities') or [],
+        stable=stablecoin_scanner.status().get('opportunities') or [],
+        live_venues=live_venues,
+    )
+
+@app.get('/api/strategy/portfolio')
+async def strategy_portfolio_status():
+    return _strategy_portfolio_snapshot()
+
+@app.get('/api/global-capital')
+async def global_capital_status():
+    return await global_capital_manager.refresh(_strategy_portfolio_snapshot())
+
+@app.post('/api/global-capital/refresh')
+async def global_capital_refresh():
+    return await global_capital_manager.refresh(_strategy_portfolio_snapshot())
+
+@app.get('/api/raven')
+async def raven_status():
+    return raven_engine.status()
+
+@app.post('/api/raven/refresh')
+async def raven_refresh():
+    return await raven_engine.refresh()
+
+@app.post('/api/raven/reset-paper')
+async def raven_reset_paper():
+    return raven_engine.reset_paper()
+
+@app.get('/api/raven-universal')
+async def raven_universal_status():
+    return raven_universal_shadow.status()
+
+@app.post('/api/raven-universal/refresh')
+async def raven_universal_refresh():
+    return await raven_universal_shadow.refresh()
+
+@app.get('/api/raven-turbo')
+async def raven_turbo_status():
+    return raven_turbo_shadow.status()
+
+@app.post('/api/raven-turbo/refresh')
+async def raven_turbo_refresh():
+    return await raven_turbo_shadow.refresh()
+
+@app.post('/api/raven-turbo/reset-paper')
+async def raven_turbo_reset_paper():
+    return raven_turbo_shadow.reset_paper()
+
+@app.get('/api/raven-evolution')
+async def raven_evolution_status():
+    return raven_evolution_manager.status()
+
+@app.post('/api/raven-evolution/refresh')
+async def raven_evolution_refresh():
+    return await raven_evolution_manager.refresh()
+
+@app.get('/api/raven-challenger-lab')
+async def raven_challenger_lab_status():
+    return raven_challenger_lab.status()
+
+@app.post('/api/raven-challenger-lab/run')
+async def raven_challenger_lab_run(samples: int = Query(60, ge=20, le=500)):
+    result=await raven_challenger_lab.run_once(samples)
+    await raven_evolution_manager.refresh()
+    return result
+
+@app.get('/api/raven-challenger-shadow')
+async def raven_challenger_shadow_status():
+    return raven_challenger_shadow.status()
+
+@app.post('/api/raven-challenger-shadow/refresh')
+async def raven_challenger_shadow_refresh():
+    await raven_evolution_manager.refresh()
+    return await raven_challenger_shadow.refresh()
+
+@app.get('/api/raven-v47-shadow')
+async def raven_v47_shadow_status():
+    return raven_v47_shadow.status()
+
+@app.post('/api/raven-v47-shadow/refresh')
+async def raven_v47_shadow_refresh():
+    return await raven_v47_shadow.refresh()
+
+@app.get('/api/raven-allocator')
+async def raven_allocator_status():
+    return raven_capital_allocator.status()
+
+@app.post('/api/raven-allocator/refresh')
+async def raven_allocator_refresh():
+    return await raven_capital_allocator.refresh()
+
+@app.get('/api/paper/arbitrage')
+async def arbitrage_paper_status():
+    return arbitrage_paper_tracker.refresh()
+
+@app.get('/api/paper/basis-funding')
+async def basis_funding_paper_status():
+    return basis_funding_paper.status()
+
+
+@app.get('/api/research/crossvenue-spot-perp-shadow')
+async def crossvenue_spot_perp_shadow_status():
+    return crossvenue_spot_perp_shadow.status()
+
+@app.post('/api/research/crossvenue-spot-perp-shadow/refresh')
+async def crossvenue_spot_perp_shadow_refresh():
+    return await crossvenue_spot_perp_shadow.refresh()
+
+@app.get('/api/research/crossvenue-spot-perp-shadow-v2')
+async def crossvenue_spot_perp_shadow_v2_status():
+    return crossvenue_spot_perp_shadow_v2.status()
+
+@app.post('/api/research/crossvenue-spot-perp-shadow-v2/refresh')
+async def crossvenue_spot_perp_shadow_v2_refresh():
+    return await crossvenue_spot_perp_shadow_v2.refresh()
+
+@app.get('/api/paper/reverse-close')
+async def reverse_close_status():
+    reverse_close_hunter.start_id=int(arbitrage_paper_tracker.state.get('start_id') or 0)
+    return await reverse_close_hunter.refresh()
+
+@app.get('/api/perp-funding-spread')
+async def perp_funding_spread_status():
+    return perp_funding_spread_scanner.status()
+
+@app.post('/api/perp-funding-spread/refresh')
+async def perp_funding_spread_refresh():
+    return await perp_funding_spread_scanner.refresh()
+
+@app.get('/api/paper/perp-funding-spread')
+async def perp_funding_spread_paper_status():
+    return perp_funding_spread_paper.status()
+
+@app.get('/api/coinex-status')
+async def coinex_status():
+    return coinex_bbo.status()
+
+@app.get('/api/latency')
+async def latency(amount: float = Query(10000.0, gt=0, le=1_000_000)):
+    if automation.enabled and automation.latest_latency and abs(float(automation.amount)-float(amount))<1e-9:
+        return {**automation.latest_latency,'served_from_auto':True}
+    return await radar.latency_scan(amount)
+
+@app.get('/api/quality')
+async def quality(limit: int = Query(50, ge=1, le=200)):
+    return {'routes': memory.leaderboard(limit=limit), 'count': len(memory.leaderboard(limit=limit))}
+
+@app.get('/api/long-windows')
+async def long_windows(min_seconds: int = Query(300, ge=30, le=86400), limit: int = Query(50, ge=1, le=200)):
+    rows=memory.long_windows(min_seconds=min_seconds, limit=limit)
+    return {'min_seconds':min_seconds,'routes':rows,'count':len(rows)}
+
+@app.on_event('startup')
+async def start_automation():
+    reload_live_credentials()
+    asyncio.create_task(verify_live_credentials(),name='live-credential-readonly-verify')
+    await depth_guard.start()
+    await automation.start()
+    await coinw_bitget_audit.start_auto(interval=30.0,amount=25.0)
+    await wide_hunt_audit.start_auto(interval=30.0,amount=25.0)
+    await inventory_manager.start()
+    await basis_funding_scanner.start()
+    await basis_funding_paper.start()
+    await crossvenue_spot_perp_shadow.start()
+    await crossvenue_spot_perp_shadow_v2.start()
+    await perp_funding_spread_scanner.start()
+    await perp_funding_spread_paper.start()
+    await market_alpha_history.start()
+    await positioning_history.start()
+    await options_surface_shadow.start()
+    await options_ivrv_package_shadow.start()
+    await options_relative_vol_shadow.start()
+    await options_term_structure_shadow.start()
+    await options_skew_shadow.start()
+    await options_perp_hedge_shadow.start()
+    await alpha_network_manager.start()
+    await aftershock_v2_shadow.start()
+    await aftershock_expanded_shadow.start()
+    await triangle_scanner.start()
+    await stablecoin_scanner.start()
+    await raven_engine.start()
+    await raven_universal_shadow.start()
+    await raven_turbo_shadow.start()
+    await raven_evolution_manager.start()
+    await raven_challenger_lab.start()
+    await raven_challenger_shadow.start()
+    await raven_v47_shadow.start()
+    await raven_v42_funding_shadow.start()
+    await raven_positioning_v55_shadow.start()
+    await raven_blend_v58_shadow.start()
+    await raven_v60_cash_overlay_shadow.start()
+    await raven_v61_allocator_shadow.start()
+    await raven_smart_positioning_v61_shadow.start()
+    await raven_smartpos_g2_drop_toppos_shadow.start()
+    await raven_v63_microstructure_shadow.start()
+    await raven_v64_short_veto_shadow.start()
+    await raven_v76_robust_short_veto_shadow.start()
+    await raven_v70_regime_shadow.start()
+    await raven_v83_sparse_squeeze_shadow.start()
+    await profit_branch_network.start()
+    await profit_portfolio_allocator.start()
+    await crowding_dislocation_v2_shadow.start()
+    await idio_vol_rotation_shadow.start()
+    await idio_skew_rotation_shadow.start()
+    await profit_variant_research_worker.start()
+    await research_archive_miner.start()
+    await trade_postmortem_analyzer.start()
+    await raven_v70_variant_pool.start()
+    await raven_v83_variant_pool.start()
+    asyncio.create_task(profit_branch_network.refresh(),name='profit-branch-initial-refresh')
+    await raven_v94_bybit_short_sizing_shadow.start()
+    await raven_v98_crowding_funding_shadow.start()
+    await raven_v102_sparse_cash_filler_shadow.start()
+    await raven_v103_regime_composite_shadow.start()
+    await raven_v105_bk_finite_arbitrage_shadow.start()
+    await raven_v79_cash_aware_ensemble_shadow.start()
+    await raven_v80_slow_micro_shadow.start()
+    await profit_history_ledger.start()
+    await arbitrage_venue_dependency_monitor.start()
+    await research_frontier_history.start()
+    await research_opportunity_radar.start()
+    await futures_forward_worker.start()
+    await raven_capital_allocator.start()
+    await global_capital_manager.start(_strategy_portfolio_snapshot)
+
+@app.on_event('shutdown')
+async def stop_hot_books():
+    await coinw_bitget_audit.stop_auto()
+    await wide_hunt_audit.stop_auto()
+    await inventory_manager.stop()
+    await futures_forward_worker.stop()
+    await profit_history_ledger.stop()
+    await research_frontier_history.stop()
+    await research_opportunity_radar.stop()
+    await arbitrage_venue_dependency_monitor.stop()
+    await research_archive_miner.stop()
+    await trade_postmortem_analyzer.stop()
+    await profit_variant_research_worker.stop()
+    await profit_portfolio_allocator.stop()
+    await crowding_dislocation_v2_shadow.stop()
+    await idio_vol_rotation_shadow.stop()
+    await idio_skew_rotation_shadow.stop()
+    await profit_branch_network.stop()
+    await aftershock_v2_shadow.stop()
+    await aftershock_expanded_shadow.stop()
+    await alpha_network_manager.stop()
+    await options_perp_hedge_shadow.stop()
+    await options_skew_shadow.stop()
+    await options_term_structure_shadow.stop()
+    await options_relative_vol_shadow.stop()
+    await options_ivrv_package_shadow.stop()
+    await options_surface_shadow.stop()
+    await positioning_history.stop()
+    await market_alpha_history.stop()
+    await perp_funding_spread_paper.stop()
+    await perp_funding_spread_scanner.stop()
+    await basis_funding_paper.stop()
+    await crossvenue_spot_perp_shadow_v2.stop()
+    await crossvenue_spot_perp_shadow.stop()
+    await basis_funding_scanner.stop()
+    await triangle_scanner.stop()
+    await stablecoin_scanner.stop()
+    await raven_engine.stop()
+    await raven_capital_allocator.stop()
+    await global_capital_manager.stop()
+    await raven_universal_shadow.stop()
+    await raven_v61_allocator_shadow.stop()
+    await raven_smartpos_g2_drop_toppos_shadow.stop()
+    await raven_smart_positioning_v61_shadow.stop()
+    await raven_v63_microstructure_shadow.stop()
+    await raven_v83_variant_pool.stop()
+    await raven_v83_sparse_squeeze_shadow.stop()
+    await raven_v70_variant_pool.stop()
+    await raven_v70_regime_shadow.stop()
+    await raven_v98_crowding_funding_shadow.stop()
+    await raven_v94_bybit_short_sizing_shadow.stop()
+    await raven_v102_sparse_cash_filler_shadow.stop()
+    await raven_v103_regime_composite_shadow.stop()
+    await raven_v105_bk_finite_arbitrage_shadow.stop()
+    await raven_v79_cash_aware_ensemble_shadow.stop()
+    await raven_v80_slow_micro_shadow.stop()
+    await raven_v76_robust_short_veto_shadow.stop()
+    await raven_v64_short_veto_shadow.stop()
+    await raven_v60_cash_overlay_shadow.stop()
+    await raven_blend_v58_shadow.stop()
+    await raven_positioning_v55_shadow.stop()
+    await raven_v42_funding_shadow.stop()
+    await raven_v47_shadow.stop()
+    await raven_challenger_shadow.stop()
+    await raven_challenger_lab.stop()
+    await raven_evolution_manager.stop()
+    await raven_turbo_shadow.stop()
+    await depth_guard.stop()
+    radar.close_cpu_pool()
+
+
+
+
+@app.get('/api/crowding-dislocation-v2-shadow')
+async def crowding_dislocation_v2_status():
+    return crowding_dislocation_v2_shadow.status()
+
+@app.post('/api/crowding-dislocation-v2-shadow/refresh')
+async def crowding_dislocation_v2_refresh():
+    return await crowding_dislocation_v2_shadow.refresh()
+
+@app.get('/api/crowding-dislocation-shadow')
+async def crowding_dislocation_v2_status_compat():
+    return crowding_dislocation_v2_shadow.status()
+
+@app.post('/api/crowding-dislocation-shadow/refresh')
+async def crowding_dislocation_v2_refresh_compat():
+    return await crowding_dislocation_v2_shadow.refresh()
+
+@app.get('/api/raven-v94-shadow')
+async def raven_v94_bybit_short_sizing_shadow_status_compat():
+    return raven_v94_bybit_short_sizing_shadow.status()
+
+@app.post('/api/raven-v94-shadow/refresh')
+async def raven_v94_bybit_short_sizing_shadow_refresh_compat():
+    return await raven_v94_bybit_short_sizing_shadow.refresh()
+
+@app.get('/api/profit-portfolio')
+async def profit_portfolio_status():
+    return profit_portfolio_allocator.status()
+
+@app.post('/api/profit-portfolio/refresh')
+async def profit_portfolio_refresh():
+    return await profit_portfolio_allocator.refresh()
+
+@app.get('/api/profit-variant-worker')
+async def profit_variant_worker_status():
+    return profit_variant_research_worker.status()
+
+@app.post('/api/profit-variant-worker/refresh')
+async def profit_variant_worker_refresh():
+    return await profit_variant_research_worker.refresh()
+
+@app.get('/api/raven-v83-variant-pool')
+async def raven_v83_variant_pool_status():
+    return raven_v83_variant_pool.status()
+
+@app.post('/api/raven-v83-variant-pool/refresh')
+async def raven_v83_variant_pool_refresh():
+    return await raven_v83_variant_pool.refresh()
+
+@app.get('/api/raven-v70-variant-pool')
+async def raven_v70_variant_pool_status():
+    return raven_v70_variant_pool.status()
+
+@app.post('/api/raven-v70-variant-pool/refresh')
+async def raven_v70_variant_pool_refresh():
+    return await raven_v70_variant_pool.refresh()
+
+@app.get('/api/profit-branch-network')
+async def profit_branch_network_status():
+    return profit_branch_network.status()
+
+@app.post('/api/profit-branch-network/refresh')
+async def profit_branch_network_refresh():
+    return await profit_branch_network.refresh()
+
+
+
+@app.get('/api/raven-smartpos-g2-shadow')
+async def raven_smartpos_g2_shadow_status():
+    return raven_smartpos_g2_drop_toppos_shadow.status()
+
+@app.post('/api/raven-smartpos-g2-shadow/refresh')
+async def raven_smartpos_g2_shadow_refresh():
+    return await raven_smartpos_g2_drop_toppos_shadow.refresh()
+
+@app.get('/api/alpha-network')
+async def alpha_network_status():
+    return alpha_network_manager.status()
+
+@app.post('/api/alpha-network/refresh')
+async def alpha_network_refresh():
+    return await alpha_network_manager.refresh()
+
+@app.get('/api/options-surface-shadow')
+async def options_surface_shadow_status():
+    return options_surface_shadow.status()
+
+@app.post('/api/options-surface-shadow/refresh')
+async def options_surface_shadow_refresh():
+    return await options_surface_shadow.refresh()
+
+@app.get('/api/aftershock-v2-shadow')
+async def aftershock_v2_shadow_status():
+    return aftershock_v2_shadow.status()
+
+@app.post('/api/aftershock-v2-shadow/refresh')
+async def aftershock_v2_shadow_refresh():
+    return await aftershock_v2_shadow.refresh()
+
+@app.get('/api/aftershock-expanded-shadow')
+async def aftershock_expanded_shadow_status():
+    return aftershock_expanded_shadow.status()
+
+@app.post('/api/aftershock-expanded-shadow/refresh')
+async def aftershock_expanded_shadow_refresh():
+    return await aftershock_expanded_shadow.refresh()
+
+@app.get('/api/research/market-alpha-history')
+async def market_alpha_history_status():
+    return market_alpha_history.status()
+
+@app.get('/api/research/positioning-history')
+async def positioning_history_status():
+    return positioning_history.status()
+
+@app.get('/api/raven-positioning-v55-shadow')
+async def raven_positioning_v55_shadow_status():
+    return raven_positioning_v55_shadow.status()
+
+@app.post('/api/raven-positioning-v55-shadow/refresh')
+async def raven_positioning_v55_shadow_refresh():
+    return await raven_positioning_v55_shadow.refresh()
+
+@app.get('/api/raven-blend-v58-shadow')
+async def raven_blend_v58_shadow_status():
+    return raven_blend_v58_shadow.status()
+
+@app.post('/api/raven-blend-v58-shadow/refresh')
+async def raven_blend_v58_shadow_refresh():
+    return await raven_blend_v58_shadow.refresh()
+
+@app.get('/api/raven-v60-cash-overlay-shadow')
+async def raven_v60_cash_overlay_shadow_status():
+    return raven_v60_cash_overlay_shadow.status()
+
+@app.post('/api/raven-v60-cash-overlay-shadow/refresh')
+async def raven_v60_cash_overlay_shadow_refresh():
+    return await raven_v60_cash_overlay_shadow.refresh()
+
+@app.get('/api/raven-v61-allocator-shadow')
+async def raven_v61_allocator_shadow_status():
+    return raven_v61_allocator_shadow.status()
+
+@app.post('/api/raven-v61-allocator-shadow/refresh')
+async def raven_v61_allocator_shadow_refresh():
+    return await raven_v61_allocator_shadow.refresh()
+
+@app.get('/api/raven-smart-positioning-v61-shadow')
+async def raven_smart_positioning_v61_shadow_status():
+    return raven_smart_positioning_v61_shadow.status()
+
+@app.post('/api/raven-smart-positioning-v61-shadow/refresh')
+async def raven_smart_positioning_v61_shadow_refresh():
+    return await raven_smart_positioning_v61_shadow.refresh()
+
+@app.get('/api/raven-v63-microstructure-shadow')
+async def raven_v63_microstructure_shadow_status():
+    return raven_v63_microstructure_shadow.status()
+
+@app.post('/api/raven-v63-microstructure-shadow/refresh')
+async def raven_v63_microstructure_shadow_refresh():
+    return await raven_v63_microstructure_shadow.refresh()
+
+@app.get('/api/raven-v64-short-veto-shadow')
+async def raven_v64_short_veto_shadow_status():
+    return raven_v64_short_veto_shadow.status()
+
+@app.post('/api/raven-v64-short-veto-shadow/refresh')
+async def raven_v64_short_veto_shadow_refresh():
+    return await raven_v64_short_veto_shadow.refresh()
+
+@app.get('/api/raven-v70-regime-shadow')
+async def raven_v70_regime_shadow_status():
+    return raven_v70_regime_shadow.status()
+
+@app.post('/api/raven-v70-regime-shadow/refresh')
+async def raven_v70_regime_shadow_refresh():
+    return await raven_v70_regime_shadow.refresh()
+
+@app.get('/api/raven-v94-bybit-short-sizing-shadow')
+async def raven_v94_bybit_short_sizing_shadow_status():
+    return raven_v94_bybit_short_sizing_shadow.status()
+
+@app.post('/api/raven-v94-bybit-short-sizing-shadow/refresh')
+async def raven_v94_bybit_short_sizing_shadow_refresh():
+    return await raven_v94_bybit_short_sizing_shadow.refresh()
+
+@app.get('/api/raven-v102-sparse-cash-filler-shadow')
+async def raven_v102_sparse_cash_filler_shadow_status():
+    return raven_v102_sparse_cash_filler_shadow.status()
+
+@app.post('/api/raven-v102-sparse-cash-filler-shadow/refresh')
+async def raven_v102_sparse_cash_filler_shadow_refresh():
+    return await raven_v102_sparse_cash_filler_shadow.refresh()
+
+@app.get('/api/raven-v103-regime-composite-shadow')
+async def raven_v103_regime_composite_shadow_status():
+    return raven_v103_regime_composite_shadow.status()
+
+@app.post('/api/raven-v103-regime-composite-shadow/refresh')
+async def raven_v103_regime_composite_shadow_refresh():
+    return await raven_v103_regime_composite_shadow.refresh()
+
+@app.get('/api/raven-v105-bk-finite-arbitrage-shadow')
+async def raven_v105_bk_finite_arbitrage_shadow_status():
+    return raven_v105_bk_finite_arbitrage_shadow.status()
+
+@app.post('/api/raven-v105-bk-finite-arbitrage-shadow/refresh')
+async def raven_v105_bk_finite_arbitrage_shadow_refresh():
+    return await raven_v105_bk_finite_arbitrage_shadow.refresh()
+
+@app.get('/api/raven-v79-cash-aware-ensemble-shadow')
+async def raven_v79_cash_aware_ensemble_shadow_status():
+    return raven_v79_cash_aware_ensemble_shadow.status()
+
+@app.post('/api/raven-v79-cash-aware-ensemble-shadow/refresh')
+async def raven_v79_cash_aware_ensemble_shadow_refresh():
+    return await raven_v79_cash_aware_ensemble_shadow.refresh()
+
+@app.get('/api/raven-v80-slow-micro-shadow')
+async def raven_v80_slow_micro_shadow_status():
+    return raven_v80_slow_micro_shadow.status()
+
+@app.post('/api/raven-v80-slow-micro-shadow/refresh')
+async def raven_v80_slow_micro_shadow_refresh():
+    return await raven_v80_slow_micro_shadow.refresh()
+
+
+@app.get('/api/raven-v83-sparse-squeeze-shadow')
+async def raven_v83_sparse_squeeze_shadow_status():
+    return raven_v83_sparse_squeeze_shadow.status()
+
+@app.post('/api/raven-v83-sparse-squeeze-shadow/refresh')
+async def raven_v83_sparse_squeeze_shadow_refresh():
+    return await raven_v83_sparse_squeeze_shadow.refresh()
+
+@app.get('/api/hot-books')
+async def hot_books_status():
+    return depth_guard.status()
+
+@app.get('/api/ws-signals')
+async def ws_signals_status():
+    return hot_signal_engine.status()
+
+@app.get('/api/order-rules/status')
+async def order_rules_status():
+    return order_rules_registry.status()
+
+@app.get('/api/automation')
+async def automation_status():
+    return automation.status()
+
+@app.get('/api/paper-trades')
+async def paper_trades(limit: int = Query(50, ge=1, le=200)):
+    return paper_engine.summary(limit)
+
+@app.get('/api/capital')
+async def capital_status():
+    return capital_manager.status()
+
+@app.post('/api/capital')
+async def capital_update(payload: dict = Body(...)):
+    return capital_manager.update(payload)
+
+@app.get('/api/auto-snapshot')
+async def auto_snapshot():
+    return automation.snapshot()
+
+@app.get('/api/execution')
+async def execution_status(limit: int = Query(50, ge=1, le=200)):
+    return execution_engine.summary(limit)
+
+@app.get('/api/execution/decisions')
+async def execution_decisions(limit: int = Query(100, ge=1, le=500), hours: float = Query(24.0, ge=1, le=720)):
+    return execution_engine.decision_summary(limit,hours)
+
+@app.post('/api/execution/config')
+async def execution_config(payload: dict = Body(...)):
+    if 'enabled' in payload: execution_engine.enabled=bool(payload['enabled'])
+    if 'max_notional' in payload:
+        execution_engine.max_notional=max(10.0,min(100000.0,float(payload['max_notional'])))
+        risk_manager.max_notional=execution_engine.max_notional
+    if 'min_score' in payload: risk_manager.min_score=max(0.0,min(100.0,float(payload['min_score'])))
+    if 'min_net_pct' in payload: risk_manager.min_net_pct=max(0.0,float(payload['min_net_pct']))
+    if 'max_daily_loss' in payload: risk_manager.max_daily_loss=max(1.0,float(payload['max_daily_loss']))
+    return execution_engine.summary(25)
+
+@app.get('/api/live/status')
+async def live_status():
+    return live_executor.status()
+
+@app.post('/api/live/reload-keys')
+async def live_reload_keys():
+    return {'ok':True,'credentials':reload_live_credentials(),'live':live_executor.status()}
+
+@app.get('/api/live/verify')
+async def live_verify():
+    return {'ok':True,'venues':await verify_live_credentials(),'live':live_executor.status()}
+
+@app.post('/api/live/kill-reset')
+async def live_kill_reset():
+    return live_executor.reset_kill_switch()
+
+@app.get('/api/autopilot')
+async def autopilot_status():
+    return autopilot.status()
+
+@app.post('/api/autopilot')
+async def autopilot_update(payload: dict = Body(...)):
+    return autopilot.update(payload)
+
+@app.get('/api/inventory')
+async def inventory_status():
+    return inventory_guard.status()
+
+@app.post('/api/inventory/reset-targets')
+async def inventory_reset_targets():
+    return inventory_guard.reset_targets()
+
+@app.get('/api/inventory-manager')
+async def inventory_manager_status():
+    return inventory_manager.status()
+
+@app.post('/api/inventory-manager')
+async def inventory_manager_update(payload: dict = Body(...)):
+    return inventory_manager.update(payload)
+
+@app.post('/api/inventory-manager/refresh')
+async def inventory_manager_refresh():
+    return {'ok':True,'refresh':await inventory_manager.refresh_balances(),'manager':inventory_manager.status()}
+
+@app.get('/api/synthetic-inventory')
+async def synthetic_inventory_status():
+    return synthetic_inventory.status()
+
+@app.post('/api/synthetic-inventory/refresh')
+async def synthetic_inventory_refresh():
+    return await synthetic_inventory.refresh()
+
+@app.get('/api/basis-funding')
+async def basis_funding_status():
+    return basis_funding_scanner.status()
+
+@app.post('/api/basis-funding/refresh')
+async def basis_funding_refresh():
+    return await basis_funding_scanner.refresh()
+
+@app.get('/api/triangles')
+async def triangle_status():
+    return triangle_scanner.status()
+
+@app.post('/api/triangles/refresh')
+async def triangle_refresh():
+    return await triangle_scanner.refresh()
+
+@app.post('/api/live/file-gate')
+async def live_file_gate(payload: dict = Body(...)):
+    return live_executor.set_file_gate(bool(payload.get('enabled')),str(payload.get('confirmation') or ''))
+
+
+@app.get('/api/trading-mode')
+async def trading_mode_status():
+    return trading_mode.status()
+
+@app.post('/api/trading-mode')
+async def trading_mode_update(payload: dict = Body(...)):
+    return trading_mode.set(str(payload.get('mode') or ''),str(payload.get('confirmation') or ''))
+
+@app.get('/api/demo/status')
+async def demo_status():
+    return demo_executor.status()
+
+@app.post('/api/demo/kill-reset')
+async def demo_kill_reset():
+    return demo_executor.reset_kill_switch()
+
+@app.post('/api/demo/bybit-funds')
+async def demo_bybit_funds(payload: dict = Body(...)):
+    return await bybit_apply_demo_funds(payload.get('funds') or payload)
+
+@app.post('/api/demo/wallet-reset')
+async def demo_wallet_reset():
+    return demo_wallet.reset()
+
+@app.post('/api/demo/reload-keys')
+async def demo_reload_keys():
+    return {'ok':True,'credentials':reload_demo_credentials(),'demo':demo_executor.status()}
+
+@app.get('/api/demo/verify')
+async def demo_verify():
+    return {'ok':True,'venues':await verify_demo_credentials(),'demo':demo_executor.status()}
+
+
+
+
+@app.get('/api/options-ivrv-package-shadow')
+async def options_ivrv_package_status():
+    return options_ivrv_package_shadow.status()
+
+@app.post('/api/options-ivrv-package-shadow/refresh')
+async def options_ivrv_package_refresh():
+    return await options_ivrv_package_shadow.refresh()
+
+@app.get('/api/options-relative-vol-shadow')
+async def options_relative_vol_status():
+    return options_relative_vol_shadow.status()
+
+@app.post('/api/options-relative-vol-shadow/refresh')
+async def options_relative_vol_refresh():
+    return await options_relative_vol_shadow.refresh()
+
+@app.get('/api/raven-v98-shadow')
+async def raven_v98_shadow_status():
+    return raven_v98_crowding_funding_shadow.status()
+
+@app.post('/api/raven-v98-shadow/refresh')
+async def raven_v98_shadow_refresh():
+    return await raven_v98_crowding_funding_shadow.refresh()
+
+@app.get('/api/research-archive-miner')
+async def research_archive_miner_status():
+    return research_archive_miner.status()
+
+@app.post('/api/research-archive-miner/refresh')
+async def research_archive_miner_refresh():
+    return await research_archive_miner.refresh()
+
+@app.get('/api/raven-v42-funding-shadow')
+async def raven_v42_funding_shadow_status():
+    return raven_v42_funding_shadow.status()
+
+@app.post('/api/raven-v42-funding-shadow/refresh')
+async def raven_v42_funding_shadow_refresh():
+    return await raven_v42_funding_shadow.refresh()
+
+@app.get('/api/idio-vol-rotation-shadow')
+async def idio_vol_rotation_status():
+    return idio_vol_rotation_shadow.status()
+
+@app.post('/api/idio-vol-rotation-shadow/refresh')
+async def idio_vol_rotation_refresh():
+    return await idio_vol_rotation_shadow.refresh()
+
+@app.get('/api/trade-postmortems')
+async def trade_postmortems_status():
+    return trade_postmortem_analyzer.status()
+
+@app.post('/api/trade-postmortems/refresh')
+async def trade_postmortems_refresh():
+    return await trade_postmortem_analyzer.refresh()
+
+@app.get('/api/idio-skew-rotation-shadow')
+async def idio_skew_rotation_status():
+    return idio_skew_rotation_shadow.status()
+
+@app.post('/api/idio-skew-rotation-shadow/refresh')
+async def idio_skew_rotation_refresh():
+    return await idio_skew_rotation_shadow.refresh()
+
+@app.get('/api/profit-history')
+async def profit_history_status():
+    return profit_history_ledger.status()
+
+@app.post('/api/profit-history/refresh')
+async def profit_history_refresh():
+    return await profit_history_ledger.refresh()
+
+
+
+@app.get('/api/research-opportunity-radar')
+async def research_opportunity_radar_status():
+    return research_opportunity_radar.status()
+
+@app.post('/api/research-opportunity-radar/refresh')
+async def research_opportunity_radar_refresh():
+    return await research_opportunity_radar.refresh()
+
+@app.get('/api/research-frontier')
+async def research_frontier_status():
+    return research_frontier.status()
+
+
+
+@app.get('/api/arbitrage-venue-dependency')
+async def arbitrage_venue_dependency_status():
+    return arbitrage_venue_dependency_monitor.status()
+
+@app.post('/api/arbitrage-venue-dependency/refresh')
+async def arbitrage_venue_dependency_refresh():
+    return await arbitrage_venue_dependency_monitor.refresh()
+
+@app.get('/api/research-frontier/history')
+async def research_frontier_history_status():
+    return research_frontier_history.status()
+
+@app.post('/api/research-frontier/history/refresh')
+async def research_frontier_history_refresh():
+    return await research_frontier_history.refresh()
+
+@app.get('/api/futures-forward')
+async def futures_forward_status():
+    return futures_forward_worker.status()
+
+@app.post('/api/futures-forward/refresh')
+async def futures_forward_refresh():
+    return await futures_forward_worker.refresh()
+
+@app.get('/api/options-perp-hedge')
+async def options_perp_hedge_status():
+    return options_perp_hedge_shadow.status()
+
+@app.post('/api/options-perp-hedge/refresh')
+async def options_perp_hedge_refresh():
+    return await options_perp_hedge_shadow.refresh()
+
+@app.get('/api/options-term-structure-shadow')
+async def options_term_structure_status():
+    return options_term_structure_shadow.status()
+
+@app.post('/api/options-term-structure-shadow/refresh')
+async def options_term_structure_refresh():
+    return await options_term_structure_shadow.refresh()
+
+@app.get('/api/options-skew-shadow')
+async def options_skew_status():
+    return options_skew_shadow.status()
+
+@app.post('/api/options-skew-shadow/refresh')
+async def options_skew_refresh():
+    return await options_skew_shadow.refresh()
+
+@app.get('/api/futures-data-integrity')
+async def futures_data_integrity_status():
+    return futures_data_integrity.status()
+
+
+# Future-only liquidation evidence collector (research only; no live orders)
+from app.services.liquidation_sweep_collector import liquidation_sweep_collector
+
+@app.on_event('startup')
+async def start_liquidation_sweep_collector():
+    await liquidation_sweep_collector.start()
+
+@app.on_event('shutdown')
+async def stop_liquidation_sweep_collector():
+    await liquidation_sweep_collector.stop()
+
+@app.get('/api/research/liquidation-sweep')
+async def liquidation_sweep_status():
+    return liquidation_sweep_collector.status()
+
+# Locked future-only liquidation sweep evaluator
+from app.services.liquidation_sweep_shadow import liquidation_sweep_shadow
+
+@app.on_event('startup')
+async def start_liquidation_sweep_shadow():
+    await liquidation_sweep_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_liquidation_sweep_shadow():
+    await liquidation_sweep_shadow.stop()
+
+@app.get('/api/research/liquidation-sweep-shadow')
+async def liquidation_sweep_shadow_status():
+    return liquidation_sweep_shadow.status()
+
+# Frozen dual-direction liquidation sweep V2 (recovery vs continuation)
+from app.services.liquidation_sweep_dual_shadow_v2 import liquidation_sweep_dual_shadow_v2
+
+@app.on_event('startup')
+async def start_liquidation_sweep_dual_shadow_v2():
+    await liquidation_sweep_dual_shadow_v2.start()
+
+@app.on_event('shutdown')
+async def stop_liquidation_sweep_dual_shadow_v2():
+    await liquidation_sweep_dual_shadow_v2.stop()
+
+@app.get('/api/research/liquidation-sweep-dual-v2')
+async def liquidation_sweep_dual_shadow_v2_status():
+    return liquidation_sweep_dual_shadow_v2.status()
+
+# Future-only cross-venue perpetual liquidity migration research
+from app.services.liquidity_migration_perp_collector import liquidity_migration_perp_collector
+from app.services.liquidity_migration_perp_shadow import liquidity_migration_perp_shadow
+
+@app.on_event('startup')
+async def start_liquidity_migration_research():
+    await liquidity_migration_perp_collector.start()
+    await liquidity_migration_perp_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_liquidity_migration_research():
+    await liquidity_migration_perp_shadow.stop()
+    await liquidity_migration_perp_collector.stop()
+
+@app.get('/api/research/liquidity-migration')
+async def liquidity_migration_status():
+    return {'collector':liquidity_migration_perp_collector.status(),'shadow':liquidity_migration_perp_shadow.status()}
+
+# Future-only Funding + OI state-transition research
+from app.services.funding_oi_state_transition_shadow import funding_oi_state_transition_shadow
+from app.services.funding_dislocation_persistence_v3 import funding_dislocation_persistence_v3
+
+@app.on_event('startup')
+async def start_funding_oi_state_transition():
+    await funding_oi_state_transition_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_funding_oi_state_transition():
+    await funding_oi_state_transition_shadow.stop()
+
+@app.get('/api/research/funding-oi-state-transition')
+async def funding_oi_state_transition_status():
+    return funding_oi_state_transition_shadow.status()
+
+@app.post('/api/research/funding-oi-state-transition/refresh')
+async def funding_oi_state_transition_refresh():
+    return await funding_oi_state_transition_shadow.refresh()
+
+@app.on_event('startup')
+async def start_funding_dislocation_persistence_v3():
+    await funding_dislocation_persistence_v3.start()
+
+@app.on_event('shutdown')
+async def stop_funding_dislocation_persistence_v3():
+    await funding_dislocation_persistence_v3.stop()
+
+@app.get('/api/research/funding-dislocation-persistence-v3')
+async def funding_dislocation_persistence_v3_status():
+    return funding_dislocation_persistence_v3.status()
+
+@app.post('/api/research/funding-dislocation-persistence-v3/refresh')
+async def funding_dislocation_persistence_v3_refresh():
+    return await funding_dislocation_persistence_v3.refresh()
+
+# Future-only options gamma / perp rebalance evidence
+from app.services.options_gamma_rebalance_shadow import options_gamma_rebalance_shadow
+
+@app.on_event('startup')
+async def start_options_gamma_rebalance():
+    await options_gamma_rebalance_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_options_gamma_rebalance():
+    await options_gamma_rebalance_shadow.stop()
+
+@app.get('/api/research/options-gamma-rebalance')
+async def options_gamma_rebalance_status():
+    return options_gamma_rebalance_shadow.status()
+
+@app.post('/api/research/options-gamma-rebalance/refresh')
+async def options_gamma_rebalance_refresh():
+    return await options_gamma_rebalance_shadow.refresh()
+
+# Future-only dated futures curve research
+from app.services.futures_curve_collector import futures_curve_collector
+from app.services.futures_curve_shadow import futures_curve_shadow
+
+@app.on_event('startup')
+async def start_futures_curve_research():
+    await futures_curve_collector.start()
+    await futures_curve_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_futures_curve_research():
+    await futures_curve_shadow.stop()
+    await futures_curve_collector.stop()
+
+@app.get('/api/research/futures-curve')
+async def futures_curve_status():
+    return {'collector':futures_curve_collector.status(),'shadow':futures_curve_shadow.status()}
+
+@app.post('/api/research/futures-curve/refresh')
+async def futures_curve_refresh():
+    await futures_curve_collector.refresh()
+    return {'collector':futures_curve_collector.status(),'shadow':await futures_curve_shadow.refresh()}
+
+# Future-only MOEX futures research
+from app.services.moex_futures_collector import moex_futures_collector
+from app.services.moex_futures_shadow import moex_futures_shadow
+from app.services.moex_feature_registry_v3 import moex_feature_registry
+from app.services.moex_futures_universe import moex_futures_universe
+from app.services.moex_universe_structure_v1 import moex_universe_structure_v1
+from app.services.moex_universe_features_v1 import moex_universe_features_v1
+
+@app.on_event('startup')
+async def start_moex_futures_research():
+    await moex_futures_collector.start(); await moex_futures_shadow.start(); await moex_feature_registry.start(); await moex_futures_universe.start(); await moex_universe_structure_v1.start(); await moex_universe_features_v1.start()
+
+@app.on_event('shutdown')
+async def stop_moex_futures_research():
+    await moex_universe_features_v1.stop(); await moex_universe_structure_v1.stop(); await moex_futures_universe.stop(); await moex_feature_registry.stop(); await moex_futures_shadow.stop(); await moex_futures_collector.stop()
+
+@app.get('/api/research/moex-futures')
+async def moex_futures_status():
+    return {'collector':moex_futures_collector.status(),'shadow':moex_futures_shadow.status()}
+
+@app.post('/api/research/moex-futures/refresh')
+async def moex_futures_refresh():
+    await moex_futures_collector.refresh()
+    return {'collector':moex_futures_collector.status(),'shadow':await moex_futures_shadow.refresh()}
+
+@app.get('/api/research/moex-universe')
+async def moex_universe_status():
+    return moex_futures_universe.status()
+
+@app.post('/api/research/moex-universe/refresh')
+async def moex_universe_refresh():
+    return await moex_futures_universe.refresh()
+
+@app.get('/api/research/moex-structure')
+async def moex_structure_status():
+    return moex_universe_structure_v1.status()
+
+@app.post('/api/research/moex-structure/refresh')
+async def moex_structure_refresh():
+    return await moex_universe_structure_v1.refresh()
+
+@app.get('/api/research/moex-universe-features')
+async def moex_universe_features_status():
+    return moex_universe_features_v1.status()
+
+@app.post('/api/research/moex-universe-features/refresh')
+async def moex_universe_features_refresh():
+    return await moex_universe_features_v1.refresh()
+
+@app.get('/api/research/moex-features')
+async def moex_features_status():
+    return moex_feature_registry.status()
+
+@app.post('/api/research/moex-features/refresh')
+async def moex_features_refresh():
+    return await moex_feature_registry.refresh()
+
+# Future-only cross-venue liquidation asymmetry research
+from app.services.crossvenue_liquidation_asymmetry_collector import crossvenue_liquidation_asymmetry_collector
+from app.services.crossvenue_liquidation_asymmetry_shadow import crossvenue_liquidation_asymmetry_shadow
+
+@app.on_event('startup')
+async def start_crossvenue_liquidation_asymmetry():
+    await crossvenue_liquidation_asymmetry_collector.start()
+    await crossvenue_liquidation_asymmetry_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_crossvenue_liquidation_asymmetry():
+    await crossvenue_liquidation_asymmetry_shadow.stop()
+    await crossvenue_liquidation_asymmetry_collector.stop()
+
+@app.get('/api/research/crossvenue-liquidation-asymmetry')
+async def crossvenue_liquidation_asymmetry_status():
+    return {'collector':crossvenue_liquidation_asymmetry_collector.status(),'shadow':crossvenue_liquidation_asymmetry_shadow.status()}
+
+@app.post('/api/research/crossvenue-liquidation-asymmetry/refresh')
+async def crossvenue_liquidation_asymmetry_refresh():
+    return {'collector':crossvenue_liquidation_asymmetry_collector.status(),'shadow':await crossvenue_liquidation_asymmetry_shadow.refresh()}
+
+# Future-only options x funding regime mismatch research
+from app.services.options_funding_regime_mismatch_shadow import options_funding_regime_mismatch_shadow
+
+@app.on_event('startup')
+async def start_options_funding_regime_mismatch():
+    await options_funding_regime_mismatch_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_options_funding_regime_mismatch():
+    await options_funding_regime_mismatch_shadow.stop()
+
+@app.get('/api/research/options-funding-regime-mismatch')
+async def options_funding_regime_mismatch_status():
+    return options_funding_regime_mismatch_shadow.status()
+
+@app.post('/api/research/options-funding-regime-mismatch/refresh')
+async def options_funding_regime_mismatch_refresh():
+    return await options_funding_regime_mismatch_shadow.refresh()
+
+# Future-only cross-venue OI migration research
+from app.services.crossvenue_oi_migration_shadow import crossvenue_oi_migration_shadow
+
+@app.on_event('startup')
+async def start_crossvenue_oi_migration():
+    await crossvenue_oi_migration_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_crossvenue_oi_migration():
+    await crossvenue_oi_migration_shadow.stop()
+
+@app.get('/api/research/crossvenue-oi-migration')
+async def crossvenue_oi_migration_status():
+    return crossvenue_oi_migration_shadow.status()
+
+@app.post('/api/research/crossvenue-oi-migration/refresh')
+async def crossvenue_oi_migration_refresh():
+    return await crossvenue_oi_migration_shadow.refresh()
+
+# Future-only cross-venue OI migration V2; threshold redesigned, evaluation begins after freeze
+from app.services.crossvenue_oi_migration_shadow_v2 import crossvenue_oi_migration_shadow_v2
+
+@app.on_event('startup')
+async def start_crossvenue_oi_migration_v2():
+    await crossvenue_oi_migration_shadow_v2.start()
+
+@app.on_event('shutdown')
+async def stop_crossvenue_oi_migration_v2():
+    await crossvenue_oi_migration_shadow_v2.stop()
+
+@app.get('/api/research/crossvenue-oi-migration-v2')
+async def crossvenue_oi_migration_v2_status():
+    return crossvenue_oi_migration_shadow_v2.status()
+
+@app.post('/api/research/crossvenue-oi-migration-v2/refresh')
+async def crossvenue_oi_migration_v2_refresh():
+    return await crossvenue_oi_migration_shadow_v2.refresh()
+
+# Future-only major-to-alt liquidation contagion research
+from app.services.major_alt_liquidation_contagion_shadow import major_alt_liquidation_contagion_shadow
+
+@app.on_event('startup')
+async def start_major_alt_liquidation_contagion():
+    await major_alt_liquidation_contagion_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_major_alt_liquidation_contagion():
+    await major_alt_liquidation_contagion_shadow.stop()
+
+@app.get('/api/research/major-alt-liquidation-contagion')
+async def major_alt_liquidation_contagion_status():
+    return major_alt_liquidation_contagion_shadow.status()
+
+@app.post('/api/research/major-alt-liquidation-contagion/refresh')
+async def major_alt_liquidation_contagion_refresh():
+    return await major_alt_liquidation_contagion_shadow.refresh()
+
+# Future-only cross-venue perp taker divergence research
+from app.services.crossvenue_perp_taker_collector_v2 import crossvenue_perp_taker_collector_v2
+from app.services.crossvenue_taker_imbalance_divergence_shadow_v2 import crossvenue_taker_imbalance_divergence_shadow_v2
+from app.services.crossvenue_taker_imbalance_divergence_shadow_v3 import crossvenue_taker_imbalance_divergence_shadow_v3
+
+@app.on_event('startup')
+async def start_crossvenue_taker_divergence():
+    await crossvenue_perp_taker_collector_v2.start()
+    await crossvenue_taker_imbalance_divergence_shadow_v2.start()
+    await crossvenue_taker_imbalance_divergence_shadow_v3.start()
+
+@app.on_event('shutdown')
+async def stop_crossvenue_taker_divergence():
+    await crossvenue_taker_imbalance_divergence_shadow_v3.stop()
+    await crossvenue_taker_imbalance_divergence_shadow_v2.stop()
+    await crossvenue_perp_taker_collector_v2.stop()
+
+@app.get('/api/research/crossvenue-taker-imbalance-divergence')
+async def crossvenue_taker_divergence_status():
+    return {'collector':crossvenue_perp_taker_collector_v2.status(),'shadow':crossvenue_taker_imbalance_divergence_shadow_v2.status()}
+
+@app.post('/api/research/crossvenue-taker-imbalance-divergence/refresh')
+async def crossvenue_taker_divergence_refresh():
+    return {'collector':crossvenue_perp_taker_collector_v2.status(),'shadow':await crossvenue_taker_imbalance_divergence_shadow_v2.refresh()}
+
+@app.get('/api/research/crossvenue-taker-imbalance-divergence-v3')
+async def crossvenue_taker_divergence_v3_status():
+    return {'collector':crossvenue_perp_taker_collector_v2.status(),'shadow':crossvenue_taker_imbalance_divergence_shadow_v3.status()}
+
+@app.post('/api/research/crossvenue-taker-imbalance-divergence-v3/refresh')
+async def crossvenue_taker_divergence_v3_refresh():
+    return {'collector':crossvenue_perp_taker_collector_v2.status(),'shadow':await crossvenue_taker_imbalance_divergence_shadow_v3.refresh()}
+
+
+# Future-only liquidation absorption research
+from app.services.liquidation_absorption_shadow import liquidation_absorption_shadow
+
+@app.on_event('startup')
+async def start_liquidation_absorption():
+    await liquidation_absorption_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_liquidation_absorption():
+    await liquidation_absorption_shadow.stop()
+
+@app.get('/api/research/liquidation-absorption')
+async def liquidation_absorption_status():
+    return liquidation_absorption_shadow.status()
+
+@app.post('/api/research/liquidation-absorption/refresh')
+async def liquidation_absorption_refresh():
+    return await liquidation_absorption_shadow.refresh()
+
+
+# Future-only funding reset drift research
+from app.services.funding_reset_drift_shadow import funding_reset_drift_shadow
+
+@app.on_event('startup')
+async def start_funding_reset_drift():
+    await funding_reset_drift_shadow.start()
+
+@app.on_event('shutdown')
+async def stop_funding_reset_drift():
+    await funding_reset_drift_shadow.stop()
+
+@app.get('/api/research/funding-reset-drift')
+async def funding_reset_drift_status():
+    return funding_reset_drift_shadow.status()
+
+@app.post('/api/research/funding-reset-drift/refresh')
+async def funding_reset_drift_refresh():
+    return await funding_reset_drift_shadow.refresh()

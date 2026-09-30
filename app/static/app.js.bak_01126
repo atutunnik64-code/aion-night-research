@@ -1,0 +1,416 @@
+let currentReport=null;
+let autoTimer=null;
+let hotTimer=null;
+let broadTimer=null;
+let hotInFlight=false;
+let recentlyClosed=new Map();
+let scanInFlight=false;
+let firstToastPass=true;
+let activeConfirmedKeys=new Set();
+let currentCycleRows=[];
+let currentLatency=null;
+let latencyTimer=null;
+let latencyInFlight=false;
+let latencyKeys=new Set();
+let qualityTimer=null;
+let autoStatusTimer=null;
+let snapshotTimer=null;
+let coinwPilotTimer=null;
+let wideHuntTimer=null;
+let sustainableToastKeys=new Set();
+let sustainableToastInitialized=false;
+let sustainableRoutes=new Map();
+const $=id=>document.getElementById(id);
+const fmt=(v,d=2)=>Number(v||0).toLocaleString('ru-RU',{maximumFractionDigits:d});
+function setText(id,value){const el=$(id);if(el)el.textContent=String(value);}
+function parseNode(key){const p=String(key||'').split(':');return {venue:p[0]||'—',asset:p[1]||'—',network:p[2]||''};}
+function routeName(nodes){return (nodes||[]).join(' → ');}
+function prefKey(x){return x.signature||[x.base,x.quote,x.buy_venue,x.sell_venue].join('|');}
+function marketUrl(venue,base,quote){
+ const b=encodeURIComponent(base),q=encodeURIComponent(quote),v=String(venue||'');
+ const urls={
+  Binance:`https://www.binance.com/en/trade/${b}_${q}?type=spot`,
+  Bybit:`https://www.bybit.com/trade/spot/${b}/${q}`,
+  OKX:`https://www.okx.com/trade-spot/${String(base).toLowerCase()}-${String(quote).toLowerCase()}`,
+  MEXC:`https://www.mexc.com/exchange/${b}_${q}`,
+  KuCoin:`https://www.kucoin.com/trade/${b}-${q}`,
+  Bitget:`https://www.bitget.com/spot/${b}${q}`,
+  BingX:`https://bingx.com/en-us/spot/${b}${q}/`,
+  BitMart:`https://www.bitmart.com/trade/en-US?symbol=${b}_${q}`,
+  HTX:`https://www.htx.com/trade/${String(base).toLowerCase()}_${String(quote).toLowerCase()}?type=spot`,
+  Kraken:`https://pro.kraken.com/app/trade/${String(base).toLowerCase()}-${String(quote).toLowerCase()}`,
+  Bitfinex:`https://trading.bitfinex.com/t/${b}:${q}?type=exchange`,
+  CoinEx:`https://www.coinex.com/en/exchange/${String(base).toLowerCase()}-${String(quote).toLowerCase()}`, 
+  CoinW:`https://www.coinw.com/spot/${b}_${q}`,
+  'Gate.io':`https://www.gate.com/trade/${b}_${q}`,
+  Toobit:`https://www.toobit.com/en-US/spot/${b}_${q}`
+ };
+ return urls[v]||'#';
+}
+function setScanState(loading,message){
+ const button=$('scan'),card=$('scanner'),progress=$('scan-progress');
+ if(button){button.disabled=loading;button.innerHTML=loading?'Сканирую рынок…':'Проверить сейчас <span>→</span>';}
+ if(card)card.classList.toggle('is-scanning',loading);
+ if(progress)progress.setAttribute('aria-hidden',loading?'false':'true');
+ setText('scan-status',message);
+}function updateHeader(report){
+ const green=report.full_loop_opportunities||[],series=report.series_ready_opportunities||[],classic=report.classic_opportunities||[],greenCount=Number(report.full_loop_count??green.length),seriesCount=Number(report.series_ready_count??series.length),classicCount=Number(report.classic_count??classic.length),pending=Number(report.network_pending_count||0);
+ const bestFull=green.length?Math.max(...green.map(x=>Number(x.full_net_pct)||0)):0,bestSeries=series.length?Math.max(...series.map(x=>Number((x.batch_ready_plan||{}).net_pct_per_cycle)||0)):0,bestClassic=classic.length?Math.max(...classic.map(x=>Number(x.net_pct)||0)):0,best=Math.max(bestFull,bestSeries,bestClassic),venues=report.venue_count||0,assets=report.asset_count||0;
+ setText('status-venues',venues);setText('status-edges',report.edge_count||0);setText('status-opps',greenCount+seriesCount+classicCount);
+ setText('kpi-venues',venues);setText('kpi-edges',report.edge_count||0);setText('kpi-opps',greenCount+seriesCount+classicCount);setText('kpi-best',(greenCount+seriesCount+classicCount)?`+${fmt(best,4)}%`:'0%');setText('kpi-scans',report.scan_count||0);
+ setText('market-title',`FULL NOW ${greenCount} · CLASSIC ${classicCount} · BATCH READY ${seriesCount} · кандидатов ${pending}`);
+ setText('engine-state',`Граф: ${report.edge_count||0} рёбер · ${venues} площадок · ${assets} активов · ${String(report.source_mode||'').toUpperCase()}`);
+ setText('diagnostic-state',`Последний скан: ${new Date(report.last_scan).toLocaleString('ru-RU')} · market-кругов ${report.arbitrage_cycle_count||0} · FULL LOOP ${greenCount} · CLASSIC ${classicCount} · pending ${pending}`);
+ const health=(report.source_health||[]).map(x=>`${x.name}: ${x.status} · пар ${x.pairs??0} · рёбер ${x.edges} · ${x.latency_ms} мс${x.error?' · '+x.error:''}`).join('\n');setText('source-health',health||'Нет данных по источникам.');
+}
+function renderOpportunities(report){
+ const body=$('opps-body');body.replaceChildren();const rows=report.opportunities||[];
+ rows.forEach((o,index)=>{
+  const tr=document.createElement('tr');
+  const values=[index+1,`+${fmt(o.profit_amount,2)} · +${fmt(o.profit_pct,4)}%`,`${fmt(o.start_amount,2)} ${parseNode(o.nodes?.[0]).asset}`,`${fmt(o.final_amount,2)} ${parseNode(o.nodes?.at(-1)).asset}`,o.hops,`${o.eta_seconds||0} сек`,routeName(o.nodes)];
+  values.forEach((value,i)=>{const td=document.createElement('td');if(i===1){const s=document.createElement('span');s.className='profit-chip';s.textContent=value;td.append(s);}else{td.textContent=String(value);if(i===6)td.className='route-text';}tr.append(td);});
+  const td=document.createElement('td'),b=document.createElement('button');b.className='quiet-action';b.textContent='Подробнее';b.dataset.routeIndex=String(index);td.append(b);tr.append(td);body.append(tr);
+ });
+ setText('empty-opps',rows.length?`${rows.length} циклов проходят текущий Paper-фильтр расходов.`:`При текущих ${report.source_mode==='live'?'LIVE':'DEMO'} данных прибыльных циклов выше порога нет.`);
+}function openRoute(index){
+ const o=currentReport?.opportunities?.[index];if(!o)return;
+ $('route-panel').classList.remove('hidden');setText('route-title',`Связка +${fmt(o.profit_pct,4)}%`);
+ setText('route-summary',`Старт ${fmt(o.start_amount,2)} → итог ${fmt(o.final_amount,2)} · NET +${fmt(o.profit_amount,2)} · ${o.hops} шагов · ETA ${o.eta_seconds||0} сек.`);
+ const root=$('route-steps');root.replaceChildren();
+ (o.steps||[]).forEach((s,i)=>{
+  const card=document.createElement('article');card.className='step-card';
+  const head=document.createElement('div');head.className='step-head';head.innerHTML=`<strong>${i+1}</strong><h3>${String(s.kind).toUpperCase()}</h3>`;card.append(head);
+  const route=document.createElement('p');route.className='step-route';route.textContent=`${s.from} → ${s.to}`;card.append(route);
+  const meta=document.createElement('div');meta.className='step-meta';meta.innerHTML=`<span>rate ${fmt(s.rate,8)}</span><span>fee ${fmt((s.fee_rate||0)*100,4)}%</span><span>slippage ${fmt((s.slippage_rate||0)*100,4)}%</span><span>fixed ${fmt(s.fixed_fee,8)}</span><span>ETA ${s.eta_seconds||0}s</span>`;card.append(meta);root.append(card);
+ });
+ $('route-panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function addPrefStep(root,num,title,text,meta='',action=null,copyValue=null,warning=false){
+ const card=document.createElement('article');card.className='step-card'+(warning?' step-warning':'');
+ const head=document.createElement('div');head.className='step-head';head.innerHTML=`<strong>${num}</strong><h3>${title}</h3>`;card.append(head);
+ const p=document.createElement('p');p.className='step-route';p.textContent=text;card.append(p);
+ if(meta){const m=document.createElement('div');m.className='step-meta';m.textContent=meta;card.append(m);}
+ const actions=document.createElement('div');actions.className='step-actions';
+ if(action?.url&&action.url!=='#'){const a=document.createElement('a');a.href=action.url;a.target='_blank';a.rel='noopener noreferrer';a.className='button-link';a.textContent=action.label;actions.append(a);}
+ if(copyValue!==null){const b=document.createElement('button');b.className='quiet-action';b.dataset.copy=String(copyValue);b.textContent='Копировать сумму';actions.append(b);}
+ if(actions.children.length)card.append(actions);root.append(card);
+}function openPrefundedRoute(index){
+ const x=currentReport?.full_loop_opportunities?.[index];if(!x)return;
+ $('route-panel').classList.remove('hidden');
+ const net=Number(x.full_net_pct)||0,start=x.start_asset||x.assets?.[0]||'USDT';
+ setText('route-title',`FULL LOOP · ${routeName(x.nodes||x.assets)}`);
+ setText('route-summary',`FULL LOOP CONFIRMED · старт ${fmt(x.start_amount,4)} ${start} · итог после рыночных сделок ${fmt(x.final_amount,4)} ${start} · ребаланс ${fmt(x.rebalance_cost_quote,4)} ${start} · чистая прибыль +${fmt(x.full_profit_amount,4)} ${start} · FULL NET +${fmt(net,4)}%.`);
+ const root=$('route-steps');root.replaceChildren();let amount=Number(x.start_amount)||0,stepNo=1;
+ addPrefStep(root,stepNo++,'Подготовить prefunded-балансы',`На каждой бирже входной актив торгового шага должен быть уже размещён заранее.`,`Это позволяет выполнить рыночные ноги почти одновременно, без ожидания blockchain-перевода.`,null,null,false);
+ for(const s of x.steps||[]){
+  const fee=Number(s.fee_rate)||0,out=amount*Number(s.rate||0)*(1-fee),side=String(s.side||'trade').toUpperCase();
+  const base=s.side==='buy'?s.to_asset:s.from_asset,quote=s.side==='buy'?s.from_asset:s.to_asset;
+  addPrefStep(root,stepNo++,`${side}: ${s.from_asset} → ${s.to_asset} · ${s.venue}`,`${fmt(amount,8)} ${s.from_asset} → расчётно ${fmt(out,8)} ${s.to_asset}.`,`Пара ${s.symbol||`${base}/${quote}`} · fee ${fmt(fee*100,4)}% · L1 capacity ${fmt(s.capacity,8)} ${s.from_asset}.`,{url:marketUrl(s.venue,base,quote),label:`Открыть ${s.venue}`},amount);
+  amount=out;
+ }
+ const br=x.base_rebalance||{},qr=x.quote_rebalance||{};
+ addPrefStep(root,stepNo++,`Ребаланс ${br.asset||'базового актива'}`,`${br.src||'BUY'} → ${br.dst||'SELL'} · сеть ${br.network||'—'} · withdraw/deposit OPEN.`,`Identity: ${br.identity||'—'} · fee ${fmt(br.fee,8)} ${br.asset||''} · min withdraw ${fmt(br.min_withdraw,8)}.`,null,null,false);
+ addPrefStep(root,stepNo++,`Ребаланс ${qr.asset||start}`,`${qr.src||'SELL'} → ${qr.dst||'BUY'} · сеть ${qr.network||'—'} · withdraw/deposit OPEN.`,`Identity: ${qr.identity||'—'} · fee ${fmt(qr.fee,8)} ${qr.asset||start} · min withdraw ${fmt(qr.min_withdraw,8)}.`,null,null,false);
+ addPrefStep(root,stepNo++,'Круг восстановлен',`После двух торговых ног и двух ребалансов портфель возвращается к исходному распределению.`,`FULL NET +${fmt(net,4)}% · чистая прибыль +${fmt(x.full_profit_amount,4)} ${start} · статус ${x.loop_status}.`,null,null,false);
+ $('route-panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderPrefunded(report){
+ const body=$('prefunded-body');if(!body)return;body.replaceChildren();
+ const rows=report.full_loop_opportunities||[],count=Number(report.full_loop_count??rows.length);
+ rows.slice(0,100).forEach((x,index)=>{
+  const tr=document.createElement('tr');tr.className='full-loop-row';tr.dataset.prefIndex=String(index);tr.tabIndex=0;
+  const net=Number(x.full_net_pct)||0,start=x.start_asset||x.assets?.[0]||'USDT',br=x.base_rebalance||{},qr=x.quote_rebalance||{};
+  const networks=[br.network,qr.network].filter(Boolean).join(' + ')||'—';
+  const values=[index+1,routeName(x.nodes||x.assets),(x.venues||[]).join(' → '),x.hops,`+${fmt(net,4)}%`,`${fmt(x.start_amount,2)} ${start}`,`+${fmt(x.full_profit_amount,4)} ${start}`,networks];
+  values.forEach((value,i)=>{const td=document.createElement('td');td.textContent=String(value);if(i===1)td.className='route-text';if(i===4||i===6)td.className='success-note';tr.append(td);});
+  const status=document.createElement('td');status.innerHTML='<span class="full-badge">FULL LOOP CONFIRMED</span>';tr.append(status);
+  const action=document.createElement('td'),b=document.createElement('button');b.className='chain-action';b.textContent='Весь круг →';b.dataset.prefIndex=String(index);action.append(b);tr.append(action);body.append(tr);
+ });
+ if(report.source_mode!=='live')setText('prefunded-note','Полные межбиржевые круги рассчитываются только на LIVE данных.');
+ else if(rows.length)setText('prefunded-note',`Зелёных FULL LOOP CONFIRMED: ${count}. В NET уже вычтена стоимость подтверждённого ребаланса.`);
+ else setText('prefunded-note',`Полных зелёных кругов сейчас нет. Рыночных кандидатов: ${report.network_pending_count||0}.`);
+}
+
+function openSeriesRoute(index){
+ const x=currentReport?.series_ready_opportunities?.[index];if(!x)return;
+ const plan=x.batch_ready_plan||{},start=x.start_asset||x.assets?.[0]||'USDT';
+ $('route-panel').classList.remove('hidden');setText('route-title',`BATCH READY ×${plan.cycles||'?'} · ${routeName(x.nodes||x.assets)}`);
+ setText('route-summary',`Серия ${plan.cycles||'?'} оборотов · NET/круг +${fmt(plan.net_pct_per_cycle,4)}% · прибыль серии +${fmt(plan.series_profit,4)} ${start} · один пакетный ребаланс ${fmt(plan.rebalance_cost_total,4)} ${start}.`);
+ const root=$('route-steps');root.replaceChildren();let amount=Number(x.start_amount)||0,stepNo=1;
+ addPrefStep(root,stepNo++,'Подготовить запас на серию',`BUY-сторона: ${fmt(plan.required_buy_quote_inventory,4)} ${start}. SELL-сторона: ${fmt(plan.required_sell_base_inventory,8)} ${x.steps?.[0]?.to_asset||'asset'}.`,`Это запас на ${plan.cycles||'?'} оборотов без промежуточного blockchain-ребаланса.`,null,null,false);
+ for(const st of x.steps||[]){const base=st.side==='buy'?st.to_asset:st.from_asset,quote=st.side==='buy'?st.from_asset:st.to_asset;addPrefStep(root,stepNo++,`${String(st.side||'trade').toUpperCase()} · ${st.venue}`,`${st.from_asset} → ${st.to_asset}`,`Пара ${st.symbol||''} · fee ${fmt((st.fee_rate||0)*100,4)}% · L1 capacity ${fmt(st.capacity,6)}.`,{url:marketUrl(st.venue,base,quote),label:`Открыть ${st.venue}`},amount);}
+ addPrefStep(root,stepNo++,'Пакетный ребаланс',`После ${plan.cycles||'?'} оборотов выполнить один возврат накопленного перекоса.`,`Общая стоимость ${fmt(plan.rebalance_cost_total,4)} ${start}; на один круг ${fmt(plan.rebalance_cost_per_cycle,4)} ${start}.`,null,null,false);
+ addPrefStep(root,stepNo++,'Серия завершена',`Расчётная чистая прибыль серии +${fmt(plan.series_profit,4)} ${start}.`,`NET на круг после амортизации ребаланса +${fmt(plan.net_pct_per_cycle,4)}%.`,null,null,false);
+ $('route-panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function renderSeries(report){
+ const body=$('series-body');if(!body)return;body.replaceChildren();const rows=report.series_ready_opportunities||[];
+ rows.slice(0,100).forEach((x,index)=>{const p=x.batch_ready_plan||{},tr=document.createElement('tr');tr.className='full-loop-row batch-ready-row';tr.dataset.seriesIndex=String(index);tr.tabIndex=0;const start=x.start_asset||x.assets?.[0]||'USDT';const base=x.steps?.[0]?.to_asset||'asset';
+ const vals=[index+1,routeName(x.nodes||x.assets),(x.venues||[]).join(' → '),p.cycles||'—',`+${fmt(p.net_pct_per_cycle,4)}%`,`${fmt(x.start_amount,2)} ${start}`,`${fmt(p.required_buy_quote_inventory,2)} ${start}`,`${fmt(p.required_sell_base_inventory,6)} ${base}`,`+${fmt(p.series_profit,4)} ${start}`];
+ vals.forEach((v,i)=>{const td=document.createElement('td');td.textContent=String(v);if(i===1)td.className='route-text';if(i===4||i===8)td.className='success-note';tr.append(td);});const td=document.createElement('td'),b=document.createElement('button');b.className='chain-action';b.textContent='Серия →';b.dataset.seriesIndex=String(index);td.append(b);tr.append(td);body.append(tr);});
+ setText('series-note',rows.length?`BATCH READY: ${report.series_ready_count??rows.length}. Показан минимальный положительный размер серии.`:'Положительных пакетных серий сейчас нет.');
+}
+function renderPending(report){
+ const body=$('pending-body');if(!body)return;body.replaceChildren();const rows=report.network_pending_loops||[];
+ rows.slice(0,100).forEach((x,index)=>{const tr=document.createElement('tr');tr.className='pending-row';const net=Number(x.full_net_pct??x.confirmed_profit_pct??x.profit_pct)||0,start=x.start_asset||x.assets?.[0]||'USDT';
+  const reason=String(x.loop_status||'PENDING').replaceAll('_',' ');const values=[index+1,routeName(x.nodes||x.assets),(x.venues||[]).join(' → '),`+${fmt(net,4)}%`,`${fmt(x.start_amount,2)} ${start}`,reason];
+  values.forEach((value,i)=>{const td=document.createElement('td');td.textContent=String(value);if(i===1)td.className='route-text';if(i===3)td.className='candidate-net';if(i===5)td.className='pending-reason';tr.append(td);});body.append(tr);});
+ setText('pending-note',rows.length?`Кандидатов: ${report.network_pending_count??rows.length}. Они НЕ зелёные, пока сеть/identity/ребаланс не доказаны.`:'Неподтверждённых кандидатов нет.');
+}
+function ensureToastStack(){let stack=$('toast-stack');if(stack)return stack;stack=document.createElement('div');stack.id='toast-stack';document.body.append(stack);return stack;}
+function showToast(x,index){
+ const stack=ensureToastStack(),toast=document.createElement('button');toast.type='button';toast.className='opportunity-toast';toast.dataset.prefIndex=String(index);
+ const net=Number(x.full_net_pct??x.confirmed_profit_pct??x.profit_pct)||0,start=x.start_asset||x.assets?.[0]||'USDT';
+ toast.innerHTML=`<span class="toast-dot"></span><span class="toast-copy"><strong>Новый FULL LOOP CONFIRMED</strong><b>${(x.assets||[]).join(' → ')} · ${(x.venues||[]).join(' / ')}</b><small>FULL NET +${fmt(net,4)}% · +${fmt(x.full_profit_amount??x.profit_amount,4)} ${start} · старт ${fmt(x.start_amount,2)} ${start}</small></span>`;
+ stack.append(toast);requestAnimationFrame(()=>toast.classList.add('show'));
+ setTimeout(()=>{toast.classList.remove('show');setTimeout(()=>toast.remove(),250);},12000);
+}
+function showBatchToast(x,index){
+ const stack=ensureToastStack(),toast=document.createElement('button');toast.type='button';toast.className='opportunity-toast batch-toast';toast.dataset.seriesIndex=String(index);
+ const p=x.batch_ready_plan||{},start=x.start_asset||x.assets?.[0]||'USDT';
+ toast.innerHTML=`<span class="toast-dot"></span><span class="toast-copy"><strong>Новая BATCH READY серия ×${p.cycles||'?'}</strong><b>${(x.assets||[]).join(' → ')} · ${(x.venues||[]).join(' / ')}</b><small>NET/круг +${fmt(p.net_pct_per_cycle,4)}% · серия +${fmt(p.series_profit,4)} ${start}</small></span>`;
+ stack.append(toast);requestAnimationFrame(()=>toast.classList.add('show'));setTimeout(()=>{toast.classList.remove('show');setTimeout(()=>toast.remove(),250);},12000);
+}
+function showSummaryToast(count){
+ if(count<=0)return;const stack=ensureToastStack(),toast=document.createElement('div');toast.className='opportunity-toast summary-toast';
+ toast.innerHTML=`<span class="toast-dot"></span><span class="toast-copy"><strong>Ещё новых кругов: ${count}</strong><small>Они уже добавлены в зелёную таблицу арбитражных связок.</small></span>`;stack.append(toast);requestAnimationFrame(()=>toast.classList.add('show'));setTimeout(()=>toast.remove(),9000);
+}
+function notifyNewConfirmed(report){
+ if(report.source_mode!=='live')return;
+ const full=(report.full_loop_opportunities||[]).map((x,index)=>({x,index,type:'full'}));
+ const batch=(report.series_ready_opportunities||[]).map((x,index)=>({x,index,type:'batch'}));
+ const all=[...full,...batch],current=new Set(all.map(({x,type})=>type+'|'+prefKey(x)));
+ const fresh=all.filter(({x,type})=>!activeConfirmedKeys.has(type+'|'+prefKey(x)));
+ const limit=firstToastPass?3:5;
+ fresh.slice(0,limit).forEach(({x,index,type})=>type==='full'?showToast(x,index):showBatchToast(x,index));
+ if(fresh.length>limit)showSummaryToast(fresh.length-limit);activeConfirmedKeys=current;firstToastPass=false;
+}
+function latencyKey(x){return x.signature||[x.base,x.quote,x.slow_venue,x.fast_venue,x.direction].join('|');}
+function latencyAction(x){return x.direction==='BUY_SLOW_SELL_FAST'?'BUY slow → SELL fast':'SELL slow → BUY fast';}
+function classicKey(x){return x.signature||[x.base,x.quote,x.buy_venue,x.sell_venue].join('|');}
+function openClassicRouteRow(x){
+ if(!x)return;$('route-panel').classList.remove('hidden');
+ const h=x.history||{},br=x.base_rebalance||{},qr=x.quote_rebalance||{};setText('route-title',`${x.sustainable_verified?'CLASSIC SUSTAINABLE ✓':'CLASSIC'} · ${x.base}/${x.quote}`);
+ setText('route-summary',`BUY ${x.buy_venue} → SELL ${x.sell_venue} · ${x.sustainable_verified?'SUSTAINABLE NET':'market NET'} +${fmt(x.net_pct,4)}% · объём ${fmt(x.quote_in,2)} ${x.quote} · AION Score ${fmt(x.aion_score,1)} · подтверждений ${h.hits||1}.`);
+ const root=$('route-steps');root.replaceChildren();let n=1;
+ addPrefStep(root,n++,'Prefunded-инвентарь',`На ${x.buy_venue} заранее нужен ${x.quote}; на ${x.sell_venue} заранее нужен ${x.base}.`,`Обе ноги исполняются почти одновременно; blockchain-перевод не должен стоять внутри окна.`,null,null,false);
+ addPrefStep(root,n++,`BUY ${x.base} · ${x.buy_venue}`,`${fmt(x.quote_in,2)} ${x.quote} по ask ${fmt(x.buy_ask,8)}.`,`Taker fee ${fmt(x.buy_fee_pct,4)}% · L1 qty ${fmt(x.buy_l1_qty,6)}.`,{url:marketUrl(x.buy_venue,x.base,x.quote),label:`Открыть ${x.buy_venue} BUY`},x.quote_in);
+ addPrefStep(root,n++,`SELL ${x.base} · ${x.sell_venue}`,`${fmt(x.base_bought,8)} ${x.base} по bid ${fmt(x.sell_bid,8)}.`,`Taker fee ${fmt(x.sell_fee_pct,4)}% · L1 qty ${fmt(x.sell_l1_qty,6)}.`,{url:marketUrl(x.sell_venue,x.base,x.quote),label:`Открыть ${x.sell_venue} SELL`},x.base_bought);
+ addPrefStep(root,n++,'Ребаланс после серии',`Base: ${br.ok?(br.network+' OPEN'):(br.reason||'pending')} · Quote: ${qr.ok?(qr.network+' OPEN'):(qr.reason||'pending')}.`,`SUSTAINABLE-проверка дополнительно вычитает VWAP, safety buffer и амортизированную стоимость этого ребаланса.`,null,null,false);
+ $('route-panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function openClassicRoute(index){openClassicRouteRow(currentReport?.classic_opportunities?.[index]);}
+function renderClassic(report){const body=$('classic-body');if(!body)return;body.replaceChildren();const rows=report.classic_opportunities||[];rows.slice(0,100).forEach((x,i)=>{const h=x.history||{},tr=document.createElement('tr');tr.className='classic-watch-row';tr.dataset.classicIndex=String(i);tr.tabIndex=0;const vals=[i+1,`${x.base}/${x.quote}`,x.buy_venue,x.sell_venue,`+${fmt(x.net_pct,4)}%`,`${fmt(x.quote_in,2)} ${x.quote}`,fmt(x.aion_score,1),h.hits||1,h.reliability_state||'WATCH'];vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===4)td.className='candidate-net';if(j===6)td.className=Number(x.aion_score)>=75?'score-high':'score-mid';tr.append(td);});const td=document.createElement('td'),b=document.createElement('button');b.className='chain-action';b.textContent='Цепочка →';b.dataset.classicIndex=String(i);td.append(b);tr.append(td);body.append(tr);});setText('classic-note',rows.length?`CLASSIC >1% и repeatable: ${rows.length}. Финальный зелёный статус — только после SUSTAINABLE depth-check.`:'CLASSIC >1% сейчас не подтверждён. HOT-контур продолжает проверять кандидатов.');}
+function renderLatency(d){
+ const body=$('latency-body');if(!body)return;body.replaceChildren();const ready=d.latency_opportunities||[],cand=d.latency_candidates||[];
+ const rows=[...ready.map(x=>({x,ready:true})),...cand.slice(0,35).map(x=>({x,ready:false}))];
+ rows.slice(0,100).forEach(({x,ready},i)=>{const tr=document.createElement('tr');tr.className=ready?(x.repeatable?'latency-repeatable-row':'latency-ready-row'):'pending-row';if(ready){tr.dataset.latencySig=latencyKey(x);tr.tabIndex=0;}
+  const status=x.repeatable?'LATENCY REPEATABLE':(x.latency_ready?'LATENCY CONFIRMED':x.latency_state||'FLASH');
+  const vals=[i+1,`${x.base}/${x.quote}`,x.slow_venue,x.fast_venue,latencyAction(x),`${fmt(x.observed_lag_ms,0)} ms`,`+${fmt(x.net_pct,4)}%`,`${fmt(x.quote_in,2)} ${x.quote}`,x.confirmations||1,status];
+  vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===6)td.className=ready?'success-note':'candidate-net';if(j===9)td.className=ready?'latency-status':'pending-reason';tr.append(td);});
+  const td=document.createElement('td');if(ready){const b=document.createElement('button');b.className='chain-action';b.textContent='Открыть →';b.dataset.latencySig=latencyKey(x);td.append(b);}tr.append(td);body.append(tr);});
+ setText('latency-note',`STRICT ${(d.latency_venues||[]).length} CEX · CONFIRMED ${d.latency_ready_count||0} · REPEATABLE ${d.latency_repeatable_count||0} · кандидатов ${d.latency_candidate_count||0} · sample ${d.sample_count||0}`);
+}
+function readyIndex(x){return (currentLatency?.latency_opportunities||[]).findIndex(y=>latencyKey(y)===latencyKey(x));}
+function openLatencyRouteBySig(sig){
+ const x=(currentLatency?.latency_opportunities||[]).find(y=>latencyKey(y)===sig);if(!x)return;
+ $('route-panel').classList.remove('hidden');setText('route-title',`LATENCY ARB · ${x.base}/${x.quote}`);
+ const action=latencyAction(x),status=x.repeatable?'LATENCY REPEATABLE':'LATENCY CONFIRMED';
+ setText('route-summary',`${status} · ${action} · NET +${fmt(x.net_pct,4)}% · +${fmt(x.net_profit,4)} ${x.quote} · lag ${fmt(x.observed_lag_ms,0)} ms · подтверждений ${x.confirmations}.`);
+ const root=$('route-steps');root.replaceChildren();let n=1;
+ addPrefStep(root,n++,'Подготовить prefunded-балансы',`На ${x.slow_venue} и ${x.fast_venue} нужные активы должны быть заранее размещены.`,`Latency-arb исполняется двумя рыночными ногами почти одновременно; ждать перевод между биржами нельзя.`,null,null,false);
+ if(x.direction==='BUY_SLOW_SELL_FAST'){
+  addPrefStep(root,n++,`BUY ${x.base} · ${x.slow_venue}`,`Купить на медленной бирже по ask ${fmt(x.slow_ask,8)} ${x.quote}.`,`Сумма до ${fmt(x.quote_in,2)} ${x.quote} · fee ${fmt(x.slow_fee_pct,4)}%.`,{url:marketUrl(x.slow_venue,x.base,x.quote),label:`Открыть ${x.slow_venue} BUY`},x.quote_in);
+  addPrefStep(root,n++,`SELL ${x.base} · ${x.fast_venue}`,`Одновременно продать ${fmt(x.base_qty,8)} ${x.base} по bid ${fmt(x.fast_bid,8)} ${x.quote}.`,`Fast reference подтверждён несколькими площадками · fee ${fmt(x.fast_fee_pct,4)}%.`,{url:marketUrl(x.fast_venue,x.base,x.quote),label:`Открыть ${x.fast_venue} SELL`},x.base_qty);
+ }else{
+  addPrefStep(root,n++,`SELL ${x.base} · ${x.slow_venue}`,`Продать на медленной бирже по bid ${fmt(x.slow_bid,8)} ${x.quote}.`,`Объём ${fmt(x.base_qty,8)} ${x.base} · fee ${fmt(x.slow_fee_pct,4)}%.`,{url:marketUrl(x.slow_venue,x.base,x.quote),label:`Открыть ${x.slow_venue} SELL`},x.base_qty);
+  addPrefStep(root,n++,`BUY ${x.base} · ${x.fast_venue}`,`Одновременно купить на быстрой бирже по ask ${fmt(x.fast_ask,8)} ${x.quote}.`,`Расчётный капитал ${fmt(x.quote_in,2)} ${x.quote} · fee ${fmt(x.fast_fee_pct,4)}%.`,{url:marketUrl(x.fast_venue,x.base,x.quote),label:`Открыть ${x.fast_venue} BUY`},x.quote_in);
+ }
+ const br=x.base_rebalance||{},qr=x.quote_rebalance||{};
+ addPrefStep(root,n++,'Почему это latency-сигнал',`Медленная котировка отстаёт примерно на ${fmt(x.observed_lag_ms,0)} ms.`,`State ${x.latency_state} · slow age ${fmt(x.slow_quote_age_ms,0)} ms · fast age ${fmt(x.fast_quote_age_ms,0)} ms · speed ratio ${fmt(x.speed_ratio,2)}×.`,null,null,false);
+ addPrefStep(root,n++,'Ребаланс после серии',`Base: ${br.ok?(br.network+' OPEN'):(br.reason||'pending')} · Quote: ${qr.ok?(qr.network+' OPEN'):(qr.reason||'pending')}.`,`REPEATABLE означает, что обе стороны можно восстановить после серии.`,null,null,!x.repeatable);
+ $('route-panel').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function showLatencyToast(x){const stack=ensureToastStack(),t=document.createElement('button');t.type='button';t.className=x.repeatable?'opportunity-toast':'opportunity-toast latency-toast';t.dataset.latencySig=latencyKey(x);t.innerHTML=`<span class="toast-dot"></span><span class="toast-copy"><strong>${x.repeatable?'LATENCY REPEATABLE':'LATENCY CONFIRMED'}</strong><b>${x.base}/${x.quote} · ${x.slow_venue} ⇄ ${x.fast_venue}</b><small>NET +${fmt(x.net_pct,4)}% · lag ${fmt(x.observed_lag_ms,0)} ms · +${fmt(x.net_profit,4)} ${x.quote}</small></span>`;stack.append(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},12000);}
+function notifyLatency(d){const rows=d.latency_opportunities||[],cur=new Set(rows.map(latencyKey)),fresh=rows.filter(x=>!latencyKeys.has(latencyKey(x)));fresh.slice(0,4).forEach(showLatencyToast);latencyKeys=cur;}
+async function latencyScan(){if(latencyInFlight||!currentReport||currentReport.source_mode!=='live')return;latencyInFlight=true;try{const amount=Number($('amount').value||10000),r=await fetch(`/api/latency?amount=${encodeURIComponent(amount)}`),d=await r.json();if(!r.ok)throw Error(d.detail||'Latency API error');currentLatency=d;renderLatency(d);notifyLatency(d);const lc=Number(d.latency_ready_count||0),fc=Number(currentReport?.full_loop_count||0),bc=Number(currentReport?.series_ready_count||0),cc=Number(currentReport?.classic_count||0);setText('status-opps',fc+bc+cc+lc);setText('kpi-opps',fc+bc+cc+lc);const lb=(d.latency_opportunities||[]).length?Math.max(...d.latency_opportunities.map(x=>Number(x.net_pct)||0)):0,fb=Math.max(0,...(currentReport?.full_loop_opportunities||[]).map(x=>Number(x.full_net_pct)||0),...(currentReport?.series_ready_opportunities||[]).map(x=>Number((x.batch_ready_plan||{}).net_pct_per_cycle)||0),...(currentReport?.classic_opportunities||[]).map(x=>Number(x.net_pct)||0));setText('kpi-best',`+${fmt(Math.max(lb,fb),4)}%`);setText('market-title',`FULL NOW ${fc} · CLASSIC ${cc} · BATCH READY ${bc} · LATENCY ${lc}`);}catch(e){setText('latency-note','Latency monitor: '+e.message);}finally{latencyInFlight=false;}}
+
+
+
+function showSustainableClassicToast(x){
+ const route=x.route||{},stack=ensureToastStack(),t=document.createElement('button');t.type='button';t.className='opportunity-toast sustainable-toast';t.dataset.execId=String(x.id);
+ const pair=route.base&&route.quote?`${route.base}/${route.quote}`:'CLASSIC',path=route.buy_venue&&route.sell_venue?`${route.buy_venue} → ${route.sell_venue}`:'';
+ t.innerHTML=`<span class="toast-dot"></span><span class="toast-copy"><strong>CLASSIC SUSTAINABLE ✓</strong><b>${pair} · ${path}</b><small>NET +${fmt(x.net_pct,4)}% · ${fmt(x.notional,2)} USDT · P/L +${fmt(x.realized_profit??x.expected_profit,4)} USDT</small></span>`;
+ stack.append(t);requestAnimationFrame(()=>t.classList.add('show'));setTimeout(()=>{t.classList.remove('show');setTimeout(()=>t.remove(),250);},14000);
+}
+function notifySustainableExecutions(rows){
+ const eligible=(rows||[]).filter(x=>x.sustainable_confirmed&&x.strategy==='CLASSIC'&&x.route);
+ eligible.forEach(x=>{const r={...x.route,quote_in:x.notional,net_pct:x.net_pct,net_profit:x.realized_profit,sustainable_verified:true};const ask=Number(r.buy_ask||0),fee=Number(r.buy_fee_pct||0)/100;if(ask>0)r.base_bought=Number(x.notional)/ask*(1-fee);sustainableRoutes.set(String(x.id),r);});const current=new Set(eligible.map(x=>String(x.id)));
+ if(!sustainableToastInitialized){sustainableToastKeys=current;sustainableToastInitialized=true;return;}
+ eligible.filter(x=>!sustainableToastKeys.has(String(x.id))).slice(0,4).reverse().forEach(showSustainableClassicToast);
+ sustainableToastKeys=new Set([...sustainableToastKeys,...current].slice(-200));
+}
+function renderWideHunt(d){
+ if(!d||d.ready===false){setText('wide-hunt-note','Широкий скан запускается…');return;}
+ const auto=d.auto||{},top=d.top_market||[],audits=new Map((d.audits||[]).map(x=>[x.signature,x]));
+ const found=Number(d.discovery_gt_1pct||0),strict=Number(d.strict_pass_count||0),strictWs=Number(d.strict_ws_pass_count||0),strictRest=Number(d.strict_rest_pass_count||0),exec=Number(d.executable_count||0),best=top.length?Number(top[0].net_pct):-999;
+ setText('wide-venues',d.venues_total||0);setText('wide-venues-ok',d.venues_ok||0);setText('wide-found',found);setText('wide-executable',exec);
+ setText('wide-best',top.length?`${best>=0?'+':''}${fmt(best,4)}%`:'—');setText('wide-scan-id',`scan #${d.scan_id||auto.scan_count||0}`);
+ setText('wide-pairs',`пар: ${d.compared_pairs||0}`);setText('wide-directions',`направлений: ${d.directions_checked||0}`);
+ setText('wide-auto-state',auto.enabled?(auto.running?'AUTO · СКАНИРУЮ…':`AUTO ON · ${fmt(auto.interval_seconds||30,0)} сек`):'AUTO OFF');
+ setText('wide-hunt-note',`DEMO DISCOVERY · ${d.venues_ok||0}/${d.venues_total||0} CEX · STRICT ${strict} (WS ${strictWs} / REST ${strictRest}) · ${fmt(d.duration_ms||0,0)} ms · реальные ордера OFF`);
+ const v=$('wide-verdict');if(v){v.className='pilot-verdict '+(exec>0?'pass':(found>0?'candidate':'wait'));v.innerHTML=exec>0?'<strong>ЕСТЬ EXECUTABLE · LIVE OFF</strong><span>Строгий рынок и торговый доступ подтверждены, но реальные ордера всё равно выключены.</span>':(strict>0?'<strong>STRICT РЫНОК ЕСТЬ · НЕТ ДОСТУПА</strong><span>Стакан подтвердился, но без торговых ключей обеих бирж это не исполнимая сделка.</span>':(found>0?`<strong>НАЙДЕНО ≥1%: ${found}</strong><span>Это DISCOVERY ONLY. Ждём строгий свежий стакан и затем решаем, какие биржи подключать.</span>`:'<strong>ИЩЕМ ОКНО ≥ 1%</strong><span>Широкий скан работает автоматически.</span>'));}
+ const body=$('wide-hunt-body');if(!body)return;body.replaceChildren();
+ top.slice(0,20).forEach((x,i)=>{const tr=document.createElement('tr'),a=audits.get(x.signature),net=Number(x.net_pct||0);let status='BELOW 1%';if(net>=1)status='DISCOVERY ONLY';if(a?.passed)status=`STRICT ${a.strict_mode==='REST_L1_DOUBLE_SNAPSHOT'?'REST L1':'WS'} MARKET · NO TRADE ACCESS`;if(a?.executable)status='EXECUTABLE · LIVE OFF';if(a&&!a.passed&&net>=1&&a.reason)status=`DISCOVERY · ${String(a.reason).replaceAll('_',' ')}`;if(a?.executable)tr.className='pilot-pass-row';else if(net>=1)tr.className='pending-row';const vals=[i+1,`${x.base}/${x.quote}`,x.buy_venue,x.sell_venue,`${fmt(x.quote_in,2)} ${x.quote}`,`${net>=0?'+':''}${fmt(net,4)}%`,status];vals.forEach((z,j)=>{const td=document.createElement('td');td.textContent=String(z);if(j===5)td.className=net>=1?'success-note':'';if(j===6&&a?.executable)td.className='success-note';tr.append(td);});body.append(tr);});
+}
+async function refreshWideHunt(){try{const r=await fetch('/api/pilot/wide/last'),d=await r.json();renderWideHunt(d);}catch(e){setText('wide-hunt-note','Wide Hunt: '+e.message);}}
+
+function tradeAccessMark(name,x){
+ const v=x||{};if(v.verified&&v.live_execution_ready!==false)return `${name} \u2713`;if(v.verified)return `${name} \u2713*`;if(v.ready)return `${name} \u25d0`;return `${name} \u25cb`;
+}
+async function refreshTradeAccess(){
+ try{const r=await fetch('/api/live/status'),d=await r.json(),c=d.credentials||{};const labels=['Bitget','HTX','CoinW'].map(n=>tradeAccessMark(n,c[n]));setText('trade-access-list',labels.join(' \u00b7 '));setText('pilot-auth',labels.join(' \u00b7 '));setText('pilot-auth-note','\u2713 verified trade API \u00b7 * live execution off');}
+ catch(e){setText('trade-access-list','trade access: '+e.message);}
+}
+function renderCoinWPilot(d){
+ if(!d||d.ready===false){setText('coinw-pilot-note','Аудит ещё не запускался.');return;}
+ const auto=d.auto||{},auth=d.auth||{},ba=auth.Bitget||{},ca=auth.CoinW||{};setText('pilot-auth',`${ba.verified?'✓':'○'} + ${ca.verified?'✓':'○'}`);
+ const now=Date.now()/1000,last=Number(auto.last_completed_at||0),next=Number(auto.next_run_at||0);setText('pilot-auto-state',auto.enabled?(auto.running?'AUTO · СКАНИРУЮ…':`AUTO ON · ${fmt(auto.interval_seconds||30,0)} сек`):'AUTO OFF');setText('pilot-scan-id',`scan #${d.scan_id||auto.scan_count||0}`);setText('pilot-updated',last?`обновлено ${new Date(last*1000).toLocaleTimeString('ru-RU')}`:'последний результат: —');setText('pilot-next',auto.running?'идёт новый проход':(next?`следующий ~ через ${Math.max(0,Math.ceil(next-now))} сек`:'следующий: —'));
+ setText('pilot-candidates',d.candidate_count||0);setText('pilot-market-pass',d.market_gt_1pct||0);setText('pilot-strict-pass',d.strict_pass_count||0);
+ const verdict=$('pilot-verdict');if(verdict){const strict=Number(d.strict_pass_count||0),cand=Number(d.market_gt_1pct||0);verdict.className='pilot-verdict '+(strict>0?'pass':(cand>0?'candidate':'wait'));verdict.innerHTML=strict>0?'<strong>STRICT WINDOW FOUND · DEMO</strong><span>Окно прошло WS ≤800 ms, глубину, fees и safety buffer. Это всё ещё не реальная прибыль.</span>':(cand>0?'<strong>КАНДИДАТ ≥1% · ЖДЁМ STRICT</strong><span>Market NET есть, но финальная исполнимость ещё не подтверждена.</span>':'<strong>ЖДЁМ ОКНО ≥ 1%</strong><span>Текущий рынок после taker fees не даёт нужного NET — сделка правильно отклонена.</span>');}
+ const top=d.top_market||[],best=top.length?Number(top[0].market_net_pct):-999;setText('pilot-best-net',top.length?`${best>=0?'+':''}${fmt(best,4)}%`:'—');
+ setText('coinw-pilot-note',`DEMO AUTO · scan #${d.scan_id||auto.scan_count||0} · ${fmt(d.amount,0)} USDT · ${fmt(d.duration_ms,0)} ms · execution REST ${d.execution_rest_hits||0} · реальные ордера OFF`);
+ const hist=d.history||[];const chart=$('pilot-history-chart');if(chart){chart.replaceChildren();const vals=hist.map(x=>Number(x.best_market_net_pct)).filter(Number.isFinite);const min=Math.min(-1,...vals),max=Math.max(1,...vals);hist.slice(-30).forEach((x,i)=>{const v=Number(x.best_market_net_pct);const bar=document.createElement('i');bar.title=`${new Date((x.ts||0)*1000).toLocaleTimeString('ru-RU')} · best ${Number.isFinite(v)?fmt(v,4):'—'}% · WS ${x.ws_ready_pairs||0}`;const zero=(-min)/(max-min)*100;const pos=Number.isFinite(v)?((v-min)/(max-min)*100):zero;bar.style.setProperty('--zero',`${zero}%`);bar.style.setProperty('--pos',`${pos}%`);bar.className=(x.strict_pass_count||0)>0?'strict':((x.market_gt_1pct||0)>0?'candidate':(v>=0?'positive':'negative'));chart.append(bar);});setText('pilot-history-note',hist.length?`${hist.length} прогонов · зелёный = STRICT PASS · жёлтый = ≥1% кандидат · серый/красный = ниже порога`:'Пока нет истории.');}
+ setText('coinw-pilot-scope',d.rebalance_included?'Rebalance включён.':'Важно: blockchain rebalance в этот контрольный прогон НЕ включён; здесь проверяется торговое окно.');
+ const body=$('coinw-pilot-body');if(!body)return;body.replaceChildren();const auditMap=new Map((d.audits||[]).map(x=>[x.signature,x]));
+ top.slice(0,20).forEach((x,i)=>{const tr=document.createElement('tr');const sig=x.signature||`${x.buy_venue}:${String(x.base||'')}${String(x.quote||'')}:${x.quote}->${x.base}>${x.sell_venue}:${String(x.base||'')}${String(x.quote||'')}:${x.base}->${x.quote}`;const a=auditMap.get(sig);const net=Number(x.market_net_pct||0);const result=a?(a.passed?'STRICT PASS':String(a.reason||'REJECT')):(net>=1?'WAIT STRICT':'BELOW 1%');if(a?.passed)tr.className='pilot-pass-row';else if(net>=1)tr.className='pending-row';const vals=[i+1,`${x.base}/${x.quote}`,x.buy_venue,x.sell_venue,`${fmt(x.quote_in,2)} ${x.quote}`,`${net>=0?'+':''}${fmt(net,4)}%`,result];vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===5)td.className=net>=1?'success-note':(net>=0?'candidate-net':'');if(j===6&&a?.passed)td.className='success-note';tr.append(td);});body.append(tr);});
+}
+async function refreshCoinWPilot(){try{const r=await fetch('/api/pilot/coinw-bitget/last'),d=await r.json();renderCoinWPilot(d);await refreshTradeAccess();}catch(e){setText('coinw-pilot-note','Pilot status: '+e.message);}}
+async function runCoinWPilot(){const b=$('coinw-pilot-run');if(b){b.disabled=true;b.textContent='Проверяю LIVE стаканы…';}setText('coinw-pilot-note','Идёт контрольный DEMO-аудит Bitget ↔ CoinW…');try{const r=await fetch('/api/pilot/coinw-bitget?amount=25'),d=await r.json();if(!r.ok)throw Error(d.detail||'pilot error');renderCoinWPilot(d);}catch(e){setText('coinw-pilot-note','Pilot: '+e.message);}finally{if(b){b.disabled=false;b.innerHTML='Проверить сейчас · 25 USDT <span>→</span>';}}}
+
+function renderTradingMode(tm){
+ const mode=tm.mode||'PAPER',effective=tm.effective_mode||'PAPER_AUTO',demo=tm.demo||{};
+ setText('trading-mode-state',effective);
+ document.querySelectorAll('[data-trading-mode]').forEach(b=>b.classList.toggle('active-mode',b.dataset.tradingMode===mode));
+ const creds=demo.credentials||{},ready=Object.entries(creds).filter(([,v])=>v.ready).map(([k])=>k),backend=demo.backend||'SHADOW_LIVE';
+ setText('demo-readiness',`DEMO backend: ${backend} · LIVE стаканы ${demo.real_market_books?'ON':'OFF'} · exchange API ${ready.length}/${Object.keys(creds).length}${ready.length?` · ${ready.join(', ')}`:''} · реальные деньги НЕ используются.`);
+ const kpi=document.querySelector('.paper-kpi');if(kpi)kpi.textContent=effective.replace('_AUTO','').replace('_WAITING_KEYS',' WAIT');
+}
+async function setTradingMode(mode){
+ const payload={mode};
+ if(mode==='LIVE'){
+  const c=prompt('Для выбора LIVE AUTO введите: ENABLE LIVE MODE');
+  if(c!=='ENABLE LIVE MODE')return;
+  payload.confirmation=c;
+ }
+ const r=await fetch('/api/trading-mode',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)}),d=await r.json();
+ if(!r.ok||d.ok===false)throw Error(d.status||'mode switch failed');
+ renderTradingMode(d);await refreshExecution();
+}
+const executionReasonLabels={
+ 'DEPTH_NET_TOO_LOW':'доходность по реальному стакану ниже порога',
+ 'SUSTAINABLE_NET_TOO_LOW':'после комиссий и ребаланса ниже порога',
+ 'CAPITAL_OVERRUN':'нужный объём выше лимита капитала',
+ 'WS_CACHE_MISS':'нет достаточно свежего WS-стакана',
+ 'SHADOW_WS_NOT_READY':'WS-стакан не успел подтвердиться',
+ 'COOLDOWN':'маршрут на короткой паузе между оборотами',
+ 'SCORE_LOW':'недостаточная надёжность сигнала',
+ 'LATENCY_TOO_SHORT_FOR_EXECUTION':'окно слишком короткое для исполнения',
+ 'DEPTH_INSUFFICIENT':'в стакане не хватает ликвидности',
+ 'NET_AFTER_BUFFER_TOO_LOW':'запас доходности после safety buffer мал'
+};
+function executionReasonLabel(x){return executionReasonLabels[x]||String(x||'').replaceAll('_',' ').toLowerCase();}
+function renderExecution(d,live,hot,signals){
+ notifySustainableExecutions(d.recent||[]);
+ renderTradingMode(d.trading_mode||{});
+ const body=$('execution-body');if(!body)return;body.replaceChildren();
+ setText('execution-mode',d.mode||'PAPER AUTO');setText('execution-count',d.execution_count||0);
+ setText('execution-pnl',fmt(d.sustainable_verified?.daily_pnl??d.daily_pnl??0,4));setText('execution-speed',`${fmt(d.avg_duration_ms||0,1)} ms`);
+ (d.recent||[]).slice(0,40).forEach((x,i)=>{const tr=document.createElement('tr');if(x.depth_confirmed)tr.className='quality-good-row';if(x.sustainable_confirmed&&x.strategy==='CLASSIC'&&x.route){tr.dataset.execId=String(x.id);tr.tabIndex=0;tr.classList.add('sustainable-exec-row');}const env=x.environment||'PAPER',direct=x.signal_source==='WS_DIRECT'?'DIRECT WS · ':'',shadow=x.shadow_fill?`SHADOW ✓ · ${x.book_source||'WS_CACHE'} · `:'',core=x.sustainable_confirmed?`SUSTAINABLE ✓ · ${x.status}`:(x.depth_confirmed?`DEPTH ✓ · ${x.status}`:`${x.status}`),status=`${env} · ${direct}${shadow}${core}`;const vals=[i+1,x.strategy,fmt(x.score,1),`${fmt(x.notional,2)} USDT`,`+${fmt(x.net_pct,4)}%`,`${fmt(x.realized_profit??x.expected_profit,4)} USDT`,`${fmt(x.duration_ms,1)} ms`,status];vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===4||j===5)td.className='success-note';tr.append(td);});body.append(tr);});
+ const creds=live?.credentials||{},ready=Object.entries(creds).filter(([,v])=>v.ready).map(([k])=>k);
+ setText('live-readiness',live?.armed?`LIVE ARMED · готовые API: ${ready.join(', ')}`:`LIVE защищён двойным gate · API готово ${ready.length}/${Object.keys(creds).length}: ${ready.join(', ')||'ключи пока не подключены'} · Withdraw permission не требуется.`);
+ const sv=d.sustainable_verified||{},dv=d.depth_verified||{},demoKill=!!d.demo?.kill_switch,kill=(d.environment==='DEMO'?demoKill:!!live?.kill_switch),hb=hot?.hot_books||{},st=signals?.templates||{},dp=signals?.depth_preview||{};setText('execution-note',`${d.mode||'PAPER_AUTO'} · SUSTAINABLE ${sv.count||0} · 24h +${fmt(sv.daily_pnl||0,4)} USDT · DIRECT WS ${st.CLASSIC||0}C/${st.LATENCY||0}L · DEPTH ${dp.viable||0}/${dp.previewed||0} viable · rejected ${dp.rejected||0} · scan ${fmt(signals?.last_scan_ms||0,2)} ms · executions ${signals?.executions||0} · WS ready ${hb.execution_ready_count||0}/${hb.watched_count||0} · execution REST ${hot?.execution?.rest_hits??hot?.execution_rest_hits??0} · WS misses ${hot?.execution?.cache_misses??hot?.execution_cache_misses??0} · min NET ${fmt(dv.min_net_pct||1,2)}% · kill switch ${kill?'ON':'OK'}`);
+ const ds=d.decisions||{},g=ds.groups||{},top=[...(g.SKIPPED||[]),...(g.FAILED||[])].sort((a,b)=>(b.count||0)-(a.count||0)).slice(0,5).map(x=>`${executionReasonLabel(x.reason)}: ${x.count}`).join(' · ');setText('execution-decisions',`24h решения: исполнено ${ds.executed||0} · пропущено ${ds.skipped||0} · ошибки ${ds.failed||0}${top?` · топ причин: ${top}`:''}`);
+}
+function renderAutopilot(c,live,inv){
+ const setVal=(id,v)=>{const e=$(id);if(e&&document.activeElement!==e)e.value=String(v)};
+ setVal('autopilot-min-net',c.min_sustainable_net_pct??1);setVal('autopilot-max-notional',c.max_notional??1000);setVal('autopilot-reserve',c.inventory_reserve_pct??15);setVal('autopilot-hourly',c.max_trades_per_hour??120);setVal('autopilot-hot-cooldown',c.hot_cycle_cooldown_seconds??1);
+ const st=c.strategies||{};[['strategy-full','FULL_NOW'],['strategy-batch','BATCH_READY'],['strategy-classic','CLASSIC'],['strategy-latency','LATENCY']].forEach(([id,k])=>{const e=$(id);if(e)e.checked=st[k]!==false});
+ const pause=Number(c.risk_pause_until||0)>Date.now()/1000,vr=live?.verified_ready_count||0;setText('autopilot-state',`${c.enabled?'AUTO ACTIVE':'AUTO PAUSED'} · SUSTAINABLE ≥${fmt(c.min_sustainable_net_pct,2)}% · max ${fmt(c.max_notional,0)} USDT · reserve ${fmt(c.inventory_reserve_pct,0)}% · hot cycle ${fmt(c.hot_cycle_cooldown_seconds??1,2)}s · verified LIVE CEX ${vr}${pause?' · RISK PAUSE':''}`);
+ const b=$('autopilot-toggle');if(b)b.textContent=c.enabled?'Пауза AUTO':'Запустить AUTO';
+}
+async function refreshExecution(){try{const [e,l,a,i,h,s]=await Promise.all([fetch('/api/execution?limit=60'),fetch('/api/live/status'),fetch('/api/autopilot'),fetch('/api/inventory'),fetch('/api/hot-books'),fetch('/api/ws-signals')]);const ed=await e.json(),ld=await l.json(),ad=await a.json(),id=await i.json(),hd=await h.json(),sd=await s.json();renderExecution(ed,ld,hd,sd);renderAutopilot(ad,ld,id);}catch(err){setText('execution-note','Execution Engine: '+err.message);}}
+
+async function saveAutopilot(){
+ const payload={min_sustainable_net_pct:Number($('autopilot-min-net')?.value||1),max_notional:Number($('autopilot-max-notional')?.value||1000),inventory_reserve_pct:Number($('autopilot-reserve')?.value||15),max_trades_per_hour:Number($('autopilot-hourly')?.value||120),hot_cycle_cooldown_seconds:Number($('autopilot-hot-cooldown')?.value||1),strategies:{FULL_NOW:!!$('strategy-full')?.checked,BATCH_READY:!!$('strategy-batch')?.checked,CLASSIC:!!$('strategy-classic')?.checked,LATENCY:!!$('strategy-latency')?.checked}};
+ const r=await fetch('/api/autopilot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});if(!r.ok)throw Error('AUTO config error');renderAutopilot(await r.json(),{},{});await refreshExecution();
+}
+async function toggleAutopilotServer(){const cur=await (await fetch('/api/autopilot')).json();const r=await fetch('/api/autopilot',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({enabled:!cur.enabled})});if(!r.ok)throw Error('AUTO toggle error');await refreshExecution();}
+function renderPaper(auto){const p=auto.paper||{},body=$('paper-body');if(!body)return;setText('paper-count',p.trade_count||0);setText('paper-profit',fmt(p.expected_profit_total||0,4));setText('paper-net',`${fmt(p.avg_net_pct||0,4)}%`);body.replaceChildren();(p.recent||[]).slice(0,30).forEach((x,i)=>{const tr=document.createElement('tr');const vals=[i+1,x.mode,fmt(x.score,1),`${fmt(x.notional,2)} USDT`,`+${fmt(x.expected_net_pct,4)}%`,`+${fmt(x.expected_profit,4)} USDT`,x.status];vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===4||j===5)td.className='success-note';tr.append(td);});body.append(tr);});}
+function renderCapital(d){const body=$('capital-body');if(!body)return;body.replaceChildren();const rows=d.recommendations||[];rows.forEach((x,i)=>{const tr=document.createElement('tr');const vals=[i+1,fmt(x.aion_score,1),x.mode,x.label,`${fmt(x.target_usdt,2)} USDT`,`+${fmt(x.avg_net_pct,4)}%`,`${x.historical_hits} замеров`];vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===1)td.className=Number(x.aion_score)>=75?'score-high':'score-mid';if(j===3)td.className='route-text';tr.append(td);});body.append(tr);});setText('capital-note',`Капитал ${fmt(d.paper_capital_usdt,2)} USDT · резерв ${fmt(d.reserve_usdt,2)} · доступно ${fmt(d.deployable_usdt,2)} · маршрутов ${rows.length}.`);}
+async function refreshAutomation(){try{const [a,c]=await Promise.all([fetch('/api/automation'),fetch('/api/capital')]);const ad=await a.json(),cd=await c.json();renderPaper(ad);renderCapital(cd);setText('auto-mode',ad.enabled?'PAPER AUTO':'PAUSED');setText('auto-note',`Broad ${ad.broad_interval}s · HOT ${ad.hot_interval}s · Latency ${ad.latency_interval}s · FULL ${ad.hot_counts?.full||0} · BATCH ${ad.hot_counts?.batch||0} · CLASSIC ${ad.classic_counts?.ready||0}/${ad.classic_counts?.watch||0} · LAT ${ad.latency_counts?.repeatable||0}${ad.last_error?' · '+ad.last_error:''}`);}catch(e){setText('auto-note','Automation: '+e.message);}}
+function secText(v){const s=Number(v||0);if(s<60)return `${Math.round(s)} сек`;if(s<3600)return `${fmt(s/60,1)} мин`;return `${fmt(s/3600,1)} ч`;}
+function renderQualityRows(id,rows,longMode=false){const body=$(id);if(!body)return;body.replaceChildren();rows.slice(0,100).forEach((x,i)=>{const tr=document.createElement('tr');if(Number(x.aion_score)>=75)tr.className='quality-good-row';const vals=longMode?[i+1,fmt(x.aion_score,1),x.mode,x.label,secText(x.age_seconds),x.hits,`+${fmt(x.avg_net_pct,4)}%`,`+${fmt(x.max_net_pct,4)}%`,fmt(x.avg_liquidity,2)]:[i+1,fmt(x.aion_score,1),x.mode,x.label,x.hits,`+${fmt(x.avg_net_pct,4)}%`,`+${fmt(x.max_net_pct,4)}%`,secText(x.observed_life_seconds),fmt(x.avg_liquidity,2)];vals.forEach((v,j)=>{const td=document.createElement('td');td.textContent=String(v);if(j===1)td.className=Number(x.aion_score)>=75?'score-high':'score-mid';if(j===3)td.className='route-text';tr.append(td);});body.append(tr);});}
+async function refreshQuality(){try{const [q,l]=await Promise.all([fetch('/api/quality?limit=100'),fetch('/api/long-windows?min_seconds=300&limit=100')]);const qd=await q.json(),ld=await l.json();renderQualityRows('quality-body',qd.routes||[],false);renderQualityRows('long-body',ld.routes||[],true);setText('quality-note',`Исторически отслеживается ${qd.count||0} устойчивых маршрутов.`);setText('long-note',`Открытых дольше 5 минут: ${ld.count||0}.`);}catch(e){setText('quality-note','Quality Engine: '+e.message);}}
+function renderWindows(report){
+ const data=report.windows||{},active=data.active||[],counts=data.counts||{},closed=data.recently_closed||[];
+ setText('window-note',`FLASH ${counts.flash||0} · CONFIRMED ${counts.confirmed||0} · STABLE ${counts.stable||0} · закрытых в истории ${closed.length}`);
+ const box=document.querySelector('#windows .window-placeholder');if(!box)return;
+ if(!active.length){box.innerHTML='<div class="radar crypto-radar"><i></i><i></i><i></i><b></b></div><div><strong>Активных положительных окон сейчас нет</strong><p>Радар продолжает следить за NET-положительными подтверждениями.</p></div>';return;}
+ box.innerHTML='';active.slice(0,12).forEach(w=>{const card=document.createElement('div');card.className='window-live-card';const mode=w.meta?.window_mode||'LIVE';card.innerHTML=`<span class="window-state window-state-${String(w.state||'FLASH').toLowerCase()}">${mode} · ${w.state}</span><strong>${w.label}</strong><p>сейчас +${fmt(w.current_pct,4)}% · максимум +${fmt(w.max_pct,4)}% · замеров ${w.samples}</p>`;box.append(card);});
+}
+function rememberClosed(prev,next){const now=Date.now(),nextKeys=new Set(next.map(prefKey));for(const x of prev||[]){const k=prefKey(x);if(!nextKeys.has(k))recentlyClosed.set(k,{row:x,closedAt:now});}for(const [k,v] of [...recentlyClosed])if(now-v.closedAt>60000)recentlyClosed.delete(k);}
+function appendRecentlyClosed(body){const now=Date.now();for(const {row:x,closedAt} of [...recentlyClosed.values()].slice(-12).reverse()){const tr=document.createElement('tr');tr.className='recently-closed-row';const ago=Math.max(0,Math.round((now-closedAt)/1000)),start=x.start_asset||x.assets?.[0]||'USDT';const vals=['—',routeName(x.nodes||x.assets),(x.venues||[]).join(' → '),x.hops||2,'—',`${fmt(x.start_amount,2)} ${start}`,'—','—',`CLOSED ${ago}s ago`];vals.forEach((v,i)=>{const td=document.createElement('td');td.textContent=String(v);if(i===1)td.className='route-text';if(i===8)td.className='closed-status';tr.append(td);});body.append(tr);}}
+
+async function refreshSnapshot(){
+ try{const r=await fetch('/api/auto-snapshot'),d=await r.json();const broad=d.broad,hot=d.hot,lat=d.latency;
+  if(broad){const prev=currentReport?.last_scan;currentReport=broad;if(hot?.ready){currentReport.full_loop_opportunities=hot.full_loop_opportunities||[];currentReport.full_loop_count=hot.full_loop_count||0;currentReport.series_ready_opportunities=hot.series_ready_opportunities||[];currentReport.series_ready_count=hot.series_ready_count||0;if(hot.windows)currentReport.windows=hot.windows;}updateHeader(currentReport);renderOpportunities(currentReport);renderClassic(currentReport);renderPrefunded(currentReport);appendRecentlyClosed($('prefunded-body'));renderSeries(currentReport);renderPending(currentReport);renderWindows(currentReport);notifyNewConfirmed(currentReport);if(!prev||prev!==currentReport.last_scan)$('result').textContent=JSON.stringify(currentReport,null,2);}
+  if(lat?.ready){currentLatency=lat;renderLatency(lat);notifyLatency(lat);}
+  await Promise.all([refreshQuality(),refreshAutomation(),refreshExecution()]);
+ }catch(e){setText('monitor-state','AUTO snapshot: '+e.message);}
+}
+async function hotScan(){
+ if(hotInFlight||scanInFlight||!currentReport||currentReport.source_mode!=='live')return;hotInFlight=true;
+ try{const r=await fetch('/api/hot'),d=await r.json();if(!r.ok||!d.ready)return;const prev=currentReport.full_loop_opportunities||[];rememberClosed(prev,d.full_loop_opportunities||[]);currentReport.full_loop_opportunities=d.full_loop_opportunities||[];currentReport.full_loop_count=d.full_loop_count||0;currentReport.series_ready_opportunities=d.series_ready_opportunities||[];currentReport.series_ready_count=d.series_ready_count||0;if(d.windows)currentReport.windows=d.windows;renderPrefunded(currentReport);appendRecentlyClosed($('prefunded-body'));renderSeries(currentReport);renderWindows(currentReport);notifyNewConfirmed(currentReport);setText('monitor-state',`HOT · каждые 8 сек · active FULL ${d.full_loop_count||0} · BATCH ${d.series_ready_count||0}`);}catch(e){setText('monitor-state','HOT monitor: '+e.message);}finally{hotInFlight=false;}
+}
+async function scan(){
+ if(scanInFlight)return;scanInFlight=true;
+ const amount=Number($('amount').value||10000),source=$('source-mode')?.value||'live';
+ if(!Number.isFinite(amount)||amount<=0){scanInFlight=false;setScanState(false,'Введите сумму больше 0.');return;}
+ setScanState(true,source==='live'?'Получаю LIVE L1 по 17 биржам и подтверждаю арбитражные круги вторым снимком…':'Пересчитываю демонстрационный граф…');setText('working','Сканирую…');
+ try{
+  const r=await fetch(`/api/scan?amount=${encodeURIComponent(amount)}&source=${encodeURIComponent(source)}`),d=await r.json();if(!r.ok)throw Error(d.detail||'Ошибка API');
+  currentReport=d;updateHeader(d);renderOpportunities(d);renderClassic(d);renderPrefunded(d);appendRecentlyClosed($('prefunded-body'));renderSeries(d);renderPending(d);renderWindows(d);notifyNewConfirmed(d);$('result').textContent=JSON.stringify(d,null,2);
+  setText('working','Сканирование завершено');const bad=(d.source_health||[]).filter(x=>x.status!=='LIVE').length;
+  setScanState(false,`Готово · ${String(source).toUpperCase()} · FULL LOOP ${d.full_loop_count||0} · market candidates ${d.arbitrage_cycle_count||0} · pending ${d.network_pending_count||0} · рёбер ${d.edge_count||0}${bad?` · источников с ошибкой ${bad}`:''}`);
+ }catch(e){setText('working','Ошибка');setScanState(false,'Ошибка сканирования: '+e.message);$('result').textContent=String(e.stack||e);}
+ finally{scanInFlight=false;}
+}
+function startAuto(){if(snapshotTimer)return;snapshotTimer=setInterval(refreshSnapshot,5000);qualityTimer=setInterval(refreshQuality,15000);autoStatusTimer=setInterval(refreshAutomation,5000);autoTimer=true;setText('auto','SERVER AUTO · 24/7');setText('monitor-state','Серверная автоматика активна · интерфейс только читает результаты');setTimeout(refreshSnapshot,1200);}
+function stopAuto(){if(snapshotTimer)clearInterval(snapshotTimer);if(qualityTimer)clearInterval(qualityTimer);if(autoStatusTimer)clearInterval(autoStatusTimer);snapshotTimer=null;qualityTimer=null;autoStatusTimer=null;autoTimer=null;setText('auto','SERVER AUTO: интерфейс пауза');setText('monitor-state','Интерфейсный монитор остановлен; серверная автоматика продолжает работать');}
+function toggleAuto(){autoTimer?stopAuto():startAuto();if(autoTimer)refreshSnapshot();}
+$('scan').addEventListener('click',scan);$('monitor-now').addEventListener('click',scan);$('auto').addEventListener('click',toggleAuto);$('source-mode').addEventListener('change',scan);$('monitor-stop').addEventListener('click',stopAuto);
+$('opps-body').addEventListener('click',e=>{const b=e.target.closest('button[data-route-index]');if(b)openRoute(Number(b.dataset.routeIndex));});
+$('prefunded-body').addEventListener('click',e=>{const target=e.target.closest('[data-pref-index]');if(target)openPrefundedRoute(Number(target.dataset.prefIndex));});
+$('prefunded-body').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr[data-pref-index]'))openPrefundedRoute(Number(e.target.dataset.prefIndex));});
+$('series-body').addEventListener('click',e=>{const t=e.target.closest('[data-series-index]');if(t)openSeriesRoute(Number(t.dataset.seriesIndex));});
+$('classic-body').addEventListener('click',e=>{const t=e.target.closest('[data-classic-index]');if(t)openClassicRoute(Number(t.dataset.classicIndex));});
+$('classic-body').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr[data-classic-index]'))openClassicRoute(Number(e.target.dataset.classicIndex));});
+$('execution-body').addEventListener('click',e=>{const t=e.target.closest('[data-exec-id]');if(t)openClassicRouteRow(sustainableRoutes.get(String(t.dataset.execId)));});
+$('execution-body').addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.matches('tr[data-exec-id]'))openClassicRouteRow(sustainableRoutes.get(String(e.target.dataset.execId)));});
+$('latency-body').addEventListener('click',e=>{const t=e.target.closest('[data-latency-sig]');if(t)openLatencyRouteBySig(t.dataset.latencySig);});
+$('route-close').addEventListener('click',()=>$('route-panel').classList.add('hidden'));
+document.addEventListener('click',async e=>{const b=e.target.closest('button[data-copy]');if(!b)return;try{await navigator.clipboard.writeText(b.dataset.copy);const old=b.textContent;b.textContent='Скопировано';setTimeout(()=>b.textContent=old,1200);}catch{b.textContent='Не удалось скопировать';}});
+document.addEventListener('click',e=>{const t=e.target.closest('.opportunity-toast[data-pref-index]');if(t)openPrefundedRoute(Number(t.dataset.prefIndex));const b=e.target.closest('.opportunity-toast[data-series-index]');if(b)openSeriesRoute(Number(b.dataset.seriesIndex));const l=e.target.closest('.opportunity-toast[data-latency-sig]');if(l)openLatencyRouteBySig(l.dataset.latencySig);const s=e.target.closest('.opportunity-toast[data-exec-id]');if(s)openClassicRouteRow(sustainableRoutes.get(String(s.dataset.execId)));});
+$('configure-balances').addEventListener('click',()=>{setText('scan-status','Следующий слой: read-only API балансов для проверки реальной исполнимости prefunded-связки на ваших остатках.');$('scanner').scrollIntoView({behavior:'smooth'});});
+$('coinw-pilot-run')?.addEventListener('click',runCoinWPilot);
+$('autopilot-save')?.addEventListener('click',()=>saveAutopilot().catch(e=>setText('autopilot-state','AUTO config: '+e.message)));
+$('autopilot-toggle')?.addEventListener('click',()=>toggleAutopilotServer().catch(e=>setText('autopilot-state','AUTO toggle: '+e.message)));
+document.querySelectorAll('[data-trading-mode]').forEach(b=>b.addEventListener('click',()=>setTradingMode(b.dataset.tradingMode).catch(e=>setText('trading-mode-state','MODE: '+e.message))));
+refreshWideHunt();wideHuntTimer=setInterval(refreshWideHunt,3000);refreshCoinWPilot();coinwPilotTimer=setInterval(refreshCoinWPilot,3000);refreshSnapshot().finally(startAuto);(function initAionNetwork(){
+ const canvas=$('network-canvas');if(!canvas)return;const ctx=canvas.getContext('2d'),palette=[[18,189,220],[15,199,181],[181,222,24],[239,85,177],[187,46,222]];let w=0,h=0,dpr=1,nodes=[],mouse={x:-9999,y:-9999};
+ function colorFor(x,a=1){const p=Math.max(0,Math.min(4,Math.floor((x/Math.max(w,1))*5))),c=palette[p];return `rgba(${c[0]},${c[1]},${c[2]},${a})`;}
+ function resize(){const r=canvas.getBoundingClientRect();dpr=Math.min(window.devicePixelRatio||1,2);w=r.width;h=r.height;canvas.width=Math.round(w*dpr);canvas.height=Math.round(h*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);nodes=Array.from({length:150},(_,i)=>{const x=(i/149)*w+(Math.random()-.5)*90,band=.23+.5*Math.sin((x/w)*Math.PI);return{x,y:h*(.18+Math.random()*band),vx:(Math.random()-.5)*.13,vy:(Math.random()-.5)*.12,r:Math.random()<.1?5+Math.random()*7:1.1+Math.random()*2.2,black:Math.random()<.09};});}
+ function draw(){ctx.clearRect(0,0,w,h);for(const n of nodes){n.x+=n.vx;n.y+=n.vy;if(n.x<-20||n.x>w+20)n.vx*=-1;if(n.y<16||n.y>h*.79)n.vy*=-1;const dx=n.x-mouse.x,dy=n.y-mouse.y,dm=Math.hypot(dx,dy);if(dm<100&&dm>1){n.x+=dx/dm*.18;n.y+=dy/dm*.18;}}for(let i=0;i<nodes.length;i++){const a=nodes[i];let links=0;for(let j=i+1;j<nodes.length&&links<5;j++){const b=nodes[j],dx=a.x-b.x,dy=a.y-b.y,d=Math.hypot(dx,dy);if(d<90){ctx.beginPath();ctx.moveTo(a.x,a.y);ctx.lineTo(b.x,b.y);ctx.strokeStyle=a.black||b.black?'rgba(34,38,42,.22)':colorFor((a.x+b.x)/2,.28*(1-d/110));ctx.lineWidth=.75;ctx.stroke();links++;}}}for(const n of nodes){ctx.beginPath();ctx.arc(n.x,n.y,n.r,0,Math.PI*2);ctx.fillStyle=n.black?'rgba(20,23,26,.96)':colorFor(n.x,.96);ctx.fill();}requestAnimationFrame(draw);}
+ canvas.addEventListener('pointermove',e=>{const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;});canvas.addEventListener('pointerleave',()=>{mouse.x=mouse.y=-9999;});window.addEventListener('resize',resize,{passive:true});resize();requestAnimationFrame(draw);
+})();

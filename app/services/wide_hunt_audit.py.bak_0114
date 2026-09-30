@@ -1,0 +1,129 @@
+from __future__ import annotations
+import asyncio,json,time
+from pathlib import Path
+from app.connectors.cex_public import DISCOVERY_CONNECTOR_CLASSES, CORE_ASSETS, START_ASSETS
+from app.services.coinw_bitget_audit import CoinWBitgetAudit
+from app.services.depth_guard import depth_guard
+from app.services.hot_book_cache import hot_book_cache
+from app.services.private_trading import readiness
+
+class WideHuntAudit:
+    def __init__(self):
+        self.last=None; self.history=[]; self.running=False
+        self.auto_enabled=False; self.auto_interval=30.0; self.auto_amount=25.0; self.auto_task=None
+        self.scan_count=0; self.last_started_at=None; self.last_completed_at=None; self.next_run_at=None; self.last_error=None
+        self.history_path=Path(__file__).parents[2]/'data'/'wide_hunt_history.json'
+        try:self.history=json.loads(self.history_path.read_text(encoding='utf-8'))[-60:]
+        except Exception:self.history=[]
+        self.scan_count=max([int(x.get('scan_id') or 0) for x in self.history] or [len(self.history)])
+    def auto_status(self):
+        return {'enabled':self.auto_enabled,'interval_seconds':self.auto_interval,'amount':self.auto_amount,'running':self.running,
+                'scan_count':self.scan_count,'last_started_at':self.last_started_at,'last_completed_at':self.last_completed_at,
+                'next_run_at':self.next_run_at,'last_error':self.last_error}
+    def snapshot(self):
+        x=dict(self.last or {'ok':True,'ready':False,'environment':'DEMO_DISCOVERY','real_orders':False,'real_money':False})
+        x['auto']=self.auto_status(); x['history']=self.history[-30:]; return x
+    def _save(self):
+        try:self.history_path.write_text(json.dumps(self.history[-60:],ensure_ascii=False,indent=2),encoding='utf-8')
+        except Exception:pass
+    async def start_auto(self,interval=30.0,amount=25.0):
+        self.auto_interval=max(20.0,float(interval)); self.auto_amount=max(10.0,min(1000.0,float(amount))); self.auto_enabled=True
+        if self.auto_task is None or self.auto_task.done():self.auto_task=asyncio.create_task(self._auto_loop(),name='wide-hunt-auto-audit')
+        return self.auto_status()
+    async def stop_auto(self):
+        self.auto_enabled=False; task=self.auto_task; self.auto_task=None
+        if task and not task.done():
+            task.cancel()
+            try:await task
+            except BaseException:pass
+        self.next_run_at=None; return self.auto_status()
+    async def _auto_loop(self):
+        await asyncio.sleep(5.0)
+        while self.auto_enabled:
+            t0=time.monotonic()
+            try:await self.run(self.auto_amount)
+            except asyncio.CancelledError:raise
+            except Exception as exc:self.last_error=f'{type(exc).__name__}: {str(exc)[:180]}'
+            wait=max(5.0,self.auto_interval-(time.monotonic()-t0)); self.next_run_at=time.time()+wait; await asyncio.sleep(wait)
+    async def _fetch(self,cls,amount):
+        name=getattr(cls,'name',cls.__name__); t=time.perf_counter()
+        try:
+            edges=await asyncio.wait_for(cls().get_edges(amount),timeout=20.0)
+            return name,edges,{'venue':name,'ok':True,'edges':len(edges),'latency_ms':round((time.perf_counter()-t)*1000,1)}
+        except Exception as exc:
+            return name,[],{'venue':name,'ok':False,'edges':0,'latency_ms':round((time.perf_counter()-t)*1000,1),'error':type(exc).__name__+': '+str(exc)[:140]}
+    @staticmethod
+    def _market_rows(name,edges):
+        out={}
+        for e in edges:
+            m=e.meta or {}; base=m.get('base'); quote=m.get('quote'); symbol=m.get('symbol'); side=m.get('side')
+            if not base or not quote or not symbol or side not in ('buy','sell'):continue
+            key=(base,quote); row=out.setdefault(key,{'venue':name,'base':base,'quote':quote,'symbol':symbol})
+            fee=float(m.get('fee_assumption') or getattr(e,'fee_rate',0.002) or 0.002); row['fee']=fee
+            if side=='buy':
+                row['ask']=float(m.get('best_ask') or 0); row['ask_qty']=float(m.get('l1_qty') or 0)
+            else:
+                row['bid']=float(m.get('best_bid') or 0); row['bid_qty']=float(m.get('l1_qty') or 0)
+        return {k:v for k,v in out.items() if v.get('ask',0)>0 and v.get('bid',0)>0 and v.get('ask_qty',0)>0 and v.get('bid_qty',0)>0}
+    async def run(self,amount=25.0):
+        if self.running:
+            x=self.snapshot(); x['busy']=True; return x
+        self.running=True; self.last_started_at=time.time(); self.next_run_at=None; self.last_error=None
+        try:
+            result=await self._run_once(amount); self.scan_count+=1; self.last_completed_at=time.time(); result['scan_id']=self.scan_count
+            if self.history:self.history[-1]['scan_id']=self.scan_count; self._save()
+            result['auto']=self.auto_status(); result['history']=self.history[-30:]; self.last=result; return result
+        except Exception as exc:
+            self.last_error=f'{type(exc).__name__}: {str(exc)[:180]}'; raise
+        finally:self.running=False
+    async def _run_once(self,amount=25.0):
+        amount=max(10.0,min(1000.0,float(amount))); started=time.perf_counter()
+        fetched=await asyncio.gather(*[self._fetch(cls,amount) for cls in DISCOVERY_CONNECTOR_CLASSES])
+        health=[x[2] for x in fetched]; books={}; venues_ok=0
+        for name,edges,h in fetched:
+            if h.get('ok') and edges:venues_ok+=1
+            for pair,row in self._market_rows(name,edges).items():books.setdefault(pair,[]).append(row)
+        rows=[]; compared_pairs=0
+        for (base,quote),items in books.items():
+            if base not in CORE_ASSETS or quote not in START_ASSETS or len(items)<2:continue
+            compared_pairs+=1
+            for buy in items:
+                for sell in items:
+                    if buy['venue']==sell['venue']:continue
+                    r=CoinWBitgetAudit._row(base,quote,buy['venue'],sell['venue'],buy['symbol'],sell['symbol'],buy['ask'],buy['ask_qty'],sell['bid'],sell['bid_qty'],buy['fee'],sell['fee'],amount)
+                    if not r:continue
+                    r['raw_net_pct']=r['net_pct']; r['net_pct']=round(r['net_pct']-float(depth_guard.safety_buffer_pct),6)
+                    r['net_profit']=round(r['quote_in']*r['net_pct']/100.0,8); rows.append(r)
+        rows.sort(key=lambda x:(x['net_pct'],x['net_profit']),reverse=True)
+        eligible=[x for x in rows if x['net_pct']>=1.0][:20]; strict=[]; supported=set(hot_book_cache.SUPPORTED)
+        helper=CoinWBitgetAudit()
+        for row in eligible[:6]:
+            can_strict=row['buy_venue'] in supported and row['sell_venue'] in supported
+            if can_strict:
+                try:a=await asyncio.wait_for(helper._strict(row,amount),timeout=4.0)
+                except Exception as exc:a={'passed':False,'reason':type(exc).__name__+': '+str(exc)[:120]}
+            else:a={'passed':False,'reason':'DISCOVERY_ONLY_NO_STRICT_WS'}
+            strict.append({'base':row['base'],'quote':row['quote'],'buy_venue':row['buy_venue'],'sell_venue':row['sell_venue'],
+                           'market_net_pct':row['net_pct'],'market_profit':row['net_profit'],'signature':row['signature'],**a})
+        creds=readiness()
+        for x in strict:
+            buy=creds.get(x['buy_venue'],{}) or {}; sell=creds.get(x['sell_venue'],{}) or {}
+            x['buy_trade_access']=bool(buy.get('verified') and buy.get('live_execution_ready'))
+            x['sell_trade_access']=bool(sell.get('verified') and sell.get('live_execution_ready'))
+            x['executable']=bool(x.get('passed') and x['buy_trade_access'] and x['sell_trade_access'])
+        strict_pass=sum(1 for x in strict if x.get('passed'))
+        executable_count=sum(1 for x in strict if x.get('executable')); top=[]
+        for x in rows[:30]:
+            top.append({k:x.get(k) for k in ('base','quote','buy_venue','sell_venue','quote_in','net_pct','net_profit','buy_ask','sell_bid','signature')})
+        sample={'ts':time.time(),'amount':amount,'venues_ok':venues_ok,'venues_total':len(DISCOVERY_CONNECTOR_CLASSES),'compared_pairs':compared_pairs,
+                'directions':len(rows),'discovery_gt_1pct':len([x for x in rows if x['net_pct']>=1.0]),'strict_pass_count':strict_pass,
+                'executable_count':executable_count,'best_net_pct':top[0]['net_pct'] if top else None}
+        self.history.append(sample); self.history=self.history[-60:]; self._save()
+        return {'ok':True,'environment':'DEMO_DISCOVERY','real_orders':False,'real_money':False,'amount':amount,'threshold_pct':1.0,
+                'safety_buffer_pct':float(depth_guard.safety_buffer_pct),'venues_total':len(DISCOVERY_CONNECTOR_CLASSES),'venues_ok':venues_ok,
+                'venue_health':health,'compared_pairs':compared_pairs,'directions_checked':len(rows),
+                'discovery_gt_1pct':len([x for x in rows if x['net_pct']>=1.0]),'strict_pass_count':strict_pass,
+                'executable_count':executable_count,'top_market':top,'audits':strict,
+                'duration_ms':round((time.perf_counter()-started)*1000,1),'history':self.history[-30:]}
+
+wide_hunt_audit=WideHuntAudit()

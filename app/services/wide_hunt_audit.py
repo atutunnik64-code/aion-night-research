@@ -1,0 +1,237 @@
+from __future__ import annotations
+from app.http_shared import SHARED_SSL_CONTEXT
+import asyncio,json,time,httpx
+from pathlib import Path
+from app.connectors.cex_public import DISCOVERY_CONNECTOR_CLASSES, CORE_ASSETS, START_ASSETS
+from app.services.coinw_bitget_audit import CoinWBitgetAudit
+from app.services.depth_guard import depth_guard
+from app.services.hot_book_cache import hot_book_cache
+from app.services.private_trading import readiness
+from app.services.inventory_manager import inventory_manager
+from app.services.inventory_guard import inventory_guard
+from app.services.synthetic_inventory import synthetic_inventory
+
+class WideHuntAudit:
+    def __init__(self):
+        self.last=None; self.history=[]; self.running=False
+        self.auto_enabled=False; self.auto_interval=30.0; self.auto_amount=25.0; self.auto_task=None
+        self.scan_count=0; self.last_started_at=None; self.last_completed_at=None; self.next_run_at=None; self.last_error=None
+        self.history_path=Path(__file__).parents[2]/'data'/'wide_hunt_history.json'
+        try:self.history=json.loads(self.history_path.read_text(encoding='utf-8'))[-60:]
+        except Exception:self.history=[]
+        self.scan_count=max([int(x.get('scan_id') or 0) for x in self.history] or [len(self.history)])
+    def auto_status(self):
+        return {'enabled':self.auto_enabled,'interval_seconds':self.auto_interval,'amount':self.auto_amount,'running':self.running,
+                'scan_count':self.scan_count,'last_started_at':self.last_started_at,'last_completed_at':self.last_completed_at,
+                'next_run_at':self.next_run_at,'last_error':self.last_error}
+    def snapshot(self):
+        x=dict(self.last or {'ok':True,'ready':False,'environment':'DEMO_DISCOVERY','real_orders':False,'real_money':False})
+        x['auto']=self.auto_status(); x['history']=self.history[-30:]; return x
+    def _save(self):
+        try:self.history_path.write_text(json.dumps(self.history[-60:],ensure_ascii=False,indent=2),encoding='utf-8')
+        except Exception:pass
+    async def start_auto(self,interval=30.0,amount=25.0):
+        self.auto_interval=max(20.0,float(interval)); self.auto_amount=max(10.0,min(1000.0,float(amount))); self.auto_enabled=True
+        if self.auto_task is None or self.auto_task.done():self.auto_task=asyncio.create_task(self._auto_loop(),name='wide-hunt-auto-audit')
+        return self.auto_status()
+    async def stop_auto(self):
+        self.auto_enabled=False; task=self.auto_task; self.auto_task=None
+        if task and not task.done():
+            task.cancel()
+            try:await task
+            except BaseException:pass
+        self.next_run_at=None; return self.auto_status()
+    async def _auto_loop(self):
+        await asyncio.sleep(5.0)
+        while self.auto_enabled:
+            t0=time.monotonic()
+            try:await self.run(self.auto_amount)
+            except asyncio.CancelledError:raise
+            except Exception as exc:self.last_error=f'{type(exc).__name__}: {str(exc)[:180]}'
+            wait=max(5.0,self.auto_interval-(time.monotonic()-t0)); self.next_run_at=time.time()+wait; await asyncio.sleep(wait)
+    async def _fetch(self,cls,amount):
+        name=getattr(cls,'name',cls.__name__); t=time.perf_counter()
+        try:
+            edges=await asyncio.wait_for(cls().get_edges(amount),timeout=20.0)
+            return name,edges,{'venue':name,'ok':True,'edges':len(edges),'latency_ms':round((time.perf_counter()-t)*1000,1)}
+        except Exception as exc:
+            return name,[],{'venue':name,'ok':False,'edges':0,'latency_ms':round((time.perf_counter()-t)*1000,1),'error':type(exc).__name__+': '+str(exc)[:140]}
+    @staticmethod
+    def _market_rows(name,edges):
+        out={}
+        for e in edges:
+            m=e.meta or {}; base=m.get('base'); quote=m.get('quote'); symbol=m.get('symbol'); side=m.get('side')
+            if not base or not quote or not symbol or side not in ('buy','sell'):continue
+            key=(base,quote); row=out.setdefault(key,{'venue':name,'base':base,'quote':quote,'symbol':symbol})
+            fee=float(m.get('fee_assumption') or getattr(e,'fee_rate',0.002) or 0.002); row['fee']=fee
+            if side=='buy':
+                row['ask']=float(m.get('best_ask') or 0); row['ask_qty']=float(m.get('l1_qty') or 0); row['ask_ts_ms']=m.get('exchange_ts_ms')
+            else:
+                row['bid']=float(m.get('best_bid') or 0); row['bid_qty']=float(m.get('l1_qty') or 0); row['bid_ts_ms']=m.get('exchange_ts_ms')
+        return {k:v for k,v in out.items() if v.get('ask',0)>0 and v.get('bid',0)>0 and v.get('ask_qty',0)>0 and v.get('bid_qty',0)>0}
+    @staticmethod
+    def _ts_age_ms(value):
+        try:
+            x=float(value or 0)
+            if x<=0:return None
+            while x>1e14:x/=1000.0
+            if x<1e11:x*=1000.0
+            return max(0.0,time.time()*1000.0-x)
+        except Exception:return None
+
+    async def _poloniex_l1(self,row):
+        if 'Poloniex' not in (row.get('buy_venue'),row.get('sell_venue')): return None
+        try:
+            leg=next(x for x in (row.get('steps') or []) if x.get('venue')=='Poloniex')
+            symbol=str(leg.get('symbol') or '')
+            if not symbol:return None
+            async with httpx.AsyncClient(verify=SHARED_SSL_CONTEXT, timeout=8.0,follow_redirects=True) as client:
+                r=await client.get(f'https://api.poloniex.com/markets/{symbol}/orderBook',params={'limit':1}); r.raise_for_status(); d=r.json()
+            bids=d.get('bids') or []; asks=d.get('asks') or []
+            if len(bids)<2 or len(asks)<2:return None
+            return {'venue':'Poloniex','base':row['base'],'quote':row['quote'],'symbol':symbol,
+                    'bid':float(bids[0]),'bid_qty':float(bids[1]),'ask':float(asks[0]),'ask_qty':float(asks[1]),
+                    'bid_ts_ms':d.get('ts') or d.get('time'),'ask_ts_ms':d.get('ts') or d.get('time'),'fee':0.002}
+        except Exception:return None
+
+    def _rest_l1_strict(self,row,second_map,amount):
+        bk=(row['buy_venue'],row['base'],row['quote']); sk=(row['sell_venue'],row['base'],row['quote'])
+        buy=second_map.get(bk); sell=second_map.get(sk)
+        if not buy or not sell:return {'passed':False,'reason':'REST_RECHECK_MISSING','strict_mode':'REST_L1_DOUBLE_SNAPSHOT'}
+        z=CoinWBitgetAudit._row(row['base'],row['quote'],row['buy_venue'],row['sell_venue'],buy['symbol'],sell['symbol'],buy['ask'],buy['ask_qty'],sell['bid'],sell['bid_qty'],buy['fee'],sell['fee'],amount)
+        if not z:return {'passed':False,'reason':'REST_RECHECK_CAPACITY','strict_mode':'REST_L1_DOUBLE_SNAPSHOT'}
+        second_net=round(float(z['net_pct'])-float(depth_guard.safety_buffer_pct),6)
+        ages=[self._ts_age_ms(buy.get('ask_ts_ms')),self._ts_age_ms(sell.get('bid_ts_ms'))]
+        known=[x for x in ages if x is not None]
+        stale=bool(known and max(known)>5000.0)
+        passed=bool(float(row.get('net_pct') or -999)>=0.20 and second_net>=0.20 and not stale)
+        reason='REST_L1_STRICT_PASS' if passed else ('REST_SOURCE_STALE' if stale else 'REST_RECHECK_BELOW_1PCT')
+        return {'passed':passed,'reason':reason,'strict_mode':'REST_L1_DOUBLE_SNAPSHOT','notional':float(z.get('quote_in') or amount),
+                'first_net_pct':float(row.get('net_pct') or -999),'second_net_pct':second_net,
+                'profit_estimate':round(float(z.get('quote_in') or amount)*second_net/100.0,8),'book_source':'PUBLIC_REST_L1',
+                'book_ages':[round(x,1) if x is not None else None for x in ages],'refresh_observed':True,'rules_ok':None}
+
+    async def run(self,amount=25.0):
+        if self.running:
+            x=self.snapshot(); x['busy']=True; return x
+        self.running=True; self.last_started_at=time.time(); self.next_run_at=None; self.last_error=None
+        try:
+            result=await self._run_once(amount); self.scan_count+=1; self.last_completed_at=time.time(); result['scan_id']=self.scan_count
+            if self.history:self.history[-1]['scan_id']=self.scan_count; self._save()
+            result['auto']=self.auto_status(); result['history']=self.history[-30:]
+            try: result['inventory_manager']=inventory_manager.observe(result)
+            except Exception as exc: result['inventory_manager_error']=str(exc)[:180]
+            try: result['synthetic_inventory']=synthetic_inventory.ingest(result)
+            except Exception as exc: result['synthetic_inventory_error']=str(exc)[:180]
+            self.last=result; return result
+        except Exception as exc:
+            self.last_error=f'{type(exc).__name__}: {str(exc)[:180]}'; raise
+        finally:self.running=False
+    async def _run_once(self,amount=25.0):
+        amount=max(10.0,min(1000.0,float(amount))); started=time.perf_counter()
+        fetch_sem=asyncio.Semaphore(3)
+        async def guarded_fetch(cls):
+            async with fetch_sem:
+                return await self._fetch(cls,amount)
+        fetched=await asyncio.gather(*[guarded_fetch(cls) for cls in DISCOVERY_CONNECTOR_CLASSES])
+        health=[x[2] for x in fetched]; books={}; venues_ok=0
+        for name,edges,h in fetched:
+            if h.get('ok') and edges:venues_ok+=1
+            for pair,row in self._market_rows(name,edges).items():books.setdefault(pair,[]).append(row)
+        rows=[]; compared_pairs=0
+        for (base,quote),items in books.items():
+            if base not in CORE_ASSETS or quote not in START_ASSETS or len(items)<2:continue
+            compared_pairs+=1
+            for buy in items:
+                for sell in items:
+                    if buy['venue']==sell['venue']:continue
+                    r=CoinWBitgetAudit._row(base,quote,buy['venue'],sell['venue'],buy['symbol'],sell['symbol'],buy['ask'],buy['ask_qty'],sell['bid'],sell['bid_qty'],buy['fee'],sell['fee'],amount)
+                    if not r:continue
+                    r['raw_net_pct']=r['net_pct']; r['net_pct']=round(r['net_pct']-float(depth_guard.safety_buffer_pct),6)
+                    r['net_profit']=round(r['quote_in']*r['net_pct']/100.0,8); rows.append(r)
+        rows.sort(key=lambda x:(x['net_pct'],x['net_profit']),reverse=True)
+        eligible=[x for x in rows if x['net_pct']>=0.20][:20]; strict=[]; supported=set(hot_book_cache.SUPPORTED)
+        helper=CoinWBitgetAudit(); class_map={getattr(cls,'name',cls.__name__):cls for cls in DISCOVERY_CONNECTOR_CLASSES}
+        rest_rows=[x for x in eligible[:10] if not (x['buy_venue'] in supported and x['sell_venue'] in supported)]
+        rest_venues=sorted({v for x in rest_rows for v in (x['buy_venue'],x['sell_venue'])})
+        second_map={}
+        if rest_venues:
+            await asyncio.sleep(.30)
+            recheck_sem=asyncio.Semaphore(4)
+            async def refetch_one(v):
+                async with recheck_sem:
+                    return await self._fetch(class_map[v],amount)
+            refetched=await asyncio.gather(*[refetch_one(v) for v in rest_venues if v in class_map])
+            for name,edges,_ in refetched:
+                for (base,quote),m in self._market_rows(name,edges).items():second_map[(name,base,quote)]=m
+            pol_rows=[x for x in rest_rows if 'Poloniex' in (x.get('buy_venue'),x.get('sell_venue'))]
+            if pol_rows:
+                fresh=await asyncio.gather(*[self._poloniex_l1(x) for x in pol_rows])
+                for m in fresh:
+                    if m:second_map[('Poloniex',m['base'],m['quote'])]=m
+        for row in eligible[:10]:
+            can_ws=row['buy_venue'] in supported and row['sell_venue'] in supported
+            if can_ws:
+                try:a=await asyncio.wait_for(helper._strict(row,amount),timeout=4.0); a['strict_mode']='WS_DEPTH'
+                except Exception as exc:a={'passed':False,'reason':type(exc).__name__+': '+str(exc)[:120],'strict_mode':'WS_DEPTH'}
+            else:a=self._rest_l1_strict(row,second_map,amount)
+            strict.append({'base':row['base'],'quote':row['quote'],'buy_venue':row['buy_venue'],'sell_venue':row['sell_venue'],
+                           'market_net_pct':row['net_pct'],'market_profit':row['net_profit'],'signature':row['signature'],
+                           'quote_in':row.get('quote_in'),'base_bought':row.get('base_bought'),'buy_ask':row.get('buy_ask'),'sell_bid':row.get('sell_bid'),
+                           'buy_fee_pct':row.get('buy_fee_pct'),'sell_fee_pct':row.get('sell_fee_pct'),**a})
+        creds=readiness()
+        connected_names={name for name,v in creds.items() if v.get('ready')}
+        connected_rows=[x for x in rows if x.get('buy_venue') in connected_names and x.get('sell_venue') in connected_names]
+        trade_access={name:{'ready':bool(v.get('ready')),'verified':bool(v.get('verified')),'fill_verification':bool(v.get('fill_verification')),'live_execution_ready':bool(v.get('live_execution_ready',True))} for name,v in creds.items() if v.get('ready')}
+        now_bal=time.time()
+        def fresh_balance(venue,asset):
+            key=f'{venue}:{str(asset or "").upper()}'
+            ts=float(inventory_guard.current_updated_at.get(key) or 0)
+            return float(inventory_guard.current.get(key) or 0) if ts and now_bal-ts<=180 else 0.0
+        for x in strict:
+            buy=creds.get(x['buy_venue'],{}) or {}; sell=creds.get(x['sell_venue'],{}) or {}
+            x['buy_trade_access']=bool(buy.get('verified') and buy.get('live_execution_ready'))
+            x['sell_trade_access']=bool(sell.get('verified') and sell.get('live_execution_ready'))
+            x['trade_ready_market']=bool(x.get('passed') and x['buy_trade_access'] and x['sell_trade_access'])
+            need_quote=float(x.get('quote_in') or x.get('notional') or amount)*1.002
+            need_base=float(x.get('base_bought') or 0)*1.002
+            buy_free=fresh_balance(x['buy_venue'],x['quote']); sell_free=fresh_balance(x['sell_venue'],x['base'])
+            x['inventory_ready']=bool(need_base>0 and buy_free>=need_quote and sell_free>=need_base)
+            x['inventory']={'buy_free':buy_free,'buy_need':need_quote,'sell_free':sell_free,'sell_need':need_base}
+            x['executable']=bool(x['trade_ready_market'] and x['inventory_ready'])
+        strict_pass=sum(1 for x in strict if x.get('passed'))
+        strict_ws_pass=sum(1 for x in strict if x.get('passed') and x.get('strict_mode')=='WS_DEPTH')
+        strict_rest_pass=sum(1 for x in strict if x.get('passed') and x.get('strict_mode')=='REST_L1_DOUBLE_SNAPSHOT')
+        executable_count=sum(1 for x in strict if x.get('executable')); top=[]
+        for x in rows[:30]:
+            top.append({k:x.get(k) for k in ('base','quote','buy_venue','sell_venue','quote_in','base_bought','net_pct','net_profit','buy_ask','sell_bid','buy_fee_pct','sell_fee_pct','signature')})
+        htx_top=[x for x in top if 'HTX' in (x.get('buy_venue'),x.get('sell_venue'))]
+        non_htx_top=[x for x in top if 'HTX' not in (x.get('buy_venue'),x.get('sell_venue'))]
+        htx_strict=[x for x in strict if 'HTX' in (x.get('buy_venue'),x.get('sell_venue'))]
+        venue_top_counts={}
+        for x in top:
+            for v in {x.get('buy_venue'),x.get('sell_venue')}:
+                if v: venue_top_counts[v]=venue_top_counts.get(v,0)+1
+        sample={'ts':time.time(),'amount':amount,'venues_ok':venues_ok,'venues_total':len(DISCOVERY_CONNECTOR_CLASSES),'compared_pairs':compared_pairs,
+                'directions':len(rows),'discovery_gt_1pct':len([x for x in rows if x['net_pct']>=0.20]),'strict_pass_count':strict_pass,
+                'strict_ws_pass_count':strict_ws_pass,'strict_rest_pass_count':strict_rest_pass,
+                'executable_count':executable_count,'best_net_pct':top[0]['net_pct'] if top else None,
+                'htx_top_count':len(htx_top),'htx_top_share_pct':round(100*len(htx_top)/max(1,len(top)),2),
+                'htx_strict_pass_count':sum(1 for x in htx_strict if x.get('passed')),
+                'htx_trade_ready_count':sum(1 for x in htx_strict if x.get('trade_ready_market')),
+                'best_htx_net_pct':max([float(x.get('net_pct') or -999) for x in htx_top] or [-999]),
+                'best_non_htx_net_pct':max([float(x.get('net_pct') or -999) for x in non_htx_top] or [-999]),
+                'venue_top_counts':dict(sorted(venue_top_counts.items(),key=lambda kv:kv[1],reverse=True))}
+        self.history.append(sample); self.history=self.history[-60:]; self._save()
+        return {'ok':True,'environment':'DEMO_DISCOVERY','real_orders':False,'real_money':False,'amount':amount,'threshold_pct':0.20,
+                'safety_buffer_pct':float(depth_guard.safety_buffer_pct),'venues_total':len(DISCOVERY_CONNECTOR_CLASSES),'venues_ok':venues_ok,
+                'venue_health':health,'compared_pairs':compared_pairs,'directions_checked':len(rows),
+                'discovery_gt_1pct':len([x for x in rows if x['net_pct']>=0.20]),'strict_pass_count':strict_pass,
+                'strict_ws_pass_count':strict_ws_pass,'strict_rest_pass_count':strict_rest_pass,
+                'executable_count':executable_count,'top_market':top,'audits':strict,
+                'trade_access':trade_access,'connected_venues':sorted(connected_names),
+                'connected_directions':len(connected_rows),
+                'connected_top_market':[{k:x.get(k) for k in ('base','quote','buy_venue','sell_venue','quote_in','base_bought','net_pct','net_profit','buy_ask','sell_bid','buy_fee_pct','sell_fee_pct','signature')} for x in connected_rows[:50]],
+                'duration_ms':round((time.perf_counter()-started)*1000,1),'history':self.history[-30:]}
+
+wide_hunt_audit=WideHuntAudit()

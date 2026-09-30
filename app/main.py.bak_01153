@@ -1,0 +1,417 @@
+import asyncio
+from pathlib import Path
+import os, faulthandler
+if os.getenv('AION_TRACE_HANG')=='1':
+    _trace_path=Path(__file__).parents[1]/'data'/'hang_trace.log'
+    _trace_file=open(_trace_path,'a',encoding='utf-8',buffering=1)
+    faulthandler.dump_traceback_later(3,repeat=True,file=_trace_file)
+from typing import Literal
+from fastapi import FastAPI, Query, Body
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+from app.services.radar import radar
+from app.services.coinex_bbo import coinex_bbo
+from app.services.opportunity_memory import memory
+from app.services.automation import AutomationController
+from app.services.paper_engine import paper_engine
+from app.services.capital_manager import capital_manager
+from app.services.execution_engine import execution_engine
+from app.services.risk_manager import risk_manager
+from app.services.live_executor import live_executor
+from app.services.private_trading import reload_live_credentials, verify_live_credentials
+from app.services.autopilot import autopilot
+from app.services.inventory_guard import inventory_guard
+from app.services.demo_executor import demo_executor
+from app.services.demo_trading import bybit_apply_demo_funds, reload_demo_credentials, verify_demo_credentials
+from app.services.demo_wallet import demo_wallet
+from app.services.trading_mode import trading_mode
+from app.services.depth_guard import depth_guard
+from app.services.hot_book_cache import hot_book_cache
+from app.services.hot_signal_engine import hot_signal_engine
+from app.services.order_rules import order_rules_registry
+from app.services.coinw_bitget_audit import coinw_bitget_audit
+from app.services.wide_hunt_audit import wide_hunt_audit
+from app.services.inventory_manager import inventory_manager
+from app.services.synthetic_inventory import synthetic_inventory
+from app.services.basis_funding import basis_funding_scanner
+from app.services.triangle_scanner import triangle_scanner
+from app.services.stablecoin_scanner import stablecoin_scanner
+from app.services.strategy_portfolio import strategy_portfolio
+from app.services.rebalance_netting import rebalance_netting
+from app.services.raven_engine import raven_engine
+from app.services.raven_universal_shadow import raven_universal_shadow
+from app.services.raven_turbo_shadow import raven_turbo_shadow
+from app.services.raven_capital_allocator import raven_capital_allocator
+from app.services.arbitrage_paper_tracker import arbitrage_paper_tracker
+from app.services.basis_funding_paper import basis_funding_paper
+from app.services.reverse_close_hunter import reverse_close_hunter
+from app.services.global_capital_manager import global_capital_manager
+from app.services.perp_funding_spread import perp_funding_spread_scanner
+from app.services.perp_funding_spread_paper import perp_funding_spread_paper
+
+app = FastAPI(title='AION Crypto Radar', version='0.11.52')
+STATIC = Path(__file__).parent / 'static'
+automation = AutomationController(radar)
+app.mount('/static', StaticFiles(directory=STATIC), name='static')
+
+@app.get('/')
+async def index():
+    return FileResponse(
+        STATIC / 'index.html',
+        headers={
+            'Cache-Control':'no-store, no-cache, must-revalidate, max-age=0',
+            'Pragma':'no-cache',
+            'Expires':'0',
+        },
+    )
+
+@app.get('/api/health')
+async def health():
+    tm=trading_mode.status()
+    return {'ok': True, 'name':'AION Crypto Radar', 'version':'0.11.52',
+            'mode':tm['effective_mode'], 'requested_mode':tm['mode'], 'sources':['live','demo']}
+
+@app.get('/api/scan')
+async def scan(amount: float = Query(10000.0, gt=0, le=1_000_000), source: Literal['live','demo'] = 'live'):
+    return await radar.scan(amount, source)
+
+@app.get('/api/hot')
+async def hot():
+    if automation.enabled and automation.latest_hot:
+        return {**automation.latest_hot,'served_from_auto':True}
+    return await radar.hot_scan()
+
+@app.get('/api/pilot/coinw-bitget')
+async def coinw_bitget_pilot(amount: float = Query(25.0, ge=10, le=1000)):
+    return await coinw_bitget_audit.run(amount)
+
+@app.get('/api/pilot/coinw-bitget/last')
+async def coinw_bitget_pilot_last():
+    return coinw_bitget_audit.snapshot()
+
+@app.get('/api/pilot/wide')
+async def wide_hunt_pilot(amount: float = Query(25.0, ge=10, le=1000)):
+    return await wide_hunt_audit.run(amount)
+
+@app.get('/api/pilot/wide/last')
+async def wide_hunt_pilot_last():
+    return wide_hunt_audit.snapshot()
+
+@app.get('/api/strategy/stablecoin')
+async def stablecoin_status():
+    return stablecoin_scanner.status()
+
+@app.get('/api/strategy/netting')
+async def netting_status():
+    broad=automation.latest_broad or {}
+    rows=list(broad.get('full_loop_opportunities') or [])+list(broad.get('series_ready_opportunities') or [])
+    return rebalance_netting.plan(rows)
+
+def _strategy_portfolio_snapshot():
+    broad=automation.latest_broad or {}
+    tradeable=list(broad.get('full_loop_opportunities') or [])+list(broad.get('series_ready_opportunities') or [])
+    live_status=live_executor.status()
+    quarantined=set(live_status.get('live_quarantined_venues') or [])
+    live_venues=[v for v in (live_status.get('verified_ready') or []) if v not in quarantined]
+    return strategy_portfolio.snapshot(
+        classic=tradeable,
+        basis=basis_funding_scanner.status().get('opportunities') or [],
+        triangles=triangle_scanner.status().get('opportunities') or [],
+        stable=stablecoin_scanner.status().get('opportunities') or [],
+        live_venues=live_venues,
+    )
+
+@app.get('/api/strategy/portfolio')
+async def strategy_portfolio_status():
+    return _strategy_portfolio_snapshot()
+
+@app.get('/api/global-capital')
+async def global_capital_status():
+    return await global_capital_manager.refresh(_strategy_portfolio_snapshot())
+
+@app.post('/api/global-capital/refresh')
+async def global_capital_refresh():
+    return await global_capital_manager.refresh(_strategy_portfolio_snapshot())
+
+@app.get('/api/raven')
+async def raven_status():
+    return raven_engine.status()
+
+@app.post('/api/raven/refresh')
+async def raven_refresh():
+    return await raven_engine.refresh()
+
+@app.post('/api/raven/reset-paper')
+async def raven_reset_paper():
+    return raven_engine.reset_paper()
+
+@app.get('/api/raven-universal')
+async def raven_universal_status():
+    return raven_universal_shadow.status()
+
+@app.post('/api/raven-universal/refresh')
+async def raven_universal_refresh():
+    return await raven_universal_shadow.refresh()
+
+@app.get('/api/raven-turbo')
+async def raven_turbo_status():
+    return raven_turbo_shadow.status()
+
+@app.post('/api/raven-turbo/refresh')
+async def raven_turbo_refresh():
+    return await raven_turbo_shadow.refresh()
+
+@app.post('/api/raven-turbo/reset-paper')
+async def raven_turbo_reset_paper():
+    return raven_turbo_shadow.reset_paper()
+
+@app.get('/api/raven-allocator')
+async def raven_allocator_status():
+    return raven_capital_allocator.status()
+
+@app.post('/api/raven-allocator/refresh')
+async def raven_allocator_refresh():
+    return await raven_capital_allocator.refresh()
+
+@app.get('/api/paper/arbitrage')
+async def arbitrage_paper_status():
+    return arbitrage_paper_tracker.refresh()
+
+@app.get('/api/paper/basis-funding')
+async def basis_funding_paper_status():
+    return basis_funding_paper.status()
+
+@app.get('/api/paper/reverse-close')
+async def reverse_close_status():
+    reverse_close_hunter.start_id=int(arbitrage_paper_tracker.state.get('start_id') or 0)
+    return await reverse_close_hunter.refresh()
+
+@app.get('/api/perp-funding-spread')
+async def perp_funding_spread_status():
+    return perp_funding_spread_scanner.status()
+
+@app.post('/api/perp-funding-spread/refresh')
+async def perp_funding_spread_refresh():
+    return await perp_funding_spread_scanner.refresh()
+
+@app.get('/api/paper/perp-funding-spread')
+async def perp_funding_spread_paper_status():
+    return perp_funding_spread_paper.status()
+
+@app.get('/api/coinex-status')
+async def coinex_status():
+    return coinex_bbo.status()
+
+@app.get('/api/latency')
+async def latency(amount: float = Query(10000.0, gt=0, le=1_000_000)):
+    if automation.enabled and automation.latest_latency and abs(float(automation.amount)-float(amount))<1e-9:
+        return {**automation.latest_latency,'served_from_auto':True}
+    return await radar.latency_scan(amount)
+
+@app.get('/api/quality')
+async def quality(limit: int = Query(50, ge=1, le=200)):
+    return {'routes': memory.leaderboard(limit=limit), 'count': len(memory.leaderboard(limit=limit))}
+
+@app.get('/api/long-windows')
+async def long_windows(min_seconds: int = Query(300, ge=30, le=86400), limit: int = Query(50, ge=1, le=200)):
+    rows=memory.long_windows(min_seconds=min_seconds, limit=limit)
+    return {'min_seconds':min_seconds,'routes':rows,'count':len(rows)}
+
+@app.on_event('startup')
+async def start_automation():
+    reload_live_credentials()
+    asyncio.create_task(verify_live_credentials(),name='live-credential-readonly-verify')
+    await depth_guard.start()
+    await automation.start()
+    await coinw_bitget_audit.start_auto(interval=30.0,amount=25.0)
+    await wide_hunt_audit.start_auto(interval=30.0,amount=25.0)
+    await inventory_manager.start()
+    await basis_funding_scanner.start()
+    await basis_funding_paper.start()
+    await perp_funding_spread_scanner.start()
+    await perp_funding_spread_paper.start()
+    await triangle_scanner.start()
+    await stablecoin_scanner.start()
+    await raven_engine.start()
+    await raven_universal_shadow.start()
+    await raven_turbo_shadow.start()
+    await raven_capital_allocator.start()
+    await global_capital_manager.start(_strategy_portfolio_snapshot)
+
+@app.on_event('shutdown')
+async def stop_hot_books():
+    await coinw_bitget_audit.stop_auto()
+    await wide_hunt_audit.stop_auto()
+    await inventory_manager.stop()
+    await perp_funding_spread_paper.stop()
+    await perp_funding_spread_scanner.stop()
+    await basis_funding_paper.stop()
+    await basis_funding_scanner.stop()
+    await triangle_scanner.stop()
+    await stablecoin_scanner.stop()
+    await raven_engine.stop()
+    await raven_capital_allocator.stop()
+    await global_capital_manager.stop()
+    await raven_universal_shadow.stop()
+    await raven_turbo_shadow.stop()
+    await depth_guard.stop()
+    radar.close_cpu_pool()
+
+@app.get('/api/hot-books')
+async def hot_books_status():
+    return depth_guard.status()
+
+@app.get('/api/ws-signals')
+async def ws_signals_status():
+    return hot_signal_engine.status()
+
+@app.get('/api/order-rules/status')
+async def order_rules_status():
+    return order_rules_registry.status()
+
+@app.get('/api/automation')
+async def automation_status():
+    return automation.status()
+
+@app.get('/api/paper-trades')
+async def paper_trades(limit: int = Query(50, ge=1, le=200)):
+    return paper_engine.summary(limit)
+
+@app.get('/api/capital')
+async def capital_status():
+    return capital_manager.status()
+
+@app.post('/api/capital')
+async def capital_update(payload: dict = Body(...)):
+    return capital_manager.update(payload)
+
+@app.get('/api/auto-snapshot')
+async def auto_snapshot():
+    return automation.snapshot()
+
+@app.get('/api/execution')
+async def execution_status(limit: int = Query(50, ge=1, le=200)):
+    return execution_engine.summary(limit)
+
+@app.get('/api/execution/decisions')
+async def execution_decisions(limit: int = Query(100, ge=1, le=500), hours: float = Query(24.0, ge=1, le=720)):
+    return execution_engine.decision_summary(limit,hours)
+
+@app.post('/api/execution/config')
+async def execution_config(payload: dict = Body(...)):
+    if 'enabled' in payload: execution_engine.enabled=bool(payload['enabled'])
+    if 'max_notional' in payload:
+        execution_engine.max_notional=max(10.0,min(100000.0,float(payload['max_notional'])))
+        risk_manager.max_notional=execution_engine.max_notional
+    if 'min_score' in payload: risk_manager.min_score=max(0.0,min(100.0,float(payload['min_score'])))
+    if 'min_net_pct' in payload: risk_manager.min_net_pct=max(0.0,float(payload['min_net_pct']))
+    if 'max_daily_loss' in payload: risk_manager.max_daily_loss=max(1.0,float(payload['max_daily_loss']))
+    return execution_engine.summary(25)
+
+@app.get('/api/live/status')
+async def live_status():
+    return live_executor.status()
+
+@app.post('/api/live/reload-keys')
+async def live_reload_keys():
+    return {'ok':True,'credentials':reload_live_credentials(),'live':live_executor.status()}
+
+@app.get('/api/live/verify')
+async def live_verify():
+    return {'ok':True,'venues':await verify_live_credentials(),'live':live_executor.status()}
+
+@app.post('/api/live/kill-reset')
+async def live_kill_reset():
+    return live_executor.reset_kill_switch()
+
+@app.get('/api/autopilot')
+async def autopilot_status():
+    return autopilot.status()
+
+@app.post('/api/autopilot')
+async def autopilot_update(payload: dict = Body(...)):
+    return autopilot.update(payload)
+
+@app.get('/api/inventory')
+async def inventory_status():
+    return inventory_guard.status()
+
+@app.post('/api/inventory/reset-targets')
+async def inventory_reset_targets():
+    return inventory_guard.reset_targets()
+
+@app.get('/api/inventory-manager')
+async def inventory_manager_status():
+    return inventory_manager.status()
+
+@app.post('/api/inventory-manager')
+async def inventory_manager_update(payload: dict = Body(...)):
+    return inventory_manager.update(payload)
+
+@app.post('/api/inventory-manager/refresh')
+async def inventory_manager_refresh():
+    return {'ok':True,'refresh':await inventory_manager.refresh_balances(),'manager':inventory_manager.status()}
+
+@app.get('/api/synthetic-inventory')
+async def synthetic_inventory_status():
+    return synthetic_inventory.status()
+
+@app.post('/api/synthetic-inventory/refresh')
+async def synthetic_inventory_refresh():
+    return await synthetic_inventory.refresh()
+
+@app.get('/api/basis-funding')
+async def basis_funding_status():
+    return basis_funding_scanner.status()
+
+@app.post('/api/basis-funding/refresh')
+async def basis_funding_refresh():
+    return await basis_funding_scanner.refresh()
+
+@app.get('/api/triangles')
+async def triangle_status():
+    return triangle_scanner.status()
+
+@app.post('/api/triangles/refresh')
+async def triangle_refresh():
+    return await triangle_scanner.refresh()
+
+@app.post('/api/live/file-gate')
+async def live_file_gate(payload: dict = Body(...)):
+    return live_executor.set_file_gate(bool(payload.get('enabled')),str(payload.get('confirmation') or ''))
+
+
+@app.get('/api/trading-mode')
+async def trading_mode_status():
+    return trading_mode.status()
+
+@app.post('/api/trading-mode')
+async def trading_mode_update(payload: dict = Body(...)):
+    return trading_mode.set(str(payload.get('mode') or ''),str(payload.get('confirmation') or ''))
+
+@app.get('/api/demo/status')
+async def demo_status():
+    return demo_executor.status()
+
+@app.post('/api/demo/kill-reset')
+async def demo_kill_reset():
+    return demo_executor.reset_kill_switch()
+
+@app.post('/api/demo/bybit-funds')
+async def demo_bybit_funds(payload: dict = Body(...)):
+    return await bybit_apply_demo_funds(payload.get('funds') or payload)
+
+@app.post('/api/demo/wallet-reset')
+async def demo_wallet_reset():
+    return demo_wallet.reset()
+
+@app.post('/api/demo/reload-keys')
+async def demo_reload_keys():
+    return {'ok':True,'credentials':reload_demo_credentials(),'demo':demo_executor.status()}
+
+@app.get('/api/demo/verify')
+async def demo_verify():
+    return {'ok':True,'venues':await verify_demo_credentials(),'demo':demo_executor.status()}
+
+
+

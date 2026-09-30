@@ -1,0 +1,199 @@
+from __future__ import annotations
+import asyncio,json,time
+from pathlib import Path
+from app.services.raven_turbo_shadow import COST,FUND
+from app.services.raven_v47_shadow import raven_v47_shadow,COSTSQ
+from app.services.raven_v70_regime_shadow import raven_v70_regime_shadow
+from app.services.raven_v94_bybit_short_sizing_shadow import raven_v94_bybit_short_sizing_shadow
+from app.services.raven_v102_sparse_cash_filler_shadow import raven_v102_sparse_cash_filler_shadow
+
+ROOT=Path(__file__).parents[2]
+STATE=ROOT/'data'/'raven_v103_regime_composite_shadow.json'
+
+class RavenV103RegimeCompositeShadow:
+    def __init__(self):
+        self.enabled=True;self.interval=300.0;self.task=None
+        self.last_error=None;self.last_refresh=None;self.latest={}
+        self.refresh_lock=asyncio.Lock();self.state=self._load()
+    @staticmethod
+    def _blank():
+        return {'equity':100.0,'benchmark_equity':100.0,'peak':100.0,'max_dd_pct':0.0,
+                'primary_weights':{},'filler_weights':{},'benchmark_weights':{},
+                'last_prices':{},'last_bar_ts':None,'costs':0.0,'benchmark_costs':0.0,
+                'funding':0.0,'benchmark_funding':0.0,'observation_count':0,
+                'short_bars':0,'filler_bars':0,'history':[],'started_at':time.time(),
+                'overlay_mode':'none','overlay_start_bar':None,'overlay_start_equity':None,
+                'overlay_start_benchmark':None,'overlay_episodes':[]}
+    def _load(self):
+        x=self._blank()
+        try:x.update(json.loads(STATE.read_text(encoding='utf-8')))
+        except Exception:pass
+        return x
+    def _save(self):
+        STATE.parent.mkdir(parents=True,exist_ok=True)
+        STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+    @staticmethod
+    def _turn(old,new):
+        keys=set(old)|set(new)
+        return sum(abs(float(new.get(k,0))-float(old.get(k,0))) for k in keys)
+    @staticmethod
+    def _leg_return(weights,old_px,new_px,fund_all):
+        r=0.0
+        for s,w in weights.items():
+            a=float(old_px.get(s) or 0);b=float(new_px.get(s) or 0)
+            if a>0 and b>0:r+=float(w)*(b/a-1.0)
+        if fund_all:gross=sum(abs(float(w)) for w in weights.values())
+        else:gross=sum(abs(float(w)) for w in weights.values() if float(w)<0)
+        return r-gross*FUND,gross*FUND
+    @staticmethod
+    def _select_targets(v70_target,v94_target,v102_filler):
+        base={k:float(v) for k,v in (v70_target or {}).items()}
+        is_short=sum(base.values())<-1e-12
+        is_cash=not any(abs(float(v))>1e-12 for v in base.values())
+        if is_short:
+            primary={k:float(v) for k,v in (v94_target or {}).items()};filler={}
+        elif is_cash:
+            primary={};filler={k:float(v) for k,v in (v102_filler or {}).items()}
+        else:
+            primary=base;filler={}
+        return primary,filler,is_short,is_cash
+    def _mark_new_bar(self,prices):
+        old_px=self.state.get('last_prices') or {}
+        if not old_px:return
+        p=self.state.get('primary_weights') or {};f=self.state.get('filler_weights') or {}
+        b=self.state.get('benchmark_weights') or {}
+        rp,fp=self._leg_return(p,old_px,prices,True)
+        rf,ff=self._leg_return(f,old_px,prices,False)
+        rb,fb=self._leg_return(b,old_px,prices,True)
+        eq=float(self.state.get('equity') or 100.0)*max(.01,1+rp+rf)
+        be=float(self.state.get('benchmark_equity') or 100.0)*max(.01,1+rb)
+        self.state['equity']=eq;self.state['benchmark_equity']=be
+        self.state['funding']=float(self.state.get('funding') or 0)+fp+ff
+        self.state['benchmark_funding']=float(self.state.get('benchmark_funding') or 0)+fb
+        self.state['peak']=max(float(self.state.get('peak') or eq),eq)
+        self.state['max_dd_pct']=min(float(self.state.get('max_dd_pct') or 0.0),(eq/self.state['peak']-1)*100.0)
+    def _rebalance(self,primary,filler,benchmark,bar_ts):
+        op=self.state.get('primary_weights') or {};of=self.state.get('filler_weights') or {}
+        ob=self.state.get('benchmark_weights') or {}
+        tp=self._turn(op,primary);tf=self._turn(of,filler);tb=self._turn(ob,benchmark)
+        eq=float(self.state.get('equity') or 100.0);be=float(self.state.get('benchmark_equity') or 100.0)
+        frac=tp*COST+tf*COSTSQ;bfrac=tb*COST
+        cost=eq*frac;bcost=be*bfrac
+        self.state['equity']=eq*max(.01,1-frac);self.state['benchmark_equity']=be*max(.01,1-bfrac)
+        self.state['costs']=float(self.state.get('costs') or 0)+cost
+        self.state['benchmark_costs']=float(self.state.get('benchmark_costs') or 0)+bcost
+        self.state['primary_weights']={k:float(v) for k,v in primary.items() if abs(float(v))>1e-12}
+        self.state['filler_weights']={k:float(v) for k,v in filler.items() if abs(float(v))>1e-12}
+        self.state['benchmark_weights']={k:float(v) for k,v in benchmark.items() if abs(float(v))>1e-12}
+        self.state['last_bar_ts']=str(bar_ts)
+        return {'turn_primary':tp,'turn_filler':tf,'turn_benchmark':tb,'cost':cost,'benchmark_cost':bcost}
+
+    def _update_overlay_episode(self,new_mode,bar_ts):
+        old_mode=str(self.state.get('overlay_mode') or 'none')
+        if new_mode==old_mode:return
+        eq=float(self.state.get('equity') or 100.0);be=float(self.state.get('benchmark_equity') or 100.0)
+        if old_mode in ('short','filler'):
+            a=float(self.state.get('overlay_start_equity') or eq);b=float(self.state.get('overlay_start_benchmark') or be)
+            cr=(eq/max(a,1e-9)-1.0)*100.0;br=(be/max(b,1e-9)-1.0)*100.0
+            row={'type':old_mode,'start':self.state.get('overlay_start_bar'),'end':str(bar_ts),
+                 'candidate_pct':cr,'benchmark_pct':br,'alpha_pp':cr-br}
+            h=list(self.state.get('overlay_episodes') or []);h.append(row);self.state['overlay_episodes']=h[-200:]
+        self.state['overlay_mode']=new_mode
+        if new_mode in ('short','filler'):
+            self.state['overlay_start_bar']=str(bar_ts);self.state['overlay_start_equity']=eq
+            self.state['overlay_start_benchmark']=be
+        else:
+            self.state['overlay_start_bar']=None;self.state['overlay_start_equity']=None
+            self.state['overlay_start_benchmark']=None
+
+    async def refresh(self):
+        async with self.refresh_lock:
+            try:
+                v70=raven_v70_regime_shadow.status();v94=raven_v94_bybit_short_sizing_shadow.status()
+                v102=raven_v102_sparse_cash_filler_shadow.status()
+                x70=v70.get('latest') or {};x94=v94.get('latest') or {};x102=v102.get('latest') or {}
+                b70=str(x70.get('bar_ts') or '');b94=str(x94.get('bar_ts') or '');b102=str(x102.get('bar_ts') or '')
+                if not b70 or b70!=b94 or b70!=b102:
+                    self.latest={'strategy':'v103_regime_composite','waiting_for':'ALIGNED_COMPONENT_SNAPSHOTS',
+                                 'v70_bar':b70 or None,'v94_bar':b94 or None,'v102_bar':b102 or None}
+                    self.last_error=None;self.last_refresh=time.time();return self.status()
+                prices=dict(raven_v47_shadow.state.get('last_closes') or {})
+                if not prices:
+                    self.latest={'strategy':'v103_regime_composite','waiting_for':'SOURCE_PRICES'}
+                    self.last_error=None;self.last_refresh=time.time();return self.status()
+                base={k:float(v) for k,v in (x70.get('target_weights') or {}).items()}
+                mod={k:float(v) for k,v in (x94.get('target_weights') or {}).items()}
+                filler={k:float(v) for k,v in (x102.get('filler_target') or {}).items()}
+                primary,fill,is_short,is_cash=self._select_targets(base,mod,filler)
+                new_bar=b70!=str(self.state.get('last_bar_ts') or '');reb=None
+                if not self.state.get('last_bar_ts'):
+                    mode='short' if is_short else ('filler' if bool(fill) else 'none')
+                    self._update_overlay_episode(mode,b70)
+                    reb=self._rebalance(primary,fill,base,b70);self.state['last_prices']={k:float(v) for k,v in prices.items()}
+                elif new_bar:
+                    self._mark_new_bar(prices)
+                    mode='short' if is_short else ('filler' if bool(fill) else 'none')
+                    self._update_overlay_episode(mode,b70)
+                    reb=self._rebalance(primary,fill,base,b70)
+                    self.state['last_prices']={k:float(v) for k,v in prices.items()}
+                    self.state['observation_count']=int(self.state.get('observation_count') or 0)+1
+                    self.state['short_bars']=int(self.state.get('short_bars') or 0)+int(is_short)
+                    self.state['filler_bars']=int(self.state.get('filler_bars') or 0)+int(bool(fill))
+                    h=list(self.state.get('history') or [])
+                    h.append({'bar_ts':b70,'equity':round(float(self.state['equity']),6),
+                              'benchmark_equity':round(float(self.state['benchmark_equity']),6),
+                              'is_short':is_short,'is_cash':is_cash,'filler_active':bool(fill)})
+                    self.state['history']=h[-300:]
+                self._save();self.last_error=None;self.last_refresh=time.time()
+                eq=float(self.state.get('equity') or 100.0);be=float(self.state.get('benchmark_equity') or 100.0)
+                self.latest={'strategy':'v103_regime_composite','bar_ts':b70,'is_short':is_short,'is_cash':is_cash,
+                             'primary_target':primary,'filler_target':fill,'benchmark_target':base,
+                             'paper_equity':eq,'paper_return_pct':eq-100.0,'benchmark_equity':be,
+                             'benchmark_return_pct':be-100.0,'relative_edge_pct':eq-be,'rebalance':reb}
+            except Exception as exc:
+                self.last_error=str(exc)[:400];self.last_refresh=time.time()
+            return self.status()
+    def status(self):
+        eq=float(self.state.get('equity') or 100.0);be=float(self.state.get('benchmark_equity') or 100.0)
+        obs=int(self.state.get('observation_count') or 0)
+        eps=list(self.state.get('overlay_episodes') or [])
+        def gate(kind,required):
+            vals=[float(x.get('alpha_pp') or 0.0) for x in eps if x.get('type')==kind]
+            z=sorted(vals);n=len(z);med=(z[n//2] if n%2 else (z[n//2-1]+z[n//2])/2.0) if n else 0.0
+            pr=(sum(v>0 for v in vals)/n) if n else 0.0
+            return {'required_episodes':required,'completed_episodes':n,'positive_alpha_ratio':pr,
+                    'median_alpha_pp':med,'sum_alpha_pp':sum(vals),'ready':n>=required and pr>=0.6 and med>0}
+        short_gate=gate('short',10);filler_gate=gate('filler',8)
+        future_gate={'minimum_observations':24,'observations':obs,'short':short_gate,'filler':filler_gate,
+                     'total_relative_edge_pct':eq-be,
+                     'ready_for_review':obs>=24 and short_gate['ready'] and filler_gate['ready'] and eq>be}
+        return {'ok':self.last_error is None,'enabled':self.enabled,'mode':'PAPER_SHADOW',
+                'strategy':'v103_regime_composite','future_only':True,'promotion_eligible':False,
+                'live_enabled':False,'grid':False,'martingale':False,'dca':False,
+                'components':['v94_bybit_short_sizing','v102_sparse_cash_filler'],
+                'locked_rules':{'v94':'BTC Bybit LS percentile short sizing','v102':{'alpha':0.5,'threshold':0.23328}},
+                'equity':round(eq,6),'return_pct':round(eq-100.0,4),
+                'benchmark_equity':round(be,6),'benchmark_return_pct':round(be-100.0,4),
+                'relative_edge_pct':round(eq-be,4),'max_dd_pct':round(float(self.state.get('max_dd_pct') or 0.0),4),
+                'observation_count':obs,'short_bars':int(self.state.get('short_bars') or 0),
+                'filler_bars':int(self.state.get('filler_bars') or 0),
+                'overlay_mode':self.state.get('overlay_mode') or 'none',
+                'completed_overlay_episodes':len(eps),'future_validation_gate':future_gate,
+                'phase':'WARMUP' if obs<24 else 'FUTURE_VALIDATION',
+                'latest':self.latest,'last_refresh':self.last_refresh,'last_error':self.last_error}
+    async def start(self):
+        if self.task and not self.task.done():return
+        self.task=asyncio.create_task(self._loop(),name='raven-v103-regime-composite-shadow')
+    async def stop(self):
+        if self.task and not self.task.done():
+            self.task.cancel()
+            try:await self.task
+            except BaseException:pass
+        self.task=None;self._save()
+    async def _loop(self):
+        while True:
+            await self.refresh()
+            waiting=bool((self.latest or {}).get('waiting_for'))
+            await asyncio.sleep(5.0 if waiting else max(300.0,self.interval))
+
+raven_v103_regime_composite_shadow=RavenV103RegimeCompositeShadow()

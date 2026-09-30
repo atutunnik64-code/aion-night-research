@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AION AILab · Crypto Radar</title>
+<link rel="stylesheet" href="/static/style.css?v=20260924-strategy132">
+<script defer src="/static/app.js?v=20260924-strategy132"></script>
+</head>
+<body class="owner-simple">
+<main id="top">
+<section class="hero">
+<canvas id="network-canvas" aria-hidden="true"></canvas>
+<div class="hero-side hero-side-left"><strong>AION</strong><span></span><p>ГЛОБАЛЬНЫЕ<br>КРИПТО-РЫНКИ.<br>СВЯЗИ БЛИЖЕ<br>К ВОЗМОЖНОСТЯМ</p></div>
+<div class="hero-side hero-side-right"><p>ТЕХНОЛОГИИ<br>НА СТОРОНЕ<br>ВАШИХ<br>ВОЗМОЖНОСТЕЙ</p><span></span></div>
+<div class="hero-title"><h1>AION AILab</h1><h2>Crypto Radar / Крипто-связки</h2><p>Биржи. Ликвидность. Маршруты. В одном решении.</p></div>
+</section>
+<section class="coverage-bar" aria-label="Покрытие крипто-рынка">
+<article><strong id="status-venues">0</strong><span>площадок</span></article><i></i>
+<article><strong id="status-edges">0</strong><span>рёбер графа</span><b class="dot green"></b></article><i></i>
+<article><strong id="status-opps">0</strong><span>возможностей</span><b class="dot blue"></b></article><i></i>
+<p>КРИПТО-ИСТОЧНИКИ<br>В ОДНОЙ ЭКОСИСТЕМЕ</p>
+</section>
+<section class="feature-grid" id="market">
+<a href="#scanner" class="feature-card cyan"><span class="feature-icon">↗</span><div><h3>Рынок</h3><p>Свежие маршруты, комиссии и итоговый NET</p></div><b>→</b></a>
+<a href="#inventory-manager-panel" class="feature-card mint"><span class="feature-icon">INV</span><div><h3>Inventory Manager</h3><p>HOT inventory / dynamic targets</p></div><b>-&gt;</b></a>
+<a href="#scanner" class="feature-card pink"><span class="feature-icon">⌕</span><div><h3>Поиск</h3><p>Поиск циклов после fees, slippage и transfer cost</p></div><b>→</b></a>
+<a href="#windows" class="feature-card lime"><span class="feature-icon">◎</span><div><h3>Охотник за окнами</h3><p>Жизнь связки, подтверждения и устойчивость</p></div><b>→</b></a>
+<a href="#latency-panel" class="feature-card cyan"><span class="feature-icon">⚡</span><div><h3>Latency Arb</h3><p>Быстрые и запаздывающие котировки CEX</p></div><b>→</b></a>
+<a href="#diagnostics" class="feature-card violet"><span class="feature-icon">▥</span><div><h3>Диагностика</h3><p>Коннекторы, источники и состояние Crypto Radar</p></div><b>→</b></a>
+</section><section class="work-grid" id="market-work">
+<article class="work-card scanner-card" id="scanner">
+<div class="work-head"><div><h2>Реальный сканер</h2><p>LIVE рынок: ищем межбиржевую разницу и сразу проверяем исполнимость.</p></div><span class="live-pill"><i></i>LIVE MARKET</span></div>
+<div class="settings-grid">
+<label>Источник данных<select id="source-mode"><option value="live" selected>LIVE · 17 CEX · Binance / Bybit / OKX / MEXC / KuCoin / Bitget / CoinW / BingX / BitMart / HTX / Kraken / Bitfinex / CoinEx / Gate.io / XT / Poloniex / Toobit</option><option value="demo">DEMO · тестовый граф</option></select></label>
+<label>Стартовая сумма, USDT<input id="amount" type="number" min="1" max="1000000" step="1" value="25"></label>
+<label>Максимум переходов<input id="max-hops" type="number" min="2" max="12" value="5" disabled></label>
+<label>Минимальная прибыль, %<input id="min-profit" type="number" step="0.01" value="0.01" disabled></label>
+</div>
+<label class="check"><input id="prefunded" type="checkbox"><span>Prefunded: учитывать быстрые межбиржевые связки при заранее размещённых балансах</span></label>
+<div class="control-row"><button id="scan" class="primary-action">Проверить сейчас <span>→</span></button><button id="auto" class="quiet-action">Автомонитор: выкл</button><a class="text-button" href="#guide">Как пользоваться</a></div>
+<div id="scan-progress" class="scan-progress" aria-hidden="true"><i></i></div><p id="scan-status" class="scan-status" aria-live="polite">Готов к поиску.</p>
+</article>
+<article class="work-card owner-summary" id="balances">
+<div class="work-head"><div><h2>Мои балансы</h2><p>Рабочие остатки для быстрых маршрутов</p></div></div>
+<div class="owner-summary-body"><span class="big-icon mint">▦</span><div><strong id="balance-venues">0</strong><small>площадок</small></div><i></i><div><strong id="balance-assets">0</strong><small>активов</small></div></div>
+<p class="soft-note" id="balance-note">Inventory Manager: balances + dynamic targets. LIVE orders remain OFF.</p>
+<button class="outline-action" id="configure-balances">Настроить позже</button>
+</article>
+<article class="work-card monitor-card">
+<div class="work-head"><div><h2>Мониторинг системы</h2><p><span class="dot green"></span> <span id="mode">PAPER MODE</span></p></div></div>
+<div class="monitor-box"><div class="radar"><i></i><i></i><i></i><b></b></div><div><strong id="market-title">Крипто-рынок под наблюдением</strong><p id="engine-state">Граф маршрутов готов</p><p id="monitor-state">Ручное сканирование</p></div></div>
+<ul class="monitor-list"><li><span>Нормализация bid/ask</span><b>Активно</b></li><li><span>Fees + slippage</span><b>Активно</b></li><li><span>Поиск циклов</span><b>Активно</b></li></ul>
+<div class="control-row compact"><button id="monitor-now" class="quiet-action">Сканировать сейчас</button><button id="monitor-stop" class="quiet-action">Остановить</button></div>
+</article>
+</section><section class="kpis">
+<article><span>Площадок</span><strong id="kpi-venues">0</strong><small>в текущем графе</small></article>
+<article><span>Рёбер графа</span><strong id="kpi-edges">0</strong><small>trade + transfer</small></article>
+<article><span>Рабочих связок</span><strong id="kpi-opps">0</strong><small>FULL + CLASSIC + BATCH + LATENCY</small></article>
+<article><span>Лучший NET</span><strong id="kpi-best">0%</strong><small>по рабочим режимам</small></article>
+<article><span>Сканирований</span><strong id="kpi-scans">0</strong><small>за текущий запуск</small></article>
+<article><span>Режим</span><strong class="paper-kpi">AUTO</strong><small>PAPER / DEMO / LIVE</small></article>
+</section>
+<details class="diagnostics" id="guide">
+<summary><div><p class="eyebrow">КАК ПОЛЬЗОВАТЬСЯ</p><strong>Короткий гид по Crypto Radar</strong></div><span>Открыть</span></summary>
+<div class="diagnostic-body">
+<section><h3>1. Укажите сумму</h3><p class="soft-note">Система проводит одну исходную сумму через весь маршрут и показывает итог после комиссии и проскальзывания.</p></section>
+<section><h3>2. Смотрите NET, а не разницу цен</h3><p class="soft-note">Обычной возможностью считается только цикл с положительной чистой разницей. Межбиржевой Prefunded Radar показывается отдельно.</p></section>
+<section><h3>3. PAPER, DEMO AUTO и LIVE AUTO</h3><p class="soft-note">Радар читает публичные LIVE-котировки 17 CEX. PAPER только моделирует исполнение. DEMO AUTO / SHADOW_LIVE использует реальные WebSocket-стаканы и виртуальный капитал; DIRECT WS-контур сам пересчитывает CLASSIC/LATENCY каждые 250 мс. При совместимых demo API-ключах возможны биржевые demo-ордера. LIVE AUTO включается отдельно и не требует права Withdraw.</p></section>
+</div>
+</details>
+<section class="section-card result-card" id="wide-hunt-panel">
+<div class="section-heading"><div><p class="eyebrow">LIVE MARKET</p><h2>Реальный сканер рынка</h2><p>Только повторяемые межбиржевые маршруты: обратный перевод активов должен быть открыт. Рыночные аномалии без ребаланса скрыты.</p></div><span class="section-note" id="wide-hunt-note">Сканер запускается…</span></div>
+<div class="kpis simple-kpis"><article><span>Бирж онлайн</span><strong id="wide-venues-ok">0</strong><small>из <b id="wide-venues">0</b></small></article><article><span>Торговых кандидатов</span><strong id="wide-found">0</strong><small>порог поиска ≥0,20%</small></article><article><span>К торговле</span><strong id="wide-executable">0</strong><small>полный цикл подтверждён</small></article><article><span>Лучший чистый NET</span><strong id="wide-best">—</strong><small>после всех затрат</small></article></div>
+<div id="wide-verdict" class="pilot-verdict wait"><strong>ИЩЕМ ПОЛОЖИТЕЛЬНЫЕ ОКНА</strong><span>Сканер показывает рынок; к торговле допускается только полный подтверждённый цикл.</span></div>
+<div class="pilot-auto-strip"><span class="pilot-live-dot"></span><strong id="wide-auto-state">AUTO запускается…</strong><span id="wide-scan-id">scan #—</span><span id="wide-pairs">пар: —</span><span id="wide-directions">направлений: —</span></div>
+<div class="pilot-auto-strip"><span class="pilot-live-dot"></span><strong>TRADE ACCESS</strong><span id="trade-access-list">Bitget ✓ · HTX ✓ · CoinW ✓*</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Пара</th><th>Купить</th><th>Продать</th><th>Сумма</th><th>После торгов</th><th>Ребаланс</th><th>Резерв</th><th>Чистый профит</th><th>Чистый NET</th><th>Статус</th></tr></thead><tbody id="wide-hunt-body"></tbody></table></div>
+<p class="soft-note">В сканере уже вычтены торговые комиссии, стоимость полного ребаланса и safety reserve 0,10%. Ниже «К торговле» — только повторно подтверждённые сделки.</p>
+</section>
+<section class="section-card result-card" id="coinw-pilot-panel">
+<div class="section-heading"><div><p class="eyebrow">CONNECTED CEX · DEMO AUDIT</p><h2>Контрольный прогон подключённых бирж · 25 USDT</h2><p>Bitget, HTX и другие подключённые API проверяются в одном контуре. Ордера не отправляются, деньги не используются.</p></div><span class="section-note" id="coinw-pilot-note">Аудит ещё не запускался.</span></div>
+<div class="kpis auto-kpis"><article><span>Подключённые API</span><strong id="pilot-auth">Bitget ✓ · HTX ✓</strong><small id="pilot-auth-note">CoinW ✓* · *live execution off</small></article><article><span>Направлений API</span><strong id="pilot-candidates">0</strong><small>между подключёнными биржами</small></article><article><span>Market NET ≥1%</span><strong id="pilot-market-pass">0</strong><small>после taker fees</small></article><article><span>STRICT PASS</span><strong id="pilot-strict-pass">0</strong><small>WS ≤800 ms + depth + buffer</small></article><article><span>Лучший Market NET</span><strong id="pilot-best-net">—</strong><small>текущий снимок</small></article><article><span>Реальные ордера</span><strong class="pilot-off">OFF</strong><small>DEMO AUDIT</small></article></div>
+<div id="pilot-verdict" class="pilot-verdict wait"><strong>ЖДЁМ ОКНО ≥ 1%</strong><span>Платформа не будет считать отрицательный спред прибылью.</span></div>
+<div class="pilot-auto-strip"><span class="pilot-live-dot"></span><strong id="pilot-auto-state">AUTO запускается…</strong><span id="pilot-scan-id">scan #—</span><span id="pilot-updated">последний результат: —</span><span id="pilot-next">следующий: —</span></div>
+<div class="control-row compact"><button id="coinw-pilot-run" class="primary-action">Проверить все API · 25 USDT <span>→</span></button><span class="soft-note" id="coinw-pilot-scope">Единый аудит подключённых CEX: Bitget ↔ HTX ↔ CoinW*. *CoinW пока audit-only.</span></div>
+<div class="pilot-history"><div><strong>История контрольных прогонов</strong><small id="pilot-history-note">Пока нет истории.</small></div><div id="pilot-history-chart" class="pilot-history-chart" aria-label="История Market NET"></div></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Пара</th><th>BUY</th><th>SELL</th><th>Сумма</th><th>Market NET</th><th>Результат</th></tr></thead><tbody id="coinw-pilot-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="inventory-manager-panel">
+<div class="section-heading"><div><p class="eyebrow">DYNAMIC INVENTORY</p><h2>Inventory Manager</h2><p>Automatically learns which asset should be prefunded on which SELL exchange. Targets decay when the edge disappears.</p></div><span class="section-note" id="inventory-manager-note">Manager starting...</span></div>
+<div class="kpis auto-kpis"><article><span>HOT assets</span><strong id="inventory-hot-count">0</strong><small>repeating STRICT edges</small></article><article><span>Target inventory</span><strong id="inventory-target-usdt">0</strong><small>USDT equivalent</small></article><article><span>Need to build</span><strong id="inventory-shortage-usdt">0</strong><small>USDT equivalent</small></article><article><span>Tracked</span><strong id="inventory-tracked">0</strong><small>asset / SELL CEX</small></article></div>
+<div class="control-row compact"><button id="inventory-refresh" class="quiet-action">Refresh balances</button><span class="soft-note">No automatic purchases. Manager sets targets and shortage; execution stays behind existing gates.</span></div>
+<div class="table-scroll"><table><thead><tr><th>State</th><th>Asset</th><th>SELL CEX</th><th>Score</th><th>STRICT / hits</th><th>Avg NET</th><th>Target</th><th>Current</th><th>Trades left</th><th>Action</th></tr></thead><tbody id="inventory-manager-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="synthetic-inventory-panel">
+<div class="section-heading"><div><p class="eyebrow">SYNTHETIC INVENTORY | ANALYSIS ONLY</p><h2>Borrow spot / Spot + Perpetual Hedge</h2><p>Separate fallback for unexpected coins when prefunded inventory is missing. Borrow and derivatives are NOT enabled for live execution.</p></div><span class="section-note" id="synthetic-note">Analysis starting...</span></div>
+<div class="kpis auto-kpis"><article><span>Borrow ready</span><strong id="synthetic-borrow-ready">0</strong><small>read-only eligibility</small></article><article><span>Perp entry edge</span><strong id="synthetic-perp-edge">0</strong><small>basis after costs</small></article><article><span>Mode</span><strong>ANALYSIS</strong><small>LIVE OFF</small></article></div>
+<h3>Borrow spot</h3><div class="table-scroll"><table><thead><tr><th>Pair</th><th>BUY</th><th>Borrow / SELL</th><th>Spot NET</th><th>Borrow cost</th><th>Est. NET</th><th>Status</th></tr></thead><tbody id="synthetic-borrow-body"></tbody></table></div>
+<h3>Spot + perpetual hedge</h3><div class="table-scroll"><table><thead><tr><th>Pair</th><th>Spot BUY</th><th>Perp SHORT</th><th>Spot ask</th><th>Perp bid</th><th>Entry basis NET</th><th>Status</th></tr></thead><tbody id="synthetic-perp-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="classic-panel">
+<div class="section-heading"><div><p class="eyebrow">КЛАССИЧЕСКИЙ МЕЖБИРЖЕВОЙ АРБИТРАЖ</p><h2>CLASSIC · купить дешевле / продать дороже</h2><p>Prefunded-режим: обе торговые ноги выполняются почти одновременно. Кандидаты проходят сеть/identity, комиссии, стакан, safety buffer и стоимость последующего ребаланса.</p></div><span class="section-note" id="classic-note">Набираю подтверждения CLASSIC.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Пара</th><th>BUY</th><th>SELL</th><th>Market NET</th><th>Сумма</th><th>Score</th><th>Подтв.</th><th>Статус</th><th></th></tr></thead><tbody id="classic-body"></tbody></table></div>
+<p class="soft-note">Зелёный SUSTAINABLE статус появляется в Execution после повторной проверки реальной глубины стакана и остаточного NET ≥ 1% после всех заложенных расходов.</p>
+</section>
+<section class="section-card result-card" id="latency-panel">
+<div class="section-heading"><div><p class="eyebrow">КЛАССИЧЕСКИЙ АРБИТРАЖ</p><h2>Latency Arb · быстрые / медленные котировки</h2><p>Система определяет быстрый консенсус рынка и ловит площадки, где исполнимая L1-котировка запаздывает.</p></div><span class="section-note" id="latency-note">Набираю историю скорости котировок.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Пара</th><th>Медленная</th><th>Быстрая</th><th>Действие</th><th>Lag</th><th>NET</th><th>L1 сумма</th><th>Подтв.</th><th>Статус</th><th></th></tr></thead><tbody id="latency-body"></tbody></table></div>
+<p class="soft-note">LATENCY CONFIRMED требует повторного наблюдения, положительного NET после обеих taker-комиссий и подтверждённой идентичности актива. REPEATABLE дополнительно означает, что доступен обратный ребаланс.</p>
+</section>
+<section class="section-card result-card" id="auto-panel">
+<div class="section-heading"><div><p class="eyebrow">AION AUTO</p><h2>Автоматический арбитражный советник</h2><p>Сервер сам ищет, перепроверяет и исполняет разрешённые стратегии. PAPER симулирует сделки, DEMO AUTO крутит виртуальный капитал по LIVE-стаканам, LIVE AUTO защищён отдельными ключами и двойным gate.</p></div><span class="section-note" id="auto-note">Запуск автоматики…</span></div>
+<div class="kpis auto-kpis"><article><span>Режим</span><strong id="auto-mode">PAPER AUTO</strong><small>без реальных ордеров</small></article><article><span>Paper сделок</span><strong id="paper-count">0</strong><small>симулированных исполнений</small></article><article><span>Ожидаемый P/L</span><strong id="paper-profit">0</strong><small>USDT, модельный</small></article><article><span>Средний NET</span><strong id="paper-net">0%</strong><small>по paper сделкам</small></article></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Тип</th><th>Score</th><th>Сумма</th><th>NET</th><th>Ожидаемая прибыль</th><th>Статус</th></tr></thead><tbody id="paper-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="execution-panel">
+<div class="section-heading"><div><p class="eyebrow">UNIFIED AUTO EXECUTION</p><h2>Автомат связок + классического арбитража</h2><p>Один серверный исполнитель обслуживает FULL LOOP, CLASSIC, BATCH READY и LATENCY REPEATABLE. Две торговые ноги исполняются параллельно; при асимметричном сбое срабатывает kill switch.</p></div><span class="section-note" id="execution-note">Проверяю исполнитель и API-готовность.</span></div>
+<div class="kpis auto-kpis"><article><span>Execution mode</span><strong id="execution-mode">PAPER AUTO</strong><small>LIVE имеет двойной safety gate</small></article><article><span>Исполнений</span><strong id="execution-count">0</strong><small>единый движок</small></article><article><span>24h P/L</span><strong id="execution-pnl">0</strong><small>USDT</small></article><article><span>Средняя скорость</span><strong id="execution-speed">0 ms</strong><small>две ноги</small></article></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Стратегия</th><th>Score</th><th>Сумма</th><th>NET</th><th>P/L</th><th>Скорость</th><th>Статус</th></tr></thead><tbody id="execution-body"></tbody></table></div>
+<p class="soft-note" id="execution-decisions">Причины исполнения и отсева загружаются…</p>
+<div class="autopilot-box">
+<div class="trading-mode-bar"><span>Режим исполнения</span><button class="mode-choice" data-trading-mode="PAPER">PAPER</button><button class="mode-choice" data-trading-mode="DEMO">DEMO AUTO</button><button class="mode-choice danger-mode" data-trading-mode="LIVE">LIVE AUTO</button><b id="trading-mode-state">PAPER_AUTO</b></div>
+<div class="demo-readiness" id="demo-readiness">DEMO: Bybit / OKX ключи не подключены.</div>
+<div class="autopilot-grid">
+<label>Min SUSTAINABLE NET, %<input id="autopilot-min-net" type="number" min="0" step="0.05" value="1"></label>
+<label>Макс. сумма / сделку, USDT<input id="autopilot-max-notional" type="number" min="10" step="10" value="1000"></label>
+<label>Резерв инвентаря, %<input id="autopilot-reserve" type="number" min="0" max="90" step="1" value="15"></label>
+<label>Лимит сделок / час<input id="autopilot-hourly" type="number" min="1" step="1" value="120"></label><label>Повтор hot-цикла, сек<input id="autopilot-hot-cooldown" type="number" min="0.25" max="30" step="0.25" value="1"></label></div>
+<div class="strategy-toggles"><label><input id="strategy-full" type="checkbox" checked> FULL</label><label><input id="strategy-batch" type="checkbox" checked> BATCH</label><label><input id="strategy-classic" type="checkbox" checked> CLASSIC</label><label><input id="strategy-latency" type="checkbox" checked> LATENCY</label></div>
+<div class="control-row compact"><button class="quiet-action" id="autopilot-save">Сохранить автомат</button><button class="quiet-action" id="autopilot-toggle">Пауза AUTO</button></div>
+<p class="soft-note" id="autopilot-state">AUTO policy загружается…</p></div>
+<p class="soft-note" id="live-readiness">LIVE: ключи не подключены. Для боевого режима нужны только Read + Trade permissions; Withdraw permission не требуется.</p>
+</section>
+<section class="section-card result-card" id="capital-panel">
+<div class="section-heading"><div><p class="eyebrow">CAPITAL MANAGER</p><h2>Распределение капитала</h2><p>Сохраняет резерв и распределяет доступный капитал по лучшим исторически устойчивым маршрутам.</p></div><span class="section-note" id="capital-note">Загрузка капитала…</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Score</th><th>Тип</th><th>Связка</th><th>Целевой капитал</th><th>Средний NET</th><th>История</th></tr></thead><tbody id="capital-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="quality-panel">
+<div class="section-heading"><div><p class="eyebrow">QUALITY ENGINE</p><h2>Лучшие устойчивые связки</h2><p>AION Score учитывает NET, повторяемость, время жизни, ликвидность и скорость.</p></div><span class="section-note" id="quality-note">История накапливается автоматически.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Score</th><th>Тип</th><th>Связка</th><th>Появлений</th><th>Средний NET</th><th>Макс NET</th><th>Жизнь</th><th>Средний объём</th></tr></thead><tbody id="quality-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="long-panel">
+<div class="section-heading"><div><p class="eyebrow">LONG WINDOW HUNTER</p><h2>Долгоживущие окна</h2><p>Связки, которые остаются открытыми дольше заданного времени.</p></div><span class="section-note" id="long-note">Порог: 5 минут.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Score</th><th>Тип</th><th>Связка</th><th>Живёт</th><th>Замеров</th><th>Средний NET</th><th>Макс NET</th><th>Средний объём</th></tr></thead><tbody id="long-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="windows">
+<div class="section-heading"><div><p class="eyebrow">ДОПОЛНИТЕЛЬНЫЙ РЕЖИМ</p><h2>Охотник за крипто-окнами</h2><p>История связок во времени: FLASH → CONFIRMED → STABLE → FADING → CLOSED.</p></div><span class="section-note" id="window-note">История включится после постоянного мониторинга и хранения замеров.</span></div>
+<div class="window-placeholder"><div class="radar crypto-radar"><i></i><i></i><i></i><b></b></div><div><strong>Window Hunter подготовлен в интерфейсе</strong><p>Следующий этап — накопление истории, подтверждений и длительности окна.</p></div></div>
+</section><section class="section-card result-card" id="opportunities">
+<div class="section-heading"><div><p class="eyebrow">ВОЗМОЖНОСТИ</p><h2>Замкнутые внутрибиржевые круги</h2></div><span class="section-note" id="empty-opps">Запустите сканирование.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>NET</th><th>Старт</th><th>Финиш</th><th>Шагов</th><th>ETA</th><th>Маршрут</th><th></th></tr></thead><tbody id="opps-body"></tbody></table></div>
+</section>
+<section class="section-card result-card" id="prefunded-panel">
+<div class="section-heading"><div><p class="eyebrow">К ТОРГОВЛЕ</p><h2>Подтверждённые связки</h2><p>Только полный цикл: торговые комиссии, подтверждённый ребаланс и резерв исполнения уже учтены в расчёте ниже.</p></div><span class="section-note" id="prefunded-note">Ищу подтверждённые сделки…</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Пара</th><th>Купить</th><th>Продать</th><th>Старт</th><th>После торгов</th><th>Ребаланс</th><th>Safety reserve</th><th>Чистый профит</th><th>Чистый NET</th><th>Статус</th></tr></thead><tbody id="prefunded-body"></tbody></table></div>
+<p class="soft-note">«Чистый профит» = результат после торговых комиссий − стоимость полного ребаланса − safety reserve. Если полный цикл не подтверждён, сюда он не попадает.</p>
+</section>
+<section class="section-card result-card" id="series-panel">
+<div class="section-heading"><div><p class="eyebrow">ПОСТОЯННОЕ ВРАЩЕНИЕ</p><h2>BATCH READY · серии кругов</h2><p>Фиксированный withdrawal fee распределяется на серию оборотов, а ребаланс выполняется одним пакетом.</p></div><span class="section-note" id="series-note">Ожидаю LIVE-скан.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Круг</th><th>Биржи</th><th>Оборотов</th><th>NET / круг</th><th>Старт / круг</th><th>Капитал BUY</th><th>Капитал SELL</th><th>Прибыль серии</th><th>Действия</th></tr></thead><tbody id="series-body"></tbody></table></div>
+<p class="soft-note">BATCH READY означает, что сеть/identity/deposit/withdraw подтверждены, а серия остаётся положительной после одного пакетного ребаланса. Требуется достаточный prefunded-инвентарь на обеих биржах.</p>
+</section>
+<section class="section-card result-card" id="pending-panel">
+<div class="section-heading"><div><p class="eyebrow">КАНДИДАТЫ</p><h2>Рыночные круги · проверка сети/identity</h2><p>Два L1-снимка уже подтверждены, но зелёный статус запрещён, пока не доказан полный повторяемый ребаланс.</p></div><span class="section-note" id="pending-note">Ожидаю LIVE-скан.</span></div>
+<div class="table-scroll"><table><thead><tr><th>#</th><th>Круг</th><th>Биржи</th><th>Market NET</th><th>Старт</th><th>Причина</th></tr></thead><tbody id="pending-body"></tbody></table></div>
+</section>
+<section class="section-card hidden" id="route-panel">
+<div class="section-heading"><div><p class="eyebrow">ДЕТАЛИ СВЯЗКИ</p><h2 id="route-title">Маршрут</h2></div><button id="route-close" class="quiet-action">Закрыть</button></div>
+<div class="exchange-summary" id="route-summary"></div><div id="route-steps" class="steps"></div>
+</section>
+<details class="diagnostics" id="diagnostics">
+<summary><div><p class="eyebrow">ДИАГНОСТИКА</p><strong>Источники, граф и техническое состояние</strong></div><span>Открыть</span></summary>
+<div class="diagnostic-body">
+<section><div class="section-heading compact"><div><h3>Источники рынка</h3><p>Радар читает публичные рынки 17 CEX. Горячий CLASSIC/LATENCY контур держит WebSocket-стаканы Binance / Bybit / OKX / KuCoin / Bitget / HTX / CoinW в памяти; остальные источники и холодный контур используют REST fallback.</p></div></div><pre id="source-health" class="source-health">Загрузка источников…</pre></section>
+<section><h3>Последний скан</h3><div id="diagnostic-state" class="soft-note">Ещё не выполнялся.</div></section>
+<section class="output"><div class="toolbar"><h3>Технический результат</h3><span id="working">Готов</span></div><pre id="result">Crypto Route Engine готов к запуску.</pre></section>
+</div>
+</details>
+<footer><span>AION AILab</span><span>CRYPTO BEYOND BORDERS</span><span>AION AUTO · SHADOW LIVE / PAPER / LIVE</span></footer>
+</main>
+</body>
+</html>

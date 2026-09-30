@@ -1,0 +1,172 @@
+from __future__ import annotations
+import asyncio,json,math,time
+import httpx
+from pathlib import Path
+from app.services.capital_manager import capital_manager
+from app.services.inventory_guard import inventory_guard
+from app.services.private_trading import ADAPTERS,readiness
+from app.http_shared import SHARED_SSL_CONTEXT
+
+PATH=Path(__file__).parents[2]/'data'/'inventory_manager.json'
+DEFAULT={
+ 'enabled':True,'min_strict_hits':2,'hot_age_seconds':180.0,'warm_age_seconds':900.0,
+ 'max_assets':8,'max_asset_pct':10.0,'max_venue_pct':25.0,'cycles_buffer':5,
+ 'balance_refresh_seconds':60.0,'require_diversification':True,'min_hot_assets':2,'min_sell_venues':2,
+}
+
+class InventoryManager:
+    def __init__(self):
+        self.cfg=dict(DEFAULT); self.stats={}; self.last_scan_id=0
+        self.last_balance_refresh=None; self.balance_errors={}; self.transfer_status={}; self.task=None
+        self.live_balances={}; self.live_balances_at=None
+        self._load()
+    def _load(self):
+        try:
+            d=json.loads(PATH.read_text(encoding='utf-8')); self.cfg.update(d.get('config') or {})
+            self.stats=d.get('stats') or {}; self.last_scan_id=int(d.get('last_scan_id') or 0)
+        except Exception: pass
+    def _save(self):
+        PATH.parent.mkdir(parents=True,exist_ok=True)
+        PATH.write_text(json.dumps({'config':self.cfg,'stats':self.stats,'last_scan_id':self.last_scan_id,'updated_at':time.time()},ensure_ascii=False,indent=2),encoding='utf-8')
+    @staticmethod
+    def _key(venue,base,quote):return f'{venue}:{str(base).upper()}:{str(quote).upper()}'
+    def observe(self,wide):
+        if not self.cfg.get('enabled',True) or not isinstance(wide,dict):return self.status()
+        scan_id=int(wide.get('scan_id') or 0)
+        if scan_id and scan_id==self.last_scan_id:return self.status()
+        now=time.time(); seen=set()
+        for a in wide.get('audits') or []:
+            net=float(a.get('market_net_pct') or -999)
+            if net<0.20:continue
+            base=str(a.get('base') or '').upper(); quote=str(a.get('quote') or '').upper(); sell=str(a.get('sell_venue') or '')
+            if not base or not quote or not sell:continue
+            k=self._key(sell,base,quote); seen.add(k); s=self.stats.get(k) or {'hits':0,'strict_hits':0,'trade_access_hits':0,'buy_venues':[]}
+            n=int(s.get('hits') or 0)+1; strict=bool(a.get('passed')); access=bool(a.get('sell_trade_access'))
+            old_avg=float(s.get('avg_net_pct') or 0); old_not=float(s.get('avg_notional') or 0)
+            notional=float(a.get('notional') or a.get('quote_in') or wide.get('amount') or 25)
+            buys=set(s.get('buy_venues') or []); buys.add(str(a.get('buy_venue') or ''))
+            s.update({'venue':sell,'base':base,'quote':quote,'hits':n,'strict_hits':int(s.get('strict_hits') or 0)+(1 if strict else 0),
+                      'trade_access_hits':int(s.get('trade_access_hits') or 0)+(1 if access else 0),'first_seen':float(s.get('first_seen') or now),
+                      'last_seen':now,'avg_net_pct':(old_avg*(n-1)+net)/n,'max_net_pct':max(float(s.get('max_net_pct') or -999),net),
+                      'last_net_pct':net,'avg_notional':(old_not*(n-1)+notional)/n,'last_sell_bid':float(a.get('sell_bid') or s.get('last_sell_bid') or 0),
+                      'last_base_qty':float(a.get('base_bought') or s.get('last_base_qty') or 0),'buy_venues':sorted(x for x in buys if x)})
+            self.stats[k]=s
+        if scan_id:self.last_scan_id=scan_id
+        self._save(); self._sync_targets(); return self.status()
+    def _ranked(self):
+        now=time.time(); capital=float(capital_manager.state.get('paper_capital_usdt') or 0)
+        max_asset=capital*float(self.cfg.get('max_asset_pct',10))/100.0; max_venue=capital*float(self.cfg.get('max_venue_pct',25))/100.0
+        rows=[]
+        for k,s in self.stats.items():
+            hits=max(1,int(s.get('hits') or 0)); strict=int(s.get('strict_hits') or 0); age=max(0,now-float(s.get('last_seen') or 0)); ratio=strict/hits
+            avg=max(0,float(s.get('avg_net_pct') or 0)); diversity=len(s.get('buy_venues') or [])
+            score=min(100.0,min(30,hits*3)+ratio*35+min(20,avg*6)+min(10,diversity*2)+max(0,5-age/180))
+            if strict>=int(self.cfg.get('min_strict_hits',2)) and age<=float(self.cfg.get('hot_age_seconds',180)):state='HOT'
+            elif strict>0 and age<=float(self.cfg.get('warm_age_seconds',900)):state='WARM'
+            elif age<=3600:state='FADING'
+            else:state='COLD'
+            trade=max(10.0,float(s.get('avg_notional') or 25)); cycles=max(2,min(int(self.cfg.get('cycles_buffer',5)),2+int(math.sqrt(max(0,strict)))))
+            raw=trade*cycles if state in {'HOT','WARM'} else 0.0
+            target=min(raw,max_asset) if max_asset>0 else raw
+            rows.append({**s,'key':k,'state':state,'score':round(score,1),'strict_ratio':round(ratio,3),'age_seconds':round(age,1),
+                         'trade_notional_usdt':round(trade,2),'raw_target_usdt':round(target,2),'venue_cap_usdt':round(max_venue,2)})
+        rows.sort(key=lambda x:(x['state']=='HOT',x['state']=='WARM',x['score'],x.get('strict_hits',0),x.get('avg_net_pct',0)),reverse=True)
+        return rows[:max(1,int(self.cfg.get('max_assets',8))*3)]
+    def recommendations(self):
+        venue_used={}; out=[]; max_assets=int(self.cfg.get('max_assets',8)); ranked=self._ranked()
+        hot_ranked=[x for x in ranked if x.get('state')=='HOT' and float(x.get('raw_target_usdt') or 0)>0]
+        diversity_ok=(not bool(self.cfg.get('require_diversification',True))) or (
+            len({x.get('base') for x in hot_ranked})>=int(self.cfg.get('min_hot_assets',2)) and
+            len({x.get('venue') for x in hot_ranked})>=int(self.cfg.get('min_sell_venues',2)))
+        for r in ranked:
+            if len(out)>=max_assets and r['state'] in {'HOT','WARM'}:continue
+            target=float(r.get('raw_target_usdt') or 0); v=r['venue']; cap=float(r.get('venue_cap_usdt') or 0)
+            transfer=self.transfer_status.get(r['key']) or {}
+            transfer_blocked=bool(transfer.get('known') and transfer.get('deposit_open') is False)
+            diversification_blocked=bool(r.get('state')=='HOT' and not diversity_ok)
+            if transfer_blocked or diversification_blocked: target=0.0
+            room=max(0,cap-float(venue_used.get(v,0))) if cap>0 else target; target=min(target,room)
+            if target>0:venue_used[v]=float(venue_used.get(v,0))+target
+            px=float(r.get('last_sell_bid') or 0); target_qty=(target/px if px>0 else 0)
+            current_qty=float(inventory_guard.current.get(f"{v}:{r['base']}") or 0); current_usdt=current_qty*px if px>0 else 0
+            shortage=max(0,target-current_usdt); excess=max(0,current_usdt-target) if target>0 else current_usdt
+            trades_left=current_usdt/max(float(r.get('trade_notional_usdt') or 25),1e-9)
+            action='REBALANCE_BLOCKED' if transfer_blocked else ('DIVERSIFICATION_WAIT' if diversification_blocked else ('BUILD' if shortage>=5 else ('REDUCE' if excess>=5 and r['state'] in {'FADING','COLD'} else ('HOLD' if target>0 else 'WAIT'))))
+            out.append({**r,'transfer':transfer,'target_usdt':round(target,2),'target_qty':round(target_qty,10),'current_qty':round(current_qty,10),
+                        'current_usdt':round(current_usdt,2),'shortage_usdt':round(shortage,2),'excess_usdt':round(excess,2),
+                        'trades_left':round(trades_left,1),'action':action})
+        return out
+    def _sync_targets(self):
+        targets={}
+        for r in self.recommendations():
+            if r.get('target_qty',0)>0 and r.get('state') in {'HOT','WARM'}:
+                targets[f"{r['venue']}:{r['base']}"]=r['target_qty']
+        if targets:
+            inventory_guard.set_targets(targets,'inventory_manager')
+
+    async def refresh_transfer_status(self):
+        rows=self._ranked()[:max(8,int(self.cfg.get('max_assets',8))*2)]
+        out={}
+        async with httpx.AsyncClient(verify=SHARED_SSL_CONTEXT,timeout=8) as c:
+            for r in rows:
+                k=r['key']; venue=r['venue']; asset=r['base']
+                if venue=='HTX':
+                    try:
+                        d=(await c.get('https://api.huobi.pro/v2/reference/currencies?currency='+asset.lower())).json()
+                        chains=((d.get('data') or [{}])[0].get('chains') or [])
+                        dep=any(str(x.get('depositStatus')).lower()=='allowed' for x in chains)
+                        wd=any(str(x.get('withdrawStatus')).lower()=='allowed' for x in chains)
+                        out[k]={'known':True,'deposit_open':dep,'withdraw_open':wd,'chains':len(chains),'source':'HTX_PUBLIC'}
+                    except Exception as exc: out[k]={'known':False,'error':str(exc)[:120]}
+                else: out[k]={'known':False,'source':'NOT_CHECKED'}
+        self.transfer_status.update(out); return out
+
+    async def refresh_balances(self):
+        creds=readiness()
+        names=[n for n,v in creds.items() if v.get('ready') and v.get('verified')]
+        results=await asyncio.gather(*[ADAPTERS[n].balances() for n in names],return_exceptions=True)
+        good={}; errors={}
+        for n,x in zip(names,results):
+            if isinstance(x,Exception): errors[n]=str(x)[:180]
+            else: good[n]=x
+        self.live_balances=good; self.live_balances_at=time.time()
+        if good: inventory_guard.record_balances(good,'inventory_manager_refresh')
+        self.last_balance_refresh=self.live_balances_at; self.balance_errors=errors; self._sync_targets()
+        return {'venues':list(good),'errors':errors,'balances':good,'updated_at':self.live_balances_at}
+    async def start(self):
+        if self.task and not self.task.done(): return
+        self.task=asyncio.create_task(self._loop(),name='inventory-manager')
+
+    async def stop(self):
+        if self.task and not self.task.done():
+            self.task.cancel()
+            try: await self.task
+            except BaseException: pass
+        self.task=None
+
+    async def _loop(self):
+        await asyncio.sleep(4)
+        while True:
+            try:
+                await self.refresh_balances(); await self.refresh_transfer_status()
+            except Exception as exc: self.balance_errors={'manager':str(exc)[:180]}
+            await asyncio.sleep(max(20,float(self.cfg.get('balance_refresh_seconds',60))))
+
+    def update(self,payload):
+        for k in DEFAULT:
+            if k in payload: self.cfg[k]=payload[k]
+        self._save(); self._sync_targets(); return self.status()
+    def status(self):
+        recs=self.recommendations(); hot=[x for x in recs if x['state']=='HOT']
+        hot_assets=len({x['base'] for x in hot}); sell_venues=len({x['venue'] for x in hot})
+        concentration_warning=bool(hot and (hot_assets<int(self.cfg.get('min_hot_assets',2)) or sell_venues<int(self.cfg.get('min_sell_venues',2))))
+        return {'ok':True,'enabled':bool(self.cfg.get('enabled',True)),'config':self.cfg,
+                'last_scan_id':self.last_scan_id,'last_balance_refresh':self.last_balance_refresh,
+                'live_balances_at':self.live_balances_at,'live_balances':self.live_balances,
+                'balance_errors':self.balance_errors,'transfer_status':self.transfer_status,'tracked_assets':len(self.stats),
+                'hot_count':len(hot),'hot_assets':hot_assets,'hot_sell_venues':sell_venues,'concentration_warning':concentration_warning,
+                'hot_target_usdt':round(sum(x['target_usdt'] for x in hot),2),
+                'hot_shortage_usdt':round(sum(x['shortage_usdt'] for x in hot),2),
+                'recommendations':recs}
+
+inventory_manager=InventoryManager()

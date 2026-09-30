@@ -1,0 +1,82 @@
+from __future__ import annotations
+import time
+
+class RiskManager:
+    def __init__(self):
+        self.min_score=50.0
+        self.min_score_by_mode={'FULL_NOW':55.0,'BATCH_READY':58.0,'CLASSIC':58.0,'LATENCY':60.0}
+        self.min_net_pct=1.0
+        self.min_net_by_mode={'FULL_NOW':1.0,'BATCH_READY':1.0,'CLASSIC':1.0,'LATENCY':1.0}
+        self.min_hits=2
+        self.max_notional=1000.0
+        self.max_open=4
+        self.max_daily_loss=50.0
+        self.cooldown=20.0
+        self.cooldown_by_mode={'FULL_NOW':20.0,'BATCH_READY':20.0,'CLASSIC':1.0,'LATENCY':1.0}
+        self.execution_buffer_pct=0.10
+        self.max_trades_per_hour=120
+        self.max_consecutive_failures=3
+        self.failure_pause_seconds=300.0
+        self.consecutive_failures=0
+        self.failure_pause_until=0.0
+        self.exec_times=[]
+        self.last_exec={}
+        self.inflight=set()
+
+    def allow(self,row,mode,history=None,open_count=0,daily_pnl=0.0):
+        now=time.time(); sig=row.get('signature') or str(row)
+        self.exec_times=[x for x in self.exec_times if now-x<3600]
+        if now<self.failure_pause_until:return False,'FAILURE_COOLDOWN'
+        if len(self.exec_times)>=self.max_trades_per_hour:return False,'HOURLY_TRADE_LIMIT'
+        score=float(row.get('aion_score') or (history or {}).get('aion_score') or 0)
+        hits=int((history or {}).get('hits') or 0)
+        score_floor=max(self.min_score,float(self.min_score_by_mode.get(mode,self.min_score)))
+        net_floor=max(self.min_net_pct,float(self.min_net_by_mode.get(mode,self.min_net_pct)))
+        if score < score_floor:return False,'SCORE_LOW'
+        if hits and hits < self.min_hits:return False,'HISTORY_TOO_SHORT'
+        if open_count >= self.max_open:return False,'MAX_OPEN'
+        if daily_pnl <= -abs(self.max_daily_loss):return False,'DAILY_LOSS_LIMIT'
+        if sig in self.inflight:return False,'INFLIGHT'
+        cooldown=max(0.0,float(self.cooldown_by_mode.get(mode,self.cooldown)))
+        if now-float(self.last_exec.get(sig,0)) < cooldown:return False,'COOLDOWN'
+        if mode=='LATENCY':
+            if not row.get('repeatable'):return False,'LATENCY_NOT_REPEATABLE'
+            lag=float(row.get('observed_lag_ms') or 0); transport=float(row.get('slow_transport_ms') or 0)+float(row.get('fast_transport_ms') or 0)
+            if lag < max(1000.0,transport*1.25):return False,'LATENCY_TOO_SHORT_FOR_EXECUTION'
+        if mode=='FULL_NOW' and not row.get('full_loop_confirmed'):return False,'FULL_LOOP_NOT_CONFIRMED'
+        if mode=='BATCH_READY' and not row.get('series_ready'):return False,'BATCH_NOT_READY'
+        net=self.net_pct(row,mode)-self.execution_buffer_pct
+        if net < net_floor:return False,'NET_AFTER_BUFFER_TOO_LOW'
+        return True,'OK'
+
+    @staticmethod
+    def net_pct(row,mode):
+        if mode=='FULL_NOW':return float(row.get('full_net_pct') or 0)
+        if mode=='BATCH_READY':return float((row.get('batch_ready_plan') or {}).get('net_pct_per_cycle') or 0)
+        return float(row.get('net_pct') or 0)
+
+    def executable_net_pct(self,row,mode):
+        return max(0.0,self.net_pct(row,mode)-self.execution_buffer_pct)
+
+    def claim(self,row):
+        sig=row.get('signature') or str(row)
+        if sig in self.inflight:return False
+        self.inflight.add(sig); return True
+
+    def release(self,row,executed=False):
+        sig=row.get('signature') or str(row); self.inflight.discard(sig)
+        if executed:
+            now=time.time(); self.last_exec[sig]=now; self.exec_times.append(now)
+
+    def record_outcome(self,success):
+        if success:
+            self.consecutive_failures=0; return
+        self.consecutive_failures+=1
+        if self.consecutive_failures>=self.max_consecutive_failures:
+            self.failure_pause_until=time.time()+self.failure_pause_seconds
+
+    def mark(self,row):
+        self.last_exec[row.get('signature') or str(row)]=time.time()
+
+risk_manager=RiskManager()
+

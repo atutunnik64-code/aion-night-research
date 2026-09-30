@@ -1,0 +1,103 @@
+from __future__ import annotations
+import asyncio, time
+from app.services.raven_capital_allocator import raven_capital_allocator
+from app.services.raven_turbo_shadow import raven_turbo_shadow
+from app.services.basis_funding import basis_funding_scanner
+from app.services.triangle_scanner import triangle_scanner
+from app.services.stablecoin_scanner import stablecoin_scanner
+from app.services.live_executor import live_executor
+from app.services.arbitrage_paper_tracker import arbitrage_paper_tracker
+from app.services.basis_funding_paper import basis_funding_paper
+from app.services.perp_funding_spread import perp_funding_spread_scanner
+from app.services.perp_funding_spread_paper import perp_funding_spread_paper
+
+class GlobalCapitalManager:
+    def __init__(self):
+        self.enabled=True; self.interval=300.0; self.task=None; self.provider=None
+        self.last_refresh=None; self.last_error=None; self.latest={}
+        self.starting_capital=100.0
+
+    @staticmethod
+    def _research_ready(status):
+        mode=str(status.get('mode') or '').upper()
+        return bool(status.get('ok')) and mode in {'PAPER_READY','LIVE_READY','PAPER'}
+
+    @staticmethod
+    def _venues(row):
+        vals=set(row.get('execution_venues') or [])
+        v=row.get('venue')
+        if v: vals.add(str(v))
+        return vals
+    async def refresh(self,portfolio=None):
+        try:
+            p=portfolio or {}; live=live_executor.status()
+            quarantine=set(live.get('live_quarantined_venues') or [])
+            raven=raven_capital_allocator.status(); rav_ok=bool(raven.get('ok')); turbo=raven_turbo_shadow.status()
+            trade=[x for x in (p.get('tradeable') or []) if not (self._venues(x)&quarantine)]
+            arb_paper=arbitrage_paper_tracker.refresh(); basis_paper=basis_funding_paper.status(); perp_paper=perp_funding_spread_paper.status()
+            basis=basis_funding_scanner.status(); perp=perp_funding_spread_scanner.status(); tri=triangle_scanner.status(); stable=stablecoin_scanner.status()
+            basis_rows=[x for x in (basis.get('opportunities') or []) if not (self._venues(x)&quarantine)]
+            tri_rows=list(tri.get('opportunities') or []); stable_rows=list(stable.get('opportunities') or [])
+            arb_ready=bool((arb_paper.get('latest') or {}).get('allocatable')) and len(trade)>0
+            basis_ready=bool((basis_paper.get('latest') or {}).get('allocatable'))
+            perp_ready=bool((perp_paper.get('latest') or {}).get('allocatable'))
+            tri_ready=self._research_ready(tri) and bool(tri_rows); stable_ready=self._research_ready(stable) and bool(stable_rows)
+
+            weights={'raven':1.0 if rav_ok else 0.0,'arbitrage':0.0,'basis_funding':0.0,
+                     'perp_funding_spread':0.0,'stablecoin':0.0,'triangles':0.0,'cash':0.0 if rav_ok else 1.0}
+            if arb_ready:
+                aw=min(0.25,0.10+0.05*min(3,len(trade)))
+                weights['arbitrage']=round(aw,4); weights['raven']=round(max(0.0,weights['raven']-aw),4)
+            if basis_ready:
+                bw=0.15; weights['basis_funding']=bw; weights['raven']=round(max(0.0,weights['raven']-bw),4)
+            if perp_ready:
+                pw=0.15; weights['perp_funding_spread']=pw; weights['raven']=round(max(0.0,weights['raven']-pw),4)
+            research={'basis_funding':{'ready':basis_ready,'count':len(basis_rows),'mode':basis.get('mode')},
+                      'perp_funding_spread':{'ready':perp_ready,'count':perp.get('candidate_count',0),'mode':perp.get('mode')},
+                      'stablecoin':{'ready':stable_ready,'count':len(stable_rows),'mode':stable.get('mode')},
+                      'triangles':{'ready':tri_ready,'count':len(tri_rows),'mode':tri.get('mode')}}
+            turbo_paper=turbo.get('paper') or {}; turbo_obs=int(turbo.get('observation_count') or 0)
+            research['raven_turbo']={'ready':False,'mode':turbo.get('mode'),'phase':'WARMUP' if turbo_obs<24 else 'LEARNING',
+                                     'observations':turbo_obs,'paper_return_pct':turbo_paper.get('return_pct'),
+                                     'reason':'LIVE_PAPER_HISTORY_REQUIRED'}
+            blocked=[]
+            if not arb_ready:blocked.append('ARBITRAGE_NO_TRADEABLE_ROUTE')
+            if not basis_ready:blocked.append('BASIS_NO_PAPER_EXECUTION')
+            if not perp_ready:blocked.append('PERP_FUNDING_NO_PRIVATE_EXECUTOR')
+            if not stable_ready:blocked.append('STABLECOIN_NO_PAPER_EXECUTION')
+            if not tri_ready:blocked.append('TRIANGLES_NO_PAPER_EXECUTION')
+            blocked.append('RAVEN_TURBO_WARMUP' if turbo_obs<24 else 'RAVEN_TURBO_SHADOW_ONLY')
+            rlatest=(raven.get('latest') or {}); split=rlatest.get('weights') or {'v8':0.5,'v14':0.5,'cash':0.0}
+            self.latest={'mode':'PAPER_SHADOW','capital_usdt':self.starting_capital,'weights':weights,
+                         'raven_split':split,'arbitrage_tradeable_count':len(trade),'research':research,
+                         'blocked_reasons':blocked,'quarantined_venues':sorted(quarantine),
+                         'live_armed':bool(live.get('armed')),'paper_engines':{'arbitrage':arb_paper,'basis_funding':basis_paper,'perp_funding_spread':perp_paper,'raven_turbo':turbo},'raven_meta_equity':rlatest.get('meta_equity'),
+                         'raven_meta_return_pct':rlatest.get('meta_return_pct'),'updated_at':time.time()}
+            self.last_refresh=time.time(); self.last_error=None
+        except Exception as exc:self.last_error=str(exc)[:300]
+        return self.status()
+
+    def status(self):
+        return {'ok':self.last_error is None,'enabled':self.enabled,'mode':'PAPER_SHADOW',
+                'interval_seconds':self.interval,'last_refresh':self.last_refresh,
+                'last_error':self.last_error,'latest':self.latest}
+    async def start(self,provider):
+        self.provider=provider
+        if self.task and not self.task.done():return
+        await self.refresh(provider())
+        self.task=asyncio.create_task(self._loop(),name='global-capital-manager')
+
+    async def stop(self):
+        if self.task and not self.task.done():
+            self.task.cancel()
+            try:await self.task
+            except BaseException:pass
+        self.task=None
+
+    async def _loop(self):
+        while True:
+            await asyncio.sleep(max(60.0,self.interval))
+            try: await self.refresh(self.provider() if self.provider else {})
+            except Exception as exc:self.last_error=str(exc)[:300]
+
+global_capital_manager=GlobalCapitalManager()

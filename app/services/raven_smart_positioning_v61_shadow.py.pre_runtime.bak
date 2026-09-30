@@ -1,0 +1,111 @@
+from __future__ import annotations
+import asyncio,json,time
+from pathlib import Path
+import numpy as np,pandas as pd
+
+ROOT=Path(__file__).parents[2]; DH=ROOT/'data'/'derivatives_history'
+LIVE=ROOT/'data'/'positioning_history.jsonl'; STATE=ROOT/'data'/'raven_smart_positioning_v61_shadow.json'
+SYMS=['BTCUSDT','ETHUSDT','SOLUSDT','XRPUSDT','BNBUSDT','DOGEUSDT','ADAUSDT','LINKUSDT','AVAXUSDT','LTCUSDT']
+FEATS=['ret8','oi8','fund','global_d','topacct_d','toppos_d','taker_log']
+COST=.0012; HORIZON=6; ALPHA=10.0
+
+class RavenSmartPositioningV61Shadow:
+    def __init__(self):
+        self.enabled=True;self.interval=900.;self.task=None;self.last_error=None;self.last_refresh=None
+        self.state=self._load();self.latest={}
+    def _load(self):
+        try:return json.loads(STATE.read_text(encoding='utf-8'))
+        except Exception:return {'mode':'PAPER_SHADOW','equity':100.,'peak':100.,'max_dd_pct':0.,'weights':{},'observations':0,'history':[]}
+    def _save(self):STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+    @staticmethod
+    def _series(path,tscol,valcol,mean=False):
+        d=pd.read_csv(path);d['ts']=pd.to_datetime(d[tscol],unit='ms',utc=True);d[valcol]=pd.to_numeric(d[valcol],errors='coerce')
+        s=d.set_index('ts')[valcol].sort_index();return s.resample('8h').mean() if mean else s.resample('8h').last()
+    def _hist_symbol(self,s):
+        p=pd.read_csv(DH/f'binance_price8h_{s}.csv');p['ts']=pd.to_datetime(p.close_time,unit='ms',utc=True).dt.floor('8h')
+        p['close']=pd.to_numeric(p.close,errors='coerce');p=p.set_index('ts').sort_index();z=pd.DataFrame(index=p.index);z['close']=p.close
+        z['oi']=self._series(DH/f'binance_oi_1h_{s}.csv','timestamp','sumOpenInterestValue').reindex(z.index,method='ffill')
+        z['fund']=self._series(DH/f'binance_funding_{s}.csv','fundingTime','fundingRate').reindex(z.index,method='ffill')
+        z['global']=self._series(DH/f'binance_pos_global_{s}.csv','timestamp','longShortRatio').reindex(z.index,method='ffill')
+        z['topacct']=self._series(DH/f'binance_pos_top_account_{s}.csv','timestamp','longShortRatio').reindex(z.index,method='ffill')
+        z['toppos']=self._series(DH/f'binance_pos_top_position_{s}.csv','timestamp','longShortRatio').reindex(z.index,method='ffill')
+        z['taker']=self._series(DH/f'binance_pos_taker_{s}.csv','timestamp','buySellRatio',True).reindex(z.index,method='ffill')
+        return z
+    @staticmethod
+    def _live_rows():
+        out={s:[] for s in SYMS}
+        if not LIVE.exists():return out
+        for line in LIVE.read_text(encoding='utf-8').splitlines():
+            try:r=json.loads(line);ts=pd.Timestamp(float(r['ts']),unit='s',tz='UTC');data=r.get('symbols') or {}
+            except Exception:continue
+            for s in SYMS:
+                x=data.get(s) or {}
+                try:
+                    out[s].append((ts,float(x.get('price') or 0),float((x.get('oi') or {}).get('sumOpenInterestValue') or 0),float(x.get('funding_rate') or 0),
+                        float((x.get('global_ls') or {}).get('longShortRatio') or 0),float((x.get('top_account_ls') or {}).get('longShortRatio') or 0),
+                        float((x.get('top_position_ls') or {}).get('longShortRatio') or 0),float((x.get('taker_ls') or {}).get('buySellRatio') or 0)))
+                except Exception:pass
+        return out
+    def _dataset(self):
+        live=self._live_rows();frames={};now=pd.Timestamp.now(tz='UTC');latest_closed=now.floor('8h')
+        for s in SYMS:
+            z=self._hist_symbol(s)
+            if live.get(s):
+                q=pd.DataFrame(live[s],columns=['ts','close','oi','fund','global','topacct','toppos','taker']).set_index('ts').sort_index()
+                q=q[q.close>0];last=q[['close','oi','fund','global','topacct','toppos']].resample('8h').last();last['taker']=q.taker.resample('8h').mean()
+                q=last[q.index<=latest_closed];z=pd.concat([z,q]).groupby(level=0).last().sort_index()
+            z=z[z.index<=latest_closed];z['ret8']=z.close.pct_change();z['oi8']=z.oi.pct_change();z['target48']=z.close.shift(-HORIZON)/z.close-1
+            for name in ('global','topacct','toppos'):
+                z[name+'_d']=np.log(z[name].replace(0,np.nan)).diff()
+            z['taker_log']=np.log(z.taker.replace(0,np.nan));frames[s]=z
+        common=None
+        for z in frames.values():common=z.index if common is None else common.intersection(z.index)
+        common=common.sort_values();return {s:z.reindex(common) for s,z in frames.items()},common
+    @staticmethod
+    def _fit(train,cur):
+        X=train[FEATS].to_numpy(float);y=train.yrel.to_numpy(float);Xc=cur[FEATS].to_numpy(float)
+        mu=X.mean(0);sd=X.std(0);sd[sd<1e-9]=1.;X=(X-mu)/sd;Xc=(Xc-mu)/sd;yc=y-y.mean()
+        b=np.linalg.solve(X.T@X+ALPHA*np.eye(len(FEATS)),X.T@yc);return Xc@b
+    def _signal(self,frames,t):
+        known=t-pd.Timedelta(hours=48);rows=[];cur=[]
+        for s,z in frames.items():
+            h=z[(z.index>=known-pd.Timedelta(days=7))&(z.index<=known)][FEATS+['target48']].dropna().copy()
+            if len(h):h['symbol']=s;h['ts']=h.index;rows.append(h.reset_index(drop=True))
+            if t in z.index:
+                r=z.loc[t];cur.append({'symbol':s,**{f:r[f] for f in FEATS}})
+        if not rows:return None
+        tr=pd.concat(rows,ignore_index=True).dropna();cu=pd.DataFrame(cur).dropna()
+        if len(tr)<180 or len(cu)<8:return None
+        tr['yrel']=tr.target48-tr.groupby('ts').target48.transform('mean');cu=cu.assign(pred=self._fit(tr,cu)).sort_values('pred')
+        k=min(3,max(1,len(cu)//3));w={s:0. for s in SYMS};shorts=cu.head(k);longs=cu.tail(k)
+        for s in longs.symbol:w[s]=.5/k
+        for s in shorts.symbol:w[s]=-.5/k
+        return {'ts':str(t),'weights':w,'longs':list(longs.symbol),'shorts':list(shorts.symbol),'train_rows':int(len(tr))}
+    def _mark(self,frames,t,prev):
+        w={s:float((self.state.get('weights') or {}).get(s,0)) for s in SYMS};gross=fund=0.
+        for s,z in frames.items():
+            if t not in z.index or prev not in z.index:continue
+            gross+=w[s]*float(z.at[t,'close']/z.at[prev,'close']-1);fund+=w[s]*float(z.at[t,'fund'] or 0)
+        return gross-fund,gross,fund
+    async def refresh(self):
+        try:
+            frames,common=self._dataset()
+            if len(common)<60:raise RuntimeError('V61_INSUFFICIENT_HISTORY')
+            latest=common[-1];last_raw=self.state.get('last_bar_ts')
+            if not last_raw:
+                sig=self._signal(frames,latest)
+                if not sig:raise RuntimeError('V61_INITIAL_SIGNAL_UNAVAILABLE')
+                self.state.update({'weights':sig['weights'],'last_signal':sig,'last_bar_ts':str(latest),'last_rebalance_ts':str(latest),'started_at':time.time()});self._save()
+            else:
+                last=pd.Timestamp(last_raw);bars=[t for t in common if t>last]
+                for t in bars:
+                    net,gross,funding=self._mark(frames,t,last);eq=float(self.state.get('equity') or 100.)*(1+net);turn=0.;reb=False
+                    lr=pd.Timestamp(self.state.get('last_rebalance_ts') or last)
+                    if t-lr>=pd.Timedelta(hours=48):
+                        sig=self._signal(frames,t)
+                        if sig:
+                            old=self.state.get('weights') or {};turn=sum(abs(float(sig['weights'].get(s,0))-float(old.get(s,0))) for s in SYMS)
+                            eq*=max(.001,1-COST*turn);self.state['weights']=sig['weights'];self.state['last_signal']=sig;self.state['last_rebalance_ts']=str(t);reb=True
+                    self.state['equity']=eq;self.state['peak']=max(float(self.state.get('peak') or 100.),eq)
+                    self.state['max_dd_pct']=min(float(self.state.get('max_dd_pct') or 0.),(eq/float(self.state['peak'])-1)*100)
+                    self.state['observations']=int(self.state.get('observations') or 0)+1;self.state['last_bar_ts']=str(t)

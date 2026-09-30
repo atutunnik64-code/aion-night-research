@@ -1,0 +1,205 @@
+from __future__ import annotations
+from app.http_shared import SHARED_SSL_CONTEXT
+import asyncio
+import httpx
+from app.services.hot_book_cache import hot_book_cache
+
+class DepthGuard:
+    def __init__(self):
+        self.timeout=3.5
+        self.levels=20
+        self.min_net_pct=0.0
+        self.safety_buffer_pct=0.10
+        self.http=None
+        self.discovery_ws_hits=0; self.discovery_rest_hits=0; self.discovery_fetch_failures=0
+        self.cache_probe_ws_hits=0
+        self.execution_attempts=0; self.execution_ws_book_sets=0; self.execution_ws_hits=0
+        self.execution_cache_misses=0; self.execution_rest_hits=0; self.execution_rejections={}
+    async def start(self):
+        await hot_book_cache.start()
+        if self.http is None or self.http.is_closed:
+            self.http=httpx.AsyncClient(verify=SHARED_SSL_CONTEXT, timeout=self.timeout,follow_redirects=True,limits=httpx.Limits(max_connections=40,max_keepalive_connections=20))
+    async def stop(self):
+        if self.http is not None and not self.http.is_closed: await self.http.aclose()
+        await hot_book_cache.stop()
+    async def _client(self):
+        if self.http is None or self.http.is_closed: await self.start()
+        return self.http
+
+    @staticmethod
+    def _floats(rows):
+        out=[]
+        for row in rows or []:
+            try:
+                p=float(row[0]); q=float(row[1])
+                if p>0 and q>0: out.append((p,q))
+            except (TypeError,ValueError,IndexError): pass
+        return out
+
+    async def _fetch(self,c,venue,symbol):
+        s=str(symbol or '')
+        if venue=='Binance':
+            r=await c.get('https://data-api.binance.vision/api/v3/depth',params={'symbol':s.replace('-','').replace('_',''),'limit':self.levels}); r.raise_for_status(); d=r.json(); return self._floats(d.get('bids')),self._floats(d.get('asks'))
+        if venue=='Bybit':
+            r=await c.get('https://api.bybit.com/v5/market/orderbook',params={'category':'spot','symbol':s.replace('-','').replace('_',''),'limit':self.levels}); r.raise_for_status(); d=r.json().get('result',{}); return self._floats(d.get('b')),self._floats(d.get('a'))
+        if venue=='KuCoin':
+            r=await c.get('https://api.kucoin.com/api/v1/market/orderbook/level2_20',params={'symbol':s.replace('_','-')}); r.raise_for_status(); d=r.json().get('data',{}); return self._floats(d.get('bids')),self._floats(d.get('asks'))
+        if venue=='OKX':
+            r=await c.get('https://www.okx.com/api/v5/market/books',params={'instId':s.replace('_','-'),'sz':self.levels}); r.raise_for_status(); d=(r.json().get('data') or [{}])[0]; return self._floats(d.get('bids')),self._floats(d.get('asks'))
+        if venue=='Bitget':
+            r=await c.get('https://api.bitget.com/api/v2/spot/market/orderbook',params={'symbol':s.replace('-','').replace('_',''),'type':'step0','limit':self.levels}); r.raise_for_status(); d=r.json().get('data',{}); return self._floats(d.get('bids')),self._floats(d.get('asks'))
+        if venue=='HTX':
+            r=await c.get('https://api.huobi.pro/market/depth',params={'symbol':s.replace('-','').replace('_','').lower(),'type':'step0'}); r.raise_for_status(); d=r.json().get('tick',{}); return self._floats(d.get('bids')[:self.levels]),self._floats(d.get('asks')[:self.levels])
+        raise RuntimeError(f'DEPTH_UNSUPPORTED:{venue}')
+
+    @staticmethod
+    def _consume(levels,qty):
+        need=max(0.0,float(qty)); filled=0.0; value=0.0; last=0.0
+        for price,size in levels:
+            take=min(need-filled,size)
+            if take<=0: continue
+            filled+=take; value+=take*price; last=price
+            if filled+1e-12>=need: break
+        if filled<=0:return {'ok':False,'filled':0.0}
+        return {'ok':filled+1e-9>=need,'filled':filled,'value':value,'vwap':value/filled,'last_price':last}
+
+    def _assess_with_books(self,legs,books):
+        if len(legs)!=2:return {'ok':False,'status':'DEPTH_PLAN_INVALID'}
+        calc=[]
+        for leg,(bids,asks) in zip(legs,books):
+            side=str(leg.get('side') or '').lower(); qty=float(leg.get('qty') or 0)
+            levels=asks if side=='buy' else bids; x=self._consume(levels,qty)
+            if not x.get('ok'):
+                return {'ok':False,'status':'DEPTH_INSUFFICIENT','venue':leg.get('venue'),'symbol':leg.get('symbol'),'side':side,'requested_qty':qty,'filled_qty':x.get('filled',0)}
+            fee=max(0.0,float(leg.get('fee_rate') or 0))
+            calc.append({**leg,'depth_vwap':x['vwap'],'depth_last_price':x['last_price'],'depth_value':x['value'],'fee_rate':fee})
+        buy=next((x for x in calc if x['side']=='buy'),None); sell=next((x for x in calc if x['side']=='sell'),None)
+        if not buy or not sell:return {'ok':False,'status':'DEPTH_SIDES_INVALID'}
+        cost=buy['depth_value']*(1+buy['fee_rate']); proceeds=sell['depth_value']*(1-sell['fee_rate'])
+        net=proceeds-cost; net_pct=(net/cost*100) if cost>0 else -999.0; executable=net_pct-self.safety_buffer_pct
+        buy['price']=buy['depth_last_price']*1.0002; sell['price']=sell['depth_last_price']*0.9998
+        return {'ok':executable>=self.min_net_pct,'status':'DEPTH_CONFIRMED' if executable>=self.min_net_pct else 'DEPTH_NET_TOO_LOW',
+                'gross_cost':round(cost,10),'gross_proceeds':round(proceeds,10),'net_profit':round(net,10),
+                'depth_net_pct':round(net_pct,6),'executable_net_pct':round(executable,6),'min_net_pct':self.min_net_pct,
+                'safety_buffer_pct':self.safety_buffer_pct,'legs':calc}
+    async def _fetch_books(self,legs):
+        if len(legs)!=2:return None
+        hot_book_cache.watch_legs(legs); books=[None,None]; ages=[]; missing=[]
+        for i,leg in enumerate(legs):
+            hit=hot_book_cache.get(leg['venue'],leg['symbol'])
+            if hit:
+                books[i]=(hit[0],hit[1]); ages.append(hit[2]); self.discovery_ws_hits+=1
+            else:missing.append(i)
+        if missing:
+            try:
+                c=await self._client(); rows=await asyncio.gather(*[self._fetch(c,legs[i]['venue'],legs[i]['symbol']) for i in missing],return_exceptions=True)
+                for i,row in zip(missing,rows):
+                    if isinstance(row,Exception):self.discovery_fetch_failures+=1; return None
+                    books[i]=row; self.discovery_rest_hits+=1
+            except Exception:self.discovery_fetch_failures+=1; return None
+        source='WS_CACHE' if not missing else ('WS_REST' if len(missing)<2 else 'REST_POOL')
+        return {'books':books,'source':source,'age_ms':round(max(ages),2) if ages else None}
+
+    async def assess_legs(self,legs):
+        fetched=await self._fetch_books(legs)
+        if not fetched:return {'ok':False,'status':'DEPTH_FETCH_FAILED'}
+        out=self._assess_with_books(legs,fetched['books']); out['book_source']=fetched['source']; out['book_age_ms']=fetched['age_ms']; return out
+
+    async def assess_leg_sets(self,leg_sets):
+        sets=[x for x in leg_sets if len(x)==2]
+        if not sets:return []
+        fetched=await self._fetch_books(sets[0])
+        if not fetched:return [{'ok':False,'status':'DEPTH_FETCH_FAILED'} for _ in sets]
+        out=[]
+        for legs in sets:
+            row=self._assess_with_books(legs,fetched['books']); row['book_source']=fetched['source']; row['book_age_ms']=fetched['age_ms']; out.append(row)
+        return out
+
+    def assess_cached_legs(self,legs):
+        if len(legs)!=2:return {'ok':False,'status':'WS_CACHE_PLAN_INVALID'}
+        hot_book_cache.watch_legs(legs); hits=[]; ages=[]
+        for leg in legs:
+            info=hot_book_cache.age_info(leg.get('venue'),leg.get('symbol')); ages.append(info)
+            hit=hot_book_cache.get(leg.get('venue'),leg.get('symbol'),hot_book_cache.execution_stale_after)
+            if not hit:
+                stale=bool(info and info.get('source_age_ms') is not None and float(info['source_age_ms'])>hot_book_cache.execution_stale_after*1000.0)
+                return {'ok':False,'status':'WS_SOURCE_STALE' if stale else 'WS_CACHE_MISS','book_ages':ages}
+            hits.append(hit)
+        self.cache_probe_ws_hits+=len(hits); out=self._assess_with_books(legs,[(x[0],x[1]) for x in hits])
+        out['book_source']='WS_CACHE'; out['book_age_ms']=round(max(x[2] for x in hits),2); out['book_ages']=ages; return out
+
+    def assess_execution_cached_legs(self,legs):
+        self.execution_attempts+=1
+        if len(legs)!=2:
+            self.execution_cache_misses+=1
+            self.execution_rejections['WS_CACHE_PLAN_INVALID']=self.execution_rejections.get('WS_CACHE_PLAN_INVALID',0)+1
+            return {'ok':False,'status':'WS_CACHE_PLAN_INVALID'}
+        hot_book_cache.watch_legs(legs); hits=[]; ages=[]
+        for leg in legs:
+            info=hot_book_cache.age_info(leg.get('venue'),leg.get('symbol')); ages.append(info)
+            hit=hot_book_cache.get(leg.get('venue'),leg.get('symbol'),hot_book_cache.execution_stale_after)
+            if not hit:
+                self.execution_cache_misses+=1
+                stale=bool(info and info.get('source_age_ms') is not None and float(info['source_age_ms'])>hot_book_cache.execution_stale_after*1000.0)
+                status='WS_SOURCE_STALE' if stale else 'WS_CACHE_MISS'
+                self.execution_rejections[status]=self.execution_rejections.get(status,0)+1
+                return {'ok':False,'status':status,'book_age':info,'book_ages':ages}
+            hits.append(hit)
+        self.execution_ws_hits+=len(hits); self.execution_ws_book_sets+=1
+        out=self._assess_with_books(legs,[(x[0],x[1]) for x in hits])
+        out['book_source']='WS_CACHE'; out['book_age_ms']=round(max(x[2] for x in hits),2); out['book_ages']=ages
+        if not out.get('ok'):
+            st=str(out.get('status') or 'UNKNOWN')
+            self.execution_rejections[st]=self.execution_rejections.get(st,0)+1
+        return out
+
+    def assess_cached_leg_sets(self,leg_sets):
+        sets=[x for x in leg_sets if len(x)==2]
+        if not sets:return []
+        first=self.assess_cached_legs(sets[0])
+        if not first.get('ok') and first.get('status') in {'WS_CACHE_MISS','WS_SOURCE_STALE','WS_CACHE_PLAN_INVALID'}: return [dict(first) for _ in sets]
+        hits=[hot_book_cache.get(x.get('venue'),x.get('symbol'),hot_book_cache.execution_stale_after) for x in sets[0]]
+        if not all(hits):return [dict(first) for _ in sets]
+        books=[(x[0],x[1]) for x in hits]; age=round(max(x[2] for x in hits),2); ages=first.get('book_ages') or []; out=[]
+        for legs in sets:
+            row=self._assess_with_books(legs,books); row['book_source']='WS_CACHE'; row['book_age_ms']=age; row['book_ages']=ages; out.append(row)
+        return out
+
+    def status(self):
+        discovery={'ws_hits':self.discovery_ws_hits,'rest_hits':self.discovery_rest_hits,'fetch_failures':self.discovery_fetch_failures}
+        execution={'attempts':self.execution_attempts,'ws_book_sets':self.execution_ws_book_sets,'ws_leg_hits':self.execution_ws_hits,'rest_hits':self.execution_rest_hits,'cache_misses':self.execution_cache_misses,'rejections':dict(sorted(self.execution_rejections.items()))}
+        return {'discovery':discovery,'execution':execution,'cache_probe_ws_hits':self.cache_probe_ws_hits,
+                'ws_hits':self.discovery_ws_hits+self.cache_probe_ws_hits,'rest_hits':self.discovery_rest_hits,'fetch_failures':self.discovery_fetch_failures,
+                'execution_ws_hits':self.execution_ws_hits,'execution_rest_hits':self.execution_rest_hits,'execution_cache_misses':self.execution_cache_misses,
+                'execution_contract':{'modes':['FULL_NOW','BATCH_READY','CLASSIC','LATENCY'],'book_source':'WS_CACHE_ONLY','max_book_age_ms':hot_book_cache.execution_stale_after*1000.0,'rest_fallback':False,'rules':'PREWARMED_CACHE_ONLY'},
+                'hot_books':hot_book_cache.status()}
+
+    def rebalance_cost(self,row,mode,notional):
+        n=max(1e-12,float(notional or 0)); cost=0.0; cycles=1.0; source='none'
+        if mode=='FULL_NOW':
+            cost=max(0.0,float(row.get('rebalance_cost_quote') or 0)); source='full_loop_network_fees'
+        elif mode=='BATCH_READY':
+            p=row.get('batch_ready_plan') or {}; cost=max(0.0,float(p.get('rebalance_cost_per_cycle') or 0)); source='batch_amortized_rebalance'
+        elif mode in {'LATENCY','CLASSIC'}:
+            br=row.get('base_rebalance') or {}; qr=row.get('quote_rebalance') or {}
+            base_fee=max(0.0,float(br.get('fee') or 0)); quote_fee=max(0.0,float(qr.get('fee') or 0))
+            px=max(float(row.get('slow_bid') or 0),float(row.get('slow_ask') or 0),float(row.get('fast_bid') or 0),float(row.get('fast_ask') or 0),float(row.get('buy_ask') or 0),float(row.get('sell_bid') or 0))
+            observed=max(int(row.get('confirmations') or 0),int((row.get('history') or {}).get('hits') or 0))
+            cycles=float(row.get('rebalance_batch_cycles') or max(1,min(8,observed//2 or 1)))
+            cost=(base_fee*px+quote_fee)/cycles; source=('latency_prefunded_amortized' if mode=='LATENCY' else 'classic_prefunded_amortized')
+        return {'cost_quote':cost,'pct':cost/n*100.0,'cycles':cycles,'source':source}
+
+    def sustainable(self,row,mode,notional,depth):
+        trade=float(depth.get('depth_net_pct') or -999)-self.safety_buffer_pct
+        reb=self.rebalance_cost(row,mode,notional); net=trade-reb['pct']
+        out=dict(depth); out['rebalance_cost_quote']=round(reb['cost_quote'],10); out['rebalance_overhead_pct']=round(reb['pct'],6)
+        out['rebalance_batch_cycles_used']=reb['cycles']; out['rebalance_cost_source']=reb['source']; out['sustainable_net_pct']=round(net,6)
+        gross_cost=max(0.0,float(depth.get('gross_cost') or 0)); cap=max(1e-12,float(notional or 0))
+        over=max(0.0,(gross_cost/cap-1.0)*100.0); out['capital_overrun_pct']=round(over,6); out['capital_ok']=bool(gross_cost<=cap*1.01)
+        out['ok']=bool(depth.get('ok') and out['capital_ok'] and net>=self.min_net_pct)
+        if not out['capital_ok']: out['status']='CAPITAL_OVERRUN'
+        else: out['status']='SUSTAINABLE_NET_CONFIRMED' if out['ok'] else 'SUSTAINABLE_NET_TOO_LOW'
+        return out
+
+
+depth_guard=DepthGuard()

@@ -1,0 +1,163 @@
+from __future__ import annotations
+import asyncio, json, time
+from pathlib import Path
+
+ROOT=Path(__file__).parents[2]
+DATA=ROOT/'data'
+STATE=DATA/'raven_evolution_state.json'
+RESULT_FILES={
+    'v24':DATA/'raven_turbo_highbeta_v24_results.json',
+    'v25':DATA/'raven_turbo_highbeta_v25_results.json',
+    'v26':DATA/'raven_turbo_v26_cash_overlay_results.json',
+    'v27':DATA/'raven_meta_v27_results.json',
+    'v28':DATA/'raven_turbo_v28_risk_parity_results.json',
+    'v29':DATA/'raven_turbo_v29_pair_quality_results.json',
+}
+CHALLENGER_DIR=DATA/'raven_challengers'
+POLICY={
+    'target_monthly_pct':40.0,
+    'max_holdout_dd_pct':12.0,
+    'min_holdout_months':6,
+    'min_positive_month_ratio':0.70,
+    'min_paper_score_improvement':3.0,
+    'max_dd_worsening_pct':2.0,
+    'live_promotion_enabled':False,
+}
+
+class RavenEvolutionManager:
+    def __init__(self):
+        self.interval=21600.0
+        self.task=None
+        self.last_error=None
+        self.state=self._load()
+    def _load(self):
+        base={
+            'paper_champion':'v24','live_champion':None,'generation':24,
+            'candidates':{},'promotion_history':[],'rollback_history':[],
+            'last_scan':None,'target_40_achieved':False,
+        }
+        try:
+            old=json.loads(STATE.read_text(encoding='utf-8'))
+            if isinstance(old,dict): base.update(old)
+        except Exception:
+            pass
+        return base
+
+    def _save(self):
+        STATE.parent.mkdir(parents=True,exist_ok=True)
+        STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+
+    @staticmethod
+    def _kpi(monthly):
+        vals=[float(x) for x in (monthly or [])]
+        ge40=sum(1 for x in vals if x>=40.0)
+        return {
+            'months_total':len(vals),'months_ge_40':ge40,
+            'ratio_ge_40':round(ge40/max(1,len(vals)),4),
+            'all_months_ge_40':bool(vals and all(x>=40.0 for x in vals)),
+        }
+
+    @staticmethod
+    def _score(h,kpi):
+        return float(h.get('return_pct',0))+30*float(h.get('monthly_positive_ratio',0))+40*float(kpi['ratio_ge_40'])-2*abs(float(h.get('max_dd_pct',0)))+float(h.get('monthly_median_pct',0))
+    def _candidate(self,name,path):
+        if not path.exists():
+            return {'name':name,'available':False,'reason':'RESULT_MISSING'}
+        try:
+            raw=json.loads(path.read_text(encoding='utf-8'))
+        except Exception as exc:
+            return {'name':name,'available':False,'reason':f'READ_ERROR:{str(exc)[:80]}'}
+        h=raw.get('holdout_180d') or {}; monthly=h.get('monthly') or []
+        kpi=self._kpi(monthly); score=self._score(h,kpi)
+        selected_on=str(raw.get('selected_on') or '')
+        dd=float(h.get('max_dd_pct',0)); pos=float(h.get('monthly_positive_ratio',0)); months=int(h.get('months',len(monthly)) or 0)
+        gates={
+            'train_selected':selected_on in {'train_only','train_walkforward_only'},
+            'months':months>=POLICY['min_holdout_months'],
+            'drawdown':dd>=-POLICY['max_holdout_dd_pct'],
+            'positive_ratio':pos>=POLICY['min_positive_month_ratio'],
+            'positive_return':float(h.get('return_pct',0))>0,
+        }
+        return {
+            'name':name,'available':True,'strategy':raw.get('strategy'),
+            'holdout':h,'kpi40':kpi,'score':round(score,6),
+            'research_gate_pass':all(gates.values()),'gates':gates,
+            'target_40_pass':kpi['all_months_ge_40'],
+            'selected_on':selected_on,
+        }
+
+    def _promote_paper_if_better(self,cands):
+        current=self.state.get('paper_champion') or 'v24'
+        cur=cands.get(current)
+        eligible=[x for x in cands.values() if x.get('available') and x.get('research_gate_pass')]
+        if not eligible:return None
+        best=max(eligible,key=lambda x:float(x.get('score',-1e9)))
+        if not cur or not cur.get('available'):
+            improvement=999.0
+        else:
+            improvement=float(best['score'])-float(cur.get('score',-1e9))
+            dd_worse=abs(min(0.0,float(best['holdout'].get('max_dd_pct',0))))-abs(min(0.0,float(cur['holdout'].get('max_dd_pct',0))))
+            if dd_worse>POLICY['max_dd_worsening_pct']: return None
+        if best['name']==current or improvement<POLICY['min_paper_score_improvement']: return None
+        event={
+            'ts':time.time(),'from':current,'to':best['name'],
+            'score_improvement':round(improvement,6),
+            'reason':'BETTER_RISK_ADJUSTED_HOLDOUT',
+            'live_changed':False,
+        }
+        self.state['paper_champion']=best['name']
+        gen=int(self.state.get('generation') or 0)
+        if best['name'].startswith('v') and best['name'][1:].isdigit(): gen=max(gen,int(best['name'][1:]))
+        else: gen+=1
+        self.state['generation']=gen
+        hist=list(self.state.get('promotion_history') or []); hist.append(event)
+        self.state['promotion_history']=hist[-100:]
+        return event
+
+    async def refresh(self):
+        try:
+            files=dict(RESULT_FILES)
+            if CHALLENGER_DIR.exists():
+                for path in sorted(CHALLENGER_DIR.glob('*.json'),key=lambda x:x.stat().st_mtime)[-50:]:
+                    files[f'challenger:{path.stem}']=path
+            cands={name:self._candidate(name,path) for name,path in files.items()}
+            self.state['candidates']=cands
+            self.state['target_40_achieved']=any(x.get('target_40_pass') for x in cands.values())
+            promotion=self._promote_paper_if_better(cands)
+            self.state['last_scan']=time.time()
+            self.state['last_promotion']=promotion
+            self.last_error=None
+            self._save()
+        except Exception as exc:
+            self.last_error=str(exc)[:300]
+        return self.status()
+
+    def status(self):
+        return {
+            'ok':self.last_error is None,'mode':'RESEARCH_EVOLUTION',
+            'policy':POLICY,'paper_champion':self.state.get('paper_champion'),
+            'live_champion':self.state.get('live_champion'),
+            'generation':self.state.get('generation'),
+            'target_40_achieved':self.state.get('target_40_achieved',False),
+            'last_scan':self.state.get('last_scan'),'last_error':self.last_error,
+            'candidates':self.state.get('candidates') or {},
+            'promotion_history':(self.state.get('promotion_history') or [])[-20:],
+            'live_promotion_enabled':False,
+        }
+    async def start(self):
+        if self.task and not self.task.done(): return
+        self.task=asyncio.create_task(self._loop(),name='raven-evolution-manager')
+
+    async def stop(self):
+        if self.task and not self.task.done():
+            self.task.cancel()
+            try: await self.task
+            except BaseException: pass
+        self.task=None
+
+    async def _loop(self):
+        while True:
+            await self.refresh()
+            await asyncio.sleep(max(3600.0,self.interval))
+
+raven_evolution_manager=RavenEvolutionManager()
