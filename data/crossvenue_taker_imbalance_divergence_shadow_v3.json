@@ -1,0 +1,15 @@
+{
+  "version": "CROSSVENUE_TAKER_IMBALANCE_DIVERGENCE_V3",
+  "rule_frozen_at": 1790788001.7366178,
+  "last_processed_bucket": 5969293,
+  "last_signal_ts": {},
+  "pending": [],
+  "resolved": [],
+  "binance_equity": 100.0,
+  "binance_peak": 100.0,
+  "binance_max_dd_pct": 0.0,
+  "bybit_equity": 100.0,
+  "bybit_peak": 100.0,
+  "bybit_max_dd_pct": 0.0,
+  "last_new_events": 0
+}

@@ -1,0 +1,17 @@
+{
+  "version": "MOEX_SPREAD_RESEARCH_V1",
+  "started_at": 1790788001.686441,
+  "refresh_count": 1,
+  "last": {
+    "ts": 1790788001.741448,
+    "mode": "MOEX_SPREAD_RESEARCH_ONLY",
+    "paper_only": true,
+    "live_enabled": false,
+    "source_samples": 0,
+    "collection_hours": 0.0,
+    "gate_ready": false,
+    "assets": [],
+    "top_deviations": []
+  },
+  "last_refresh": 1790788001.741448
+}

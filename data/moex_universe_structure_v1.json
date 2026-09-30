@@ -1,0 +1,15 @@
+{
+  "version": "MOEX_UNIVERSE_STRUCTURE_V1",
+  "started_at": 1790788001.6843398,
+  "samples": 1,
+  "last": {
+    "ts": 1790788001.741367,
+    "mode": "FUTURE_ONLY_STRUCTURE",
+    "source": "MOEX_UNIVERSE_V1",
+    "curve_assets": 0,
+    "liquid_curve_assets": 0,
+    "curves": [],
+    "liquid_curves": []
+  },
+  "last_refresh": 1790788001.741367
+}

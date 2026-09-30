@@ -1,0 +1,25 @@
+{
+  "version": "CROSSVENUE_PERP_TAKER_COLLECTOR_V2",
+  "last_binance_bucket": {},
+  "stats": {
+    "Binance": {
+      "connected": true,
+      "messages": 0,
+      "trades": 0,
+      "buckets": 0,
+      "errors": 12,
+      "last_error": null,
+      "last_trade_at": null
+    },
+    "Bybit": {
+      "connected": true,
+      "messages": 10,
+      "trades": 55,
+      "buckets": 0,
+      "errors": 0,
+      "last_error": null,
+      "last_trade_at": 1790788002.872662
+    }
+  },
+  "updated_at": 1790788002.9459503
+}

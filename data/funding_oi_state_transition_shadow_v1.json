@@ -1,0 +1,15 @@
+{
+  "version": "FUNDING_OI_STATE_TRANSITION_V1",
+  "rule_frozen_at": 1790788001.6891482,
+  "last_processed_ts": 1790788001.6891482,
+  "last_event_ts": {},
+  "pending": [],
+  "resolved": [],
+  "follow_equity": 100.0,
+  "follow_peak": 100.0,
+  "follow_max_dd_pct": 0.0,
+  "fade_equity": 100.0,
+  "fade_peak": 100.0,
+  "fade_max_dd_pct": 0.0,
+  "last_new_events": 0
+}
