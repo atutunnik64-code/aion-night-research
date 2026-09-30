@@ -1,4 +1,4 @@
-name: AION Night Research
+﻿name: AION Night Research
 
 on:
   schedule:
@@ -39,7 +39,7 @@ jobs:
             D="3480"
           fi
           export AION_NIGHT_DURATION_SEC="$D"
-          python cloud/night_agent.py
+          PYTHONPATH=. python cloud/night_agent.py
       - name: Persist research state
         shell: bash
         run: |
@@ -53,3 +53,4 @@ jobs:
           git commit -m "research: hourly public snapshot"
           git pull --rebase origin main
           git push origin HEAD:main
+
