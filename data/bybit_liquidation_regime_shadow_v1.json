@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_LIQUIDATION_REGIME_V1",
   "rule_frozen_at": 1790832884.3502889,
-  "last_bucket": 29847711,
+  "last_bucket": 29847715,
   "last_signal_ts": {},
   "pending": [],
   "resolved": [],
