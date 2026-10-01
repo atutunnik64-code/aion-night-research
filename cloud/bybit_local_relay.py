@@ -16,12 +16,16 @@ DATA = ROOT / "data"
 RELAY = DATA / "bybit_local_relay_v1.json"
 RUNTIME = Path(os.getenv("AION_BYBIT_RUNTIME", str(ROOT.parent / "aion-bybit-runtime")))
 RUNTIME.mkdir(parents=True, exist_ok=True)
+FUNDING_REFRESH_SEC = 180.0
 
 # Keep local collector state outside the git checkout so pulling/pushing the
 # compact relay file never conflicts with cloud-generated state.
 import app.services.crossvenue_spot_arb_cloud_v1 as arbmod
+from app.services.perp_funding_spread import PerpFundingSpreadScanner
+
 arbmod.STATE = RUNTIME / "crossvenue_spot_arb_local_v1.json"
 arb = arbmod.CrossVenueSpotArbCloudV1()
+funding = PerpFundingSpreadScanner()
 
 
 def _atomic_json(path: Path, payload: dict) -> None:
@@ -48,6 +52,21 @@ def _bybit_signals(limit: int = 100) -> list[dict]:
     return out[:limit]
 
 
+def _bybit_funding_rows(limit: int = 100) -> list[dict]:
+    rows = [
+        x for x in (funding.rows or [])
+        if x.get("long_venue") == "Bybit" or x.get("short_venue") == "Bybit"
+    ]
+    rows.sort(
+        key=lambda x: (
+            x.get("status") == "PAPER_CANDIDATE",
+            float(x.get("net_24h_conservative_pct") or -999.0),
+        ),
+        reverse=True,
+    )
+    return rows[:limit]
+
+
 def _relay_payload() -> dict:
     counts = arb.state.get("venue_symbol_counts") or {}
     errs = arb.state.get("venue_errors") or {}
@@ -55,17 +74,22 @@ def _relay_payload() -> dict:
     bybit_guarded = sum(1 for vm in market.values() if "Bybit" in vm)
     events = _bybit_events()
     signals = _bybit_signals()
+    funding_rows = _bybit_funding_rows()
+    funding_candidates = [x for x in funding_rows if x.get("status") == "PAPER_CANDIDATE"]
     return {
-        "version": "BYBIT_LOCAL_RELAY_V1",
+        "version": "BYBIT_LOCAL_RELAY_V2_SPOT_AND_PERP",
         "generated_at": time.time(),
         "paper_only": True,
         "live_enabled": False,
         "source": "LOCAL_WINDOWS_DIRECT_BYBIT_PUBLIC_API",
         "source_health": {
-            "bybit_symbol_count": int(counts.get("Bybit") or 0),
+            "bybit_spot_symbol_count": int(counts.get("Bybit") or 0),
             "bybit_guarded_common_assets": bybit_guarded,
-            "bybit_error": errs.get("Bybit"),
-            "all_venue_symbol_counts": counts,
+            "bybit_spot_error": errs.get("Bybit"),
+            "all_spot_venue_symbol_counts": counts,
+            "bybit_perp_symbol_count": int((funding.venue_asset_counts or {}).get("Bybit") or 0),
+            "all_perp_venue_symbol_counts": funding.venue_asset_counts or {},
+            "funding_last_error": funding.last_error,
         },
         "spot_arb": {
             "scan_count": int(arb.state.get("scan_count") or 0),
@@ -78,6 +102,15 @@ def _relay_payload() -> dict:
             "recent_bybit_events": events,
             "bybit_signal_count": len(signals),
             "top_bybit_signals": signals,
+        },
+        "perp_funding": {
+            "last_refresh": funding.last_refresh,
+            "universe_bases": int(funding.universe_bases or 0),
+            "multi_venue_bases": int(funding.multi_venue_bases or 0),
+            "pairs_evaluated": int(funding.pairs_evaluated or 0),
+            "bybit_route_count": len(funding_rows),
+            "bybit_paper_candidate_count": len(funding_candidates),
+            "top_bybit_routes": funding_rows,
         },
         "policy": {
             "no_grid": True,
@@ -112,16 +145,24 @@ def sync_relay() -> tuple[bool, str]:
 
 async def run(interval: float, sync_every: float, do_sync: bool, once: bool) -> None:
     last_sync = 0.0
+    last_funding = 0.0
     while True:
         await arb.refresh()
+        now = time.time()
+        if last_funding == 0.0 or now - last_funding >= FUNDING_REFRESH_SEC:
+            await funding.refresh()
+            last_funding = time.time()
         payload = _relay_payload()
         _atomic_json(RELAY, payload)
         print(
             f"BYBIT_RELAY scan={payload['spot_arb']['scan_count']} "
-            f"symbols={payload['source_health']['bybit_symbol_count']} "
+            f"spot_symbols={payload['source_health']['bybit_spot_symbol_count']} "
             f"guarded={payload['source_health']['bybit_guarded_common_assets']} "
-            f"events={payload['spot_arb']['recent_bybit_event_count']} "
-            f"err={payload['source_health']['bybit_error']}",
+            f"spot_events={payload['spot_arb']['recent_bybit_event_count']} "
+            f"perp_symbols={payload['source_health']['bybit_perp_symbol_count']} "
+            f"funding_candidates={payload['perp_funding']['bybit_paper_candidate_count']} "
+            f"spot_err={payload['source_health']['bybit_spot_error']} "
+            f"funding_err={payload['source_health']['funding_last_error']}",
             flush=True,
         )
         now = time.time()
