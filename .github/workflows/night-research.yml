@@ -50,6 +50,11 @@ jobs:
           fi
           export AION_NIGHT_DURATION_SEC="$D"
           PYTHONPATH=. python cloud/night_agent.py
+      - name: Build evidence dashboard
+        shell: bash
+        run: |
+          set -euo pipefail
+          PYTHONPATH=. python cloud/research_evidence_dashboard.py
       - name: Validate research state
         shell: bash
         run: |
