@@ -1,15 +1,15 @@
 {
   "version": "CROSSVENUE_SPOT_ARB_CLOUD_V1",
   "started_at": 1790835361.142944,
-  "scan_count": 145,
+  "scan_count": 151,
   "signals": {},
   "events": [],
   "pnl_quote": 0.0,
   "loss_reasons": {
-    "NO_RAW_SPREAD": 15,
-    "TRADING_FEES": 5
+    "NO_RAW_SPREAD": 16,
+    "TRADING_FEES": 4
   },
-  "last_scan_ts": 1790853953.887719,
+  "last_scan_ts": 1790854162.5638142,
   "last_new_events": 0,
   "last_depth_checks": 0,
   "last_depth_pass": 0
