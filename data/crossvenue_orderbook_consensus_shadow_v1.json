@@ -1,0 +1,59 @@
+{
+  "version": "CROSSVENUE_ORDERBOOK_CONSENSUS_V1",
+  "rule_frozen_at": 1790847742.152853,
+  "last_event_ts": {
+    "LINK": 1790847742.695916,
+    "BTC": 1790847863.3554506,
+    "SUI": 1790847863.3554506
+  },
+  "pending": [
+    {
+      "id": "LINK:1790847742",
+      "base": "LINK",
+      "ts": 1790847742.695916,
+      "due_ts": 1790848642.695916,
+      "side": 1,
+      "entry": 14.309,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.7334422518521563,
+        "Bitget": 0.6338421975449502
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "BTC:1790847863",
+      "base": "BTC",
+      "ts": 1790847863.3554506,
+      "due_ts": 1790848763.3554506,
+      "side": 1,
+      "entry": 83883.1825,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.605152647190292,
+        "Bitget": 0.5003131551490326
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "SUI:1790847863",
+      "base": "SUI",
+      "ts": 1790847863.3554506,
+      "due_ts": 1790848763.3554506,
+      "side": -1,
+      "entry": 1.1627750000000001,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": -0.43186519628204706,
+        "Bitget": -0.48896520595244897
+      },
+      "round_trip_cost": 0.0025
+    }
+  ],
+  "resolved": [],
+  "equity": 100.0,
+  "peak": 100.0,
+  "max_dd_pct": 0.0,
+  "last_new_events": 2,
+  "scan_count": 3
+}
