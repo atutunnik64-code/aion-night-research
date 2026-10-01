@@ -31,6 +31,7 @@ from app.services.perp_funding_spread_paper import perp_funding_spread_paper
 from app.services.basis_funding import basis_funding_scanner
 from app.services.crossvenue_spot_perp_shadow_v2 import crossvenue_spot_perp_shadow_v2
 from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_v1
+from app.services.crossvenue_arb_verifier_v1 import crossvenue_arb_verifier_v1
 from app.services.crossvenue_leadlag_episode_cloud_v1 import crossvenue_leadlag_episode_cloud_v1
 from app.services.crossvenue_orderbook_consensus_shadow_v1 import crossvenue_orderbook_consensus_shadow_v1
 from app.services.crossvenue_momentum_divergence_shadow_v1 import crossvenue_momentum_divergence_shadow_v1
@@ -58,6 +59,7 @@ SERVICES = [
     basis_funding_scanner,
     crossvenue_spot_perp_shadow_v2,
     crossvenue_spot_arb_cloud_v1,
+    crossvenue_arb_verifier_v1,
     crossvenue_leadlag_episode_cloud_v1,
     crossvenue_orderbook_consensus_shadow_v1,
     crossvenue_momentum_divergence_shadow_v1,
