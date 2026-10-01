@@ -8,9 +8,10 @@ ROOT=Path(__file__).parents[2]; DATA=ROOT/'data'; STATE=DATA/'crossvenue_spot_ar
 VENUES=('Bybit','OKX','Bitget','Gate','KuCoin')
 TAKER={v:0.0010 for v in VENUES}
 NOTIONAL=25.0; SAFETY_PCT=0.05; REBALANCE_RESERVE_PCT=0.10
-MIN_ALL_IN_NET_PCT=0.05; COOLDOWN_SEC=300; MIN_HITS=2
-DEPTH_LEVELS=20; MAX_DEPTH_CHECKS_PER_SCAN=40
-MIN_QUOTE_VOLUME=100_000.0; MAX_LOCAL_SPREAD_PCT=1.5; MAX_PRICE_DEVIATION_PCT=3.0; MAX_RAW_SPREAD_PCT=2.5
+MIN_CONSERVATIVE_NET_PCT=0.05; COOLDOWN_SEC=300; MIN_HITS=2
+DEPTH_LEVELS=20; MAX_DEPTH_CHECKS_PER_SCAN=60
+MIN_OBSERVE_QUOTE_VOLUME=10_000.0; TRUSTED_QUOTE_VOLUME=100_000.0
+MAX_LOCAL_SPREAD_PCT=1.5; MAX_PRICE_DEVIATION_PCT=3.0; REVIEW_RAW_SPREAD_PCT=2.5
 CANONICAL_MAJOR={'BTC','ETH','SOL','XRP','DOGE','ADA','LINK','AVAX','LTC','SUI','TRX','TON','BNB','BCH','DOT','ATOM','NEAR','APT','ARB','OP'}
 LEVERAGED=re.compile(r'(?:3L|3S|5L|5S|BULL|BEAR|UP|DOWN)$',re.I)
 
@@ -23,9 +24,13 @@ class CrossVenueSpotArbCloudV1:
             self.state['legacy_unverified_event_count']=len(self.state.get('events') or [])
             self.state['legacy_unverified_pnl_quote']=float(self.state.get('pnl_quote') or 0)
             self.state['legacy_signal_count']=len(self.state.get('signals') or {})
-            self.state['signals']={};self.state['research_pnl_quote']=0.0;self.state['quality_version']=3
-        self.state['version']='CROSSVENUE_SPOT_ARB_CLOUD_V3_IDENTITY_GUARD'
-    def _save(self):STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+            self.state['signals']={};self.state['research_pnl_quote']=0.0
+        self.state.setdefault('verification_queue',[])
+        self.state.setdefault('execution_edge_quote',float(self.state.get('research_pnl_quote') or 0))
+        self.state['quality_version']=4
+        self.state['version']='CROSSVENUE_SPOT_ARB_CLOUD_V4_PROFIT_PRESERVING'
+    def _save(self):
+        tmp=STATE.with_suffix(STATE.suffix+'.tmp');tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
     @staticmethod
     def _base_ok(base):
         b=str(base or '').upper().strip()
@@ -65,7 +70,7 @@ class CrossVenueSpotArbCloudV1:
         except Exception:return {}
         return out
     def _guard_market(self,raw):
-        guarded={};reject={'LOW_VOLUME':0,'LOCAL_SPREAD_WIDE':0,'PRICE_IDENTITY_OUTLIER':0,'INSUFFICIENT_IDENTITY_VENUES':0}
+        guarded={};reject={'TOO_LOW_TO_OBSERVE':0,'LOCAL_SPREAD_WIDE':0,'PRICE_IDENTITY_OUTLIER':0,'INSUFFICIENT_IDENTITY_VENUES':0}
         for base,vm in raw.items():
             if len(vm)<2:continue
             mids=[(q['bid']+q['ask'])/2 for q in vm.values() if q['bid']>0 and q['ask']>0]
@@ -73,9 +78,10 @@ class CrossVenueSpotArbCloudV1:
             med=statistics.median(mids);good={}
             for venue,q in vm.items():
                 mid=(q['bid']+q['ask'])/2;local=(q['ask']/q['bid']-1)*100 if q['bid']>0 else 999
-                if q.get('quote_volume',0)<MIN_QUOTE_VOLUME:reject['LOW_VOLUME']+=1;continue
+                if q.get('quote_volume',0)<MIN_OBSERVE_QUOTE_VOLUME:reject['TOO_LOW_TO_OBSERVE']+=1;continue
                 if local>MAX_LOCAL_SPREAD_PCT:reject['LOCAL_SPREAD_WIDE']+=1;continue
                 if med<=0 or abs(mid/med-1)*100>MAX_PRICE_DEVIATION_PCT:reject['PRICE_IDENTITY_OUTLIER']+=1;continue
+                q=dict(q);q['liquidity_tier']='TRUSTED' if q.get('quote_volume',0)>=TRUSTED_QUOTE_VOLUME else 'RESEARCH'
                 good[venue]=q
             need=2 if base in CANONICAL_MAJOR else 3
             if len(good)<need:reject['INSUFFICIENT_IDENTITY_VENUES']+=1;continue
@@ -113,13 +119,12 @@ class CrossVenueSpotArbCloudV1:
             t=min(remain,qty);sold+=t;received+=t*px;remain-=t
             if remain<=1e-12:break
         return {'ok':remain<=1e-9,'base_sold':sold,'quote_received':received,'vwap':received/sold if sold>0 else 0.0}
-    def _reason(self,gross,fees,all_in):
-        if gross<=0:return 'NO_RAW_SPREAD'
-        if gross>MAX_RAW_SPREAD_PCT:return 'RAW_SPREAD_IDENTITY_GUARD'
-        if gross-fees<=0:return 'TRADING_FEES'
-        if all_in<=0:return 'REBALANCE_AND_SAFETY'
-        if all_in<MIN_ALL_IN_NET_PCT:return 'EDGE_TOO_SMALL'
-        return 'PASS'
+    def _identity_confidence(self,base,vm,buy,sell,gross):
+        trusted_liq=buy.get('liquidity_tier')=='TRUSTED' and sell.get('liquidity_tier')=='TRUSTED'
+        if base in CANONICAL_MAJOR:return 'HIGH_MAJOR' if trusted_liq else 'MEDIUM_MAJOR'
+        if len(vm)>=4 and trusted_liq:return 'HIGH_4VENUE'
+        if gross<=REVIEW_RAW_SPREAD_PCT and trusted_liq:return 'MEDIUM_3VENUE'
+        return 'REVIEW_REQUIRED'
     async def refresh(self):
         try:
             async with httpx.AsyncClient(verify=SHARED_SSL_CONTEXT,timeout=httpx.Timeout(10.0),follow_redirects=True) as c:
@@ -128,45 +133,56 @@ class CrossVenueSpotArbCloudV1:
                     venue_status[venue]=len(mp)
                     for base,q in mp.items():raw.setdefault(base,{})[venue]=q
                 raw_common={b:vm for b,vm in raw.items() if len(vm)>=2};market,guard_reject=self._guard_market(raw_common);self.market=market
-                now=time.time();events=[];reasons=dict(guard_reject);raw_positive=after_fees=0;candidates=[]
+                now=time.time();events=[];reasons=dict(guard_reject);raw_positive=after_fees=0;candidates=[];verification=[]
                 for base,vm in market.items():
                     qs=list(vm.values())
                     for buy in qs:
                         for sell in qs:
                             if buy['venue']==sell['venue']:continue
-                            gross=(sell['bid']/buy['ask']-1)*100;fees=(TAKER[buy['venue']]+TAKER[sell['venue']])*100;allin=gross-fees-SAFETY_PCT-REBALANCE_RESERVE_PCT
+                            gross=(sell['bid']/buy['ask']-1)*100;fees=(TAKER[buy['venue']]+TAKER[sell['venue']])*100;execution=gross-fees;conservative=execution-SAFETY_PCT-REBALANCE_RESERVE_PCT
                             if gross>0:raw_positive+=1
-                            if gross-fees>0:after_fees+=1
-                            reason=self._reason(gross,fees,allin)
-                            if reason!='PASS':reasons[reason]=reasons.get(reason,0)+1;continue
-                            candidates.append((allin,base,buy,sell))
-                candidates.sort(reverse=True,key=lambda x:x[0]);depth_checks=depth_pass=0
-                for _,base,buy,sell in candidates[:MAX_DEPTH_CHECKS_PER_SCAN]:
+                            if execution>0:after_fees+=1
+                            if gross<=0:reasons['NO_RAW_SPREAD']=reasons.get('NO_RAW_SPREAD',0)+1;continue
+                            if execution<=0:reasons['TRADING_FEES']=reasons.get('TRADING_FEES',0)+1;continue
+                            conf=self._identity_confidence(base,vm,buy,sell,gross)
+                            candidates.append((execution,conservative,base,buy,sell,conf,len(vm)))
+                candidates.sort(reverse=True,key=lambda x:(x[1]>=MIN_CONSERVATIVE_NET_PCT,x[0]));depth_checks=depth_pass=0
+                for _,_,base,buy,sell,conf,venue_count in candidates[:MAX_DEPTH_CHECKS_PER_SCAN]:
                     depth_checks+=1;bb,sb=await asyncio.gather(self._book(c,buy['venue'],base),self._book(c,sell['venue'],base))
                     if not bb or not sb:reasons['DEPTH_UNAVAILABLE']=reasons.get('DEPTH_UNAVAILABLE',0)+1;continue
                     bf=self._buy_vwap(bb['asks'],NOTIONAL)
                     if not bf['ok']:reasons['BUY_DEPTH_INSUFFICIENT']=reasons.get('BUY_DEPTH_INSUFFICIENT',0)+1;continue
                     sf=self._sell_vwap(sb['bids'],bf['base_qty'])
                     if not sf['ok']:reasons['SELL_DEPTH_INSUFFICIENT']=reasons.get('SELL_DEPTH_INSUFFICIENT',0)+1;continue
-                    buy_fee=NOTIONAL*TAKER[buy['venue']];sell_fee=sf['quote_received']*TAKER[sell['venue']];netq=sf['quote_received']-NOTIONAL-buy_fee-sell_fee
-                    reserve=NOTIONAL*(SAFETY_PCT+REBALANCE_RESERVE_PCT)/100;allq=netq-reserve;allpct=allq/NOTIONAL*100;gross_depth=(sf['quote_received']/NOTIONAL-1)*100
-                    reason=self._reason(gross_depth,(buy_fee+sell_fee)/NOTIONAL*100,allpct)
-                    if reason!='PASS':reasons['DEPTH_'+reason]=reasons.get('DEPTH_'+reason,0)+1;continue
-                    depth_pass+=1;sig=f"{base}:{buy['venue']}>{sell['venue']}";st=self.state.setdefault('signals',{}).get(sig) or {'hits':0,'last_event':0}
-                    st['hits']=int(st.get('hits') or 0)+1;st['last_seen']=now;st['last_all_in_net_pct']=allpct;self.state['signals'][sig]=st
+                    buy_fee=NOTIONAL*TAKER[buy['venue']];sell_fee=sf['quote_received']*TAKER[sell['venue']]
+                    execution_q=sf['quote_received']-NOTIONAL-buy_fee-sell_fee;execution_pct=execution_q/NOTIONAL*100
+                    reserve=NOTIONAL*(SAFETY_PCT+REBALANCE_RESERVE_PCT)/100;conservative_q=execution_q-reserve;conservative_pct=conservative_q/NOTIONAL*100
+gross_depth=(sf['quote_received']/NOTIONAL-1)*100
+                    if execution_pct<=0:reasons['DEPTH_TRADING_FEES']=reasons.get('DEPTH_TRADING_FEES',0)+1;continue
+                    depth_pass+=1;high_spread=gross_depth>REVIEW_RAW_SPREAD_PCT
+                    if high_spread and conf=='REVIEW_REQUIRED':
+                        verification.append({'ts':now,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'venue_consensus_count':venue_count,'buy_quote_volume':buy.get('quote_volume',0),'sell_quote_volume':sell.get('quote_volume',0),'reason':'HIGH_EDGE_REQUIRES_STRONGER_IDENTITY_CHECK'})
+                        continue
+                    sig=f"{base}:{buy['venue']}>{sell['venue']}";st=self.state.setdefault('signals',{}).get(sig) or {'hits':0,'last_event':0}
+                    st['hits']=int(st.get('hits') or 0)+1;st['last_seen']=now;st['last_execution_net_pct']=execution_pct;st['last_conservative_net_pct']=conservative_pct;self.state['signals'][sig]=st
                     if st['hits']<MIN_HITS or now-float(st.get('last_event') or 0)<COOLDOWN_SEC:continue
-                    st['last_event']=now;ev={'ts':now,'signature':sig,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'buy_vwap':bf['vwap'],'sell_vwap':sf['vwap'],'gross_depth_pct':gross_depth,'all_in_net_pct':allpct,'paper_pnl_quote':allq,'notional_quote':NOTIONAL,'quality_guard':'PRICE_VOLUME_CONSENSUS_V1','identity_verified_contract_address':False}
-                    events.append(ev);self.state.setdefault('events',[]).append(ev);self.state['events']=self.state['events'][-3000:];self.state['research_pnl_quote']=float(self.state.get('research_pnl_quote') or 0)+allq
-                self.state.update({'scan_count':int(self.state.get('scan_count') or 0)+1,'last_scan_ts':now,'loss_reasons':reasons,'last_new_events':len(events),'last_depth_checks':depth_checks,'last_depth_pass':depth_pass,'last_raw_positive':raw_positive,'last_after_fees_positive':after_fees,'last_top_candidates':len(candidates),'venue_symbol_counts':venue_status,'raw_common_assets':len(raw_common),'common_assets':len(market)});self._save()
+                    st['last_event']=now;tier='CONSERVATIVE_POSITIVE' if conservative_pct>=MIN_CONSERVATIVE_NET_PCT else 'EXECUTION_POSITIVE_REBALANCE_SENSITIVE'
+                    ev={'ts':now,'signature':sig,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'buy_vwap':bf['vwap'],'sell_vwap':sf['vwap'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'execution_edge_quote':execution_q,'conservative_pnl_quote':conservative_q,'notional_quote':NOTIONAL,'quality_guard':'PRICE_VOLUME_CONSENSUS_V2','quality_tier':tier,'identity_confidence':conf,'high_spread_review':high_spread,'venue_consensus_count':venue_count,'identity_verified_contract_address':False}
+                    events.append(ev);self.state.setdefault('events',[]).append(ev);self.state['events']=self.state['events'][-3000:]
+                    self.state['execution_edge_quote']=float(self.state.get('execution_edge_quote') or 0)+execution_q
+                    if tier=='CONSERVATIVE_POSITIVE':self.state['research_pnl_quote']=float(self.state.get('research_pnl_quote') or 0)+conservative_q
+                if verification:
+                    q=list(self.state.get('verification_queue') or []);q.extend(verification);self.state['verification_queue']=q[-1000:]
+                self.state.update({'scan_count':int(self.state.get('scan_count') or 0)+1,'last_scan_ts':now,'loss_reasons':reasons,'last_new_events':len(events),'last_verification_candidates':len(verification),'last_depth_checks':depth_checks,'last_depth_pass':depth_pass,'last_raw_positive':raw_positive,'last_after_fees_positive':after_fees,'last_top_candidates':len(candidates),'venue_symbol_counts':venue_status,'raw_common_assets':len(raw_common),'common_assets':len(market)});self._save()
             self.last_error=None;self.last_refresh=now
         except Exception as exc:self.last_error=str(exc)[:500]
         return self.status()
     def status(self):
-        ev=[x for x in (self.state.get('events') or []) if x.get('quality_guard')=='PRICE_VOLUME_CONSENSUS_V1'];pnl=float(self.state.get('research_pnl_quote') or 0)
-        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_SPOT_ARB_CLOUD_V3_IDENTITY_GUARD','mode':'FUTURE_ONLY_PAPER_RESEARCH','paper_only':True,'live_enabled':False,'venues':VENUES,'raw_common_assets':self.state.get('raw_common_assets',0),'guarded_common_assets':self.state.get('common_assets',0),'venue_symbol_counts':self.state.get('venue_symbol_counts') or {},'scan_count':self.state.get('scan_count',0),'research_event_count':len(ev),'legacy_unverified_event_count':self.state.get('legacy_unverified_event_count',0),'legacy_unverified_pnl_quote':self.state.get('legacy_unverified_pnl_quote',0),'research_pnl_quote':round(pnl,6),'raw_positive_routes':self.state.get('last_raw_positive',0),'after_fees_positive_routes':self.state.get('last_after_fees_positive',0),'all_in_candidates':self.state.get('last_top_candidates',0),'depth_validation':{'last_checks':self.state.get('last_depth_checks',0),'last_pass':self.state.get('last_depth_pass',0)},'identity_guard':{'min_quote_volume':MIN_QUOTE_VOLUME,'max_local_spread_pct':MAX_LOCAL_SPREAD_PCT,'max_price_deviation_pct':MAX_PRICE_DEVIATION_PCT,'max_raw_spread_pct':MAX_RAW_SPREAD_PCT,'non_major_min_venues':3,'contract_address_verified':False},'loss_reasons':self.state.get('loss_reasons') or {},'recent_events':ev[-20:],'promotion_blocked':True,'blocking_reason':'CONTRACT_ADDRESS_OR_NETWORK_IDENTITY_NOT_YET_VERIFIED','last_error':self.last_error,'policy':{'dynamic_universe':True,'prefunded_inventory':True,'depth_validated':True,'legacy_false_edges_quarantined':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
+        ev=[x for x in (self.state.get('events') or []) if str(x.get('quality_guard') or '').startswith('PRICE_VOLUME_CONSENSUS')];pnl=float(self.state.get('research_pnl_quote') or 0);execution=float(self.state.get('execution_edge_quote') or 0)
+        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_SPOT_ARB_CLOUD_V4_PROFIT_PRESERVING','mode':'FUTURE_ONLY_PAPER_RESEARCH','paper_only':True,'live_enabled':False,'venues':VENUES,'raw_common_assets':self.state.get('raw_common_assets',0),'guarded_common_assets':self.state.get('common_assets',0),'venue_symbol_counts':self.state.get('venue_symbol_counts') or {},'scan_count':self.state.get('scan_count',0),'research_event_count':len(ev),'legacy_unverified_event_count':self.state.get('legacy_unverified_event_count',0),'legacy_unverified_pnl_quote':self.state.get('legacy_unverified_pnl_quote',0),'conservative_research_pnl_quote':round(pnl,6),'execution_edge_quote':round(execution,6),'raw_positive_routes':self.state.get('last_raw_positive',0),'after_fees_positive_routes':self.state.get('last_after_fees_positive',0),'all_execution_candidates':self.state.get('last_top_candidates',0),'verification_queue_count':len(self.state.get('verification_queue') or []),'last_verification_candidates':self.state.get('last_verification_candidates',0),'depth_validation':{'last_checks':self.state.get('last_depth_checks',0),'last_pass':self.state.get('last_depth_pass',0)},'identity_guard':{'min_observe_quote_volume':MIN_OBSERVE_QUOTE_VOLUME,'trusted_quote_volume':TRUSTED_QUOTE_VOLUME,'max_local_spread_pct':MAX_LOCAL_SPREAD_PCT,'max_price_deviation_pct':MAX_PRICE_DEVIATION_PCT,'review_raw_spread_pct':REVIEW_RAW_SPREAD_PCT,'non_major_min_venues':3,'high_spread_not_discarded':True,'contract_address_verified':False},'loss_reasons':self.state.get('loss_reasons') or {},'recent_events':ev[-20:],'verification_queue':(self.state.get('verification_queue') or [])[-20:],'promotion_blocked':True,'blocking_reason':'CONTRACT_ADDRESS_OR_NETWORK_IDENTITY_NOT_YET_VERIFIED_FOR_REVIEW_QUEUE','last_error':self.last_error,'policy':{'dynamic_universe':True,'prefunded_inventory':True,'depth_validated':True,'profit_preserving_tiers':True,'legacy_false_edges_quarantined':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
     async def start(self):
         if self.task and not self.task.done():return
-        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-spot-arb-cloud-v3')
+        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-spot-arb-cloud-v4')
     async def stop(self):
         if self.task and not self.task.done():self.task.cancel();await asyncio.gather(self.task,return_exceptions=True)
         self.task=None
