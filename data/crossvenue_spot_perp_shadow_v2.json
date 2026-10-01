@@ -13,21 +13,21 @@
       "last_conservative_net_pct": null
     },
     "SOON:Bitget>Gate": {
-      "hits": 24,
+      "hits": 27,
       "last_net_pct": 0.34958955223880295,
-      "last_execution_net_pct": 0.40176949941793466,
-      "last_conservative_net_pct": 0.30176949941793463
+      "last_execution_net_pct": 0.9970272812794037,
+      "last_conservative_net_pct": 0.8970272812794037
     },
     "LAB:Bitget>Gate": {
-      "hits": 9,
+      "hits": 12,
       "last_net_pct": null,
-      "last_execution_net_pct": 0.11851286939942113,
-      "last_conservative_net_pct": 0.018512869399421122
+      "last_execution_net_pct": 0.5576950963556684,
+      "last_conservative_net_pct": 0.4576950963556684
     },
     "Q:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.7746738536793842,
+      "last_conservative_net_pct": 0.6746738536793843
     },
     "NAORIS:Bitget>Gate": {
       "hits": 0,
@@ -40,26 +40,26 @@
       "last_conservative_net_pct": null
     },
     "US:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.022141278029250977,
+      "last_conservative_net_pct": -0.07785872197074903
     },
     "IN:Bitget>Gate": {
-      "hits": 9,
+      "hits": 12,
       "last_net_pct": null,
-      "last_execution_net_pct": 0.0037118964122043185,
-      "last_conservative_net_pct": -0.09628810358779569
+      "last_execution_net_pct": 0.35312870220785914,
+      "last_conservative_net_pct": 0.2531287022078591
     },
     "TAG:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.10267028166180775,
+      "last_conservative_net_pct": 0.002670281661807744
     },
     "B2:Bitget>Gate": {
-      "hits": 9,
+      "hits": 12,
       "last_net_pct": null,
-      "last_execution_net_pct": 0.09464959045691695,
-      "last_conservative_net_pct": -0.005350409543083051
+      "last_execution_net_pct": 0.30738846994871977,
+      "last_conservative_net_pct": 0.20738846994871976
     },
     "IDOL:Bitget>Gate": {
       "hits": 0,
@@ -87,9 +87,9 @@
       "last_conservative_net_pct": null
     },
     "CT:OKX>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.9663791622555575,
+      "last_conservative_net_pct": 0.8663791622555576
     },
     "DRIFT:Gate>Bitget": {
       "hits": 0,
@@ -122,24 +122,24 @@
       "last_conservative_net_pct": null
     },
     "CT:OKX>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.7726232946487424,
+      "last_conservative_net_pct": 0.6726232946487424
     },
     "ROBO:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.288070757324497,
+      "last_conservative_net_pct": 0.188070757324497
     },
     "CT:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.7241783073949384,
+      "last_conservative_net_pct": 0.6241783073949384
     },
     "CT:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.8231312202725862,
+      "last_conservative_net_pct": 0.7231312202725863
     },
     "ARIA:Bitget>Gate": {
       "hits": 0,
@@ -152,14 +152,14 @@
       "last_conservative_net_pct": null
     },
     "NIGHT:Gate>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.009305373525559046,
-      "last_conservative_net_pct": -0.09069462647444096
-    },
-    "CT:Bitget>OKX": {
       "hits": 0,
       "last_execution_net_pct": null,
       "last_conservative_net_pct": null
+    },
+    "CT:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.8231464087293474,
+      "last_conservative_net_pct": 0.7231464087293474
     },
     "NIGHT:OKX>Gate": {
       "hits": 0,
@@ -177,14 +177,14 @@
       "last_conservative_net_pct": null
     },
     "RESOLV:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.2701287553647938,
+      "last_conservative_net_pct": 0.1701287553647938
     },
     "UAI:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.060595850881304536,
-      "last_conservative_net_pct": -0.03940414911869547
+      "hits": 1,
+      "last_execution_net_pct": 0.13342255855405077,
+      "last_conservative_net_pct": 0.03342255855405077
     },
     "SOON:Gate>Bitget": {
       "hits": 0,
@@ -202,9 +202,9 @@
       "last_conservative_net_pct": null
     },
     "ETHFI:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.1318690948925208,
+      "last_conservative_net_pct": 0.031869094892520794
     },
     "US:Gate>Bitget": {
       "hits": 0,
@@ -233,23 +233,23 @@
     },
     "BR:Bitget>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.11448744059741972,
-      "last_conservative_net_pct": 0.014487440597419715
+      "last_execution_net_pct": 0.016544985751130448,
+      "last_conservative_net_pct": -0.08345501424886956
     },
     "CP:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.48971659919026883,
+      "last_conservative_net_pct": 0.3897165991902688
     },
     "O:Bitget>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.061991295919714695,
-      "last_conservative_net_pct": -0.03800870408028531
+      "last_execution_net_pct": 0.24099648188647765,
+      "last_conservative_net_pct": 0.14099648188647765
     },
     "ENA:Bitget>OKX": {
       "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "last_execution_net_pct": 0.6004113948614334,
+      "last_conservative_net_pct": 0.5004113948614334
     },
     "BR:Gate>Bitget": {
       "hits": 0,
@@ -257,24 +257,24 @@
       "last_conservative_net_pct": null
     },
     "FF:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.049893856545511206,
+      "last_conservative_net_pct": -0.0501061434544888
     },
     "FLOCK:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.121083805923137,
+      "last_conservative_net_pct": 0.021083805923136995
     },
     "NMR:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.05426483692746259,
+      "last_conservative_net_pct": -0.045735163072537416
     },
     "KAT:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.1347333608929227,
+      "last_conservative_net_pct": 0.0347333608929227
     },
     "BICO:Bitget>Gate": {
       "hits": 0,
@@ -287,39 +287,39 @@
       "last_conservative_net_pct": null
     },
     "ENA:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.5610059768687317,
+      "last_conservative_net_pct": 0.4610059768687317
     },
     "TRB:Bitget>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.9122274881516381,
-      "last_conservative_net_pct": 0.8122274881516381
+      "last_execution_net_pct": 0.48913850547357224,
+      "last_conservative_net_pct": 0.3891385054735722
     },
     "TRB:Gate>Bitget": {
       "hits": 1,
-      "last_execution_net_pct": 0.7684997633696213,
-      "last_conservative_net_pct": 0.6684997633696214
+      "last_execution_net_pct": 0.5410846812559413,
+      "last_conservative_net_pct": 0.44108468125594136
     },
     "PONS:Gate>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.31532724221518005,
+      "last_conservative_net_pct": 0.21532724221518004
     },
     "PONS:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.3307551743427209,
+      "last_conservative_net_pct": 0.2307551743427209
     },
     "PONS:Bitget>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.42801941385103315,
+      "last_conservative_net_pct": 0.32801941385103317
     },
     "PONS:OKX>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.3683044208169986,
+      "last_conservative_net_pct": 0.26830442081699857
     },
     "SAFE:Bitget>Gate": {
       "hits": 0,
@@ -327,9 +327,9 @@
       "last_conservative_net_pct": null
     },
     "PONS:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.42668657830876394,
+      "last_conservative_net_pct": 0.3266865783087639
     },
     "GRASS:Gate>OKX": {
       "hits": 0,
@@ -337,19 +337,19 @@
       "last_conservative_net_pct": null
     },
     "PONS:OKX>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.351516508114145,
+      "last_conservative_net_pct": 0.25151650811414494
     },
     "VELVET:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.03909712722299591,
+      "last_conservative_net_pct": -0.0609028727770041
     },
     "RECALL:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.1584688995215225,
+      "last_conservative_net_pct": 0.05846889952152248
     },
     "MUBARAK:Gate>Bitget": {
       "hits": 0,
@@ -367,24 +367,24 @@
       "last_conservative_net_pct": null
     },
     "WLD:OKX>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.21720652606445984,
+      "last_conservative_net_pct": 0.11720652606445983
     },
     "WLD:Bitget>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.1573473851660292,
+      "last_conservative_net_pct": 0.05734738516602919
     },
     "WLD:Gate>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.05756853396902151,
+      "last_conservative_net_pct": -0.0424314660309785
     },
     "WLD:OKX>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.2768961400716344,
+      "last_conservative_net_pct": 0.17689614007163437
     },
     "MUBARAK:Bitget>Gate": {
       "hits": 0,
@@ -402,34 +402,34 @@
       "last_conservative_net_pct": null
     },
     "XPL:OKX>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.2511263881544193,
+      "last_conservative_net_pct": 0.15112638815441928
     },
     "SOMI:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.3922507122507171,
+      "last_conservative_net_pct": 0.2922507122507171
     },
     "WLD:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.05743345252285731,
+      "last_conservative_net_pct": -0.0425665474771427
     },
     "ZEC:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.020636093083301887,
+      "last_conservative_net_pct": -0.07936390691669812
     },
     "WLD:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.2168860608470971,
+      "last_conservative_net_pct": 0.1168860608470971
     },
     "TAO:Bitget>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.26013179571663403,
+      "last_conservative_net_pct": 0.16013179571663402
     },
     "VELVET:Gate>Bitget": {
       "hits": 0,
@@ -437,20 +437,750 @@
       "last_conservative_net_pct": null
     },
     "PROVE:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.3285084306095956,
-      "last_conservative_net_pct": 0.2285084306095956
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "PROVE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DATA:OKX>Bitget": {
+      "hits": 3,
+      "last_execution_net_pct": 0.10273367778298265,
+      "last_conservative_net_pct": 0.002733677782982641
+    },
+    "CHILLGUY:Bitget>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.1551619870410284,
-      "last_conservative_net_pct": 0.0551619870410284
+      "last_execution_net_pct": 0.6552321981424172,
+      "last_conservative_net_pct": 0.5552321981424172
+    },
+    "CT:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.5309586911902533,
+      "last_conservative_net_pct": 0.4309586911902533
+    },
+    "CHILLGUY:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.5157839343754891,
+      "last_conservative_net_pct": 0.4157839343754891
+    },
+    "AAVE:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.44307454523838685,
+      "last_conservative_net_pct": 0.3430745452383869
+    },
+    "Q:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.4278935908359352,
+      "last_conservative_net_pct": 0.32789359083593517
+    },
+    "AIO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.406289561575566,
+      "last_conservative_net_pct": 0.30628956157556597
+    },
+    "FET:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.39047957371224157,
+      "last_conservative_net_pct": 0.29047957371224153
+    },
+    "CP:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.34777327935223723,
+      "last_conservative_net_pct": 0.24777327935223722
+    },
+    "SUI:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.32286334810181866,
+      "last_conservative_net_pct": 0.22286334810181865
+    },
+    "AAVE:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.3174671970551548,
+      "last_conservative_net_pct": 0.2174671970551548
+    },
+    "AAVE:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.31595839524517305,
+      "last_conservative_net_pct": 0.21595839524517305
+    },
+    "SUI:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.31412091730368213,
+      "last_conservative_net_pct": 0.21412091730368213
+    },
+    "AAVE:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.3101272143621528,
+      "last_conservative_net_pct": 0.2101272143621528
+    },
+    "FET:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.3011180124223725,
+      "last_conservative_net_pct": 0.2011180124223725
+    },
+    "AAVE:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.29218424962852235,
+      "last_conservative_net_pct": 0.19218424962852235
+    },
+    "SUI:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.29104737070838627,
+      "last_conservative_net_pct": 0.19104737070838626
+    },
+    "ENA:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.2876792073076431,
+      "last_conservative_net_pct": 0.18767920730764312
+    },
+    "SUI:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.27973924380702925,
+      "last_conservative_net_pct": 0.17973924380702924
+    },
+    "MET:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.27451841838458413,
+      "last_conservative_net_pct": 0.17451841838458412
+    },
+    "MON:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.26951287620228054,
+      "last_conservative_net_pct": 0.16951287620228053
+    },
+    "MON:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.26951287620228054,
+      "last_conservative_net_pct": 0.16951287620228053
+    },
+    "SKR:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.2634702316886764,
+      "last_conservative_net_pct": 0.1634702316886764
+    },
+    "FET:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.2572646536412074,
+      "last_conservative_net_pct": 0.15726465364120737
+    },
+    "ENA:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.25671466171236307,
+      "last_conservative_net_pct": 0.15671466171236306
+    },
+    "TAO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.24013179571663407,
+      "last_conservative_net_pct": 0.14013179571663406
+    },
+    "SUI:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.22988186240445763,
+      "last_conservative_net_pct": 0.12988186240445762
+    },
+    "SUI:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.2273025801407294,
+      "last_conservative_net_pct": 0.1273025801407294
+    },
+    "XPL:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.21939714436808117,
+      "last_conservative_net_pct": 0.11939714436808116
+    },
+    "XPL:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.21922605201945916,
+      "last_conservative_net_pct": 0.11922605201945916
+    },
+    "ZRO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.21892215568862589,
+      "last_conservative_net_pct": 0.11892215568862588
+    },
+    "AAVE:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.2084094282491214,
+      "last_conservative_net_pct": 0.10840942824912139
+    },
+    "MON:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.20713178294572226,
+      "last_conservative_net_pct": 0.10713178294572226
+    },
+    "MON:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.20713178294572226,
+      "last_conservative_net_pct": 0.10713178294572226
+    },
+    "MOVE:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.2056372111474672,
+      "last_conservative_net_pct": 0.10563721114746719
+    },
+    "VIRTUAL:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.20262587635436563,
+      "last_conservative_net_pct": 0.10262587635436562
+    },
+    "PUMP:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.20158273381295305,
+      "last_conservative_net_pct": 0.10158273381295305
+    },
+    "ENA:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.19866635741622196,
+      "last_conservative_net_pct": 0.09866635741622196
+    },
+    "XPL:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.19693381264537257,
+      "last_conservative_net_pct": 0.09693381264537257
+    },
+    "MON:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.19612403100776077,
+      "last_conservative_net_pct": 0.09612403100776076
+    },
+    "MON:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.19612403100776077,
+      "last_conservative_net_pct": 0.09612403100776076
+    },
+    "PUMP:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1944709161197602,
+      "last_conservative_net_pct": 0.09447091611976019
+    },
+    "GUN:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.18899219545299523,
+      "last_conservative_net_pct": 0.08899219545299522
+    },
+    "PUMP:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.18543689320388324,
+      "last_conservative_net_pct": 0.08543689320388323
+    },
+    "PUMP:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.18359712230216846,
+      "last_conservative_net_pct": 0.08359712230216845
+    },
+    "MERL:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1739084622983092,
+      "last_conservative_net_pct": 0.07390846229830919
+    },
+    "PUMP:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.16543689320388327,
+      "last_conservative_net_pct": 0.06543689320388327
+    },
+    "XPL:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.16506711764082715,
+      "last_conservative_net_pct": 0.06506711764082715
+    },
+    "SLX:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.16466912353790852,
+      "last_conservative_net_pct": 0.06466912353790852
+    },
+    "SLX:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.16069219676334373,
+      "last_conservative_net_pct": 0.060692196763343725
+    },
+    "PENGU:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.15928426882521968,
+      "last_conservative_net_pct": 0.05928426882521967
+    },
+    "PUMP:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1564901555335932,
+      "last_conservative_net_pct": 0.056490155533593184
+    },
+    "XPL:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1556368248599596,
+      "last_conservative_net_pct": 0.055636824859959605
+    },
+    "ORCA:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1529729729729737,
+      "last_conservative_net_pct": 0.05297297297297368
+    },
+    "BIO:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.14932618169628348,
+      "last_conservative_net_pct": 0.04932618169628347
+    },
+    "KGEN:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.14898449224612725,
+      "last_conservative_net_pct": 0.04898449224612725
+    },
+    "PENGU:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.14742729306488367,
+      "last_conservative_net_pct": 0.04742729306488366
+    },
+    "FET:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.14365572315883113,
+      "last_conservative_net_pct": 0.04365572315883112
+    },
+    "BERA:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1431578947368542,
+      "last_conservative_net_pct": 0.04315789473685419
+    },
+    "FARTCOIN:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.14003450258769173,
+      "last_conservative_net_pct": 0.04003450258769173
+    },
+    "SOMI:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.13098504628531266,
+      "last_conservative_net_pct": 0.03098504628531265
+    },
+    "PLUME:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12914134742404243,
+      "last_conservative_net_pct": 0.029141347424042424
+    },
+    "ENA:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12841315860684183,
+      "last_conservative_net_pct": 0.02841315860684182
+    },
+    "SLX:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12807169147065284,
+      "last_conservative_net_pct": 0.028071691470652832
+    },
+    "NMR:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12773124220281118,
+      "last_conservative_net_pct": 0.027731242202811174
+    },
+    "ALLO:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12689434364993057,
+      "last_conservative_net_pct": 0.02689434364993057
+    },
+    "ONDO:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12525399716657254,
+      "last_conservative_net_pct": 0.025253997166572534
+    },
+    "TIA:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1219632472668189,
+      "last_conservative_net_pct": 0.02196324726681889
+    },
+    "IO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12033184428844407,
+      "last_conservative_net_pct": 0.020331844288444062
+    },
+    "MET:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1193376140588101,
+      "last_conservative_net_pct": 0.0193376140588101
+    },
+    "CYS:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11862437225858918,
+      "last_conservative_net_pct": 0.018624372258589178
+    },
+    "PENGU:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11677426227763937,
+      "last_conservative_net_pct": 0.016774262277639368
+    },
+    "ENS:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11617330619365457,
+      "last_conservative_net_pct": 0.016173306193654563
+    },
+    "CETUS:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11604651162791885,
+      "last_conservative_net_pct": 0.01604651162791884
+    },
+    "TAO:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11435340572557379,
+      "last_conservative_net_pct": 0.014353405725573781
+    },
+    "SLX:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11200000000001015,
+      "last_conservative_net_pct": 0.012000000000010141
+    },
+    "W:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1085069914298667,
+      "last_conservative_net_pct": 0.00850699142986669
+    },
+    "MERL:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.10777229351760315,
+      "last_conservative_net_pct": 0.0077722935176031405
+    },
+    "TAO:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.10777229351760315,
+      "last_conservative_net_pct": 0.0077722935176031405
+    },
+    "AIO:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.10260961436872967,
+      "last_conservative_net_pct": 0.002609614368729668
+    },
+    "GALA:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1001778568252456,
+      "last_conservative_net_pct": 0.0001778568252455981
+    },
+    "CP:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.09999838462158933,
+      "last_conservative_net_pct": -1.615378410674273e-06
+    },
+    "CP:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.09576770858573691,
+      "last_conservative_net_pct": -0.004232291414263095
+    },
+    "PENGU:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.0953796996485326,
+      "last_conservative_net_pct": -0.004620300351467405
+    },
+    "HOME:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.09124057573680427,
+      "last_conservative_net_pct": -0.00875942426319573
+    },
+    "OP:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.08378940829319809,
+      "last_conservative_net_pct": -0.01621059170680192
+    },
+    "CP:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.08322580645160144,
+      "last_conservative_net_pct": -0.01677419354839857
+    },
+    "IN:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.08300913487372191,
+      "last_conservative_net_pct": -0.016990865126278093
+    },
+    "FET:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07893617021276028,
+      "last_conservative_net_pct": -0.021063829787239724
+    },
+    "SAND:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07859320046893298,
+      "last_conservative_net_pct": -0.021406799531067028
+    },
+    "MOVE:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07721946375370631,
+      "last_conservative_net_pct": -0.022780536246293698
+    },
+    "PLUME:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07640591966174642,
+      "last_conservative_net_pct": -0.02359408033825358
+    },
+    "PENGU:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07374268383525201,
+      "last_conservative_net_pct": -0.026257316164747996
+    },
+    "TRUMP:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07177277179236469,
+      "last_conservative_net_pct": -0.02822722820763532
+    },
+    "HYPE:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.07104319505955942,
+      "last_conservative_net_pct": -0.02895680494044059
+    },
+    "FIL:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.06875598086125506,
+      "last_conservative_net_pct": -0.031244019138744944
+    },
+    "ONDO:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.06430420711974555,
+      "last_conservative_net_pct": -0.03569579288025446
+    },
+    "OPEN:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.06218547695187954,
+      "last_conservative_net_pct": -0.03781452304812047
+    },
+    "STRK:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.06113387327296521,
+      "last_conservative_net_pct": -0.038866126727034794
+    },
+    "DOS:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.05878787878786734,
+      "last_conservative_net_pct": -0.04121212121213266
+    },
+    "LUNA:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.056386687797158885,
+      "last_conservative_net_pct": -0.04361331220284112
+    },
+    "FET:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.0546099290780091,
+      "last_conservative_net_pct": -0.045390070921990905
+    },
+    "PNUT:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.053831775700939055,
+      "last_conservative_net_pct": -0.04616822429906095
+    },
+    "TIA:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.05217957664572587,
+      "last_conservative_net_pct": -0.04782042335427414
+    },
+    "TIA:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.05192003719199728,
+      "last_conservative_net_pct": -0.048079962808002724
+    },
+    "HYPE:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.05047387222917332,
+      "last_conservative_net_pct": -0.04952612777082668
+    },
+    "VIRTUAL:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.04895674300254643,
+      "last_conservative_net_pct": -0.05104325699745357
+    },
+    "W:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.04814425244175996,
+      "last_conservative_net_pct": -0.051855747558240045
+    },
+    "ICP:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.04686028737389353,
+      "last_conservative_net_pct": -0.05313971262610648
+    },
+    "ONDO:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.04429872495447046,
+      "last_conservative_net_pct": -0.05570127504552955
+    },
+    "QNT:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.04114807070899423,
+      "last_conservative_net_pct": -0.05885192929100577
+    },
+    "BOME:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.04060168967648742,
+      "last_conservative_net_pct": -0.05939831032351259
+    },
+    "PENGU:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.040534213046717005,
+      "last_conservative_net_pct": -0.059465786953283
+    },
+    "REZ:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.03930833146191609,
+      "last_conservative_net_pct": -0.060691668538083915
+    },
+    "ZEC:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.03862860421747022,
+      "last_conservative_net_pct": -0.061371395782529786
+    },
+    "W:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.038091660405703776,
+      "last_conservative_net_pct": -0.06190833959429623
+    },
+    "W:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.038091660405703776,
+      "last_conservative_net_pct": -0.06190833959429623
+    },
+    "GALA:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.035713650511324524,
+      "last_conservative_net_pct": -0.06428634948867548
+    },
+    "BIGTIME:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.0326507581991245,
+      "last_conservative_net_pct": -0.06734924180087551
+    },
+    "SLX:OKX>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.03205632901265104,
+      "last_conservative_net_pct": -0.06794367098734896
+    },
+    "SAND:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.03153503632527893,
+      "last_conservative_net_pct": -0.06846496367472107
+    },
+    "NEAR:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.030594398549275426,
+      "last_conservative_net_pct": -0.06940560145072458
+    },
+    "DOT:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.026313033195366764,
+      "last_conservative_net_pct": -0.07368696680463324
+    },
+    "SEI:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.024115622849283647,
+      "last_conservative_net_pct": -0.07588437715071636
+    },
+    "ONDO:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.023690066761073103,
+      "last_conservative_net_pct": -0.0763099332389269
+    },
+    "TRUMP:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.022801175318330202,
+      "last_conservative_net_pct": -0.0771988246816698
+    },
+    "TRUMP:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.022633382280932424,
+      "last_conservative_net_pct": -0.07736661771906758
+    },
+    "ALLO:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.02100596760444634,
+      "last_conservative_net_pct": -0.07899403239555366
+    },
+    "RENDER:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.020867376370024282,
+      "last_conservative_net_pct": -0.07913262362997572
+    },
+    "SLX:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.02000000000000912,
+      "last_conservative_net_pct": -0.07999999999999088
+    },
+    "FIL:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.018915470494405284,
+      "last_conservative_net_pct": -0.08108452950559472
+    },
+    "ICP:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.016185819070911045,
+      "last_conservative_net_pct": -0.08381418092908896
+    },
+    "RENDER:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.015605663345561738,
+      "last_conservative_net_pct": -0.08439433665443827
+    },
+    "BIO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.015120643431641156,
+      "last_conservative_net_pct": -0.08487935656835885
+    },
+    "INJ:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.01449290875031678,
+      "last_conservative_net_pct": -0.08550709124968323
+    },
+    "INJ:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.014448160535116827,
+      "last_conservative_net_pct": -0.08555183946488318
+    },
+    "GALA:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.010972900932915364,
+      "last_conservative_net_pct": -0.08902709906708464
+    },
+    "AVAX:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.009308452250276489,
+      "last_conservative_net_pct": -0.09069154774972352
+    },
+    "ZRO:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.008908025355811866,
+      "last_conservative_net_pct": -0.09109197464418814
+    },
+    "FLOKI:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.008107911046293659,
+      "last_conservative_net_pct": -0.09189208895370635
+    },
+    "PYTH:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.006380711336107181,
+      "last_conservative_net_pct": -0.09361928866389282
+    },
+    "ONDO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.003690066761073141,
+      "last_conservative_net_pct": -0.09630993323892686
+    },
+    "ONDO:Gate>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.003398058252435332,
+      "last_conservative_net_pct": -0.09660194174756467
+    },
+    "AR:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.0024487942231624094,
+      "last_conservative_net_pct": -0.0975512057768376
+    },
+    "AVAX:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.001866081229418226,
+      "last_conservative_net_pct": -0.09813391877058178
+    },
+    "JTO:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.00015065913368889072,
+      "last_conservative_net_pct": -0.09984934086631111
     }
   },
   "pending": {
     "SOON:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "SOON:Bitget>Gate",
       "base": "SOON",
       "spot_venue": "Bitget",
@@ -462,14 +1192,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04014801525005607,
-      "funding_quote": 0.001178346163847367,
+      "funding_quote": 0.0011980813354522607,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.5667683337070998,
       "entry_raw_basis_pct": 0.9867683337070998
     },
     "LAB:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "LAB:Bitget>Gate",
       "base": "LAB",
       "spot_venue": "Bitget",
@@ -481,14 +1211,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04011058601134215,
-      "funding_quote": 0.0007277865638449061,
+      "funding_quote": 0.0007482033818079355,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.31724007561435374,
       "entry_raw_basis_pct": 0.7372400756143538
     },
     "Q:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "Q:Bitget>Gate",
       "base": "Q",
       "spot_venue": "Bitget",
@@ -500,14 +1230,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.040104850964348335,
-      "funding_quote": 0.0007253377505949389,
+      "funding_quote": 0.0007456677479202416,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.27900642898890193,
       "entry_raw_basis_pct": 0.699006428988902
     },
     "US:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "US:Bitget>Gate",
       "base": "US",
       "spot_venue": "Bitget",
@@ -519,14 +1249,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008294008294008,
-      "funding_quote": 0.0006877934477905998,
+      "funding_quote": 0.0007063560337157224,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.13293388626720393,
       "entry_raw_basis_pct": 0.552933886267204
     },
     "TAG:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "TAG:Bitget>Gate",
       "base": "TAG",
       "spot_venue": "Bitget",
@@ -538,14 +1268,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008119837603248,
-      "funding_quote": 0.0007195083631596819,
+      "funding_quote": 0.0007397205942198163,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.12132250688319057,
       "entry_raw_basis_pct": 0.5413225068831906
     },
     "IN:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "IN:Bitget>Gate",
       "base": "IN",
       "spot_venue": "Bitget",
@@ -557,7 +1287,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008092797410305,
-      "funding_quote": 0.0011761646981920323,
+      "funding_quote": 0.0012025514186009827,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.11951982735365163,
       "entry_raw_basis_pct": 0.5395198273536517
@@ -583,7 +1313,7 @@
     },
     "B2:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "B2:Bitget>Gate",
       "base": "B2",
       "spot_venue": "Bitget",
@@ -595,7 +1325,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007413509060956,
-      "funding_quote": 0.000718260692507259,
+      "funding_quote": 0.0007384743147956729,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.0742339373970261,
       "entry_raw_basis_pct": 0.49423393739702615
@@ -640,7 +1370,7 @@
     },
     "UAI:Bitget>Gate": {
       "opened_at": 1790862732.7413192,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "UAI:Bitget>Gate",
       "base": "UAI",
       "spot_venue": "Bitget",
@@ -652,14 +1382,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007060473815461,
-      "funding_quote": 8.847030837624774e-05,
+      "funding_quote": 0.00010892477201618418,
       "funding_interval_hours": 8.0,
       "entry_net_basis_pct": 0.05069825436409914,
       "entry_raw_basis_pct": 0.4706982543640992
     },
     "CP:Bitget>Gate": {
       "opened_at": 1790863384.7052724,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "CP:Bitget>Gate",
       "base": "CP",
       "spot_venue": "Bitget",
@@ -671,7 +1401,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007275666936136,
-      "funding_quote": 0.000126608734053335,
+      "funding_quote": 0.00021671909625846234,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.16504446240904552,
       "entry_conservative_net_basis_pct": 0.06504446240904552,
@@ -680,7 +1410,7 @@
     },
     "GRASS:Bitget>OKX": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "GRASS:Bitget>OKX",
       "base": "GRASS",
       "spot_venue": "Bitget",
@@ -692,7 +1422,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758461191335741,
-      "funding_quote": 1.9977877435988516e-05,
+      "funding_quote": 4.0517627968999424e-05,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.37689530685921535,
       "entry_conservative_net_basis_pct": 0.2768953068592154,
@@ -701,7 +1431,7 @@
     },
     "NMR:Bitget>Gate": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "NMR:Bitget>Gate",
       "base": "NMR",
       "spot_venue": "Bitget",
@@ -713,7 +1443,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008142742724927,
-      "funding_quote": -8.620240030036828e-05,
+      "funding_quote": -0.00017058739479070234,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.22284951499510292,
       "entry_conservative_net_basis_pct": 0.12284951499510291,
@@ -722,7 +1452,7 @@
     },
     "ROBO:Bitget>Gate": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "ROBO:Bitget>Gate",
       "base": "ROBO",
       "spot_venue": "Bitget",
@@ -734,7 +1464,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007629367536489,
-      "funding_quote": 2.0224006830757346e-05,
+      "funding_quote": 4.078630623884102e-05,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.18862450243256418,
       "entry_conservative_net_basis_pct": 0.08862450243256417,
@@ -743,7 +1473,7 @@
     },
     "NIGHT:Gate>OKX": {
       "opened_at": 1790863681.495401,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "NIGHT:Gate>OKX",
       "base": "NIGHT",
       "spot_venue": "Gate",
@@ -755,7 +1485,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758418394191308,
-      "funding_quote": -1.7120939310448845e-05,
+      "funding_quote": -7.478188761325181e-05,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.3734715353046594,
       "entry_conservative_net_basis_pct": 0.2734715353046594,
@@ -764,7 +1494,7 @@
     },
     "MOVR:Gate>Bitget": {
       "opened_at": 1790863681.495401,
-      "last_mark": 1790863746.536564,
+      "last_mark": 1790863981.8272638,
       "signature": "MOVR:Gate>Bitget",
       "base": "MOVR",
       "spot_venue": "Gate",
@@ -776,11 +1506,32 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008828996282528,
-      "funding_quote": -2.0508893534172624e-05,
+      "funding_quote": -9.268297251313628e-05,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.2685997521685393,
       "entry_conservative_net_basis_pct": 0.1685997521685393,
       "entry_raw_basis_pct": 0.5885997521685393,
+      "identity_confidence": "NORMAL_RANGE"
+    },
+    "ENA:Bitget>OKX": {
+      "opened_at": 1790863981.8272638,
+      "last_mark": 1790863981.8272638,
+      "signature": "ENA:Bitget>OKX",
+      "base": "ENA",
+      "spot_venue": "Bitget",
+      "perp_venue": "OKX",
+      "notional": 25.0,
+      "qty": 97.02708996351781,
+      "spot_entry": 0.25766,
+      "perp_entry": 0.25998,
+      "spot_fee_pct": 0.1,
+      "perp_fee_pct": 0.05,
+      "entry_fees": 0.03761255142435768,
+      "funding_quote": 0.0,
+      "funding_interval_hours": 4.0,
+      "entry_execution_net_basis_pct": 0.6004113948614334,
+      "entry_conservative_net_basis_pct": 0.5004113948614334,
+      "entry_raw_basis_pct": 0.9004113948614334,
       "identity_confidence": "NORMAL_RANGE"
     }
   },
@@ -832,6 +1583,6 @@
     }
   ],
   "verification_watch": {},
-  "scan_count": 115,
-  "last_market_refresh": 1790863741.4622018
+  "scan_count": 118,
+  "last_market_refresh": 1790863974.3040938
 }
