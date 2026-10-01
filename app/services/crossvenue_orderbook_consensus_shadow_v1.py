@@ -7,15 +7,16 @@ from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_
 
 ROOT=Path(__file__).parents[2]; DATA=ROOT/'data'; STATE=DATA/'crossvenue_orderbook_consensus_shadow_v1.json'
 IMB_THRESHOLD=0.35; MIN_AGREE=2; HOLD_SEC=900; COOLDOWN_SEC=1800
-ROUND_TRIP_COST=0.0025; ALLOC=0.05; DEPTH=10; BATCH_BASES=60
+ROUND_TRIP_COST=0.0025; ALLOC=0.05; DEPTH=10; BATCH_BASES=60; MAX_RESOLUTION_LAG_SEC=180
 
 class CrossVenueOrderbookConsensusShadowV1:
     def __init__(self):
         self.enabled=True; self.live_enabled=False; self.task=None; self.last_error=None; self.last_refresh=None
         try:self.state=json.loads(STATE.read_text(encoding='utf-8-sig'))
-        except Exception:self.state={'version':'CROSSVENUE_ORDERBOOK_CONSENSUS_V1','rule_frozen_at':time.time(),'last_event_ts':{},'pending':[],'resolved':[],'equity':100.0,'peak':100.0,'max_dd_pct':0.0}
-        self.state['version']='CROSSVENUE_ORDERBOOK_CONSENSUS_V2_DYNAMIC'
-    def _save(self):STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+        except Exception:self.state={'version':'CROSSVENUE_ORDERBOOK_CONSENSUS_V3_TIMING_SAFE','rule_frozen_at':time.time(),'last_event_ts':{},'pending':[],'resolved':[],'aborted':[],'equity':100.0,'peak':100.0,'max_dd_pct':0.0}
+        self.state['version']='CROSSVENUE_ORDERBOOK_CONSENSUS_V3_TIMING_SAFE';self.state.setdefault('aborted',[])
+    def _save(self):
+        tmp=STATE.with_suffix(STATE.suffix+'.tmp');tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
     async def _book(self,c,v,b):
         try:
             if v=='Bybit':
@@ -53,6 +54,22 @@ class CrossVenueOrderbookConsensusShadowV1:
             if b in market and b not in selected:selected.append(b)
         self.state['cursor']=(cursor+BATCH_BASES)%len(bases)
         return selected,len(bases)
+    @staticmethod
+    def _lag(row):
+        try:return float(row.get('exit_ts') or 0)-float(row.get('due_ts') or 0)
+        except Exception:return 1e18
+    def _evidence_metrics(self):
+        valid=[];stale=[]
+        for x in self.state.get('resolved') or []:
+            lag=self._lag(x)
+            (valid if 0<=lag<=MAX_RESOLUTION_LAG_SEC else stale).append(x)
+        eq=100.0;peak=100.0;dd=0.0
+        for x in valid:
+            net=float(x.get('net_return_pct') or 0)/100.0;eq*=1+ALLOC*net;peak=max(peak,eq);dd=min(dd,(eq/peak-1)*100 if peak else 0.0)
+        return valid,stale,eq,dd
+    def _abort(self,p,reason,now):
+        self.state.setdefault('aborted',[]).append({**p,'aborted_at':now,'abort_reason':reason,'pnl_counted':False})
+        self.state['aborted']=self.state['aborted'][-3000:]
     async def refresh(self):
         try:
             if not crossvenue_spot_arb_cloud_v1.market:await crossvenue_spot_arb_cloud_v1.refresh()
@@ -65,10 +82,15 @@ class CrossVenueOrderbookConsensusShadowV1:
                 if x:by.setdefault(x['base'],[]).append(x)
             keep=[]
             for p in self.state.get('pending') or []:
-                rows=by.get(p['base']) or []
-                if now<float(p['due_ts']) or not rows:keep.append(p);continue
+                due=float(p.get('due_ts') or 0);rows=by.get(p['base']) or []
+                if now<due:keep.append(p);continue
+                lag=now-due
+                if lag>MAX_RESOLUTION_LAG_SEC:
+                    self._abort(p,'STALE_RESOLUTION_WINDOW' if rows else 'NO_BOOK_AT_RESOLUTION_WINDOW',now);continue
+                if not rows:keep.append(p);continue
                 px=sum(x['mid'] for x in rows)/len(rows);gross=float(p['side'])*(px/float(p['entry'])-1.0);net=gross-ROUND_TRIP_COST
-                out={**p,'exit':px,'exit_ts':now,'net_return_pct':net*100};self.state.setdefault('resolved',[]).append(out);self.state['resolved']=self.state['resolved'][-3000:]
+                out={**p,'exit':px,'exit_ts':now,'resolution_lag_sec':lag,'timing_valid':True,'net_return_pct':net*100};self.state.setdefault('resolved',[]).append(out);self.state['resolved']=self.state['resolved'][-3000:]
+                # Legacy raw curve retained for audit; evidence status below is recomputed timing-safe.
                 eq=float(self.state.get('equity') or 100)*(1+ALLOC*net);peak=max(float(self.state.get('peak') or 100),eq);self.state['equity']=eq;self.state['peak']=peak;self.state['max_dd_pct']=min(float(self.state.get('max_dd_pct') or 0),(eq/peak-1)*100)
             self.state['pending']=keep
             new=0;active={str(p.get('base')) for p in keep}
@@ -81,22 +103,27 @@ class CrossVenueOrderbookConsensusShadowV1:
                 entry=sum(x['mid'] for x in rows)/len(rows)
                 self.state.setdefault('pending',[]).append({'id':f'{base}:{int(now)}','base':base,'ts':now,'due_ts':now+HOLD_SEC,'side':side,'entry':entry,'agree_count':len(up) if side>0 else len(dn),'venue_imbalances':{x['venue']:x['imbalance'] for x in rows},'round_trip_cost':ROUND_TRIP_COST})
                 self.state.setdefault('last_event_ts',{})[base]=now;active.add(base);new+=1
+            valid,stale,ev_eq,ev_dd=self._evidence_metrics()
+            self.state['evidence_equity']=ev_eq;self.state['evidence_max_dd_pct']=ev_dd;self.state['timing_valid_resolved_count']=len(valid);self.state['legacy_stale_resolved_count']=len(stale)
             self.state['last_new_events']=new;self.state['scan_count']=int(self.state.get('scan_count') or 0)+1
             self.state['dynamic_universe_bases']=universe_count;self.state['last_scanned_bases']=len(selected);self.state['last_books_ok']=len(vals)-sum(x is None for x in vals)
             self._save();self.last_error=None;self.last_refresh=now
-        except Exception as exc:self.last_error=str(exc)[:500]
+        except Exception as exc:
+            self.last_error=str(exc)[:500];self.state['last_error']=self.last_error;self.state['last_error_ts']=time.time()
+            try:self._save()
+            except Exception:pass
         return self.status()
     def status(self):
-        r=self.state.get('resolved') or [];wins=sum(1 for x in r if float(x.get('net_return_pct') or 0)>0)
-        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_ORDERBOOK_CONSENSUS_V2_DYNAMIC','mode':'FUTURE_ONLY_SHADOW','paper_only':True,'live_enabled':False,
+        r=self.state.get('resolved') or [];valid,stale,ev_eq,ev_dd=self._evidence_metrics();wins=sum(1 for x in valid if float(x.get('net_return_pct') or 0)>0)
+        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_ORDERBOOK_CONSENSUS_V3_TIMING_SAFE','mode':'FUTURE_ONLY_SHADOW','paper_only':True,'live_enabled':False,
             'dynamic_universe_bases':self.state.get('dynamic_universe_bases',0),'last_scanned_bases':self.state.get('last_scanned_bases',0),'venues':VENUES,
-            'pending_count':len(self.state.get('pending') or []),'resolved_count':len(r),'return_pct':float(self.state.get('equity',100))-100,'max_dd_pct':self.state.get('max_dd_pct',0),
-            'wins':wins,'win_rate':wins/len(r) if r else None,'last_new_events':self.state.get('last_new_events',0),
-            'locked_rule':{'depth_levels':DEPTH,'imbalance_threshold':IMB_THRESHOLD,'min_agree_venues':MIN_AGREE,'hold_minutes':15,'cooldown_minutes':30,'round_trip_cost':ROUND_TRIP_COST,'allocation_fraction':ALLOC,'rotating_batch_bases':BATCH_BASES},
-            'promotion_eligible':False,'last_error':self.last_error,'policy':{'dynamic_five_venue_universe':True,'rotating_rate_limit_safe_scan':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_parameter_tuning':True,'no_live_orders':True}}
+            'pending_count':len(self.state.get('pending') or []),'resolved_count_raw':len(r),'timing_valid_resolved_count':len(valid),'legacy_stale_resolved_count':len(stale),'aborted_no_pnl':len(self.state.get('aborted') or []),
+            'return_pct':ev_eq-100.0,'max_dd_pct':ev_dd,'wins':wins,'win_rate':wins/len(valid) if valid else None,'last_new_events':self.state.get('last_new_events',0),
+            'legacy_raw_return_pct':float(self.state.get('equity',100))-100,'locked_rule':{'depth_levels':DEPTH,'imbalance_threshold':IMB_THRESHOLD,'min_agree_venues':MIN_AGREE,'hold_minutes':15,'cooldown_minutes':30,'round_trip_cost':ROUND_TRIP_COST,'allocation_fraction':ALLOC,'rotating_batch_bases':BATCH_BASES,'max_resolution_lag_sec':MAX_RESOLUTION_LAG_SEC},
+            'promotion_eligible':False,'last_error':self.last_error,'policy':{'timing_safe_future_resolution':True,'stale_resolutions_excluded_from_evidence':True,'history_preserved':True,'dynamic_five_venue_universe':True,'rotating_rate_limit_safe_scan':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_parameter_tuning':True,'no_live_orders':True}}
     async def start(self):
         if self.task and not self.task.done():return
-        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-orderbook-consensus-v2')
+        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-orderbook-consensus-v3')
     async def stop(self):
         if self.task and not self.task.done():self.task.cancel();await asyncio.gather(self.task,return_exceptions=True)
         self.task=None
