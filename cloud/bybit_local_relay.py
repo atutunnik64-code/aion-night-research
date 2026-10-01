@@ -25,6 +25,8 @@ import app.services.crossvenue_spot_arb_cloud_v1 as arbmod
 import app.services.crossvenue_liquidation_asymmetry_collector as liqmod
 import app.services.funding_oi_bybit_shadow_v1 as foimod
 import app.services.bybit_price_shock_shadow_v1 as shockmod
+import app.services.bybit_liquidation_regime_shadow_v1 as lregmod
+import app.services.bybit_volatility_compression_shadow_v1 as volmod
 from app.services.perp_funding_spread import PerpFundingSpreadScanner
 
 arbmod.STATE = RUNTIME / "crossvenue_spot_arb_local_v1.json"
@@ -35,12 +37,19 @@ foimod.SNAPS = liqmod.BY_CTX
 foimod.STATE = RUNTIME / "funding_oi_bybit_shadow_local_v1.json"
 shockmod.SNAPS = liqmod.BY_CTX
 shockmod.STATE = RUNTIME / "bybit_price_shock_shadow_local_v1.json"
+lregmod.RAW = liqmod.BY_RAW
+lregmod.CTX = liqmod.BY_CTX
+lregmod.STATE = RUNTIME / "bybit_liquidation_regime_shadow_local_v1.json"
+volmod.SNAPS = liqmod.BY_CTX
+volmod.STATE = RUNTIME / "bybit_volatility_compression_shadow_local_v1.json"
 
 arb = arbmod.CrossVenueSpotArbCloudV1()
 funding = PerpFundingSpreadScanner()
 liq = liqmod.CrossVenueLiquidationAsymmetryCollector()
 funding_oi = foimod.FundingOiBybitShadowV1()
 price_shock = shockmod.BybitPriceShockShadowV1()
+liq_regime = lregmod.BybitLiquidationRegimeShadowV1()
+vol_compression = volmod.BybitVolatilityCompressionShadowV1()
 
 
 def _atomic_json(path: Path, payload: dict) -> None:
@@ -94,6 +103,8 @@ def _relay_payload() -> dict:
     liq_status = liq.status()
     foi_status = funding_oi.status()
     shock_status = price_shock.status()
+    lreg_status = liq_regime.status()
+    vol_status = vol_compression.status()
     return {
         "version": "BYBIT_LOCAL_RELAY_V3_FULL_PUBLIC_RESEARCH",
         "generated_at": time.time(),
@@ -161,6 +172,23 @@ def _relay_payload() -> dict:
             "future_gate": shock_status.get("future_gate") or {},
             "last_error": shock_status.get("last_error"),
         },
+        "liquidation_regime_shadow": {
+            "pending_count": int(lreg_status.get("pending_count") or 0),
+            "resolved_count": int(lreg_status.get("resolved_count") or 0),
+            "continuation": lreg_status.get("continuation") or {},
+            "recovery": lreg_status.get("recovery") or {},
+            "future_gate": lreg_status.get("future_gate") or {},
+            "last_error": lreg_status.get("last_error"),
+        },
+        "volatility_compression_shadow": {
+            "pending_count": int(vol_status.get("pending_count") or 0),
+            "resolved_count": int(vol_status.get("resolved_count") or 0),
+            "last_new_events": int(vol_status.get("last_new_events") or 0),
+            "breakout": vol_status.get("breakout") or {},
+            "fakeout": vol_status.get("fakeout") or {},
+            "future_gate": vol_status.get("future_gate") or {},
+            "last_error": vol_status.get("last_error"),
+        },
         "policy": {
             "no_grid": True,
             "no_martingale": True,
@@ -207,6 +235,8 @@ async def run(interval: float, sync_every: float, do_sync: bool, once: bool) -> 
             if last_shadow == 0.0 or now - last_shadow >= SHADOW_REFRESH_SEC:
                 await funding_oi.refresh()
                 await price_shock.refresh()
+                await liq_regime.refresh()
+                await vol_compression.refresh()
                 last_shadow = time.time()
             payload = _relay_payload()
             _atomic_json(RELAY, payload)
