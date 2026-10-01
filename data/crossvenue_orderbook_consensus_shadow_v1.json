@@ -1,5 +1,5 @@
 {
-  "version": "CROSSVENUE_ORDERBOOK_CONSENSUS_V2_DYNAMIC",
+  "version": "CROSSVENUE_ORDERBOOK_CONSENSUS_V3_TIMING_SAFE",
   "rule_frozen_at": 1790847742.152853,
   "last_event_ts": {
     "LINK": 1790868742.5262632,
@@ -33,12 +33,12 @@
     "ENA": 1790862953.9808757,
     "FIL": 1790869218.2097876,
     "GRAM": 1790855676.047072,
-    "GRASS": 1790861892.2908525,
+    "GRASS": 1790869705.9615552,
     "HBAR": 1790862043.6582375,
     "HUMA": 1790868136.6817467,
     "LIT": 1790863377.0551856,
     "MCAT": 1790855676.047072,
-    "PROMPT": 1790861763.8338108,
+    "PROMPT": 1790869772.1270146,
     "Q": 1790868136.6817467,
     "ALGO": 1790855799.2960284,
     "ARB": 1790868136.6817467,
@@ -47,7 +47,7 @@
     "LTC": 1790869282.9787328,
     "NMR": 1790861763.8338108,
     "NPC": 1790868807.6190019,
-    "QNT": 1790861763.8338108,
+    "QNT": 1790869835.87458,
     "UAI": 1790861826.594949,
     "UNI": 1790869038.8463197,
     "VIRTUAL": 1790869038.8463197,
@@ -90,7 +90,7 @@
     "NEAR": 1790869282.9787328,
     "NOT": 1790862660.132564,
     "NYM": 1790862660.132564,
-    "RPL": 1790862660.132564,
+    "RPL": 1790869835.87458,
     "S": 1790868973.4902065,
     "SATS": 1790862725.3343883,
     "SUPER": 1790869464.9027755,
@@ -115,7 +115,7 @@
     "LUNC": 1790863377.0551856,
     "MANA": 1790868807.6190019,
     "MINA": 1790863377.0551856,
-    "PROPS": 1790863440.3411934,
+    "PROPS": 1790869772.1270146,
     "PROS": 1790863440.3411934,
     "SPK": 1790863440.3411934,
     "TOSHI": 1790868973.4902065,
@@ -142,7 +142,7 @@
     "LAT": 1790863736.6692743,
     "METIS": 1790863844.471938,
     "NFT": 1790863844.471938,
-    "ROSE": 1790863908.921666,
+    "ROSE": 1790869835.87458,
     "SAHARA": 1790868136.6817467,
     "SXT": 1790869464.9027755,
     "TAIKO": 1790868136.6817467,
@@ -182,259 +182,14 @@
     "TRX": 1790869464.9027755,
     "CAKE": 1790869593.9494088,
     "CELO": 1790869593.9494088,
-    "ENJ": 1790869593.9494088
+    "ENJ": 1790869593.9494088,
+    "FLOW": 1790869705.9615552,
+    "GALA": 1790869705.9615552,
+    "SKL": 1790869835.87458,
+    "TAO": 1790869835.87458,
+    "TNSR": 1790869835.87458
   },
   "pending": [
-    {
-      "id": "ACU:1790855461",
-      "base": "ACU",
-      "ts": 1790855461.6602986,
-      "due_ts": 1790856361.6602986,
-      "side": 1,
-      "entry": 0.1264325,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": 0.5042183454627572,
-        "KuCoin": 0.8864464366633484
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "AIA:1790855461",
-      "base": "AIA",
-      "ts": 1790855461.6602986,
-      "due_ts": 1790856361.6602986,
-      "side": -1,
-      "entry": 0.07175925,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Bitget": -0.6945792884769346,
-        "Gate": -0.5231937472757799
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "ALEX:1790855461",
-      "base": "ALEX",
-      "ts": 1790855461.6602986,
-      "due_ts": 1790856361.6602986,
-      "side": 1,
-      "entry": 0.00561605,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": 0.7541472247942811,
-        "KuCoin": 0.3546427996118278
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "BABYSHARK:1790855523",
-      "base": "BABYSHARK",
-      "ts": 1790855523.150269,
-      "due_ts": 1790856423.150269,
-      "side": 1,
-      "entry": 0.005032666666666667,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Bitget": -0.0018835767705554596,
-        "Gate": 0.47619934152974064,
-        "KuCoin": 0.505818580612297
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "BAN:1790855523",
-      "base": "BAN",
-      "ts": 1790855523.150269,
-      "due_ts": 1790856423.150269,
-      "side": -1,
-      "entry": 0.06752,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": -0.966698769253614,
-        "KuCoin": -0.3900624287351995
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "BB:1790855523",
-      "base": "BB",
-      "ts": 1790855523.150269,
-      "due_ts": 1790856423.150269,
-      "side": -1,
-      "entry": 0.0097045,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": -0.736333391563463,
-        "KuCoin": -0.5841511647964878
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "BERT:1790855523",
-      "base": "BERT",
-      "ts": 1790855523.150269,
-      "due_ts": 1790856423.150269,
-      "side": -1,
-      "entry": 0.01426375,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": -0.482602082225974,
-        "KuCoin": -0.8076223916351934
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "CESS:1790855584",
-      "base": "CESS",
-      "ts": 1790855584.678099,
-      "due_ts": 1790856484.678099,
-      "side": -1,
-      "entry": 0.00239775,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": -0.6981745944167513,
-        "KuCoin": -0.35294861176142484
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "COQ:1790855584",
-      "base": "COQ",
-      "ts": 1790855584.678099,
-      "due_ts": 1790856484.678099,
-      "side": -1,
-      "entry": 1.4321e-07,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Gate": -0.5670742552817436,
-        "KuCoin": -0.5234001694530922
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "ILV:1790868742",
-      "base": "ILV",
-      "ts": 1790868742.5262632,
-      "due_ts": 1790869642.5262632,
-      "side": -1,
-      "entry": 3.810166666666667,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "OKX": -0.40608124456903627,
-        "Gate": -0.1454210673480009,
-        "KuCoin": -0.37219800854422647
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "LINK:1790868742",
-      "base": "LINK",
-      "ts": 1790868742.5262632,
-      "due_ts": 1790869642.5262632,
-      "side": -1,
-      "entry": 14.276,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "OKX": -0.4659042829818791,
-        "Bitget": -0.9361406396097628,
-        "Gate": -0.06945399290887712,
-        "KuCoin": -0.04012495900185513
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "LSK:1790868742",
-      "base": "LSK",
-      "ts": 1790868742.5262632,
-      "due_ts": 1790869642.5262632,
-      "side": 1,
-      "entry": 0.28389833333333336,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "OKX": 0.35836211843446225,
-        "Gate": 0.39235649946840706,
-        "KuCoin": 0.2903551002301351
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "LUNA:1790868742",
-      "base": "LUNA",
-      "ts": 1790868742.5262632,
-      "due_ts": 1790869642.5262632,
-      "side": 1,
-      "entry": 0.05040625,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "OKX": 0.3180394877076342,
-        "Bitget": -0.22994720427726587,
-        "Gate": 0.6036275263177848,
-        "KuCoin": 0.4984871788001162
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "MANA:1790868807",
-      "base": "MANA",
-      "ts": 1790868807.6190019,
-      "due_ts": 1790869707.6190019,
-      "side": -1,
-      "entry": 0.08832666666666666,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "OKX": 0.11531338304190454,
-        "Gate": -0.38087664054950254,
-        "KuCoin": -0.6750135833570198
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "MERL:1790868807",
-      "base": "MERL",
-      "ts": 1790868807.6190019,
-      "due_ts": 1790869707.6190019,
-      "side": 1,
-      "entry": 0.030405,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "OKX": 0.5742476821234139,
-        "Bitget": 0.40501304444753705,
-        "Gate": 0.17576479921626056,
-        "KuCoin": 0.09952309917658336
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "NPC:1790868807",
-      "base": "NPC",
-      "ts": 1790868807.6190019,
-      "due_ts": 1790869707.6190019,
-      "side": -1,
-      "entry": 0.0207905,
-      "agree_count": 3,
-      "venue_imbalances": {
-        "Bitget": -0.4341107726635811,
-        "Gate": -0.9426326397971436,
-        "KuCoin": -0.5126697142626885
-      },
-      "round_trip_cost": 0.0025
-    },
-    {
-      "id": "PLUME:1790868807",
-      "base": "PLUME",
-      "ts": 1790868807.6190019,
-      "due_ts": 1790869707.6190019,
-      "side": -1,
-      "entry": 0.018371666666666665,
-      "agree_count": 2,
-      "venue_imbalances": {
-        "Bitget": -0.6240228562919743,
-        "Gate": -0.2812102897577754,
-        "KuCoin": -0.4962921743443885
-      },
-      "round_trip_cost": 0.0025
-    },
     {
       "id": "RECALL:1790868973",
       "base": "RECALL",
@@ -992,6 +747,175 @@
         "OKX": -0.15955795902969475,
         "Gate": 0.6187650343048541,
         "KuCoin": 0.47697108658523524
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "FLOW:1790869705",
+      "base": "FLOW",
+      "ts": 1790869705.9615552,
+      "due_ts": 1790870605.9615552,
+      "side": 1,
+      "entry": 0.030921666666666667,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.01712021107011551,
+        "Gate": 0.3631699119098864,
+        "KuCoin": 0.6322956464296703
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "GALA:1790869705",
+      "base": "GALA",
+      "ts": 1790869705.9615552,
+      "due_ts": 1790870605.9615552,
+      "side": 1,
+      "entry": 0.00224415,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.0458301845018224,
+        "Bitget": 0.02596720471109058,
+        "Gate": 0.36254355815891254,
+        "KuCoin": 0.48664142477361694
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "GRASS:1790869705",
+      "base": "GRASS",
+      "ts": 1790869705.9615552,
+      "due_ts": 1790870605.9615552,
+      "side": -1,
+      "entry": 0.6698125,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.10538137474983753,
+        "Bitget": -0.6626245047028676,
+        "Gate": -0.070152072436168,
+        "KuCoin": -0.7989154072866234
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "PROMPT:1790869772",
+      "base": "PROMPT",
+      "ts": 1790869772.1270146,
+      "due_ts": 1790870672.1270146,
+      "side": 1,
+      "entry": 0.02168166666666667,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": 0.515247676374615,
+        "Gate": 0.40131964319637087,
+        "KuCoin": -0.6546253357609895
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "PROPS:1790869772",
+      "base": "PROPS",
+      "ts": 1790869772.1270146,
+      "due_ts": 1790870672.1270146,
+      "side": -1,
+      "entry": 0.006806833333333334,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": -0.8825206049073371,
+        "Gate": 0.443369691817645,
+        "KuCoin": -0.4616685917861913
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "QNT:1790869835",
+      "base": "QNT",
+      "ts": 1790869835.87458,
+      "due_ts": 1790870735.87458,
+      "side": -1,
+      "entry": 260.6838333333333,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": -0.7311240672450637,
+        "Gate": -0.05312613382682026,
+        "KuCoin": -0.38737640552984254
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "ROSE:1790869835",
+      "base": "ROSE",
+      "ts": 1790869835.87458,
+      "due_ts": 1790870735.87458,
+      "side": 1,
+      "entry": 0.008452,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": 0.9393050257296705,
+        "Gate": 0.45889915391204006,
+        "KuCoin": -0.12923761239961776
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "RPL:1790869835",
+      "base": "RPL",
+      "ts": 1790869835.87458,
+      "due_ts": 1790870735.87458,
+      "side": -1,
+      "entry": 1.9181666666666668,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.1155837189056625,
+        "Gate": -0.46123356978477303,
+        "KuCoin": -0.46315468094400725
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "SKL:1790869835",
+      "base": "SKL",
+      "ts": 1790869835.87458,
+      "due_ts": 1790870735.87458,
+      "side": 1,
+      "entry": 0.004528125,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.5254821969720532,
+        "Bitget": -0.17838318457442368,
+        "Gate": 0.38126492161963194,
+        "KuCoin": -0.05155929069873283
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "TAO:1790869835",
+      "base": "TAO",
+      "ts": 1790869835.87458,
+      "due_ts": 1790870735.87458,
+      "side": 1,
+      "entry": 305.46875,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.5330610380467049,
+        "Bitget": -0.3571434355286424,
+        "Gate": 0.821483047011081,
+        "KuCoin": -0.25833078493591644
+      },
+      "round_trip_cost": 0.0025
+    },
+    {
+      "id": "TNSR:1790869835",
+      "base": "TNSR",
+      "ts": 1790869835.87458,
+      "due_ts": 1790870735.87458,
+      "side": -1,
+      "entry": 0.04103333333333333,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": -0.4245522888610929,
+        "Gate": 0.31462080977665086,
+        "KuCoin": -0.4539305350189521
       },
       "round_trip_cost": 0.0025
     }
@@ -5257,15 +5181,338 @@
       "exit": 0.7261166666666666,
       "exit_ts": 1790869593.9494088,
       "net_return_pct": -0.21670684805695206
+    },
+    {
+      "id": "ILV:1790868742",
+      "base": "ILV",
+      "ts": 1790868742.5262632,
+      "due_ts": 1790869642.5262632,
+      "side": -1,
+      "entry": 3.810166666666667,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": -0.40608124456903627,
+        "Gate": -0.1454210673480009,
+        "KuCoin": -0.37219800854422647
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 3.8203333333333336,
+      "exit_ts": 1790869705.9615552,
+      "resolution_lag_sec": 63.43529200553894,
+      "timing_valid": true,
+      "net_return_pct": -0.5168299724421397
+    },
+    {
+      "id": "LINK:1790868742",
+      "base": "LINK",
+      "ts": 1790868742.5262632,
+      "due_ts": 1790869642.5262632,
+      "side": -1,
+      "entry": 14.276,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": -0.4659042829818791,
+        "Bitget": -0.9361406396097628,
+        "Gate": -0.06945399290887712,
+        "KuCoin": -0.04012495900185513
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 14.272750000000002,
+      "exit_ts": 1790869705.9615552,
+      "resolution_lag_sec": 63.43529200553894,
+      "timing_valid": true,
+      "net_return_pct": -0.227234519473257
+    },
+    {
+      "id": "LSK:1790868742",
+      "base": "LSK",
+      "ts": 1790868742.5262632,
+      "due_ts": 1790869642.5262632,
+      "side": 1,
+      "entry": 0.28389833333333336,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.35836211843446225,
+        "Gate": 0.39235649946840706,
+        "KuCoin": 0.2903551002301351
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 0.2834725,
+      "exit_ts": 1790869705.9615552,
+      "resolution_lag_sec": 63.43529200553894,
+      "timing_valid": true,
+      "net_return_pct": -0.39999500995075415
+    },
+    {
+      "id": "LUNA:1790868742",
+      "base": "LUNA",
+      "ts": 1790868742.5262632,
+      "due_ts": 1790869642.5262632,
+      "side": 1,
+      "entry": 0.05040625,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.3180394877076342,
+        "Bitget": -0.22994720427726587,
+        "Gate": 0.6036275263177848,
+        "KuCoin": 0.4984871788001162
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 0.050527499999999996,
+      "exit_ts": 1790869705.9615552,
+      "resolution_lag_sec": 63.43529200553894,
+      "timing_valid": true,
+      "net_return_pct": -0.009454432734040457
+    },
+    {
+      "id": "MANA:1790868807",
+      "base": "MANA",
+      "ts": 1790868807.6190019,
+      "due_ts": 1790869707.6190019,
+      "side": -1,
+      "entry": 0.08832666666666666,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.11531338304190454,
+        "Gate": -0.38087664054950254,
+        "KuCoin": -0.6750135833570198
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 0.08870666666666667,
+      "exit_ts": 1790869772.1270146,
+      "resolution_lag_sec": 64.50801277160645,
+      "timing_valid": true,
+      "net_return_pct": -0.6802211487659413
+    },
+    {
+      "id": "MERL:1790868807",
+      "base": "MERL",
+      "ts": 1790868807.6190019,
+      "due_ts": 1790869707.6190019,
+      "side": 1,
+      "entry": 0.030405,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "OKX": 0.5742476821234139,
+        "Bitget": 0.40501304444753705,
+        "Gate": 0.17576479921626056,
+        "KuCoin": 0.09952309917658336
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 0.030601666666666666,
+      "exit_ts": 1790869772.1270146,
+      "resolution_lag_sec": 64.50801277160645,
+      "timing_valid": true,
+      "net_return_pct": 0.3968234391273197
+    },
+    {
+      "id": "NPC:1790868807",
+      "base": "NPC",
+      "ts": 1790868807.6190019,
+      "due_ts": 1790869707.6190019,
+      "side": -1,
+      "entry": 0.0207905,
+      "agree_count": 3,
+      "venue_imbalances": {
+        "Bitget": -0.4341107726635811,
+        "Gate": -0.9426326397971436,
+        "KuCoin": -0.5126697142626885
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 0.020805999999999998,
+      "exit_ts": 1790869772.1270146,
+      "resolution_lag_sec": 64.50801277160645,
+      "timing_valid": true,
+      "net_return_pct": -0.3245532815468408
+    },
+    {
+      "id": "PLUME:1790868807",
+      "base": "PLUME",
+      "ts": 1790868807.6190019,
+      "due_ts": 1790869707.6190019,
+      "side": -1,
+      "entry": 0.018371666666666665,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": -0.6240228562919743,
+        "Gate": -0.2812102897577754,
+        "KuCoin": -0.4962921743443885
+      },
+      "round_trip_cost": 0.0025,
+      "exit": 0.018544333333333333,
+      "exit_ts": 1790869772.1270146,
+      "resolution_lag_sec": 64.50801277160645,
+      "timing_valid": true,
+      "net_return_pct": -1.1898530345640976
     }
   ],
-  "equity": 97.2887286591274,
+  "equity": 97.14523772241111,
   "peak": 100.0,
-  "max_dd_pct": -2.711271340872601,
-  "last_new_events": 4,
-  "scan_count": 66,
-  "cursor": 102,
+  "max_dd_pct": -2.854762277588885,
+  "last_new_events": 6,
+  "scan_count": 69,
+  "cursor": 282,
   "dynamic_universe_bases": 333,
-  "last_scanned_bases": 99,
-  "last_books_ok": 312
+  "last_scanned_bases": 94,
+  "last_books_ok": 269,
+  "aborted": [
+    {
+      "id": "ACU:1790855461",
+      "base": "ACU",
+      "ts": 1790855461.6602986,
+      "due_ts": 1790856361.6602986,
+      "side": 1,
+      "entry": 0.1264325,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": 0.5042183454627572,
+        "KuCoin": 0.8864464366633484
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "AIA:1790855461",
+      "base": "AIA",
+      "ts": 1790855461.6602986,
+      "due_ts": 1790856361.6602986,
+      "side": -1,
+      "entry": 0.07175925,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": -0.6945792884769346,
+        "Gate": -0.5231937472757799
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "ALEX:1790855461",
+      "base": "ALEX",
+      "ts": 1790855461.6602986,
+      "due_ts": 1790856361.6602986,
+      "side": 1,
+      "entry": 0.00561605,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": 0.7541472247942811,
+        "KuCoin": 0.3546427996118278
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "BABYSHARK:1790855523",
+      "base": "BABYSHARK",
+      "ts": 1790855523.150269,
+      "due_ts": 1790856423.150269,
+      "side": 1,
+      "entry": 0.005032666666666667,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Bitget": -0.0018835767705554596,
+        "Gate": 0.47619934152974064,
+        "KuCoin": 0.505818580612297
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "BAN:1790855523",
+      "base": "BAN",
+      "ts": 1790855523.150269,
+      "due_ts": 1790856423.150269,
+      "side": -1,
+      "entry": 0.06752,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": -0.966698769253614,
+        "KuCoin": -0.3900624287351995
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "BB:1790855523",
+      "base": "BB",
+      "ts": 1790855523.150269,
+      "due_ts": 1790856423.150269,
+      "side": -1,
+      "entry": 0.0097045,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": -0.736333391563463,
+        "KuCoin": -0.5841511647964878
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "BERT:1790855523",
+      "base": "BERT",
+      "ts": 1790855523.150269,
+      "due_ts": 1790856423.150269,
+      "side": -1,
+      "entry": 0.01426375,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": -0.482602082225974,
+        "KuCoin": -0.8076223916351934
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "CESS:1790855584",
+      "base": "CESS",
+      "ts": 1790855584.678099,
+      "due_ts": 1790856484.678099,
+      "side": -1,
+      "entry": 0.00239775,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": -0.6981745944167513,
+        "KuCoin": -0.35294861176142484
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    },
+    {
+      "id": "COQ:1790855584",
+      "base": "COQ",
+      "ts": 1790855584.678099,
+      "due_ts": 1790856484.678099,
+      "side": -1,
+      "entry": 1.4321e-07,
+      "agree_count": 2,
+      "venue_imbalances": {
+        "Gate": -0.5670742552817436,
+        "KuCoin": -0.5234001694530922
+      },
+      "round_trip_cost": 0.0025,
+      "aborted_at": 1790869705.9615552,
+      "abort_reason": "NO_BOOK_AT_RESOLUTION_WINDOW",
+      "pnl_counted": false
+    }
+  ],
+  "evidence_equity": 97.80556555705292,
+  "evidence_max_dd_pct": -2.1944344429470797,
+  "timing_valid_resolved_count": 151,
+  "legacy_stale_resolved_count": 89
 }

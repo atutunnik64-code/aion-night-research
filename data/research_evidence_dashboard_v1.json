@@ -1,6 +1,6 @@
 {
   "version": "RESEARCH_EVIDENCE_DASHBOARD_V1",
-  "generated_at": 1790869656.50929,
+  "generated_at": 1790869900.9161336,
   "paper_only": true,
   "live_enabled": false,
   "notes": [
@@ -11,21 +11,21 @@
   "branches": {
     "classic_spot_arb": {
       "metric_type": "research_edge_quote",
-      "scan_count": 249,
-      "last_new_events": 5,
-      "last_scan_ts": 1790869619.1454694,
-      "events_count": 753,
-      "verification_queue_count": 54,
-      "research_event_count": 649,
-      "conservative_research_edge_quote": 51.33152714,
-      "execution_edge_quote": 70.19578019,
+      "scan_count": 254,
+      "last_new_events": 9,
+      "last_scan_ts": 1790869865.2628405,
+      "events_count": 807,
+      "verification_queue_count": 58,
+      "research_event_count": 703,
+      "conservative_research_edge_quote": 53.95089553,
+      "execution_edge_quote": 74.37388938,
       "latest_cycle": {
-        "raw_positive_routes": 589,
-        "after_fees_positive_routes": 105,
+        "raw_positive_routes": 495,
+        "after_fees_positive_routes": 97,
         "depth_checks": 60,
-        "depth_pass": 47,
-        "new_events": 5,
-        "verification_candidates": 2
+        "depth_pass": 45,
+        "new_events": 9,
+        "verification_candidates": 0
       },
       "venue_symbol_counts": {
         "Bybit": 0,
@@ -41,61 +41,61 @@
     },
     "leadlag": {
       "metric_type": "episode_edge",
-      "scan_count": 1034,
-      "last_scan_ts": 1790869652.7810528,
-      "pending_count": 65,
-      "resolved_count": 549,
+      "scan_count": 1072,
+      "last_scan_ts": 1790869891.8021922,
+      "pending_count": 62,
+      "resolved_count": 682,
       "final_all_in_net_pct": {
-        "count": 549,
-        "sum": -316.53121051,
-        "mean": -0.57655958,
-        "median": -0.54245574,
+        "count": 682,
+        "sum": -391.77363143,
+        "mean": -0.57444814,
+        "median": -0.53632133,
         "min": -2.9290536,
         "max": 1.84668807,
-        "positive": 14,
-        "positive_rate": 0.025501
+        "positive": 16,
+        "positive_rate": 0.02346
       },
       "max_all_in_net_pct": {
-        "count": 549,
-        "sum": -244.7561234,
-        "mean": -0.44582172,
-        "median": -0.41447453,
+        "count": 682,
+        "sum": -300.64628532,
+        "mean": -0.44083033,
+        "median": -0.40454843,
         "min": -2.90490811,
         "max": 1.84668807,
-        "positive": 23,
-        "positive_rate": 0.041894
+        "positive": 27,
+        "positive_rate": 0.039589
       },
-      "paper_positive_window_edge_quote_sum": 1.79256355,
-      "caught_up_count": 205,
-      "timeout_count": 344,
+      "paper_positive_window_edge_quote_sum": 1.97383931,
+      "caught_up_count": 297,
+      "timeout_count": 385,
       "error_count": 0,
       "last_error": null
     },
     "orderbook_consensus": {
       "metric_type": "trade_return_pct_not_portfolio",
-      "scan_count": 66,
-      "last_new_events": 4,
-      "pending_count": 53,
-      "resolved_count": 232,
+      "scan_count": 69,
+      "last_new_events": 6,
+      "pending_count": 47,
+      "resolved_count": 240,
       "net_return_pct": {
-        "count": 232,
-        "sum": -54.91229508,
-        "mean": -0.23669093,
-        "median": -0.27597949,
+        "count": 240,
+        "sum": -57.86361304,
+        "mean": -0.24109839,
+        "median": -0.27735885,
         "min": -3.05704404,
         "max": 8.6293142,
-        "positive": 72,
-        "positive_rate": 0.310345
+        "positive": 73,
+        "positive_rate": 0.304167
       }
     },
     "momentum_divergence": {
       "metric_type": "capital_normalized_equity_5pct_alloc",
-      "scan_count": 135,
-      "last_new_events": 8,
-      "last_scan_ts": 1790869652.2824297,
-      "pending_count": 177,
+      "scan_count": 142,
+      "last_new_events": 4,
+      "last_scan_ts": 1790869894.7333686,
+      "pending_count": 184,
       "resolved_count": 271,
-      "collection_hours": 4.3461,
+      "collection_hours": 4.414,
       "resolved_symbols": 266,
       "continuation": {
         "equity": 99.48872316,
@@ -130,7 +130,7 @@
     },
     "perp_funding_spread": {
       "metric_type": "quote_pnl",
-      "positions_count": 12,
+      "positions_count": 13,
       "closed_count": 1,
       "closed_pnl_quote": 0.22364332,
       "open_funding_realized_quote": 0.0,
@@ -148,8 +148,8 @@
     },
     "moex_broad": {
       "metric_type": "trade_return_pct_not_portfolio",
-      "last_new_events": 2,
-      "pending_count": 392,
+      "last_new_events": 18,
+      "pending_count": 410,
       "resolved_count": 464,
       "resolved_return_pct": {
         "count": 464,
@@ -166,10 +166,10 @@
     },
     "moex_calendar_matrix": {
       "metric_type": "native_state_summary",
-      "last_new_events": 6,
-      "pending_count": 120,
-      "resolved_count": 54,
-      "continuation_equity": 93.21724725015387
+      "last_new_events": 10,
+      "pending_count": 116,
+      "resolved_count": 68,
+      "continuation_equity": 90.86489567734164
     },
     "moex_spread_paper": {
       "metric_type": "native_state_summary",
@@ -180,7 +180,7 @@
     },
     "spot_perp_shadow": {
       "metric_type": "native_state_summary",
-      "scan_count": 136,
+      "scan_count": 139,
       "pending_count": 24,
       "resolved_count": 0
     },

@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 67,
-  "last_source_ts": 1790869201.6387095,
+  "sample_count": 68,
+  "last_source_ts": 1790869444.8595219,
   "latest": {
-    "source_ts": 1790869201.6387095,
+    "source_ts": 1790869444.8595219,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4224.4,
+      "front_px": 4229.1,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4276.0,
-      "curve_pct": 1.2214752390872219
+      "next_px": 4279.3,
+      "curve_pct": 1.1870137854389728
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 61.8,
+      "front_px": 61.81,
       "next": "SVH7",
       "next_name": "SILV-3.27",
-      "next_px": 63.27,
-      "curve_pct": 2.378640776699048
+      "next_px": 63.41,
+      "curve_pct": 2.5885779000161646
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28424.0,
+      "front_px": 28438.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29397.0,
-      "curve_pct": 3.423163523782713
+      "curve_pct": 3.3722484000281217
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11162.5,
-      "oi": 1615200,
-      "volume": 409057
+      "px": 11175.1,
+      "oi": 1615340,
+      "volume": 409694
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 160.6,
+      "px": 160.94,
       "oi": 78992,
-      "volume": 4111
+      "volume": 4114
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 276.12,
-      "oi": 234122,
-      "volume": 15248
+      "px": 276.18,
+      "oi": 233944,
+      "volume": 15399
     },
-    "gold_silver_ratio": 68.35598705501617,
-    "sber_perp_vs_front_pct": -2.8567407824373725,
+    "gold_silver_ratio": 68.42096748099013,
+    "sber_perp_vs_front_pct": -2.8834657852169654,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
