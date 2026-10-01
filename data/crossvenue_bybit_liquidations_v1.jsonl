@@ -57,3 +57,15 @@
 {"event_time":1790863519144,"symbol":"BTCUSDT","position_side":"Buy","pressure_side":"SELL","price":83267.1,"qty":0.015,"notional_usdt":1249.0065}
 {"event_time":1790863519173,"symbol":"BTCUSDT","position_side":"Buy","pressure_side":"SELL","price":83262.3,"qty":0.113,"notional_usdt":9408.6399}
 {"event_time":1790863520815,"symbol":"AVAXUSDT","position_side":"Buy","pressure_side":"SELL","price":10.841,"qty":5.7,"notional_usdt":61.7937}
+{"event_time":1790863722405,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84175.5,"qty":0.004,"notional_usdt":336.702}
+{"event_time":1790863724198,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84191.1,"qty":0.174,"notional_usdt":14649.2514}
+{"event_time":1790863725048,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84208.2,"qty":0.002,"notional_usdt":168.4164}
+{"event_time":1790863725256,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84201.9,"qty":0.012,"notional_usdt":1010.4227999999999}
+{"event_time":1790863726256,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84232.8,"qty":1.303,"notional_usdt":109755.3384}
+{"event_time":1790863773342,"symbol":"AAVEUSDT","position_side":"Sell","pressure_side":"BUY","price":169.42,"qty":0.07,"notional_usdt":11.8594}
+{"event_time":1790863776758,"symbol":"AAVEUSDT","position_side":"Sell","pressure_side":"BUY","price":170.76,"qty":7.17,"notional_usdt":1224.3491999999999}
+{"event_time":1790863776957,"symbol":"AAVEUSDT","position_side":"Sell","pressure_side":"BUY","price":170.55,"qty":9.36,"notional_usdt":1596.348}
+{"event_time":1790863784235,"symbol":"AAVEUSDT","position_side":"Sell","pressure_side":"BUY","price":171.34,"qty":0.43,"notional_usdt":73.6762}
+{"event_time":1790863784505,"symbol":"AAVEUSDT","position_side":"Sell","pressure_side":"BUY","price":171.19,"qty":0.16,"notional_usdt":27.3904}
+{"event_time":1790863785228,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84278.1,"qty":0.059,"notional_usdt":4972.4079}
+{"event_time":1790863786658,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84286.7,"qty":0.002,"notional_usdt":168.5734}
