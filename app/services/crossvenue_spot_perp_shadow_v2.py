@@ -8,17 +8,27 @@ STATE=ROOT/'data'/'crossvenue_spot_perp_shadow_v2.json'
 EVENTS=ROOT/'data'/'crossvenue_spot_perp_shadow_v2_events.jsonl'
 SAFE={'Bybit','OKX','Bitget','Gate','KuCoin'}
 THRESHOLD=.05; SAFETY=.10; HORIZON=8*3600; NOTIONAL=25.0; MAX_PENDING=12
+MAX_RAW_BASIS_PCT=5.0
 
 class CrossVenueSpotPerpShadowV2:
  def __init__(self):
   self.enabled=True;self.live_enabled=False;self.interval=65.0;self.task=None;self.last_error=None;self.last_refresh=None
-  self.state=self._load();self.latest={}
+  self.state=self._load();self.latest={};self._quarantine_implausible_pending();self._save()
  def _load(self):
-  base={'version':'CROSSVENUE_SPOT_PERP_SHADOW_V2','created_at':time.time(),'confirm':{},'pending':{},'resolved':[],'scan_count':0,'last_market_refresh':None}
+  base={'version':'CROSSVENUE_SPOT_PERP_SHADOW_V3_IDENTITY_GUARD','created_at':time.time(),'confirm':{},'pending':{},'resolved':[],'quarantined_pending':[],'scan_count':0,'last_market_refresh':None}
   try:base.update(json.loads(STATE.read_text(encoding='utf-8-sig')))
   except Exception:pass
+  base['version']='CROSSVENUE_SPOT_PERP_SHADOW_V3_IDENTITY_GUARD'
   return base
- def _save(self):STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+ def _save(self):
+  tmp=STATE.with_suffix(STATE.suffix+'.tmp');tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
+ def _quarantine_implausible_pending(self):
+  pending=self.state.get('pending') or {};keep={};q=list(self.state.get('quarantined_pending') or [])
+  for sig,p in pending.items():
+   raw=abs(float(p.get('entry_raw_basis_pct') or 0))
+   if raw>MAX_RAW_BASIS_PCT:q.append({**p,'quarantined_at':time.time(),'quarantine_reason':'IMPLAUSIBLE_RAW_BASIS_OR_IDENTITY_MISMATCH','max_raw_basis_pct':MAX_RAW_BASIS_PCT})
+   else:keep[sig]=p
+  self.state['pending']=keep;self.state['quarantined_pending']=q[-1000:]
  def _append(self,row):
   with EVENTS.open('a',encoding='utf-8') as f:f.write(json.dumps(row,ensure_ascii=False,separators=(',',':'))+'\n')
  def _routes(self):
@@ -27,13 +37,15 @@ class CrossVenueSpotPerpShadowV2:
    sv=str(s.get('venue') or '');base=str(s.get('base') or '')
    if sv not in SAFE:continue
    ask=float(s.get('spot_ask') or 0);bid=float(s.get('spot_bid') or 0);sf=float(s.get('spot_fee_pct') or 0)
-   if ask<=0 or bid<=0:continue
+   if ask<=0 or bid<=0 or (ask/bid-1.0)*100.0>2.0:continue
    for p in rows:
     pv=str(p.get('venue') or '')
     if pv not in SAFE or pv==sv or str(p.get('base') or '')!=base:continue
     pb=float(p.get('perp_bid') or 0);pa=float(p.get('perp_ask') or 0);pf=float(p.get('perp_fee_pct') or 0)
-    if pb<=0 or pa<=0:continue
-    raw=(pb/ask-1)*100;cost=2*(sf+pf)+SAFETY;net=raw-cost
+    if pb<=0 or pa<=0 or (pa/pb-1.0)*100.0>2.0:continue
+    raw=(pb/ask-1)*100
+    if abs(raw)>MAX_RAW_BASIS_PCT:continue
+    cost=2*(sf+pf)+SAFETY;net=raw-cost
     out.append({'signature':f'{base}:{sv}>{pv}','base':base,'spot_venue':sv,'perp_venue':pv,
      'spot_ask':ask,'spot_bid':bid,'perp_bid':pb,'perp_ask':pa,'spot_fee_pct':sf,'perp_fee_pct':pf,
      'funding_rate_pct':float(p.get('funding_rate_pct') or 0),'funding_interval_hours':max(1.0,float(p.get('funding_interval_hours') or 8.0)),
@@ -91,17 +103,17 @@ class CrossVenueSpotPerpShadowV2:
       active_bases.add(row['base']);c['hits']=0
     self.state['last_market_refresh']=market_ts;self.state['scan_count']=int(self.state.get('scan_count') or 0)+1
    self.state['confirm']=confirm;self.state['pending']=pending;self._save();g=self._gate()
-   self.latest={'mode':'FUTURE_ONLY_FIXED_8H','strategy':'crossvenue_spot_perp_basis_v2','live_enabled':False,'paper_only':True,
-    'threshold_net_pct':THRESHOLD,'confirmation_scans':3,'horizon_hours':8,'notional_per_leg':NOTIONAL,'safe_venues':sorted(SAFE),'max_pending':MAX_PENDING,
+   self.latest={'mode':'FUTURE_ONLY_FIXED_8H','strategy':'crossvenue_spot_perp_basis_v3_identity_guard','live_enabled':False,'paper_only':True,
+    'threshold_net_pct':THRESHOLD,'max_raw_basis_pct':MAX_RAW_BASIS_PCT,'confirmation_scans':3,'horizon_hours':8,'notional_per_leg':NOTIONAL,'safe_venues':sorted(SAFE),'max_pending':MAX_PENDING,
     'route_count':len(routes),'strict_positive_now':sum(float(x['net_basis_pct'])>=THRESHOLD for x in routes),'top_routes':routes[:30],
-    'pending_count':len(self.state.get('pending') or {}),'pending':list((self.state.get('pending') or {}).values()),'gate':g}
+    'pending_count':len(self.state.get('pending') or {}),'quarantined_pending_count':len(self.state.get('quarantined_pending') or []),'pending':list((self.state.get('pending') or {}).values()),'gate':g}
    self.last_error=None;self.last_refresh=now
   except Exception as exc:self.last_error=str(exc)[:500]
   return self.status()
  def status(self):
   return {'ok':self.last_error is None,'enabled':self.enabled,'mode':'FUTURE_ONLY_FIXED_8H','last_refresh':self.last_refresh,
    'last_error':self.last_error,'future_only_start':self.state.get('created_at'),'scan_count':int(self.state.get('scan_count') or 0),'latest':self.latest,
-   'policy':{'five_venue_dynamic_universe':True,'one_position_per_base':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
+   'policy':{'five_venue_dynamic_universe':True,'identity_plausibility_guard':True,'one_position_per_base':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
  async def start(self):
   if self.task and not self.task.done():return
   self.task=asyncio.create_task(self._loop(),name='crossvenue-spot-perp-shadow')
