@@ -19,6 +19,7 @@ from app.services.crossvenue_liquidation_asymmetry_collector import crossvenue_l
 from app.services.funding_oi_bybit_shadow_v1 import funding_oi_bybit_shadow_v1
 from app.services.bybit_liquidation_regime_shadow_v1 import bybit_liquidation_regime_shadow_v1
 from app.services.funding_reset_bybit_shadow_v1 import funding_reset_bybit_shadow_v1
+from app.services.bybit_price_shock_shadow_v1 import bybit_price_shock_shadow_v1
 from app.services.liquidity_migration_perp_collector import liquidity_migration_perp_collector
 from app.services.funding_dislocation_persistence_v3 import funding_dislocation_persistence_v3
 from app.services.crossvenue_perp_taker_collector_v2 import crossvenue_perp_taker_collector_v2
@@ -39,6 +40,7 @@ SERVICES = [
     funding_oi_bybit_shadow_v1,
     bybit_liquidation_regime_shadow_v1,
     funding_reset_bybit_shadow_v1,
+    bybit_price_shock_shadow_v1,
     liquidity_migration_perp_collector,
     funding_dislocation_persistence_v3,
     crossvenue_perp_taker_collector_v2,
