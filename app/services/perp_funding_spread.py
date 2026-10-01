@@ -7,6 +7,7 @@ VENUES=('Bybit','Bitget','Gate','KuCoin','OKX')
 TAKER_FEE={'Bybit':0.00055,'Bitget':0.0006,'Gate':0.0006,'KuCoin':0.0006,'OKX':0.0005}
 MAKER_FEE={'Bybit':0.0002,'Bitget':0.0002,'Gate':0.0002,'KuCoin':0.0002,'OKX':0.0002}
 OKX_FUNDING_LIMIT=60
+OKX_CACHE_TTL=6*3600.0
 
 
 def _f(v,default=0.0):
@@ -25,6 +26,7 @@ class PerpFundingSpreadScanner:
         self.last_refresh=None; self.last_error=None; self.rows=[]; self.market={}
         self.safety_pct=0.05; self.max_basis_abs_pct=0.60
         self.venue_asset_counts={}; self.universe_bases=0; self.multi_venue_bases=0; self.pairs_evaluated=0
+        self.okx_cursor=0; self.okx_funding_cache={}
 
     async def _bybit(self,c):
         out={}
@@ -117,6 +119,11 @@ class PerpFundingSpreadScanner:
                 qv=_f(x.get('volCcy24h'))*((bid+ask)/2.0)
                 candidates.append((qv,base,inst,bid,ask))
             candidates.sort(reverse=True)
+            n=len(candidates);batch=[]
+            if n:
+                start=self.okx_cursor%n
+                for i in range(min(OKX_FUNDING_LIMIT,n)):batch.append(candidates[(start+i)%n])
+                self.okx_cursor=(start+len(batch))%n
             sem=asyncio.Semaphore(12)
             async def one(row):
                 qv,base,inst,bid,ask=row
@@ -127,13 +134,19 @@ class PerpFundingSpreadScanner:
                         if not fr.is_success or fd.get('code')!='0':return None
                         ft=_f(f.get('fundingTime'));nft=_f(f.get('nextFundingTime'))
                         hours=max(1.0,(nft-ft)/3600000.0) if nft>ft>0 else 8.0
-                        return base,{'venue':'OKX','base':base,'bid':bid,'ask':ask,'rate':_f(f.get('fundingRate')),
-                            'interval_hours':hours,'next_funding_time':f.get('nextFundingTime'),'interval_source':'OKX_FUNDING_TIMES',
-                            'source':'OKX_SWAP_TOP_VOLUME','quote_volume':qv}
+                        return base,{'rate':_f(f.get('fundingRate')),'interval_hours':hours,'next_funding_time':f.get('nextFundingTime'),'cached_at':time.time()}
                     except Exception:return None
-            vals=await asyncio.gather(*[one(x) for x in candidates[:OKX_FUNDING_LIMIT]])
+            vals=await asyncio.gather(*[one(x) for x in batch])
             for z in vals:
-                if z:out[z[0]]=z[1]
+                if z:self.okx_funding_cache[z[0]]=z[1]
+            now=time.time()
+            self.okx_funding_cache={b:v for b,v in self.okx_funding_cache.items() if now-float(v.get('cached_at') or 0)<=OKX_CACHE_TTL}
+            for qv,base,inst,bid,ask in candidates:
+                fc=self.okx_funding_cache.get(base)
+                if not fc:continue
+                out[base]={'venue':'OKX','base':base,'bid':bid,'ask':ask,'rate':float(fc['rate']),
+                    'interval_hours':float(fc['interval_hours']),'next_funding_time':fc.get('next_funding_time'),'interval_source':'OKX_ROTATING_FUNDING_CACHE',
+                    'source':'OKX_SWAP_ROTATING_COVERAGE','quote_volume':qv}
         except Exception:pass
         return out
 
@@ -143,8 +156,7 @@ class PerpFundingSpreadScanner:
         long_h=max(1e-9,float(longm['interval_hours'])); short_h=max(1e-9,float(shortm['interval_hours']))
         long_hour=float(longm['rate'])*100.0/long_h; short_hour=float(shortm['rate'])*100.0/short_h
         carry_hour=short_hour-long_hour; carry24=carry_hour*24.0
-        basis=(float(shortm['bid'])/float(longm['ask'])-1.0)*100.0
-        if abs(basis)>max_basis:return None
+        basis=(float(shortm['bid'])/float(longm['ask'])-1.0)*100.0; basis_review=abs(basis)>max_basis
         lf=float(TAKER_FEE[longm['venue']]); sf=float(TAKER_FEE[shortm['venue']])
         round_trip=2.0*(lf+sf)*100.0
         conservative=carry24-round_trip-abs(basis)-safety
@@ -159,6 +171,7 @@ class PerpFundingSpreadScanner:
                 'short_bid':shortm['bid'],'short_ask':shortm['ask'],'long_funding_rate_pct':round(longm['rate']*100,6),
                 'short_funding_rate_pct':round(shortm['rate']*100,6),'long_interval_hours':long_h,'short_interval_hours':short_h,
                 'carry_per_hour_pct':round(carry_hour,7),'projected_24h_carry_pct':round(carry24,6),'entry_basis_pct':round(basis,6),
+                'basis_review':basis_review,'quality_tier':'BASIS_REVIEW' if basis_review else 'NORMAL',
                 'round_trip_fee_pct':round(round_trip,6),'safety_pct':safety,'net_24h_conservative_pct':round(conservative,6),
                 'break_even_hours':round(break_even,2) if break_even is not None else None,
                 'maker_round_trip_fee_pct':round(maker_round_trip,6) if maker_round_trip is not None else None,
@@ -187,11 +200,10 @@ class PerpFundingSpreadScanner:
                 for a in ms:
                     for b in ms:
                         if a['venue']==b['venue']:continue
-                        pairs+=1
-                        rr=self._pair_row(base,a,b,self.safety_pct,self.max_basis_abs_pct)
+                        pairs+=1;rr=self._pair_row(base,a,b,self.safety_pct,self.max_basis_abs_pct)
                         if rr:rows.append(rr)
             self.market=market
-            self.rows=sorted(rows,key=lambda x:(x['status']=='PAPER_CANDIDATE',x['net_24h_conservative_pct']),reverse=True)[:500]
+            self.rows=sorted(rows,key=lambda x:(x['status']=='PAPER_CANDIDATE',x['net_24h_conservative_pct']),reverse=True)
             self.venue_asset_counts={v:len(x) for v,x in byvenue.items()};self.universe_bases=len(market)
             self.multi_venue_bases=sum(1 for x in market.values() if len(x)>=2);self.pairs_evaluated=pairs
             self.last_refresh=time.time(); self.last_error=None
@@ -199,13 +211,14 @@ class PerpFundingSpreadScanner:
         return self.status()
 
     def status(self):
-        candidates=[x for x in self.rows if x.get('status')=='PAPER_CANDIDATE']
+        candidates=[x for x in self.rows if x.get('status')=='PAPER_CANDIDATE'];review=[x for x in self.rows if x.get('basis_review')]
         return {'ok':self.last_error is None,'enabled':self.enabled,'mode':'ANALYSIS_ONLY','interval_seconds':self.interval,
                 'last_refresh':self.last_refresh,'last_error':self.last_error,'venues':VENUES,
                 'venue_asset_counts':self.venue_asset_counts,'universe_bases':self.universe_bases,'multi_venue_bases':self.multi_venue_bases,
                 'pairs_evaluated':self.pairs_evaluated,'market_assets':len(self.market),'count':len(self.rows),
-                'candidate_count':len(candidates),'opportunities':self.rows,
-                'policy':{'dynamic_perp_universe':True,'binance_cloud_dependency_removed':True,'no_live_orders':True}}
+                'candidate_count':len(candidates),'basis_review_count':len(review),'okx_funding_cached':len(self.okx_funding_cache),'opportunities':self.rows,
+                'policy':{'dynamic_perp_universe':True,'rotating_okx_coverage':True,'high_basis_not_discarded':True,'no_top500_cut':True,
+                          'binance_cloud_dependency_removed':True,'no_live_orders':True}}
 
     async def start(self):
         if self.task and not self.task.done():return
