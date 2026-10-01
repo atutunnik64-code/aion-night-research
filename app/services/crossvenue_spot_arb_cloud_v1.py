@@ -3,6 +3,7 @@ import asyncio,json,time,re,statistics
 from pathlib import Path
 import httpx
 from app.http_shared import SHARED_SSL_CONTEXT
+from app.services.bybit_spot_ws_mirror_v1 import bybit_spot_ws_mirror_v1
 
 ROOT=Path(__file__).parents[2]; DATA=ROOT/'data'; STATE=DATA/'crossvenue_spot_arb_cloud_v1.json'
 VENUES=('Bybit','OKX','Bitget','Gate','KuCoin')
@@ -28,8 +29,8 @@ class CrossVenueSpotArbCloudV1:
             self.state['signals']={};self.state['research_pnl_quote']=0.0
         self.state.setdefault('verification_queue',[])
         self.state.setdefault('execution_edge_quote',float(self.state.get('research_pnl_quote') or 0))
-        self.state['quality_version']=4
-        self.state['version']='CROSSVENUE_SPOT_ARB_CLOUD_V4_PROFIT_PRESERVING'
+        self.state['quality_version']=5
+        self.state['version']='CROSSVENUE_SPOT_ARB_CLOUD_V5_BYBIT_WS'
     def _save(self):
         tmp=STATE.with_suffix(STATE.suffix+'.tmp');tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
     @staticmethod
@@ -61,12 +62,19 @@ class CrossVenueSpotArbCloudV1:
         out={}
         try:
             if venue=='Bybit':
+                # Prefer the official websocket mirror because GitHub-hosted
+                # runners can get Bybit REST HTTP 403 from US egress IPs.
+                ws = bybit_spot_ws_mirror_v1.ticker_snapshot()
+                if ws:
+                    self.venue_hosts['Bybit']='wss://stream.bybit.com/v5/public/spot'
+                    self.venue_errors.pop('Bybit',None)
+                    return ws
                 r,body=await self._bybit_get(c,'/v5/market/tickers',{'category':'spot'})
                 if not r:return {}
                 rows=((body.get('result') or {}).get('list') or [])
                 for x in rows:
                     s=str(x.get('symbol') or '');base=s[:-4] if s.endswith('USDT') else '';bid=self._q(x.get('bid1Price'));ask=self._q(x.get('ask1Price'));qv=self._q(x.get('turnover24h'))
-                    if self._base_ok(base) and bid>0 and ask>0:out[base]={'venue':venue,'base':base,'bid':bid,'ask':ask,'quote_volume':qv}
+                    if self._base_ok(base) and bid>0 and ask>0:out[base]={'venue':venue,'base':base,'bid':bid,'ask':ask,'quote_volume':qv,'source':'BYBIT_REST'}
             elif venue=='OKX':
                 r=await c.get('https://www.okx.com/api/v5/market/tickers',params={'instType':'SPOT'});r.raise_for_status();rows=r.json().get('data') or []
                 for x in rows:
@@ -111,6 +119,8 @@ class CrossVenueSpotArbCloudV1:
     async def _book(self,c,venue,base):
         try:
             if venue=='Bybit':
+                wsbook=bybit_spot_ws_mirror_v1.book_snapshot(base)
+                if wsbook:return wsbook
                 r,body=await self._bybit_get(c,'/v5/market/orderbook',{'category':'spot','symbol':base+'USDT','limit':DEPTH_LEVELS})
                 if not r:return None
                 x=body.get('result') or {};bids=x.get('b') or [];asks=x.get('a') or []
@@ -118,7 +128,7 @@ class CrossVenueSpotArbCloudV1:
             elif venue=='Bitget':r=await c.get('https://api.bitget.com/api/v2/spot/market/orderbook',params={'symbol':base+'USDT','type':'step0','limit':DEPTH_LEVELS});x=r.json().get('data') or {};bids=x.get('bids') or [];asks=x.get('asks') or []
             elif venue=='Gate':r=await c.get('https://api.gateio.ws/api/v4/spot/order_book',params={'currency_pair':base+'_USDT','limit':DEPTH_LEVELS});x=r.json() if r.is_success else {};bids=x.get('bids') or [];asks=x.get('asks') or []
             else:r=await c.get('https://api.kucoin.com/api/v1/market/orderbook/level2_20',params={'symbol':base+'-USDT'});x=r.json().get('data') or {};bids=x.get('bids') or [];asks=x.get('asks') or []
-            if not r.is_success:return None
+            if venue!='Bybit' and not r.is_success:return None
             def norm(rows):
                 z=[]
                 for a in rows:
@@ -190,12 +200,12 @@ class CrossVenueSpotArbCloudV1:
                     st['hits']=int(st.get('hits') or 0)+1;st['last_seen']=now;st['last_execution_net_pct']=execution_pct;st['last_conservative_net_pct']=conservative_pct;self.state['signals'][sig]=st
                     if st['hits']<MIN_HITS or now-float(st.get('last_event') or 0)<COOLDOWN_SEC:continue
                     st['last_event']=now;tier='CONSERVATIVE_POSITIVE' if conservative_pct>=MIN_CONSERVATIVE_NET_PCT else 'EXECUTION_POSITIVE_REBALANCE_SENSITIVE'
-                    ev={'ts':now,'signature':sig,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'buy_vwap':bf['vwap'],'sell_vwap':sf['vwap'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'execution_edge_quote':execution_q,'conservative_pnl_quote':conservative_q,'notional_quote':NOTIONAL,'quality_guard':'PRICE_VOLUME_CONSENSUS_V2','quality_tier':tier,'identity_confidence':conf,'high_spread_review':high_spread,'venue_consensus_count':venue_count,'identity_verified_contract_address':False}
+                    ev={'ts':now,'signature':sig,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'buy_vwap':bf['vwap'],'sell_vwap':sf['vwap'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'execution_edge_quote':execution_q,'conservative_pnl_quote':conservative_q,'notional_quote':NOTIONAL,'quality_guard':'PRICE_VOLUME_CONSENSUS_V3_BYBIT_WS','quality_tier':tier,'identity_confidence':conf,'high_spread_review':high_spread,'venue_consensus_count':venue_count,'identity_verified_contract_address':False}
                     events.append(ev);self.state.setdefault('events',[]).append(ev);self.state['events']=self.state['events'][-3000:];self.state['execution_edge_quote']=float(self.state.get('execution_edge_quote') or 0)+execution_q
                     if tier=='CONSERVATIVE_POSITIVE':self.state['research_pnl_quote']=float(self.state.get('research_pnl_quote') or 0)+conservative_q
                 if verification:
                     q=list(self.state.get('verification_queue') or []);q.extend(verification);self.state['verification_queue']=q[-1000:]
-                self.state.update({'scan_count':int(self.state.get('scan_count') or 0)+1,'last_scan_ts':now,'loss_reasons':reasons,'last_new_events':len(events),'last_verification_candidates':len(verification),'last_depth_checks':depth_checks,'last_depth_pass':depth_pass,'last_raw_positive':raw_positive,'last_after_fees_positive':after_fees,'last_top_candidates':len(candidates),'venue_symbol_counts':venue_status,'venue_errors':dict(self.venue_errors),'venue_hosts':dict(self.venue_hosts),'raw_common_assets':len(raw_common),'common_assets':len(market)});self._save()
+                self.state.update({'scan_count':int(self.state.get('scan_count') or 0)+1,'last_scan_ts':now,'loss_reasons':reasons,'last_new_events':len(events),'last_verification_candidates':len(verification),'last_depth_checks':depth_checks,'last_depth_pass':depth_pass,'last_raw_positive':raw_positive,'last_after_fees_positive':after_fees,'last_top_candidates':len(candidates),'venue_symbol_counts':venue_status,'venue_errors':dict(self.venue_errors),'venue_hosts':dict(self.venue_hosts),'raw_common_assets':len(raw_common),'common_assets':len(market),'bybit_ws_status':bybit_spot_ws_mirror_v1.status()});self._save()
             self.last_error=None;self.last_refresh=now
         except Exception as exc:
             self.last_error=str(exc)[:500];self.state['last_error']=self.last_error;self.state['last_error_ts']=time.time();self.state['venue_errors']=dict(self.venue_errors)
@@ -204,10 +214,10 @@ class CrossVenueSpotArbCloudV1:
         return self.status()
     def status(self):
         ev=[x for x in (self.state.get('events') or []) if str(x.get('quality_guard') or '').startswith('PRICE_VOLUME_CONSENSUS')];pnl=float(self.state.get('research_pnl_quote') or 0);execution=float(self.state.get('execution_edge_quote') or 0)
-        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_SPOT_ARB_CLOUD_V4_PROFIT_PRESERVING','mode':'FUTURE_ONLY_PAPER_RESEARCH','paper_only':True,'live_enabled':False,'venues':VENUES,'raw_common_assets':self.state.get('raw_common_assets',0),'guarded_common_assets':self.state.get('common_assets',0),'venue_symbol_counts':self.state.get('venue_symbol_counts') or {},'venue_errors':self.state.get('venue_errors') or {},'venue_hosts':self.state.get('venue_hosts') or {},'scan_count':self.state.get('scan_count',0),'research_event_count':len(ev),'legacy_unverified_event_count':self.state.get('legacy_unverified_event_count',0),'legacy_unverified_pnl_quote':self.state.get('legacy_unverified_pnl_quote',0),'conservative_research_pnl_quote':round(pnl,6),'execution_edge_quote':round(execution,6),'raw_positive_routes':self.state.get('last_raw_positive',0),'after_fees_positive_routes':self.state.get('last_after_fees_positive',0),'all_execution_candidates':self.state.get('last_top_candidates',0),'verification_queue_count':len(self.state.get('verification_queue') or []),'last_verification_candidates':self.state.get('last_verification_candidates',0),'depth_validation':{'last_checks':self.state.get('last_depth_checks',0),'last_pass':self.state.get('last_depth_pass',0)},'identity_guard':{'min_observe_quote_volume':MIN_OBSERVE_QUOTE_VOLUME,'trusted_quote_volume':TRUSTED_QUOTE_VOLUME,'max_local_spread_pct':MAX_LOCAL_SPREAD_PCT,'max_price_deviation_pct':MAX_PRICE_DEVIATION_PCT,'review_raw_spread_pct':REVIEW_RAW_SPREAD_PCT,'non_major_min_venues':3,'high_spread_not_discarded':True,'contract_address_verified':False},'loss_reasons':self.state.get('loss_reasons') or {},'recent_events':ev[-20:],'verification_queue':(self.state.get('verification_queue') or [])[-20:],'promotion_blocked':True,'blocking_reason':'CONTRACT_ADDRESS_OR_NETWORK_IDENTITY_NOT_YET_VERIFIED_FOR_REVIEW_QUEUE','last_error':self.last_error,'policy':{'dynamic_universe':True,'prefunded_inventory':True,'depth_validated':True,'profit_preserving_tiers':True,'legacy_false_edges_quarantined':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
+        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_SPOT_ARB_CLOUD_V5_BYBIT_WS','mode':'FUTURE_ONLY_PAPER_RESEARCH','paper_only':True,'live_enabled':False,'venues':VENUES,'raw_common_assets':self.state.get('raw_common_assets',0),'guarded_common_assets':self.state.get('common_assets',0),'venue_symbol_counts':self.state.get('venue_symbol_counts') or {},'venue_errors':self.state.get('venue_errors') or {},'venue_hosts':self.state.get('venue_hosts') or {},'bybit_ws_status':self.state.get('bybit_ws_status') or {},'scan_count':self.state.get('scan_count',0),'research_event_count':len(ev),'legacy_unverified_event_count':self.state.get('legacy_unverified_event_count',0),'legacy_unverified_pnl_quote':self.state.get('legacy_unverified_pnl_quote',0),'conservative_research_pnl_quote':round(pnl,6),'execution_edge_quote':round(execution,6),'raw_positive_routes':self.state.get('last_raw_positive',0),'after_fees_positive_routes':self.state.get('last_after_fees_positive',0),'all_execution_candidates':self.state.get('last_top_candidates',0),'verification_queue_count':len(self.state.get('verification_queue') or []),'last_verification_candidates':self.state.get('last_verification_candidates',0),'depth_validation':{'last_checks':self.state.get('last_depth_checks',0),'last_pass':self.state.get('last_depth_pass',0)},'identity_guard':{'min_observe_quote_volume':MIN_OBSERVE_QUOTE_VOLUME,'trusted_quote_volume':TRUSTED_QUOTE_VOLUME,'max_local_spread_pct':MAX_LOCAL_SPREAD_PCT,'max_price_deviation_pct':MAX_PRICE_DEVIATION_PCT,'review_raw_spread_pct':REVIEW_RAW_SPREAD_PCT,'non_major_min_venues':3,'high_spread_not_discarded':True,'contract_address_verified':False},'loss_reasons':self.state.get('loss_reasons') or {},'recent_events':ev[-20:],'verification_queue':(self.state.get('verification_queue') or [])[-20:],'promotion_blocked':True,'blocking_reason':'CONTRACT_ADDRESS_OR_NETWORK_IDENTITY_NOT_YET_VERIFIED_FOR_REVIEW_QUEUE','last_error':self.last_error,'policy':{'dynamic_universe':True,'prefunded_inventory':True,'depth_validated':True,'profit_preserving_tiers':True,'legacy_false_edges_quarantined':True,'bybit_ws_fallback':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
     async def start(self):
         if self.task and not self.task.done():return
-        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-spot-arb-cloud-v4')
+        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-spot-arb-cloud-v5')
     async def stop(self):
         if self.task and not self.task.done():self.task.cancel();await asyncio.gather(self.task,return_exceptions=True)
         self.task=None
