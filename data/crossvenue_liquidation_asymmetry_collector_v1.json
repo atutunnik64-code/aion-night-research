@@ -1,30 +1,12 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 272,
-  "bybit_notional_usdt": 1211125.5238600003,
+  "bybit_events": 274,
+  "bybit_notional_usdt": 1213748.0319600003,
   "context_count": 0,
-  "last_event_at": 1790884160.0207918,
-  "last_context_at": 1790884140.6141398,
+  "last_event_at": 1790884278.519371,
+  "last_context_at": 1790884395.0731726,
   "recent": [
-    {
-      "event_time": 1790873801470,
-      "symbol": "AVAXUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 10.69,
-      "qty": 2.2,
-      "notional_usdt": 23.518
-    },
-    {
-      "event_time": 1790873801898,
-      "symbol": "AAVEUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 165.09,
-      "qty": 0.03,
-      "notional_usdt": 4.9527
-    },
     {
       "event_time": 1790873805083,
       "symbol": "ETHUSDT",
@@ -906,6 +888,24 @@
       "price": 1.1916,
       "qty": 40.0,
       "notional_usdt": 47.664
+    },
+    {
+      "event_time": 1790884275202,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 118.88,
+      "qty": 16.8,
+      "notional_usdt": 1997.184
+    },
+    {
+      "event_time": 1790884277994,
+      "symbol": "AVAXUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 11.107,
+      "qty": 56.3,
+      "notional_usdt": 625.3240999999999
     }
   ],
   "last_context": []
