@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 83,
-  "last_source_ts": 1790875029.9864519,
+  "sample_count": 84,
+  "last_source_ts": 1790882992.3546968,
   "latest": {
-    "source_ts": 1790875029.9864519,
+    "source_ts": 1790882992.3546968,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4225.7,
+      "front_px": 4239.4,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4275.5,
-      "curve_pct": 1.178502969922146
+      "next_px": 4288.6,
+      "curve_pct": 1.1605415860735269
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 61.73,
+      "front_px": 62.03,
       "next": "SVH7",
       "next_name": "SILV-3.27",
-      "next_px": 63.23,
-      "curve_pct": 2.429936821642631
+      "next_px": 63.56,
+      "curve_pct": 2.466548444301142
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28503.0,
+      "front_px": 28485.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
-      "next_px": 29475.0,
-      "curve_pct": 3.410167350805171
+      "next_px": 29451.0,
+      "curve_pct": 3.391258557135335
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11155.6,
-      "oi": 1617150,
-      "volume": 429167
+      "px": 11193.8,
+      "oi": 1615436,
+      "volume": 440711
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 160.32,
-      "oi": 79098,
-      "volume": 4351
+      "px": 161.25,
+      "oi": 79194,
+      "volume": 4529
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 276.83,
-      "oi": 240926,
-      "volume": 23995
+      "px": 276.61,
+      "oi": 241232,
+      "volume": 24794
     },
-    "gold_silver_ratio": 68.45456018143528,
-    "sber_perp_vs_front_pct": -2.8768901519138357,
+    "gold_silver_ratio": 68.34434950830243,
+    "sber_perp_vs_front_pct": -2.8927505704756884,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188

@@ -1,6 +1,6 @@
 {
   "version": "EVIDENCE_DASHBOARD_V1",
-  "generated_at": 1790883215.9946628,
+  "generated_at": 1790884175.6449196,
   "paper_only": true,
   "live_enabled": false,
   "portfolio_metrics": {
@@ -14,40 +14,40 @@
       "metric_type": "CAPITAL_NORMALIZED_REALIZED"
     },
     "perp_funding_spread": {
-      "closed_pnl_quote": 0.22364331578947125,
+      "closed_pnl_quote": 0.4237013430661066,
       "open_positions": 45,
-      "closed_positions": 1,
-      "open_positions_accrued_funding_quote": 0.24776685315298927,
+      "closed_positions": 2,
+      "open_positions_accrued_funding_quote": 0.12005214887488098,
       "metric_type": "REALIZED_QUOTE_IF_CLOSED_PLUS_SEPARATE_OPEN_FUNDING_ACCRUAL"
     }
   },
   "research_edge_metrics": {
     "classic_spot_arb": {
-      "scan_count": 360,
-      "execution_edge_quote_sum": 165.17444135882857,
-      "last_raw_positive": 474,
-      "last_after_fees_positive": 102,
+      "scan_count": 366,
+      "execution_edge_quote_sum": 172.33863600617454,
+      "last_raw_positive": 473,
+      "last_after_fees_positive": 94,
       "last_depth_checks": 60,
-      "last_depth_pass": 52,
+      "last_depth_pass": 57,
       "verification_candidates": 0,
       "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
     },
     "leadlag": {
-      "scan_count": 1861,
-      "pending": 62,
+      "scan_count": 1899,
+      "pending": 47,
       "resolved": 1000,
-      "positive_edge_episodes": 71,
-      "paper_edge_quote_sum": 7.583166721484612,
+      "positive_edge_episodes": 69,
+      "paper_edge_quote_sum": 7.059533910701422,
       "error_count": 0,
       "last_error": null,
       "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
     },
     "orderbook_consensus": {
-      "pending": 34,
-      "resolved": 472,
-      "sum_trade_return_pct": -111.9592427030547,
-      "mean_trade_return_pct": -0.23720178538782774,
-      "positive_trade_rate": 0.3241525423728814,
+      "pending": 21,
+      "resolved": 506,
+      "sum_trade_return_pct": -118.59197206051806,
+      "mean_trade_return_pct": -0.2343714862856088,
+      "positive_trade_rate": 0.32608695652173914,
       "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED"
     },
     "arb_verifier": {
@@ -61,7 +61,7 @@
   "moex_research": {
     "broad_shadow": {
       "resolved": 1342,
-      "pending": 274,
+      "pending": 332,
       "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
     },
     "calendar_matrix": {

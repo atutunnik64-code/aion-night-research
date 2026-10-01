@@ -269,3 +269,4 @@
 {"event_time":1790883025529,"symbol":"SUIUSDT","position_side":"Buy","pressure_side":"SELL","price":1.1522,"qty":240.0,"notional_usdt":276.52799999999996}
 {"event_time":1790883029759,"symbol":"XRPUSDT","position_side":"Buy","pressure_side":"SELL","price":1.4854,"qty":44.4,"notional_usdt":65.95176000000001}
 {"event_time":1790883031986,"symbol":"XRPUSDT","position_side":"Buy","pressure_side":"SELL","price":1.4851,"qty":165.5,"notional_usdt":245.78405}
+{"event_time":1790884159688,"symbol":"SUIUSDT","position_side":"Sell","pressure_side":"BUY","price":1.1916,"qty":40.0,"notional_usdt":47.664}
