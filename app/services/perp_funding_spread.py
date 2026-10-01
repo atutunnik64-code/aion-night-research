@@ -91,18 +91,26 @@ class PerpFundingSpreadScanner:
     async def _kucoin(self,c):
         out={}
         try:
-            r=await c.get('https://api-futures.kucoin.com/api/v1/contracts/active')
-            d=r.json(); rows=d.get('data') or []
-            for x in rows:
+            cr,tr=await asyncio.gather(
+                c.get('https://api-futures.kucoin.com/api/v1/contracts/active'),
+                c.get('https://api-futures.kucoin.com/api/v1/allTickers')
+            )
+            cd=cr.json(); td=tr.json(); contracts={}
+            for x in (cd.get('data') or []):
                 if str(x.get('quoteCurrency') or '').upper()!='USDT':continue
-                sym=str(x.get('symbol') or '').upper();root=str(x.get('rootSymbol') or '').upper()
-                base=('BTC' if root=='XBT' else root) or _base_from_symbol(sym,'USDTM')
-                bid=_f(x.get('bestBidPrice'));ask=_f(x.get('bestAskPrice'));rate=_f(x.get('fundingFeeRate'))
+                if str(x.get('status') or '').upper()!='OPEN':continue
+                sym=str(x.get('symbol') or '').upper()
+                if sym:contracts[sym]=x
+            ticks={str(x.get('symbol') or '').upper():x for x in (td.get('data') or [])}
+            for sym,x in contracts.items():
+                t=ticks.get(sym) or {}; base=str(x.get('baseCurrency') or '').upper()
+                if base=='XBT':base='BTC'
+                bid=_f(t.get('bestBidPrice'));ask=_f(t.get('bestAskPrice'));rate=_f(x.get('fundingFeeRate'))
                 if not base or bid<=0 or ask<=0:continue
-                gran=_f(x.get('fundingRateGranularity'),28800000.0)
+                gran=_f(x.get('currentFundingRateGranularity') or x.get('fundingRateGranularity'),28800000.0)
                 out[base]={'venue':'KuCoin','base':base,'bid':bid,'ask':ask,'rate':rate,'interval_hours':max(1.0,gran/3600000.0),
-                    'next_funding_time':x.get('nextFundingRateTime'),'interval_source':'KUCOIN_ACTIVE_CONTRACTS',
-                    'source':'KUCOIN_USDT_FUTURES_BULK','quote_volume':_f(x.get('turnoverOf24h'))}
+                    'next_funding_time':x.get('nextFundingRateDateTime') or x.get('nextFundingRateTime'),'interval_source':'KUCOIN_CONTRACTS_PLUS_ALL_TICKERS',
+                    'source':'KUCOIN_USDT_FUTURES_BULK_V2','quote_volume':_f(x.get('turnoverOf24h'))}
         except Exception:pass
         return out
 
