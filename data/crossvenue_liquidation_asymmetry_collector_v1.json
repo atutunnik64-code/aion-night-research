@@ -1,11 +1,11 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 41,
-  "bybit_notional_usdt": 57624.83765000001,
+  "bybit_events": 50,
+  "bybit_notional_usdt": 100383.52135000001,
   "context_count": 0,
-  "last_event_at": 1790855488.9272957,
-  "last_context_at": 1790855855.5001326,
+  "last_event_at": 1790861884.9821515,
+  "last_context_at": 1790861941.6471932,
   "recent": [
     {
       "event_time": 1790832689038,
@@ -375,6 +375,87 @@
       "price": 0.2512,
       "qty": 96.0,
       "notional_usdt": 24.115199999999998
+    },
+    {
+      "event_time": 1790861863333,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2701.89,
+      "qty": 0.24,
+      "notional_usdt": 648.4535999999999
+    },
+    {
+      "event_time": 1790861863461,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2702.19,
+      "qty": 0.24,
+      "notional_usdt": 648.5255999999999
+    },
+    {
+      "event_time": 1790861866248,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.4958,
+      "qty": 27323.8,
+      "notional_usdt": 40870.94004
+    },
+    {
+      "event_time": 1790861866826,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 118.17,
+      "qty": 0.3,
+      "notional_usdt": 35.451
+    },
+    {
+      "event_time": 1790861875698,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2703.64,
+      "qty": 0.07,
+      "notional_usdt": 189.25480000000002
+    },
+    {
+      "event_time": 1790861879032,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.4972,
+      "qty": 3.4,
+      "notional_usdt": 5.09048
+    },
+    {
+      "event_time": 1790861879332,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.4972,
+      "qty": 116.9,
+      "notional_usdt": 175.02268
+    },
+    {
+      "event_time": 1790861880245,
+      "symbol": "LINKUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 14.479,
+      "qty": 3.5,
+      "notional_usdt": 50.6765
+    },
+    {
+      "event_time": 1790861884728,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2705.38,
+      "qty": 0.05,
+      "notional_usdt": 135.269
     }
   ],
   "last_context": []
