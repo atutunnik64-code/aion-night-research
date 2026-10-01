@@ -15,20 +15,20 @@ from app.services.moex_universe_features_v1 import moex_universe_features_v1
 from app.services.moex_spread_research_v1 import moex_spread_research_v1
 from app.services.moex_spread_paper_v1 import moex_spread_paper_v1
 
-from app.services.funding_oi_state_transition_shadow import funding_oi_state_transition_shadow
+from app.services.crossvenue_liquidation_asymmetry_collector import crossvenue_liquidation_asymmetry_collector
+from app.services.funding_oi_bybit_shadow_v1 import funding_oi_bybit_shadow_v1
+from app.services.liquidity_migration_perp_collector import liquidity_migration_perp_collector
 from app.services.funding_dislocation_persistence_v3 import funding_dislocation_persistence_v3
-from app.services.crossvenue_oi_migration_shadow_v2 import crossvenue_oi_migration_shadow_v2
 from app.services.crossvenue_perp_taker_collector_v2 import crossvenue_perp_taker_collector_v2
-from app.services.crossvenue_taker_imbalance_divergence_shadow_v3 import crossvenue_taker_imbalance_divergence_shadow_v3
 
 STOP = asyncio.Event()
 SERVICES = [
     moex_futures_collector, moex_futures_shadow, moex_feature_registry,
     moex_futures_universe, moex_universe_structure_v1, moex_universe_features_v1,
     moex_spread_research_v1,
-    funding_oi_state_transition_shadow, funding_dislocation_persistence_v3,
-    crossvenue_oi_migration_shadow_v2, crossvenue_perp_taker_collector_v2,
-    crossvenue_taker_imbalance_divergence_shadow_v3,
+    crossvenue_liquidation_asymmetry_collector, funding_oi_bybit_shadow_v1,
+    liquidity_migration_perp_collector, funding_dislocation_persistence_v3,
+    crossvenue_perp_taker_collector_v2,
 ]
 
 async def _start_all():
@@ -46,6 +46,7 @@ async def _stop_all():
                 await fn()
             except Exception as exc:
                 print(f'STOP_WARN {type(svc).__name__}: {exc}', flush=True)
+
 async def main():
     loop = asyncio.get_running_loop()
     for sig in (signal.SIGINT, signal.SIGTERM):
@@ -67,4 +68,3 @@ async def main():
 
 if __name__ == '__main__':
     asyncio.run(main())
-
