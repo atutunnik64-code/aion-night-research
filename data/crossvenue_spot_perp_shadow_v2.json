@@ -13,19 +13,19 @@
       "last_conservative_net_pct": null
     },
     "SOON:Bitget>Gate": {
-      "hits": 9,
-      "last_execution_net_pct": 0.2161305361305524,
-      "last_conservative_net_pct": 0.11613053613055238
+      "hits": 12,
+      "last_execution_net_pct": 0.08265277119848619,
+      "last_conservative_net_pct": -0.01734722880151382
     },
     "LAB:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.3286074017550525,
-      "last_conservative_net_pct": 0.22860740175505248
+      "hits": 7,
+      "last_execution_net_pct": 0.06402457757296115,
+      "last_conservative_net_pct": -0.035975422427038856
     },
     "Q:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.06817136001128016,
-      "last_conservative_net_pct": -0.03182863998871985
+      "hits": 8,
+      "last_execution_net_pct": 0.04960867501760752,
+      "last_conservative_net_pct": -0.05039132498239249
     },
     "NAORIS:Bitget>Gate": {
       "hits": 0,
@@ -38,24 +38,24 @@
       "last_conservative_net_pct": null
     },
     "US:Bitget>Gate": {
-      "hits": 6,
-      "last_execution_net_pct": 0.580241081509967,
-      "last_conservative_net_pct": 0.480241081509967
+      "hits": 1,
+      "last_execution_net_pct": 0.3702279757131424,
+      "last_conservative_net_pct": 0.2702279757131424
     },
     "IN:Bitget>Gate": {
-      "hits": 22,
-      "last_execution_net_pct": 0.11068640646028999,
-      "last_conservative_net_pct": 0.010686406460289982
+      "hits": 6,
+      "last_execution_net_pct": 0.0010272873194197563,
+      "last_conservative_net_pct": -0.09897271268058025
     },
     "TAG:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.20390695034119083,
-      "last_conservative_net_pct": 0.10390695034119082
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "B2:Bitget>Gate": {
-      "hits": 6,
-      "last_execution_net_pct": 0.23900239572455045,
-      "last_conservative_net_pct": 0.13900239572455045
+      "hits": 1,
+      "last_execution_net_pct": 0.15700587084149592,
+      "last_conservative_net_pct": 0.057005870841495915
     },
     "IDOL:Bitget>Gate": {
       "hits": 0,
@@ -103,9 +103,9 @@
       "last_conservative_net_pct": null
     },
     "BLESS:Bitget>Gate": {
-      "hits": 6,
-      "last_execution_net_pct": 0.047303470909119405,
-      "last_conservative_net_pct": -0.0526965290908806
+      "hits": 1,
+      "last_execution_net_pct": 0.011611012570376389,
+      "last_conservative_net_pct": -0.08838898742962362
     },
     "HUMA:Bitget>Gate": {
       "hits": 0,
@@ -123,9 +123,9 @@
       "last_conservative_net_pct": null
     },
     "ROBO:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.40495606326890005,
-      "last_conservative_net_pct": 0.3049560632689
+      "hits": 1,
+      "last_execution_net_pct": 0.17861495844876202,
+      "last_conservative_net_pct": 0.07861495844876201
     },
     "CT:Gate>Bitget": {
       "hits": 0,
@@ -143,14 +143,14 @@
       "last_conservative_net_pct": null
     },
     "NIGHT:Bitget>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 1.0959390862944287,
+      "last_conservative_net_pct": 0.9959390862944287
     },
     "NIGHT:Gate>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 2,
+      "last_execution_net_pct": 1.0959390862944287,
+      "last_conservative_net_pct": 0.9959390862944287
     },
     "CT:Bitget>OKX": {
       "hits": 0,
@@ -158,9 +158,9 @@
       "last_conservative_net_pct": null
     },
     "NIGHT:OKX>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 1.2353522415370668,
+      "last_conservative_net_pct": 1.1353522415370667
     },
     "JASMY:Bitget>Gate": {
       "hits": 0,
@@ -168,19 +168,19 @@
       "last_conservative_net_pct": null
     },
     "NIGHT:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 1.1013197969543234,
+      "last_conservative_net_pct": 1.0013197969543233
     },
     "RESOLV:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.05253858435335462,
-      "last_conservative_net_pct": -0.04746141564664538
+      "hits": 2,
+      "last_execution_net_pct": 0.48040020010005985,
+      "last_conservative_net_pct": 0.3804002001000598
     },
     "UAI:Bitget>Gate": {
-      "hits": 2,
-      "last_execution_net_pct": 0.09578751396300628,
-      "last_conservative_net_pct": -0.004212486036993729
+      "hits": 6,
+      "last_execution_net_pct": 0.16111245615669595,
+      "last_conservative_net_pct": 0.06111245615669594
     },
     "SOON:Gate>Bitget": {
       "hits": 0,
@@ -208,14 +208,14 @@
       "last_conservative_net_pct": null
     },
     "NIGHT:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 2,
+      "last_execution_net_pct": 0.9997969543147225,
+      "last_conservative_net_pct": 0.8997969543147225
     },
     "NIGHT:OKX>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 1.1336952322862672,
+      "last_conservative_net_pct": 1.0336952322862671
     },
     "PHA:Bitget>Gate": {
       "hits": 0,
@@ -223,29 +223,29 @@
       "last_conservative_net_pct": null
     },
     "GRASS:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.17875523638538637,
-      "last_conservative_net_pct": 0.07875523638538637
-    },
-    "BR:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.34436940041350034,
-      "last_conservative_net_pct": 0.24436940041350033
-    },
-    "CP:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.242700964630225,
-      "last_conservative_net_pct": 0.142700964630225
-    },
-    "O:Bitget>Gate": {
       "hits": 0,
       "last_execution_net_pct": null,
       "last_conservative_net_pct": null
     },
-    "ENA:Bitget>OKX": {
+    "BR:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CP:Bitget>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.15524131818548415,
-      "last_conservative_net_pct": 0.05524131818548414
+      "last_execution_net_pct": 0.00025620496396455694,
+      "last_conservative_net_pct": -0.09974379503603545
+    },
+    "O:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.3800736919675843,
+      "last_conservative_net_pct": 0.28007369196758425
+    },
+    "ENA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "BR:Gate>Bitget": {
       "hits": 0,
@@ -253,19 +253,19 @@
       "last_conservative_net_pct": null
     },
     "FF:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.03948234542257928,
-      "last_conservative_net_pct": -0.060517654577420726
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "FLOCK:Bitget>Gate": {
-      "hits": 6,
-      "last_execution_net_pct": 0.21501180173092244,
-      "last_conservative_net_pct": 0.11501180173092243
+      "hits": 1,
+      "last_execution_net_pct": 0.04363636363634377,
+      "last_conservative_net_pct": -0.05636363636365624
     },
     "NMR:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.14275292623172425,
-      "last_conservative_net_pct": 0.04275292623172425
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "KAT:Bitget>Gate": {
       "hits": 0,
@@ -278,14 +278,14 @@
       "last_conservative_net_pct": null
     },
     "GRASS:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.06898862956313617,
-      "last_conservative_net_pct": -0.031011370436863833
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ENA:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.07481105470953181,
-      "last_conservative_net_pct": -0.025188945290468195
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "TRB:Bitget>Gate": {
       "hits": 0,
@@ -308,9 +308,9 @@
       "last_conservative_net_pct": null
     },
     "PONS:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.05916824196597914,
-      "last_conservative_net_pct": -0.040831758034020865
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "PONS:OKX>Bitget": {
       "hits": 0,
@@ -323,9 +323,9 @@
       "last_conservative_net_pct": null
     },
     "PONS:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.07697542533081442,
-      "last_conservative_net_pct": -0.023024574669185588
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "GRASS:Gate>OKX": {
       "hits": 0,
@@ -338,9 +338,9 @@
       "last_conservative_net_pct": null
     },
     "VELVET:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.018696020321749274,
-      "last_conservative_net_pct": -0.08130397967825073
+      "hits": 2,
+      "last_execution_net_pct": 0.020715502555366527,
+      "last_conservative_net_pct": -0.07928449744463348
     },
     "RECALL:Bitget>Gate": {
       "hits": 0,
@@ -423,9 +423,9 @@
       "last_conservative_net_pct": null
     },
     "TAO:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.16082949308754446,
-      "last_conservative_net_pct": 0.060829493087544456
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "VELVET:Gate>Bitget": {
       "hits": 0,
@@ -568,9 +568,9 @@
       "last_conservative_net_pct": null
     },
     "TAO:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.10791310072416432,
-      "last_conservative_net_pct": 0.007913100724164318
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "SUI:Gate>OKX": {
       "hits": 0,
@@ -683,9 +683,9 @@
       "last_conservative_net_pct": null
     },
     "SLX:Bitget>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.046893724377172985,
+      "last_conservative_net_pct": -0.05310627562282702
     },
     "SLX:Bitget>Gate": {
       "hits": 0,
@@ -893,9 +893,9 @@
       "last_conservative_net_pct": null
     },
     "MOVE:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.24925996204932882,
-      "last_conservative_net_pct": 0.14925996204932881
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "PLUME:Bitget>Gate": {
       "hits": 0,
@@ -1013,9 +1013,9 @@
       "last_conservative_net_pct": null
     },
     "ZEC:OKX>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.034718410395360444,
-      "last_conservative_net_pct": -0.06528158960463956
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "W:Bitget>OKX": {
       "hits": 0,
@@ -1043,9 +1043,9 @@
       "last_conservative_net_pct": null
     },
     "SAND:Gate>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.18656228413539228,
-      "last_conservative_net_pct": 0.08656228413539227
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "NEAR:Bitget>Gate": {
       "hits": 0,
@@ -1178,9 +1178,9 @@
       "last_conservative_net_pct": null
     },
     "H:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.04742423143956148,
-      "last_conservative_net_pct": -0.052575768560438524
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ALICE:Bitget>Gate": {
       "hits": 0,
@@ -1208,9 +1208,9 @@
       "last_conservative_net_pct": null
     },
     "AEON:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.0666228494104007,
+      "last_conservative_net_pct": -0.03337715058959931
     },
     "QNT:Gate>Bitget": {
       "hits": 0,
@@ -1228,9 +1228,9 @@
       "last_conservative_net_pct": null
     },
     "UNI:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.02110915492957527,
-      "last_conservative_net_pct": -0.07889084507042474
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "KAITO:Bitget>Gate": {
       "hits": 0,
@@ -1238,9 +1238,9 @@
       "last_conservative_net_pct": null
     },
     "UNI:OKX>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.02110915492957527,
-      "last_conservative_net_pct": -0.07889084507042474
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "HUMA:OKX>Bitget": {
       "hits": 0,
@@ -1258,9 +1258,9 @@
       "last_conservative_net_pct": null
     },
     "DATA:Gate>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.05558685446008599,
-      "last_conservative_net_pct": -0.04441314553991402
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "HUMA:OKX>Gate": {
       "hits": 0,
@@ -1268,19 +1268,19 @@
       "last_conservative_net_pct": null
     },
     "MEGA:OKX>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 1.0498630136986355,
+      "last_conservative_net_pct": 0.9498630136986356
     },
     "MEGA:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.12020542920029104,
+      "last_conservative_net_pct": 0.02020542920029103
     },
     "MEGA:Gate>OKX": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.011812179016879254,
+      "last_conservative_net_pct": -0.08818782098312075
     },
     "TRB:OKX>Gate": {
       "hits": 0,
@@ -1303,14 +1303,14 @@
       "last_conservative_net_pct": null
     },
     "AERO:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.07718129404227031,
-      "last_conservative_net_pct": -0.022818705957729696
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ZAMA:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0975764350222954,
-      "last_conservative_net_pct": -0.002423564977704601
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "INJ:Bitget>OKX": {
       "hits": 0,
@@ -1323,9 +1323,9 @@
       "last_conservative_net_pct": null
     },
     "CROSS:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.07215119848050594,
-      "last_conservative_net_pct": -0.027848801519494065
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ALLO:Bitget>Gate": {
       "hits": 0,
@@ -1333,14 +1333,14 @@
       "last_conservative_net_pct": null
     },
     "MOVE:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.3641366223908873,
-      "last_conservative_net_pct": 0.2641366223908873
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "SPK:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.051120107962208394,
-      "last_conservative_net_pct": -0.04887989203779161
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "BICO:Gate>Bitget": {
       "hits": 0,
@@ -1373,35 +1373,3280 @@
       "last_conservative_net_pct": null
     },
     "MOVE:OKX>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.23828917486753226,
-      "last_conservative_net_pct": 0.13828917486753226
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ZAMA:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0902785575469614,
-      "last_conservative_net_pct": -0.009721442453038603
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "SOPH:Gate>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0440436852422324,
-      "last_conservative_net_pct": -0.055956314757767606
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "TUT:Gate>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0411556982343389,
-      "last_conservative_net_pct": -0.058844301765661106
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "AERO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZRO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZRO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZRO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEGA:OKX>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.025577883015502068,
-      "last_conservative_net_pct": -0.07442211698449794
+      "last_execution_net_pct": 1.0313513513513597,
+      "last_conservative_net_pct": 0.9313513513513597
+    },
+    "MEGA:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.9028127313101544,
+      "last_conservative_net_pct": 0.8028127313101544
+    },
+    "MEGA:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.9938415988156903,
+      "last_conservative_net_pct": 0.8938415988156904
+    },
+    "RE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KITE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KITE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETHFI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NEAR:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NEAR:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LUNC:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.1299437570303577,
+      "last_conservative_net_pct": 0.029943757030357704
+    },
+    "RE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NEAR:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VVV:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ROBO:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.14321329639889213,
+      "last_conservative_net_pct": 0.043213296398892126
+    },
+    "AEON:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EDGE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "JASMY:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ENSO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "H:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ACE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BICO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BICO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BICO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BICO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKY:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKY:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKY:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKY:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SPACE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZEC:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZEC:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOVE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZEC:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOVE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZEC:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STX:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STX:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STX:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STX:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STX:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZEN:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STX:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GRASS:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARB:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZRO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VIRTUAL:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GRASS:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BERA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARB:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DASH:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARB:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STRK:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VIRTUAL:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "INJ:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "INJ:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZK:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARB:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NEAR:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VIRTUAL:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "OP:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZEN:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TAO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TAO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEOPLE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAITO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "INJ:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEOPLE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "OP:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEOPLE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AEON:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AEON:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "JTO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARKM:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ADA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VVV:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOODENG:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TIA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EIGEN:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EIGEN:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEOPLE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LIT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ADA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DEEP:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZK:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "JTO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MORPHO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARB:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOODENG:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TIA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LIT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HBAR:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AEON:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GRT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAITO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEPE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WET:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ROBO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAITO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ADA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ADA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARB:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAND:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TRUMP:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STRK:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HBAR:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GALA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FIL:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRV:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TIA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "JTO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DYDX:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LIT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IOTA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FIL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EIGEN:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SEI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MINA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BLUR:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAND:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MORPHO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEPE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "JTO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEPE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARKM:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIGTIME:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHIP:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SUSHI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "OP:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZAMA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BSV:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRV:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRV:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VIRTUAL:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EIGEN:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRV:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOODENG:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GALA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BONK:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEPE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "OP:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BOME:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PNUT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MINA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RAY:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AVAX:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MORPHO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FARTCOIN:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MINA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAND:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XAI:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "METIS:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SUSHI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORDI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZAMA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZK:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEOPLE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SEI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RAY:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ROBO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MORPHO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ROBO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "OP:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOOD:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HBAR:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DYDX:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEOPLE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PNUT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEPE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AEVO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TURBO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAND:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AVAX:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINK:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HBAR:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MORPHO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XLM:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SEI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MORPHO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "UNI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOODENG:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAS:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SEI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TRUMP:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MINA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LIT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DASH:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORDI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WIF:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "UNI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PEPE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RAY:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SEI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINK:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINK:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "METIS:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ADA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIGTIME:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XLM:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORDI:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TRUMP:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETC:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EIGEN:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINK:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BERA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ADA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ENS:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BCH:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ROBO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MINA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NMR:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STRK:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZK:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APT:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RAY:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SNX:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ASTER:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STRK:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORDI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZK:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EIGEN:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NMR:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CROSS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETC:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XLM:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HBAR:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "REZ:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XLM:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BERA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BERA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SHIB:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CORE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIGTIME:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOODENG:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRV:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KITE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKY:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FIL:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KSM:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STRK:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DYDX:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PYTH:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORDI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ICP:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BOME:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEME:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETC:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "W:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KMNO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "METIS:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRV:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MET:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IOTA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ASTER:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FIL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SPK:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "JTO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BOME:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CYBER:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOW:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RENDER:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RSR:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BCH:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORDI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SUSHI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SUSHI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SHIB:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AR:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZK:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOT:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAITO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETC:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RENDER:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BERA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KITE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LPT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOKI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CELO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ASTER:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ICP:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BONK:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "QTUM:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AXS:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAITO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SNX:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KITE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINK:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DYDX:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETHFI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SHIB:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SUSHI:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOOD:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HBAR:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ICP:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BCH:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MET:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CP:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATH:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CFX:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RAY:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XTZ:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CELO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MINA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IRYS:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PYTH:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PNUT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZETA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LIT:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SHIB:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ASTER:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "S:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZAMA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NOT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "S:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HYPE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AIXBT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOGE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BOME:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RENDER:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BOME:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOKI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOKI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZAMA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XLM:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CFX:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RAY:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "COMP:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "COMP:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALGO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AVAX:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PYTH:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOGE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BCH:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GRVT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ENS:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NIL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZETA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "POL:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOODENG:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CETUS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RSR:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SUSHI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "METIS:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AR:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RENDER:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AIXBT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOKI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOKI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AEVO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BCH:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BCH:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GALA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MANA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOL:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZORA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SHIB:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "COMP:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINK:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GRT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATOM:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOGE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AXS:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALGO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SNX:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NMR:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IOST:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ASTER:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHZ:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PIXEL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AVAX:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XLM:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOL:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HYPE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ENS:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAT:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOGE:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PYTH:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ASTER:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CFX:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WAL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SHIB:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SSV:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "POL:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DEEP:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALGO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KSM:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATH:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AXS:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "QTUM:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "THETA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALGO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ONT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GWEI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOL:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARKM:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHZ:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHZ:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINEA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALGO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MERL:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MOCA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XRP:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "QTUM:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TOSHI:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "2Z:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KMNO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FLOW:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SSV:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SSV:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "W:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATH:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZETA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LIT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ONT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ICP:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MERL:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MERL:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOGE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARKM:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARKM:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DOGE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHIP:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AR:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CELO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SATS:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SSV:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TURBO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATOM:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "2Z:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALGO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IMX:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IMX:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BRETT:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CELO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEME:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WIF:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WIF:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KITE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZORA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINEA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IOST:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEME:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IRYS:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XRP:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAHARA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BARD:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "POL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "S:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RECALL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GENIUS:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETHFI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TAIKO:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ONT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATH:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ONT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MET:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PYTH:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "2Z:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BARD:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BARD:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "COMP:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GUN:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "FF:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RSR:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XRP:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAHARA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NMR:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHZ:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XRP:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LPT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETC:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "THETA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "POL:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "QTUM:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "APE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MMT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "POL:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETC:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "2Z:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BLESS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "METIS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALLO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SPK:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEW:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ALLO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ORCA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "COMP:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SNX:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "POL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOPH:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XAI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETHFI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SENT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WAL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "METIS:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WCT:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LDO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOL:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XRP:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SOL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BLUR:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AXS:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "2Z:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZETA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ACH:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIGTIME:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TOWNS:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HYPE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BARD:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AVNT:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEW:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "S:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SKL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CFX:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "YFI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MMT:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LUNA:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "VET:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LTC:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PNUT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CRO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "HYPE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IOST:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEME:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINEA:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINEA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ACH:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IOST:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SENT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ACH:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZORA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ARKM:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "1INCH:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "XRP:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DYDX:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BIGTIME:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "S:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SPK:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IRYS:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NEO:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IRYS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BRETT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LINEA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "EDGE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LTC:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "2Z:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BARD:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LDO:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WOO:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZORA:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CC:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZIL:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AR:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WIF:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MERL:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CHZ:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KMNO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PENDLE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEME:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "API3:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CFX:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PENDLE:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZORA:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BSV:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BANK:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "DYDX:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SPACE:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LUNA:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GWEI:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CYBER:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WLFI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ZETA:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "AVNT:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "1INCH:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CC:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PARTI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LTC:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "API3:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CELO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ENS:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MEME:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TAG:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SPK:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "COMP:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CC:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ENS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ACH:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IRYS:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "SAFE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CELO:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ROSE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "S:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "WLFI:OKX>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ATH:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "KAT:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "ETH:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "NIL:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LAB:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "BANK:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "IO:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "RESOLV:Bitget>OKX": {
+      "hits": 1,
+      "last_execution_net_pct": 0.3003001500750393,
+      "last_conservative_net_pct": 0.2003001500750393
+    },
+    "RESOLV:Gate>Bitget": {
+      "hits": 2,
+      "last_execution_net_pct": 0.12910179640718084,
+      "last_conservative_net_pct": 0.02910179640718083
+    },
+    "RESOLV:OKX>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.12910179640718084,
+      "last_conservative_net_pct": 0.02910179640718083
+    },
+    "RESOLV:OKX>Gate": {
+      "hits": 2,
+      "last_execution_net_pct": 0.22890219560879138,
+      "last_conservative_net_pct": 0.12890219560879138
+    },
+    "RESOLV:Gate>OKX": {
+      "hits": 2,
+      "last_execution_net_pct": 0.049301397205592457,
+      "last_conservative_net_pct": -0.05069860279440755
+    },
+    "PENDLE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PENDLE:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PENDLE:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "GRAM:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "G:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PARTI:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PARTI:Gate>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PARTI:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PARTI:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "PARTI:OKX>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "TUT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "STABLE:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "MMT:Bitget>Gate": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "LUNC:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.24465273856578512,
+      "last_conservative_net_pct": 0.14465273856578512
+    },
+    "O:Gate>Bitget": {
+      "hits": 1,
+      "last_execution_net_pct": 0.11916870325793055,
+      "last_conservative_net_pct": 0.019168703257930547
     }
   },
   "pending": {
     "SOON:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "SOON:Bitget>Gate",
       "base": "SOON",
       "spot_venue": "Bitget",
@@ -1413,14 +4658,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04014801525005607,
-      "funding_quote": 0.0017096989407863106,
+      "funding_quote": 0.0018445893841352533,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.5667683337070998,
       "entry_raw_basis_pct": 0.9867683337070998
     },
     "LAB:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "LAB:Bitget>Gate",
       "base": "LAB",
       "spot_venue": "Bitget",
@@ -1432,14 +4677,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04011058601134215,
-      "funding_quote": 0.0012802009107522989,
+      "funding_quote": 0.0016939257653299212,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.31724007561435374,
       "entry_raw_basis_pct": 0.7372400756143538
     },
     "Q:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "Q:Bitget>Gate",
       "base": "Q",
       "spot_venue": "Bitget",
@@ -1451,14 +4696,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.040104850964348335,
-      "funding_quote": 0.0012758844033838163,
+      "funding_quote": 0.0016880307036500927,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.27900642898890193,
       "entry_raw_basis_pct": 0.699006428988902
     },
     "US:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "US:Bitget>Gate",
       "base": "US",
       "spot_venue": "Bitget",
@@ -1470,14 +4715,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008294008294008,
-      "funding_quote": 0.007269462083095073,
+      "funding_quote": 0.026004817815324682,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.13293388626720393,
       "entry_raw_basis_pct": 0.552933886267204
     },
     "TAG:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "TAG:Bitget>Gate",
       "base": "TAG",
       "spot_venue": "Bitget",
@@ -1489,14 +4734,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008119837603248,
-      "funding_quote": 0.0012693121597372587,
+      "funding_quote": 0.002971770240641186,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.12132250688319057,
       "entry_raw_basis_pct": 0.5413225068831906
     },
     "IN:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "IN:Bitget>Gate",
       "base": "IN",
       "spot_venue": "Bitget",
@@ -1508,7 +4753,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008092797410305,
-      "funding_quote": 0.0017722773146810538,
+      "funding_quote": 0.003295958320825814,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.11951982735365163,
       "entry_raw_basis_pct": 0.5395198273536517
@@ -1534,7 +4779,7 @@
     },
     "B2:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "B2:Bitget>Gate",
       "base": "B2",
       "spot_venue": "Bitget",
@@ -1546,7 +4791,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007413509060956,
-      "funding_quote": 0.0012674035817313192,
+      "funding_quote": 0.001677380702229276,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.0742339373970261,
       "entry_raw_basis_pct": 0.49423393739702615
@@ -1591,7 +4836,7 @@
     },
     "UAI:Bitget>Gate": {
       "opened_at": 1790862732.7413192,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "UAI:Bitget>Gate",
       "base": "UAI",
       "spot_venue": "Bitget",
@@ -1603,14 +4848,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007060473815461,
-      "funding_quote": 0.0006510383233655899,
+      "funding_quote": 0.0010709328049407127,
       "funding_interval_hours": 8.0,
       "entry_net_basis_pct": 0.05069825436409914,
       "entry_raw_basis_pct": 0.4706982543640992
     },
     "CP:Bitget>Gate": {
       "opened_at": 1790863384.7052724,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "CP:Bitget>Gate",
       "base": "CP",
       "spot_venue": "Bitget",
@@ -1622,7 +4867,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007275666936136,
-      "funding_quote": 0.0031644716998139675,
+      "funding_quote": 0.00372324797397638,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.16504446240904552,
       "entry_conservative_net_basis_pct": 0.06504446240904552,
@@ -1631,7 +4876,7 @@
     },
     "GRASS:Bitget>OKX": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "GRASS:Bitget>OKX",
       "base": "GRASS",
       "spot_venue": "Bitget",
@@ -1643,7 +4888,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758461191335741,
-      "funding_quote": 0.000583041205170942,
+      "funding_quote": 0.0010055088571426793,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.37689530685921535,
       "entry_conservative_net_basis_pct": 0.2768953068592154,
@@ -1652,7 +4897,7 @@
     },
     "NMR:Bitget>Gate": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "NMR:Bitget>Gate",
       "base": "NMR",
       "spot_venue": "Bitget",
@@ -1664,7 +4909,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008142742724927,
-      "funding_quote": -0.0020468012223602556,
+      "funding_quote": -0.0034210769548519413,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.22284951499510292,
       "entry_conservative_net_basis_pct": 0.12284951499510291,
@@ -1673,7 +4918,7 @@
     },
     "ROBO:Bitget>Gate": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "ROBO:Bitget>Gate",
       "base": "ROBO",
       "spot_venue": "Bitget",
@@ -1685,7 +4930,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007629367536489,
-      "funding_quote": 0.0005832344341825853,
+      "funding_quote": 0.0010039263717719128,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.18862450243256418,
       "entry_conservative_net_basis_pct": 0.08862450243256417,
@@ -1694,7 +4939,7 @@
     },
     "NIGHT:Gate>OKX": {
       "opened_at": 1790863681.495401,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "NIGHT:Gate>OKX",
       "base": "NIGHT",
       "spot_venue": "Gate",
@@ -1706,7 +4951,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758418394191308,
-      "funding_quote": -0.0005018163700588898,
+      "funding_quote": -0.0005678791195647129,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.3734715353046594,
       "entry_conservative_net_basis_pct": 0.2734715353046594,
@@ -1715,7 +4960,7 @@
     },
     "MOVR:Gate>Bitget": {
       "opened_at": 1790863681.495401,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "MOVR:Gate>Bitget",
       "base": "MOVR",
       "spot_venue": "Gate",
@@ -1727,7 +4972,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008828996282528,
-      "funding_quote": -0.0012618533778347208,
+      "funding_quote": -0.002058613870536749,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.2685997521685393,
       "entry_conservative_net_basis_pct": 0.1685997521685393,
@@ -1736,7 +4981,7 @@
     },
     "ENA:Bitget>OKX": {
       "opened_at": 1790863981.8272638,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "ENA:Bitget>OKX",
       "base": "ENA",
       "spot_venue": "Bitget",
@@ -1748,7 +4993,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03761255142435768,
-      "funding_quote": 0.0005198773127849238,
+      "funding_quote": 0.0009227809448969509,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.6004113948614334,
       "entry_conservative_net_basis_pct": 0.5004113948614334,
@@ -1757,7 +5002,7 @@
     },
     "CT:Bitget>OKX": {
       "opened_at": 1790868210.8014357,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "CT:Bitget>OKX",
       "base": "CT",
       "spot_venue": "Bitget",
@@ -1769,7 +5014,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758894061841181,
-      "funding_quote": -0.003933143210399599,
+      "funding_quote": -0.014967446281030807,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.41152494729445066,
       "entry_conservative_net_basis_pct": 0.3115249472944507,
@@ -1778,7 +5023,7 @@
     },
     "AEON:Bitget>Gate": {
       "opened_at": 1790868275.8411977,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "AEON:Bitget>Gate",
       "base": "AEON",
       "spot_venue": "Bitget",
@@ -1790,7 +5035,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04017329156060309,
-      "funding_quote": 0.0029617132583259894,
+      "funding_quote": 0.006964291450946238,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.8352770706872994,
       "entry_conservative_net_basis_pct": 0.7352770706872994,
@@ -1799,7 +5044,7 @@
     },
     "FLOCK:Bitget>Gate": {
       "opened_at": 1790868275.8411977,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "FLOCK:Bitget>Gate",
       "base": "FLOCK",
       "spot_venue": "Bitget",
@@ -1811,7 +5056,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04009442870632672,
-      "funding_quote": -0.0011074982662233365,
+      "funding_quote": -0.0016936308478920769,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.3095247088448086,
       "entry_conservative_net_basis_pct": 0.2095247088448086,
@@ -1820,7 +5065,7 @@
     },
     "ALICE:Bitget>Gate": {
       "opened_at": 1790868447.2433999,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "ALICE:Bitget>Gate",
       "base": "ALICE",
       "spot_venue": "Bitget",
@@ -1832,7 +5077,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.040164520743919886,
-      "funding_quote": 0.0001458457168094458,
+      "funding_quote": -0.0008790904667145845,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.7768049594658912,
       "entry_conservative_net_basis_pct": 0.6768049594658913,
@@ -1841,7 +5086,7 @@
     },
     "BR:Bitget>Gate": {
       "opened_at": 1790868512.30419,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "BR:Bitget>Gate",
       "base": "BR",
       "spot_venue": "Bitget",
@@ -1853,7 +5098,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04009691417550627,
-      "funding_quote": 0.0001423414497024097,
+      "funding_quote": 0.0005651678644464944,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.3260945033751164,
       "entry_conservative_net_basis_pct": 0.2260945033751164,
@@ -1862,7 +5107,7 @@
     },
     "BLESS:Bitget>Gate": {
       "opened_at": 1790868512.30419,
-      "last_mark": 1790870147.767525,
+      "last_mark": 1790874956.1130672,
       "signature": "BLESS:Bitget>Gate",
       "base": "BLESS",
       "spot_venue": "Bitget",
@@ -1874,7 +5119,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008371651066525,
-      "funding_quote": 0.0005845525400480046,
+      "funding_quote": 0.0017136937371020425,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.23811007110169174,
       "entry_conservative_net_basis_pct": 0.13811007110169174,
@@ -1942,6 +5187,6 @@
       "reason": "PRESERVED_HIGH_BASIS_REQUIRES_IDENTITY_VERIFICATION"
     }
   },
-  "scan_count": 142,
-  "last_market_refresh": 1790870077.634575
+  "scan_count": 172,
+  "last_market_refresh": 1790874868.3703904
 }
