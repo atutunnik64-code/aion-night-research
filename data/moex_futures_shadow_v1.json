@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 89,
-  "last_source_ts": 1790884976.9531045,
+  "sample_count": 90,
+  "last_source_ts": 1790885232.5888894,
   "latest": {
-    "source_ts": 1790884976.9531045,
+    "source_ts": 1790885232.5888894,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4239.2,
+      "front_px": 4239.3,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
       "next_px": 4289.3,
-      "curve_pct": 1.1818267597659915
+      "curve_pct": 1.1794400018870999
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.07,
+      "front_px": 62.12,
       "next": "SVH7",
       "next_name": "SILV-3.27",
-      "next_px": 63.69,
-      "curve_pct": 2.6099565007249748
+      "next_px": 63.72,
+      "curve_pct": 2.5756600128783003
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28497.0,
+      "front_px": 28496.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29451.0,
-      "curve_pct": 3.3477208127171254
+      "curve_pct": 3.3513475575519314
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11190.9,
-      "oi": 1615246,
-      "volume": 441691
+      "px": 11196.9,
+      "oi": 1615266,
+      "volume": 441736
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.43,
-      "oi": 79198,
-      "volume": 4541
+      "px": 161.36,
+      "oi": 79192,
+      "volume": 4550
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 276.66,
+      "px": 276.72,
       "oi": 241250,
-      "volume": 25117
+      "volume": 25153
     },
-    "gold_silver_ratio": 68.29708393748993,
-    "sber_perp_vs_front_pct": -2.9160964312032855,
+    "gold_silver_ratio": 68.24372182871862,
+    "sber_perp_vs_front_pct": -2.8916339135317215,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188

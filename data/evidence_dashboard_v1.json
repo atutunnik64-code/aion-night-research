@@ -1,6 +1,6 @@
 {
   "version": "EVIDENCE_DASHBOARD_V2_BYBIT_RELAY_AWARE",
-  "generated_at": 1790885450.4781363,
+  "generated_at": 1790886676.6396441,
   "paper_only": true,
   "live_enabled": false,
   "portfolio_metrics": {
@@ -15,47 +15,47 @@
     },
     "perp_funding_spread": {
       "closed_pnl_quote": 0.4237013430661066,
-      "open_positions": 93,
+      "open_positions": 95,
       "closed_positions": 2,
-      "open_positions_accrued_funding_quote": 0.2935683536208665,
+      "open_positions_accrued_funding_quote": 0.3157717814527493,
       "metric_type": "REALIZED_QUOTE_IF_CLOSED_PLUS_SEPARATE_OPEN_FUNDING_ACCRUAL"
     }
   },
   "research_edge_metrics": {
     "classic_spot_arb": {
-      "scan_count": 396,
-      "execution_edge_quote_sum": 202.0374097238605,
-      "last_raw_positive": 462,
-      "last_after_fees_positive": 99,
+      "scan_count": 402,
+      "execution_edge_quote_sum": 209.28819661637152,
+      "last_raw_positive": 496,
+      "last_after_fees_positive": 100,
       "last_depth_checks": 60,
-      "last_depth_pass": 53,
+      "last_depth_pass": 52,
       "verification_candidates": 0,
       "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
     },
     "bybit_local_relay": {
       "fresh": true,
-      "age_sec": 371.497,
-      "spot_scan_count": 31,
-      "spot_recent_bybit_event_count": 77,
-      "spot_bybit_signal_count": 24,
-      "spot_execution_edge_quote_sum_all_venues": 44.96198215042885,
-      "perp_universe_bases": 1209,
+      "age_sec": 403.541,
+      "spot_scan_count": 60,
+      "spot_recent_bybit_event_count": 100,
+      "spot_bybit_signal_count": 25,
+      "spot_execution_edge_quote_sum_all_venues": 81.69013461919215,
+      "perp_universe_bases": 1212,
       "perp_bybit_route_count": 100,
-      "perp_bybit_paper_candidate_count": 59,
+      "perp_bybit_paper_candidate_count": 52,
       "metric_type": "LOCAL_BYBIT_PUBLIC_DATA_RELAY_PAPER_RESEARCH"
     },
     "leadlag": {
-      "scan_count": 2087,
-      "pending": 33,
+      "scan_count": 2125,
+      "pending": 44,
       "resolved": 1000,
-      "positive_edge_episodes": 63,
-      "paper_edge_quote_sum": 9.077058225802901,
+      "positive_edge_episodes": 60,
+      "paper_edge_quote_sum": 8.934652792326169,
       "error_count": 0,
       "last_error": null,
       "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
     },
     "orderbook_consensus": {
-      "pending": 72,
+      "pending": 20,
       "resolved": 542,
       "sum_trade_return_pct": -121.83017194366396,
       "mean_trade_return_pct": -0.22477891502521025,
@@ -63,17 +63,17 @@
       "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED"
     },
     "arb_verifier": {
-      "verified_count": 70,
+      "verified_count": 71,
       "rejected_count": 6,
-      "watch_count": 32,
-      "verified_paper_edge_quote_sum": 4.594733539467279,
+      "watch_count": 33,
+      "verified_paper_edge_quote_sum": 4.611619926883759,
       "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION"
     }
   },
   "moex_research": {
     "broad_shadow": {
-      "resolved": 1616,
-      "pending": 112,
+      "resolved": 1702,
+      "pending": 78,
       "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
     },
     "calendar_matrix": {
@@ -85,7 +85,7 @@
     "arb_bybit_cloud_symbols": 0,
     "arb_bybit_cloud_error": "https://api.bybit.com:HTTP_403 | https://api.bytick.com:HTTP_403",
     "bybit_local_relay_fresh": true,
-    "bybit_local_relay_age_sec": 371.497,
+    "bybit_local_relay_age_sec": 403.541,
     "bybit_local_spot_symbols": 390,
     "bybit_local_perp_symbols": 789,
     "bybit_effective_source": "LOCAL_WINDOWS_RELAY",
