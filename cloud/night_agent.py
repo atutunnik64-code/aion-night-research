@@ -17,18 +17,35 @@ from app.services.moex_spread_paper_v1 import moex_spread_paper_v1
 
 from app.services.crossvenue_liquidation_asymmetry_collector import crossvenue_liquidation_asymmetry_collector
 from app.services.funding_oi_bybit_shadow_v1 import funding_oi_bybit_shadow_v1
+from app.services.bybit_liquidation_regime_shadow_v1 import bybit_liquidation_regime_shadow_v1
+from app.services.funding_reset_bybit_shadow_v1 import funding_reset_bybit_shadow_v1
 from app.services.liquidity_migration_perp_collector import liquidity_migration_perp_collector
 from app.services.funding_dislocation_persistence_v3 import funding_dislocation_persistence_v3
 from app.services.crossvenue_perp_taker_collector_v2 import crossvenue_perp_taker_collector_v2
+from app.services.perp_funding_spread import perp_funding_spread_scanner
+from app.services.perp_funding_spread_paper import perp_funding_spread_paper
+from app.services.basis_funding import basis_funding_scanner
+from app.services.crossvenue_spot_perp_shadow_v2 import crossvenue_spot_perp_shadow_v2
 
 STOP = asyncio.Event()
 SERVICES = [
+    # MOEX / FORTS research
     moex_futures_collector, moex_futures_shadow, moex_feature_registry,
     moex_futures_universe, moex_universe_structure_v1, moex_universe_features_v1,
     moex_spread_research_v1,
-    crossvenue_liquidation_asymmetry_collector, funding_oi_bybit_shadow_v1,
-    liquidity_migration_perp_collector, funding_dislocation_persistence_v3,
+
+    # Crypto public-data collectors + independent PAPER hypotheses
+    crossvenue_liquidation_asymmetry_collector,
+    funding_oi_bybit_shadow_v1,
+    bybit_liquidation_regime_shadow_v1,
+    funding_reset_bybit_shadow_v1,
+    liquidity_migration_perp_collector,
+    funding_dislocation_persistence_v3,
     crossvenue_perp_taker_collector_v2,
+    perp_funding_spread_scanner,
+    perp_funding_spread_paper,
+    basis_funding_scanner,
+    crossvenue_spot_perp_shadow_v2,
 ]
 
 async def _start_all():
