@@ -60,6 +60,16 @@ class EvidenceDashboardV1:
         sp_equity = self._f(spot_perp.get("realized_equity_quote"), sp_start)
         sp_realized_pct = ((sp_equity / sp_start) - 1.0) * 100.0 if sp_start > 0 else None
 
+        funding_positions = funding.get("positions") or []
+        funding_closed = funding.get("closed") or []
+        funding_closed_pnl = self._f(funding.get("closed_pnl_quote"), self._f(funding.get("closed_pnl")))
+        funding_open_accrued = sum(self._f(x.get("funding_realized")) for x in funding_positions)
+
+        verified = verifier.get("verified") or {}
+        rejected = verifier.get("rejected") or {}
+        watch = verifier.get("watch") or {}
+        verified_edge = sum(self._f(x.get("paper_edge_quote")) for x in verified.values()) if isinstance(verified, dict) else 0.0
+
         venue_counts = arb.get("venue_symbol_counts") or {}
         venue_errors = arb.get("venue_errors") or {}
         source_health = {
@@ -86,10 +96,11 @@ class EvidenceDashboardV1:
                     "metric_type": "CAPITAL_NORMALIZED_REALIZED",
                 },
                 "perp_funding_spread": {
-                    "closed_pnl_quote": self._f(funding.get("closed_pnl_quote")),
-                    "open_positions": len(funding.get("positions") or []),
-                    "closed_positions": len(funding.get("closed") or []),
-                    "metric_type": "REALIZED_QUOTE_IF_CLOSED",
+                    "closed_pnl_quote": funding_closed_pnl,
+                    "open_positions": len(funding_positions),
+                    "closed_positions": len(funding_closed),
+                    "open_positions_accrued_funding_quote": funding_open_accrued,
+                    "metric_type": "REALIZED_QUOTE_IF_CLOSED_PLUS_SEPARATE_OPEN_FUNDING_ACCRUAL",
                 },
             },
             "research_edge_metrics": {
@@ -122,9 +133,10 @@ class EvidenceDashboardV1:
                     "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED",
                 },
                 "arb_verifier": {
-                    "verified_count": int(verifier.get("verified_count") or 0),
-                    "rejected_count": int(verifier.get("rejected_count") or 0),
-                    "pending_count": len(verifier.get("pending") or []),
+                    "verified_count": len(verified) if isinstance(verified, dict) else int(verifier.get("verified_count") or 0),
+                    "rejected_count": len(rejected) if isinstance(rejected, dict) else int(verifier.get("rejected_count") or 0),
+                    "watch_count": len(watch) if isinstance(watch, dict) else int(verifier.get("watch_count") or 0),
+                    "verified_paper_edge_quote_sum": verified_edge,
                     "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION",
                 },
             },
