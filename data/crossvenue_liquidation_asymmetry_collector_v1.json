@@ -1,11 +1,11 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 35,
-  "bybit_notional_usdt": 56484.97815000001,
+  "bybit_events": 38,
+  "bybit_notional_usdt": 56708.10205000001,
   "context_count": 0,
-  "last_event_at": 1790854375.961307,
-  "last_context_at": 1790855199.179776,
+  "last_event_at": 1790855288.5127916,
+  "last_context_at": 1790855418.3421125,
   "recent": [
     {
       "event_time": 1790832689038,
@@ -321,6 +321,33 @@
       "price": 2685.47,
       "qty": 0.5,
       "notional_usdt": 1342.735
+    },
+    {
+      "event_time": 1790855265534,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2715.07,
+      "qty": 0.05,
+      "notional_usdt": 135.7535
+    },
+    {
+      "event_time": 1790855283256,
+      "symbol": "AAVEUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 167.36,
+      "qty": 0.24,
+      "notional_usdt": 40.1664
+    },
+    {
+      "event_time": 1790855288273,
+      "symbol": "SUIUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.1801,
+      "qty": 40.0,
+      "notional_usdt": 47.20399999999999
     }
   ],
   "last_context": []
