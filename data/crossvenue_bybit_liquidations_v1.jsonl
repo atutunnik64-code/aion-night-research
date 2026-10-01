@@ -48,3 +48,4 @@
 {"event_time":1790861879332,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.4972,"qty":116.9,"notional_usdt":175.02268}
 {"event_time":1790861880245,"symbol":"LINKUSDT","position_side":"Sell","pressure_side":"BUY","price":14.479,"qty":3.5,"notional_usdt":50.6765}
 {"event_time":1790861884728,"symbol":"ETHUSDT","position_side":"Sell","pressure_side":"BUY","price":2705.38,"qty":0.05,"notional_usdt":135.269}
+{"event_time":1790862716609,"symbol":"XRPUSDT","position_side":"Buy","pressure_side":"SELL","price":1.4813,"qty":176.4,"notional_usdt":261.30132000000003}
