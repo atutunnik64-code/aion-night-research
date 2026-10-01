@@ -1,11 +1,11 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 34,
-  "bybit_notional_usdt": 55142.24315000001,
+  "bybit_events": 35,
+  "bybit_notional_usdt": 56484.97815000001,
   "context_count": 0,
-  "last_event_at": 1790847174.0900106,
-  "last_context_at": 1790854193.5962276,
+  "last_event_at": 1790854375.961307,
+  "last_context_at": 1790854550.1310434,
   "recent": [
     {
       "event_time": 1790832689038,
@@ -312,6 +312,15 @@
       "price": 118.79,
       "qty": 0.2,
       "notional_usdt": 23.758000000000003
+    },
+    {
+      "event_time": 1790854375588,
+      "symbol": "ETHUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 2685.47,
+      "qty": 0.5,
+      "notional_usdt": 1342.735
     }
   ],
   "last_context": []
