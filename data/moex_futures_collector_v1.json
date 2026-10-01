@@ -1,9 +1,9 @@
 {
   "version": "MOEX_FUTURES_COLLECTOR_V1",
   "started_at": 1790788001.5967064,
-  "snapshot_count": 13,
+  "snapshot_count": 25,
   "last_good": {
-    "ts": 1790806682.2796404,
+    "ts": 1790820450.8431308,
     "mode": "FUTURE_ONLY_COLLECT",
     "source": "MOEX_ISS_DELAYED",
     "source_delay_minutes": 15,
@@ -310,5 +310,5 @@
     ],
     "contracts": 23
   },
-  "last_refresh": 1790806682.2796404
+  "last_refresh": 1790820450.8431308
 }

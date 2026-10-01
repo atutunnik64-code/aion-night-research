@@ -7,19 +7,19 @@
       "messages": 0,
       "trades": 0,
       "buckets": 0,
-      "errors": 708,
+      "errors": 1404,
       "last_error": null,
       "last_trade_at": null
     },
     "Bybit": {
       "connected": true,
-      "messages": 26481,
-      "trades": 86109,
-      "buckets": 144,
+      "messages": 68212,
+      "trades": 217200,
+      "buckets": 288,
       "errors": 0,
       "last_error": null,
-      "last_trade_at": 1790806812.2381263
+      "last_trade_at": 1790820600.555216
     }
   },
-  "updated_at": 1790806812.2763257
+  "updated_at": 1790820600.565823
 }
