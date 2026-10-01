@@ -1,25 +1,26 @@
 {
-  "version": "CROSSVENUE_PERP_TAKER_COLLECTOR_V2",
-  "last_binance_bucket": {},
+  "version": "CROSSVENUE_PERP_TAKER_COLLECTOR_V3_WS",
   "stats": {
     "Binance": {
-      "connected": true,
+      "connected": false,
       "messages": 0,
       "trades": 0,
       "buckets": 0,
-      "errors": 1404,
+      "errors": 0,
+      "prior_errors": 1404,
       "last_error": null,
       "last_trade_at": null
     },
     "Bybit": {
-      "connected": true,
-      "messages": 68212,
-      "trades": 217200,
+      "connected": false,
+      "messages": 73029,
+      "trades": 232615,
       "buckets": 288,
       "errors": 0,
+      "prior_errors": 0,
       "last_error": null,
-      "last_trade_at": 1790820600.555216
+      "last_trade_at": 1790830462.4031
     }
   },
-  "updated_at": 1790820600.565823
+  "updated_at": 1790830465.918869
 }
