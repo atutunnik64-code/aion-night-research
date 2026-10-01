@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 50,
-  "last_source_ts": 1790854010.585068,
+  "sample_count": 51,
+  "last_source_ts": 1790854367.5471227,
   "latest": {
-    "source_ts": 1790854010.585068,
+    "source_ts": 1790854367.5471227,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4234.4,
+      "front_px": 4230.5,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4285.3,
-      "curve_pct": 1.2020593236349963
+      "next_px": 4281.4,
+      "curve_pct": 1.2031674742938092
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.01,
+      "front_px": 61.89,
       "next": "SVH7",
       "next_name": "SILV-3.27",
-      "next_px": 63.6,
-      "curve_pct": 2.564102564102577
+      "next_px": 63.5,
+      "curve_pct": 2.601389562126344
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28302.0,
+      "front_px": 28313.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29279.0,
-      "curve_pct": 3.4520528584552235
+      "curve_pct": 3.4118602761982197
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11182.8,
-      "oi": 1633656,
-      "volume": 251644
+      "px": 11181.6,
+      "oi": 1638602,
+      "volume": 258197
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.06,
-      "oi": 80004,
-      "volume": 2470
+      "px": 160.84,
+      "oi": 80008,
+      "volume": 2484
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 275.05,
-      "oi": 232570,
-      "volume": 10120
+      "px": 275.02,
+      "oi": 232588,
+      "volume": 10138
     },
-    "gold_silver_ratio": 68.28576036123205,
-    "sber_perp_vs_front_pct": -2.8160554024450613,
+    "gold_silver_ratio": 68.35514622717724,
+    "sber_perp_vs_front_pct": -2.864408575565991,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188

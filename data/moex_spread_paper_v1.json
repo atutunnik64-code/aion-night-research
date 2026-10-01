@@ -1,0 +1,12 @@
+{
+  "version": "MOEX_SPREAD_PAPER_V1",
+  "started_at": 1790854584.4076161,
+  "pending": [],
+  "resolved": [],
+  "last_source_ts": 1790854584.59147,
+  "equity": 100.0,
+  "peak": 100.0,
+  "max_dd_pct": 0.0,
+  "last_event_ts": {},
+  "last_new_events": 0
+}
