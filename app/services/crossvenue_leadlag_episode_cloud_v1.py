@@ -12,9 +12,10 @@ class CrossVenueLeadLagEpisodeCloudV1:
     def __init__(self):
         self.enabled=True; self.live_enabled=False; self.task=None; self.last_error=None; self.last_refresh=None
         self.hist=defaultdict(lambda:defaultdict(lambda:deque(maxlen=240)))
-        try:self.state=json.loads(STATE.read_text(encoding='utf-8'))
+        try:self.state=json.loads(STATE.read_text(encoding='utf-8-sig'))
         except Exception:self.state={'version':'CROSSVENUE_LEADLAG_EPISODE_CLOUD_V1','started_at':time.time(),'pending':[],'resolved':[],'last_event_ts':{},'scan_count':0}
-    def _save(self):STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+    def _save(self):
+        tmp=STATE.with_suffix(STATE.suffix+'.tmp');tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
     @staticmethod
     def _mid(q):return (float(q['bid'])+float(q['ask']))/2.0
     def _old_mid(self,base,venue,target):
@@ -45,10 +46,8 @@ class CrossVenueLeadLagEpisodeCloudV1:
                     lk='|'.join(key); prev=float((self.state.get('last_event_ts') or {}).get(lk) or 0)
                     if now-prev<COOLDOWN_SEC:continue
                     fq=vm[fast]; sq=vm[slow]
-                    if direction>0:
-                        raw=(float(fq['bid'])/float(sq['ask'])-1.0)*100.0
-                    else:
-                        raw=(float(sq['bid'])/float(fq['ask'])-1.0)*100.0
+                    if direction>0:raw=(float(fq['bid'])/float(sq['ask'])-1.0)*100.0
+                    else:raw=(float(sq['bid'])/float(fq['ask'])-1.0)*100.0
                     fees=(TAKER[fast]+TAKER[slow])*100.0
                     all_in=raw-fees-SAFETY_PCT-REBALANCE_RESERVE_PCT
                     fast_mid=self._mid(fq); slow_mid=self._mid(sq)
@@ -66,7 +65,7 @@ class CrossVenueLeadLagEpisodeCloudV1:
                 if now<p['due_ts']:keep.append(p)
                 continue
             fm=self._mid(fq); sm=self._mid(sq); direction=1.0 if p['direction']=='UP' else -1.0
-            fast_move=(fm/float(p['fast_entry_mid'])-1.0)*100.0; slow_move=(sm/float(p['slow_entry_mid'])-1.0)*100.0
+            slow_move=(sm/float(p['slow_entry_mid'])-1.0)*100.0
             denom=max(abs(float(p['fast_move_30s_pct'])),1e-9); catch=max(0.0,min(2.0,(slow_move*direction)/denom))
             gap=abs((fm/sm-1.0)*100.0); p['catchup_fraction']=max(float(p.get('catchup_fraction') or 0),catch); p['max_gap_pct']=max(float(p.get('max_gap_pct') or 0),gap)
             if direction>0:raw=(float(fq['bid'])/float(sq['ask'])-1.0)*100.0
@@ -95,7 +94,7 @@ class CrossVenueLeadLagEpisodeCloudV1:
             'scan_count':self.state.get('scan_count',0),'pending_count':len(self.state.get('pending') or []),'resolved_count':len(r),
             'catchup_rate':caught/len(r) if r else None,'positive_all_in_episode_rate':pos/len(r) if r else None,
             'recent_resolved':r[-20:],'last_error':self.last_error,
-            'policy':{'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True,'no_parameter_tuning':True}}
+            'policy':{'atomic_state_write':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True,'no_parameter_tuning':True}}
     async def start(self):
         if self.task and not self.task.done():return
         await self.refresh(); self.task=asyncio.create_task(self._loop(),name='crossvenue-leadlag-episode-cloud-v1')
