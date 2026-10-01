@@ -29,6 +29,7 @@ from app.services.basis_funding import basis_funding_scanner
 from app.services.crossvenue_spot_perp_shadow_v2 import crossvenue_spot_perp_shadow_v2
 from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_v1
 from app.services.crossvenue_leadlag_episode_cloud_v1 import crossvenue_leadlag_episode_cloud_v1
+from app.services.crossvenue_orderbook_consensus_shadow_v1 import crossvenue_orderbook_consensus_shadow_v1
 
 STOP = asyncio.Event()
 SERVICES = [
@@ -52,6 +53,7 @@ SERVICES = [
     crossvenue_spot_perp_shadow_v2,
     crossvenue_spot_arb_cloud_v1,
     crossvenue_leadlag_episode_cloud_v1,
+    crossvenue_orderbook_consensus_shadow_v1,
 ]
 
 async def _start_all():
