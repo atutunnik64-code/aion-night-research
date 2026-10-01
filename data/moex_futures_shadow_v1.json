@@ -1,48 +1,48 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 85,
-  "last_source_ts": 1790883954.7557337,
+  "sample_count": 86,
+  "last_source_ts": 1790884212.211894,
   "latest": {
-    "source_ts": 1790883954.7557337,
+    "source_ts": 1790884212.211894,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4239.8,
+      "front_px": 4240.2,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
       "next_px": 4289.3,
-      "curve_pct": 1.1675079013161005
+      "curve_pct": 1.1579642469695006
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.07,
+      "front_px": 62.08,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.69,
-      "curve_pct": 2.6099565007249748
+      "curve_pct": 2.5934278350515427
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28492.0,
+      "front_px": 28494.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29451.0,
-      "curve_pct": 3.3658570826898826
+      "curve_pct": 3.358601810907569
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11191.9,
-      "oi": 1615506,
-      "volume": 441354
+      "px": 11193.4,
+      "oi": 1615520,
+      "volume": 441409
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.45,
+      "px": 161.43,
       "oi": 79198,
-      "volume": 4540
+      "volume": 4541
     },
     "sber_perp": {
       "secid": "SBERF",
@@ -50,8 +50,8 @@
       "oi": 241250,
       "volume": 25074
     },
-    "gold_silver_ratio": 68.30675044304817,
-    "sber_perp_vs_front_pct": -2.90607889934017,
+    "gold_silver_ratio": 68.30219072164948,
+    "sber_perp_vs_front_pct": -2.9128939425844047,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
