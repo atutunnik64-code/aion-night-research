@@ -8,6 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).parents[2]
 DATA = ROOT / "data"
 STATE = DATA / "evidence_dashboard_v1.json"
+BYBIT_RELAY_FRESH_SEC = 900.0
 
 
 class EvidenceDashboardV1:
@@ -40,6 +41,7 @@ class EvidenceDashboardV1:
             return default
 
     def _build(self) -> dict:
+        now = time.time()
         arb = self._read("crossvenue_spot_arb_cloud_v1.json")
         verifier = self._read("crossvenue_arb_verifier_v1.json")
         leadlag = self._read("crossvenue_leadlag_episode_cloud_v1.json")
@@ -48,6 +50,7 @@ class EvidenceDashboardV1:
         funding = self._read("perp_funding_spread_paper.json")
         moex = self._read("moex_broad_futures_shadow_v1.json")
         calendar = self._read("moex_calendar_matrix_shadow_v1.json")
+        bybit_relay = self._read("bybit_local_relay_v1.json")
 
         ll_resolved = leadlag.get("resolved") or []
         ll_positive = [x for x in ll_resolved if self._f(x.get("max_all_in_net_pct")) > 0]
@@ -72,17 +75,34 @@ class EvidenceDashboardV1:
 
         venue_counts = arb.get("venue_symbol_counts") or {}
         venue_errors = arb.get("venue_errors") or {}
+        relay_health = bybit_relay.get("source_health") or {}
+        relay_spot = bybit_relay.get("spot_arb") or {}
+        relay_perp = bybit_relay.get("perp_funding") or {}
+        relay_ts = self._f(bybit_relay.get("generated_at"), 0.0)
+        relay_age = max(0.0, now - relay_ts) if relay_ts > 0 else None
+        relay_fresh = relay_age is not None and relay_age <= BYBIT_RELAY_FRESH_SEC and bybit_relay.get("_health") is None
+        local_spot_symbols = int(relay_health.get("bybit_spot_symbol_count") or relay_health.get("bybit_symbol_count") or 0)
+        local_perp_symbols = int(relay_health.get("bybit_perp_symbol_count") or 0)
+        cloud_bybit_symbols = int(venue_counts.get("Bybit") or 0)
+
         source_health = {
-            "arb_bybit_symbols": int(venue_counts.get("Bybit") or 0),
-            "arb_bybit_error": venue_errors.get("Bybit"),
+            "arb_bybit_cloud_symbols": cloud_bybit_symbols,
+            "arb_bybit_cloud_error": venue_errors.get("Bybit"),
+            "bybit_local_relay_fresh": relay_fresh,
+            "bybit_local_relay_age_sec": round(relay_age, 3) if relay_age is not None else None,
+            "bybit_local_spot_symbols": local_spot_symbols,
+            "bybit_local_perp_symbols": local_perp_symbols,
+            "bybit_effective_source": "LOCAL_WINDOWS_RELAY" if relay_fresh and local_spot_symbols > 0 else "CLOUD_DIRECT",
+            "bybit_effective_spot_symbols": local_spot_symbols if relay_fresh and local_spot_symbols > 0 else cloud_bybit_symbols,
+            "bybit_effective_perp_symbols": local_perp_symbols if relay_fresh else 0,
             "leadlag_state": leadlag.get("_health", "OK"),
             "orderbook_state": orderbook.get("_health", "OK"),
             "moex_state": moex.get("_health", "OK"),
         }
 
         return {
-            "version": "EVIDENCE_DASHBOARD_V1",
-            "generated_at": time.time(),
+            "version": "EVIDENCE_DASHBOARD_V2_BYBIT_RELAY_AWARE",
+            "generated_at": now,
             "paper_only": True,
             "live_enabled": False,
             "portfolio_metrics": {
@@ -113,6 +133,18 @@ class EvidenceDashboardV1:
                     "last_depth_pass": int(arb.get("last_depth_pass") or 0),
                     "verification_candidates": int(arb.get("last_verification_candidates") or 0),
                     "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN",
+                },
+                "bybit_local_relay": {
+                    "fresh": relay_fresh,
+                    "age_sec": round(relay_age, 3) if relay_age is not None else None,
+                    "spot_scan_count": int(relay_spot.get("scan_count") or 0),
+                    "spot_recent_bybit_event_count": int(relay_spot.get("recent_bybit_event_count") or 0),
+                    "spot_bybit_signal_count": int(relay_spot.get("bybit_signal_count") or 0),
+                    "spot_execution_edge_quote_sum_all_venues": self._f(relay_spot.get("execution_edge_quote_sum_all_venues")),
+                    "perp_universe_bases": int(relay_perp.get("universe_bases") or 0),
+                    "perp_bybit_route_count": int(relay_perp.get("bybit_route_count") or 0),
+                    "perp_bybit_paper_candidate_count": int(relay_perp.get("bybit_paper_candidate_count") or 0),
+                    "metric_type": "LOCAL_BYBIT_PUBLIC_DATA_RELAY_PAPER_RESEARCH",
                 },
                 "leadlag": {
                     "scan_count": int(leadlag.get("scan_count") or 0),
@@ -181,7 +213,7 @@ class EvidenceDashboardV1:
     def status(self):
         return {
             "ok": self.last_error is None,
-            "strategy": "EVIDENCE_DASHBOARD_V1",
+            "strategy": "EVIDENCE_DASHBOARD_V2_BYBIT_RELAY_AWARE",
             "paper_only": True,
             "live_enabled": False,
             "last_refresh": self.last_refresh,
@@ -192,7 +224,7 @@ class EvidenceDashboardV1:
         if self.task and not self.task.done():
             return
         await self.refresh()
-        self.task = asyncio.create_task(self._loop(), name="evidence-dashboard-v1")
+        self.task = asyncio.create_task(self._loop(), name="evidence-dashboard-v2")
 
     async def stop(self):
         if self.task and not self.task.done():
