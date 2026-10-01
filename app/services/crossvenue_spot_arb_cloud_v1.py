@@ -157,7 +157,7 @@ class CrossVenueSpotArbCloudV1:
                     buy_fee=NOTIONAL*TAKER[buy['venue']];sell_fee=sf['quote_received']*TAKER[sell['venue']]
                     execution_q=sf['quote_received']-NOTIONAL-buy_fee-sell_fee;execution_pct=execution_q/NOTIONAL*100
                     reserve=NOTIONAL*(SAFETY_PCT+REBALANCE_RESERVE_PCT)/100;conservative_q=execution_q-reserve;conservative_pct=conservative_q/NOTIONAL*100
-gross_depth=(sf['quote_received']/NOTIONAL-1)*100
+                    gross_depth=(sf['quote_received']/NOTIONAL-1)*100
                     if execution_pct<=0:reasons['DEPTH_TRADING_FEES']=reasons.get('DEPTH_TRADING_FEES',0)+1;continue
                     depth_pass+=1;high_spread=gross_depth>REVIEW_RAW_SPREAD_PCT
                     if high_spread and conf=='REVIEW_REQUIRED':
