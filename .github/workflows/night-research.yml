@@ -103,17 +103,33 @@ jobs:
           git config user.name "aion-night-bot"
           git config user.email "aion-night-bot@users.noreply.github.com"
 
-          # Preserve the freshly collected state, then move onto the current
-          # main tip. This avoids rebasing generated JSON/JSONL state files.
+          # Preserve the freshly collected cloud state. The local Windows Bybit
+          # relay may publish a newer compact snapshot while this run is active,
+          # so each persistence attempt re-reads that relay from current origin/main
+          # and lets the newer relay win over the run-start copy.
           rm -rf /tmp/aion-data
           cp -a data /tmp/aion-data
-          git fetch origin main
-          git reset --hard origin/main
-          rm -rf data
-          cp -a /tmp/aion-data data
 
-          # Validate once more after restore onto the latest main tip.
-          python - <<'PY'
+          for attempt in 1 2 3; do
+            echo "PERSIST_ATTEMPT=$attempt"
+            git fetch origin main
+
+            rm -f /tmp/bybit-relay-latest.json
+            if git show origin/main:data/bybit_local_relay_v1.json > /tmp/bybit-relay-latest.json 2>/dev/null; then
+              echo "BYBIT_RELAY_FROM_ORIGIN=1"
+            else
+              rm -f /tmp/bybit-relay-latest.json
+              echo "BYBIT_RELAY_FROM_ORIGIN=0"
+            fi
+
+            git reset --hard origin/main
+            rm -rf data
+            cp -a /tmp/aion-data data
+            if [ -s /tmp/bybit-relay-latest.json ]; then
+              cp /tmp/bybit-relay-latest.json data/bybit_local_relay_v1.json
+            fi
+
+            python - <<'PY'
           import json
           from pathlib import Path
           bad=[]
@@ -130,10 +146,18 @@ jobs:
           print("POST_RESTORE_JSON_VALIDATION_OK")
           PY
 
-          git add data/
-          if git diff --cached --quiet; then
-            echo "No research-state changes"
-            exit 0
-          fi
-          git commit -m "research: cloud snapshot"
-          git push origin HEAD:main
+            git add data/
+            if git diff --cached --quiet; then
+              echo "No research-state changes"
+              exit 0
+            fi
+            git commit -m "research: cloud snapshot"
+            if git push origin HEAD:main; then
+              echo "PERSIST_OK attempt=$attempt"
+              exit 0
+            fi
+            echo "PERSIST_RETRY attempt=$attempt"
+          done
+
+          echo "PERSIST_FAILED_AFTER_RETRIES"
+          exit 1
