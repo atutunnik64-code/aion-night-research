@@ -34,21 +34,21 @@
   "rejected": {},
   "watch": {
     "PEAQ:Bitget>Gate": {
-      "verified_at": 1790869153.9408367,
+      "verified_at": 1790869398.2210433,
       "signature": "PEAQ:Bitget>Gate",
       "base": "PEAQ",
       "buy_venue": "Bitget",
       "sell_venue": "Gate",
       "method": null,
-      "repeat_hits": 2,
-      "repeat_span_sec": 81.39704537391663,
+      "repeat_hits": 7,
+      "repeat_span_sec": 338.8810877799988,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 42595.8433946,
-      "sell_quote_volume": 612030.136414,
-      "gross_depth_pct": 2.519246781289497,
-      "execution_net_pct": 2.3167275345082063,
-      "conservative_net_pct": 2.1667275345082064,
-      "paper_edge_quote": 0.5791818836270516,
+      "buy_quote_volume": 42632.2782516,
+      "sell_quote_volume": 609327.209957,
+      "gross_depth_pct": 2.692502532928076,
+      "execution_net_pct": 2.4898100303951463,
+      "conservative_net_pct": 2.3398100303951463,
+      "paper_edge_quote": 0.6224525075987866,
       "buy_addresses": [
         "0x0000000000000000000000000000000000000809"
       ],
@@ -58,21 +58,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "PEAQ:Bitget>KuCoin": {
-      "verified_at": 1790869153.9408367,
+      "verified_at": 1790869398.2210433,
       "signature": "PEAQ:Bitget>KuCoin",
       "base": "PEAQ",
       "buy_venue": "Bitget",
       "sell_venue": "KuCoin",
       "method": null,
-      "repeat_hits": 1,
-      "repeat_span_sec": 0.0,
+      "repeat_hits": 6,
+      "repeat_span_sec": 257.48404240608215,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 42595.8433946,
-      "sell_quote_volume": 476281.991334,
-      "gross_depth_pct": 2.5031605562578996,
-      "execution_net_pct": 2.300657395701638,
-      "conservative_net_pct": 2.150657395701638,
-      "paper_edge_quote": 0.5751643489254095,
+      "buy_quote_volume": 42632.2782516,
+      "sell_quote_volume": 469100.67774,
+      "gross_depth_pct": 2.684903748733536,
+      "execution_net_pct": 2.4822188449847986,
+      "conservative_net_pct": 2.3322188449847987,
+      "paper_edge_quote": 0.6205547112461997,
       "buy_addresses": [
         "0x0000000000000000000000000000000000000809"
       ],
@@ -82,8 +82,8 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     }
   },
-  "scan_count": 42,
-  "last_scan_ts": 1790869153.9408367,
+  "scan_count": 49,
+  "last_scan_ts": 1790869398.2210433,
   "last_processed": 2,
   "last_new_verified": 0,
   "last_new_rejected": 0

@@ -1,0 +1,233 @@
+{
+  "version": "RESEARCH_EVIDENCE_DASHBOARD_V1",
+  "generated_at": 1790869414.9714556,
+  "paper_only": true,
+  "live_enabled": false,
+  "notes": [
+    "Metrics remain in each branch's native units; incompatible branches are never summed into one portfolio return.",
+    "Trade-return sums are not capital-normalized portfolio returns unless explicitly labelled equity_return_pct.",
+    "Research edge dollars are observed PAPER edge, not realized account profit."
+  ],
+  "branches": {
+    "classic_spot_arb": {
+      "metric_type": "research_edge_quote",
+      "scan_count": 244,
+      "last_new_events": 8,
+      "last_scan_ts": 1790869383.7214947,
+      "events_count": 701,
+      "verification_queue_count": 44,
+      "research_event_count": 597,
+      "conservative_research_edge_quote": 48.64323669,
+      "execution_edge_quote": 65.84880614,
+      "latest_cycle": {
+        "raw_positive_routes": 432,
+        "after_fees_positive_routes": 86,
+        "depth_checks": 60,
+        "depth_pass": 55,
+        "new_events": 8,
+        "verification_candidates": 2
+      },
+      "venue_symbol_counts": {
+        "Bybit": 0,
+        "OKX": 405,
+        "Bitget": 3316,
+        "Gate": 1624,
+        "KuCoin": 836
+      },
+      "venue_errors": {
+        "Bybit": "https://api.bybit.com:HTTP_403 | https://api.bytick.com:HTTP_403"
+      },
+      "venue_hosts": {}
+    },
+    "leadlag": {
+      "metric_type": "episode_edge",
+      "scan_count": 996,
+      "last_scan_ts": 1790869404.974396,
+      "pending_count": 47,
+      "resolved_count": 428,
+      "final_all_in_net_pct": {
+        "count": 428,
+        "sum": -250.67833861,
+        "mean": -0.58569705,
+        "median": -0.54651962,
+        "min": -2.19993728,
+        "max": 1.84668807,
+        "positive": 9,
+        "positive_rate": 0.021028
+      },
+      "max_all_in_net_pct": {
+        "count": 428,
+        "sum": -190.97859645,
+        "mean": -0.44621167,
+        "median": -0.4147048,
+        "min": -2.19858427,
+        "max": 1.84668807,
+        "positive": 17,
+        "positive_rate": 0.03972
+      },
+      "paper_positive_window_edge_quote_sum": 1.53813581,
+      "caught_up_count": 144,
+      "timeout_count": 284,
+      "error_count": 0,
+      "last_error": null
+    },
+    "orderbook_consensus": {
+      "metric_type": "trade_return_pct_not_portfolio",
+      "scan_count": 63,
+      "last_new_events": 1,
+      "pending_count": 57,
+      "resolved_count": 216,
+      "net_return_pct": {
+        "count": 216,
+        "sum": -50.83313989,
+        "mean": -0.23533861,
+        "median": -0.28681912,
+        "min": -3.05704404,
+        "max": 8.6293142,
+        "positive": 69,
+        "positive_rate": 0.319444
+      }
+    },
+    "momentum_divergence": {
+      "metric_type": "capital_normalized_equity_5pct_alloc",
+      "scan_count": 128,
+      "last_new_events": 5,
+      "last_scan_ts": 1790869407.8687692,
+      "pending_count": 142,
+      "resolved_count": 271,
+      "collection_hours": 4.279,
+      "resolved_symbols": 266,
+      "continuation": {
+        "equity": 99.48872316,
+        "equity_return_pct": -0.51127684,
+        "max_dd_pct": -1.69111043,
+        "trade_returns": {
+          "count": 271,
+          "sum": -10.10261174,
+          "mean": -0.03727901,
+          "median": -0.0719342,
+          "min": -5.6136733,
+          "max": 7.0879568,
+          "positive": 127,
+          "positive_rate": 0.468635
+        }
+      },
+      "snapback": {
+        "equity": 93.91495551,
+        "equity_return_pct": -6.08504449,
+        "max_dd_pct": -6.19843169,
+        "trade_returns": {
+          "count": 271,
+          "sum": -125.39738826,
+          "mean": -0.46272099,
+          "median": -0.4280658,
+          "min": -7.5879568,
+          "max": 5.1136733,
+          "positive": 97,
+          "positive_rate": 0.357934
+        }
+      }
+    },
+    "perp_funding_spread": {
+      "metric_type": "quote_pnl",
+      "positions_count": 12,
+      "closed_count": 0,
+      "closed_pnl_quote": 0.0,
+      "open_funding_realized_quote": 0.29266546,
+      "open_funding_events": 3,
+      "closed_trade_pnl_quote": {
+        "count": 0,
+        "sum": 0.0,
+        "mean": null,
+        "median": null,
+        "min": null,
+        "max": null,
+        "positive": 0,
+        "positive_rate": null
+      }
+    },
+    "moex_broad": {
+      "metric_type": "trade_return_pct_not_portfolio",
+      "last_new_events": 4,
+      "pending_count": 390,
+      "resolved_count": 464,
+      "resolved_return_pct": {
+        "count": 464,
+        "sum": -144.24,
+        "mean": -0.31086207,
+        "median": -0.28,
+        "min": -6.58829405,
+        "max": 6.02829405,
+        "positive": 130,
+        "positive_rate": 0.280172
+      },
+      "reported_equity_raw": null,
+      "reported_equity_warning": "raw branch equity is not treated as portfolio return unless capital normalization is explicit"
+    },
+    "moex_calendar_matrix": {
+      "metric_type": "native_state_summary",
+      "last_new_events": 6,
+      "pending_count": 134,
+      "resolved_count": 34,
+      "continuation_equity": 96.2741756226216
+    },
+    "moex_spread_paper": {
+      "metric_type": "native_state_summary",
+      "last_new_events": 0,
+      "pending_count": 0,
+      "resolved_count": 0,
+      "equity": 100.0
+    },
+    "spot_perp_shadow": {
+      "metric_type": "native_state_summary",
+      "scan_count": 133,
+      "pending_count": 24,
+      "resolved_count": 0
+    },
+    "funding_dislocation": {
+      "metric_type": "native_state_summary",
+      "pending_count": 0,
+      "resolved_count": 0,
+      "equity": 100.0,
+      "equity_2x": 100.0,
+      "equity_3x": 100.0
+    },
+    "funding_oi_bybit": {
+      "metric_type": "native_state_summary",
+      "last_new_events": 0,
+      "pending_count": 0,
+      "resolved_count": 0,
+      "follow_equity": 100.0,
+      "fade_equity": 100.0,
+      "rule_frozen_at": 1790832319.629528
+    },
+    "bybit_liquidation_regime": {
+      "metric_type": "native_state_summary",
+      "last_new_events": 0,
+      "pending_count": 0,
+      "resolved_count": 0,
+      "continuation_equity": 100.0,
+      "recovery_equity": 100.0,
+      "rule_frozen_at": 1790832884.3502889
+    },
+    "bybit_price_shock": {
+      "metric_type": "native_state_summary",
+      "last_new_events": 0,
+      "pending_count": 0,
+      "resolved_count": 0,
+      "continuation_equity": 100.0,
+      "reversal_equity": 100.0,
+      "rule_frozen_at": 1790835156.6301072
+    },
+    "bybit_volatility_compression": {
+      "metric_type": "native_state_summary",
+      "last_new_events": 0,
+      "pending_count": 0,
+      "resolved_count": 0,
+      "breakout_equity": 100.0,
+      "fakeout_equity": 100.0,
+      "rule_frozen_at": 1790847742.0372891
+    }
+  },
+  "errors": {}
+}
