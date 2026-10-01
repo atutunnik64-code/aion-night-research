@@ -38,7 +38,7 @@ SERVICES = [
     # MOEX / FORTS research
     moex_futures_collector, moex_futures_shadow, moex_feature_registry,
     moex_futures_universe, moex_universe_structure_v1, moex_universe_features_v1,
-    moex_spread_research_v1,
+    moex_spread_research_v1, moex_spread_paper_v1,
 
     # Crypto public-data collectors + independent PAPER hypotheses
     crossvenue_liquidation_asymmetry_collector,
