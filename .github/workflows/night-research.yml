@@ -1,8 +1,15 @@
-﻿name: AION Night Research
+name: AION Night Research
 
 on:
   schedule:
     - cron: "7 * * * *"
+  push:
+    branches: [main]
+    paths:
+      - "app/**"
+      - "cloud/**"
+      - "requirements.txt"
+      - ".github/workflows/night-research.yml"
   workflow_dispatch:
     inputs:
       duration_seconds:
@@ -35,6 +42,8 @@ jobs:
         run: |
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             D="${{ inputs.duration_seconds }}"
+          elif [ "${{ github.event_name }}" = "push" ]; then
+            D="180"
           else
             D="3480"
           fi
@@ -50,7 +59,6 @@ jobs:
             echo "No research-state changes"
             exit 0
           fi
-          git commit -m "research: hourly public snapshot"
+          git commit -m "research: cloud snapshot"
           git pull --rebase origin main
           git push origin HEAD:main
-
