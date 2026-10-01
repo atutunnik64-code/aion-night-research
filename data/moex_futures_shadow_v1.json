@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 90,
-  "last_source_ts": 1790885232.5888894,
+  "sample_count": 91,
+  "last_source_ts": 1790886463.443374,
   "latest": {
-    "source_ts": 1790885232.5888894,
+    "source_ts": 1790886463.443374,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4239.3,
+      "front_px": 4240.1,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4289.3,
-      "curve_pct": 1.1794400018870999
+      "next_px": 4290.0,
+      "curve_pct": 1.1768590363434805
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.12,
+      "front_px": 62.07,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.72,
-      "curve_pct": 2.5756600128783003
+      "curve_pct": 2.658289028516192
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28496.0,
+      "front_px": 28504.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29451.0,
-      "curve_pct": 3.3513475575519314
+      "curve_pct": 3.3223407241089076
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11196.9,
-      "oi": 1615266,
-      "volume": 441736
+      "px": 11198.3,
+      "oi": 1615252,
+      "volume": 441973
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.36,
+      "px": 161.43,
       "oi": 79192,
-      "volume": 4550
+      "volume": 4553
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 276.72,
-      "oi": 241250,
-      "volume": 25153
+      "px": 276.73,
+      "oi": 241242,
+      "volume": 25278
     },
-    "gold_silver_ratio": 68.24372182871862,
-    "sber_perp_vs_front_pct": -2.8916339135317215,
+    "gold_silver_ratio": 68.3115836958273,
+    "sber_perp_vs_front_pct": -2.9153802975021015,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
