@@ -1,30 +1,12 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 276,
-  "bybit_notional_usdt": 1217267.3067400001,
+  "bybit_events": 278,
+  "bybit_notional_usdt": 1218071.53114,
   "context_count": 0,
-  "last_event_at": 1790884922.9795673,
-  "last_context_at": 1790884902.610177,
+  "last_event_at": 1790885067.3708239,
+  "last_context_at": 1790885162.7237465,
   "recent": [
-    {
-      "event_time": 1790873811112,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2666.08,
-      "qty": 0.01,
-      "notional_usdt": 26.6608
-    },
-    {
-      "event_time": 1790873811237,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2666.17,
-      "qty": 0.65,
-      "notional_usdt": 1733.0105
-    },
     {
       "event_time": 1790873811470,
       "symbol": "BTCUSDT",
@@ -906,6 +888,24 @@
       "price": 2712.09,
       "qty": 0.04,
       "notional_usdt": 108.48360000000001
+    },
+    {
+      "event_time": 1790885066211,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.5117,
+      "qty": 476.0,
+      "notional_usdt": 719.5692
+    },
+    {
+      "event_time": 1790885067194,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.5117,
+      "qty": 56.0,
+      "notional_usdt": 84.65520000000001
     }
   ],
   "last_context": []
