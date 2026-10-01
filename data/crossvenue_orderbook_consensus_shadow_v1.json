@@ -6,7 +6,8 @@
     "BTC": 1790847863.3554506,
     "SUI": 1790847863.3554506
   },
-  "pending": [
+  "pending": [],
+  "resolved": [
     {
       "id": "LINK:1790847742",
       "base": "LINK",
@@ -19,7 +20,10 @@
         "OKX": 0.7334422518521563,
         "Bitget": 0.6338421975449502
       },
-      "round_trip_cost": 0.0025
+      "round_trip_cost": 0.0025,
+      "exit": 14.32,
+      "exit_ts": 1790853801.8131773,
+      "net_return_pct": -0.17312530575162555
     },
     {
       "id": "BTC:1790847863",
@@ -33,7 +37,10 @@
         "OKX": 0.605152647190292,
         "Bitget": 0.5003131551490326
       },
-      "round_trip_cost": 0.0025
+      "round_trip_cost": 0.0025,
+      "exit": 83837.1075,
+      "exit_ts": 1790853801.8131773,
+      "net_return_pct": -0.3049275774080149
     },
     {
       "id": "SUI:1790847863",
@@ -47,13 +54,15 @@
         "OKX": -0.43186519628204706,
         "Bitget": -0.48896520595244897
       },
-      "round_trip_cost": 0.0025
+      "round_trip_cost": 0.0025,
+      "exit": 1.1629749999999999,
+      "exit_ts": 1790853801.8131773,
+      "net_return_pct": -0.2672002322031073
     }
   ],
-  "resolved": [],
-  "equity": 100.0,
+  "equity": 99.96274185721859,
   "peak": 100.0,
-  "max_dd_pct": 0.0,
-  "last_new_events": 2,
-  "scan_count": 3
+  "max_dd_pct": -0.03725814278141559,
+  "last_new_events": 0,
+  "scan_count": 6
 }
