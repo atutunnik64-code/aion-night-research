@@ -1,11 +1,11 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 53,
-  "bybit_notional_usdt": 109140.4431,
+  "bybit_events": 59,
+  "bybit_notional_usdt": 210974.4987,
   "context_count": 0,
-  "last_event_at": 1790862923.9176831,
-  "last_context_at": 1790862997.0571523,
+  "last_event_at": 1790863521.0213985,
+  "last_context_at": 1790863547.3362198,
   "recent": [
     {
       "event_time": 1790832689038,
@@ -483,6 +483,60 @@
       "price": 0.09557,
       "qty": 799.0,
       "notional_usdt": 76.36043000000001
+    },
+    {
+      "event_time": 1790863518654,
+      "symbol": "ETHUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 2673.99,
+      "qty": 32.57,
+      "notional_usdt": 87091.85429999999
+    },
+    {
+      "event_time": 1790863518805,
+      "symbol": "ETHUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 2673.66,
+      "qty": 1.38,
+      "notional_usdt": 3689.6507999999994
+    },
+    {
+      "event_time": 1790863518926,
+      "symbol": "BTCUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 83277.6,
+      "qty": 0.004,
+      "notional_usdt": 333.1104
+    },
+    {
+      "event_time": 1790863519144,
+      "symbol": "BTCUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 83267.1,
+      "qty": 0.015,
+      "notional_usdt": 1249.0065
+    },
+    {
+      "event_time": 1790863519173,
+      "symbol": "BTCUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 83262.3,
+      "qty": 0.113,
+      "notional_usdt": 9408.6399
+    },
+    {
+      "event_time": 1790863520815,
+      "symbol": "AVAXUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 10.841,
+      "qty": 5.7,
+      "notional_usdt": 61.7937
     }
   ],
   "last_context": []

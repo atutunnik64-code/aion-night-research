@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 58,
-  "last_source_ts": 1790862580.4894352,
+  "sample_count": 59,
+  "last_source_ts": 1790862814.3679795,
   "latest": {
-    "source_ts": 1790862580.4894352,
+    "source_ts": 1790862814.3679795,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4230.7,
+      "front_px": 4226.8,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4282.0,
-      "curve_pct": 1.2125652965230493
+      "next_px": 4275.0,
+      "curve_pct": 1.1403425759439756
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.26,
+      "front_px": 62.14,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.83,
-      "curve_pct": 2.5216832637327435
+      "curve_pct": 2.7196652719665204
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28358.0,
+      "front_px": 28335.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29326.0,
-      "curve_pct": 3.413498836307216
+      "curve_pct": 3.497441326980777
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11193.3,
-      "oi": 1610376,
-      "volume": 350720
+      "px": 11183.8,
+      "oi": 1610874,
+      "volume": 353857
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 162.27,
-      "oi": 79326,
-      "volume": 3587
+      "px": 161.85,
+      "oi": 79330,
+      "volume": 3689
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 275.43,
-      "oi": 233004,
-      "volume": 11449
+      "px": 275.36,
+      "oi": 233100,
+      "volume": 11528
     },
-    "gold_silver_ratio": 67.95213620301959,
-    "sber_perp_vs_front_pct": -2.87396854503138,
+    "gold_silver_ratio": 68.0205986482137,
+    "sber_perp_vs_front_pct": -2.819834127404275,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
