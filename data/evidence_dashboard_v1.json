@@ -1,6 +1,6 @@
 {
   "version": "EVIDENCE_DASHBOARD_V1",
-  "generated_at": 1790875256.0617356,
+  "generated_at": 1790883215.9946628,
   "paper_only": true,
   "live_enabled": false,
   "portfolio_metrics": {
@@ -14,35 +14,36 @@
       "metric_type": "CAPITAL_NORMALIZED_REALIZED"
     },
     "perp_funding_spread": {
-      "closed_pnl_quote": 0.0,
-      "open_positions": 42,
+      "closed_pnl_quote": 0.22364331578947125,
+      "open_positions": 45,
       "closed_positions": 1,
-      "metric_type": "REALIZED_QUOTE_IF_CLOSED"
+      "open_positions_accrued_funding_quote": 0.24776685315298927,
+      "metric_type": "REALIZED_QUOTE_IF_CLOSED_PLUS_SEPARATE_OPEN_FUNDING_ACCRUAL"
     }
   },
   "research_edge_metrics": {
     "classic_spot_arb": {
-      "scan_count": 354,
-      "execution_edge_quote_sum": 157.16399222891522,
-      "last_raw_positive": 522,
-      "last_after_fees_positive": 98,
+      "scan_count": 360,
+      "execution_edge_quote_sum": 165.17444135882857,
+      "last_raw_positive": 474,
+      "last_after_fees_positive": 102,
       "last_depth_checks": 60,
-      "last_depth_pass": 50,
+      "last_depth_pass": 52,
       "verification_candidates": 0,
       "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
     },
     "leadlag": {
-      "scan_count": 1823,
-      "pending": 63,
+      "scan_count": 1861,
+      "pending": 62,
       "resolved": 1000,
-      "positive_edge_episodes": 79,
-      "paper_edge_quote_sum": 9.385708853377272,
+      "positive_edge_episodes": 71,
+      "paper_edge_quote_sum": 7.583166721484612,
       "error_count": 0,
       "last_error": null,
       "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
     },
     "orderbook_consensus": {
-      "pending": 46,
+      "pending": 34,
       "resolved": 472,
       "sum_trade_return_pct": -111.9592427030547,
       "mean_trade_return_pct": -0.23720178538782774,
@@ -50,16 +51,17 @@
       "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED"
     },
     "arb_verifier": {
-      "verified_count": 0,
-      "rejected_count": 0,
-      "pending_count": 0,
+      "verified_count": 66,
+      "rejected_count": 6,
+      "watch_count": 29,
+      "verified_paper_edge_quote_sum": 4.510556680838559,
       "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION"
     }
   },
   "moex_research": {
     "broad_shadow": {
-      "resolved": 1224,
-      "pending": 118,
+      "resolved": 1342,
+      "pending": 274,
       "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
     },
     "calendar_matrix": {
