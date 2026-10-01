@@ -36,6 +36,7 @@ from app.services.crossvenue_arb_verifier_v1 import crossvenue_arb_verifier_v1
 from app.services.crossvenue_leadlag_episode_cloud_v1 import crossvenue_leadlag_episode_cloud_v1
 from app.services.crossvenue_orderbook_consensus_shadow_v1 import crossvenue_orderbook_consensus_shadow_v1
 from app.services.crossvenue_momentum_divergence_shadow_v1 import crossvenue_momentum_divergence_shadow_v1
+from app.services.evidence_dashboard_v1 import evidence_dashboard_v1
 
 STOP = asyncio.Event()
 SERVICES = [
@@ -65,6 +66,9 @@ SERVICES = [
     crossvenue_leadlag_episode_cloud_v1,
     crossvenue_orderbook_consensus_shadow_v1,
     crossvenue_momentum_divergence_shadow_v1,
+
+    # Neutral metrics aggregation; reports evidence without ranking strategies.
+    evidence_dashboard_v1,
 ]
 
 async def _start_all():
