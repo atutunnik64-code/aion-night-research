@@ -1,0 +1,85 @@
+{
+  "version": "EVIDENCE_DASHBOARD_V1",
+  "generated_at": 1790875256.0617356,
+  "paper_only": true,
+  "live_enabled": false,
+  "portfolio_metrics": {
+    "spot_perp_100usdt": {
+      "starting_capital_quote": 100.0,
+      "realized_equity_quote": 100.0,
+      "realized_pnl_quote": 0.0,
+      "realized_return_pct": 0.0,
+      "open_positions": 2,
+      "resolved_positions": 0,
+      "metric_type": "CAPITAL_NORMALIZED_REALIZED"
+    },
+    "perp_funding_spread": {
+      "closed_pnl_quote": 0.0,
+      "open_positions": 42,
+      "closed_positions": 1,
+      "metric_type": "REALIZED_QUOTE_IF_CLOSED"
+    }
+  },
+  "research_edge_metrics": {
+    "classic_spot_arb": {
+      "scan_count": 354,
+      "execution_edge_quote_sum": 157.16399222891522,
+      "last_raw_positive": 522,
+      "last_after_fees_positive": 98,
+      "last_depth_checks": 60,
+      "last_depth_pass": 50,
+      "verification_candidates": 0,
+      "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
+    },
+    "leadlag": {
+      "scan_count": 1823,
+      "pending": 63,
+      "resolved": 1000,
+      "positive_edge_episodes": 79,
+      "paper_edge_quote_sum": 9.385708853377272,
+      "error_count": 0,
+      "last_error": null,
+      "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
+    },
+    "orderbook_consensus": {
+      "pending": 46,
+      "resolved": 472,
+      "sum_trade_return_pct": -111.9592427030547,
+      "mean_trade_return_pct": -0.23720178538782774,
+      "positive_trade_rate": 0.3241525423728814,
+      "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED"
+    },
+    "arb_verifier": {
+      "verified_count": 0,
+      "rejected_count": 0,
+      "pending_count": 0,
+      "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION"
+    }
+  },
+  "moex_research": {
+    "broad_shadow": {
+      "resolved": 1224,
+      "pending": 118,
+      "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
+    },
+    "calendar_matrix": {
+      "sample_keys": 207,
+      "metric_type": "BASELINE_AND_SIGNAL_RESEARCH"
+    }
+  },
+  "source_health": {
+    "arb_bybit_symbols": 0,
+    "arb_bybit_error": "https://api.bybit.com:HTTP_403 | https://api.bytick.com:HTTP_403",
+    "leadlag_state": "OK",
+    "orderbook_state": "OK",
+    "moex_state": "OK"
+  },
+  "policy": {
+    "no_grid": true,
+    "no_martingale": true,
+    "no_dca": true,
+    "no_live_orders": true,
+    "no_strategy_ranking": true,
+    "separate_portfolio_from_research_edge": true
+  }
+}

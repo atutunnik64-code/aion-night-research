@@ -1,6 +1,6 @@
 {
   "version": "RESEARCH_EVIDENCE_DASHBOARD_V2",
-  "generated_at": 1790874996.408608,
+  "generated_at": 1790875259.936604,
   "paper_only": true,
   "live_enabled": false,
   "notes": [
@@ -11,20 +11,20 @@
   "branches": {
     "classic_spot_arb": {
       "metric_type": "research_edge_quote",
-      "scan_count": 348,
-      "last_new_events": 12,
-      "last_scan_ts": 1790874970.0711868,
-      "events_count": 1611,
-      "verification_queue_count": 129,
-      "research_event_count": 1507,
-      "conservative_research_edge_quote": 106.63313949,
-      "execution_edge_quote": 151.50213333,
+      "scan_count": 354,
+      "last_new_events": 5,
+      "last_scan_ts": 1790875228.7552161,
+      "events_count": 1673,
+      "verification_queue_count": 131,
+      "research_event_count": 1569,
+      "conservative_research_edge_quote": 110.59011426,
+      "execution_edge_quote": 157.16399223,
       "latest_cycle": {
-        "raw_positive_routes": 456,
-        "after_fees_positive_routes": 107,
+        "raw_positive_routes": 522,
+        "after_fees_positive_routes": 98,
         "depth_checks": 60,
-        "depth_pass": 51,
-        "new_events": 12,
+        "depth_pass": 50,
+        "new_events": 5,
         "verification_candidates": 0
       },
       "venue_symbol_counts": {
@@ -41,115 +41,115 @@
     },
     "arb_identity_verifier": {
       "metric_type": "identity_verified_paper_edge",
-      "scan_count": 183,
+      "scan_count": 190,
       "candidate_signature_count": 101,
-      "verified_count": 60,
-      "rejected_count": 5,
-      "watch_count": 30,
-      "verified_paper_edge_quote": 3.82008746,
+      "verified_count": 62,
+      "rejected_count": 6,
+      "watch_count": 29,
+      "verified_paper_edge_quote": 4.33602028,
       "verified_execution_net_pct": {
-        "count": 60,
-        "sum": 15.28034986,
-        "mean": 0.2546725,
-        "median": 0.12187502,
+        "count": 62,
+        "sum": 17.34408114,
+        "mean": 0.27974324,
+        "median": 0.1240593,
         "min": 0.0255454,
         "max": 2.37690691,
-        "positive": 60,
+        "positive": 62,
         "positive_rate": 1.0
       },
       "last_error": null
     },
     "leadlag": {
       "metric_type": "episode_edge",
-      "scan_count": 1787,
-      "last_scan_ts": 1790874987.6152318,
-      "pending_count": 45,
+      "scan_count": 1823,
+      "last_scan_ts": 1790875251.1525185,
+      "pending_count": 63,
       "resolved_count": 1000,
       "final_all_in_net_pct": {
         "count": 1000,
-        "sum": -565.29360062,
-        "mean": -0.5652936,
-        "median": -0.52837243,
+        "sum": -544.44157101,
+        "mean": -0.54444157,
+        "median": -0.5217033,
         "min": -3.54361277,
         "max": 2.49615385,
-        "positive": 40,
-        "positive_rate": 0.04
+        "positive": 42,
+        "positive_rate": 0.042
       },
       "max_all_in_net_pct": {
         "count": 1000,
-        "sum": -423.06578238,
-        "mean": -0.42306578,
-        "median": -0.40157298,
+        "sum": -406.98998811,
+        "mean": -0.40698999,
+        "median": -0.39820053,
         "min": -3.49528208,
         "max": 2.49615385,
-        "positive": 78,
-        "positive_rate": 0.078
+        "positive": 79,
+        "positive_rate": 0.079
       },
-      "paper_positive_window_edge_quote_sum": 8.1275626,
-      "caught_up_count": 402,
-      "timeout_count": 598,
+      "paper_positive_window_edge_quote_sum": 9.38570885,
+      "caught_up_count": 414,
+      "timeout_count": 586,
       "error_count": 0,
       "last_error": null
     },
     "orderbook_consensus": {
       "metric_type": "capital_normalized_timing_valid_equity",
-      "scan_count": 126,
-      "last_new_events": 6,
-      "pending_count": 66,
-      "resolved_count": 447,
-      "aborted_count": 53,
-      "timing_valid_resolved_count": 358,
+      "scan_count": 129,
+      "last_new_events": 3,
+      "pending_count": 46,
+      "resolved_count": 472,
+      "aborted_count": 54,
+      "timing_valid_resolved_count": 383,
       "legacy_stale_resolved_count": 89,
       "timing_valid_net_return_pct": {
-        "count": 358,
-        "sum": -92.8005713,
-        "mean": -0.25921947,
-        "median": -0.25650449,
-        "min": -2.90168274,
+        "count": 383,
+        "sum": -98.45306332,
+        "mean": -0.25705761,
+        "median": -0.2542889,
+        "min": -3.48655188,
         "max": 3.52706861,
-        "positive": 111,
-        "positive_rate": 0.310056
+        "positive": 123,
+        "positive_rate": 0.321149
       },
-      "equity_return_pct": -4.53593341,
-      "max_dd_pct": -4.54526673
+      "equity_return_pct": -4.80566606,
+      "max_dd_pct": -4.84156415
     },
     "momentum_divergence": {
       "metric_type": "capital_normalized_equity_5pct_alloc",
-      "scan_count": 262,
+      "scan_count": 268,
       "last_new_events": 0,
-      "last_scan_ts": 1790874971.395852,
-      "pending_count": 30,
-      "resolved_count": 569,
-      "collection_hours": 5.8294,
-      "resolved_symbols": 440,
+      "last_scan_ts": 1790875229.9107697,
+      "pending_count": 46,
+      "resolved_count": 570,
+      "collection_hours": 5.9026,
+      "resolved_symbols": 441,
       "continuation": {
-        "equity": 92.26253046,
-        "equity_return_pct": -7.73746954,
+        "equity": 92.27639101,
+        "equity_return_pct": -7.72360899,
         "max_dd_pct": -8.55338305,
         "trade_returns": {
-          "count": 569,
-          "sum": -160.75526147,
-          "mean": -0.28252243,
-          "median": -0.3492084,
+          "count": 570,
+          "sum": -160.45480275,
+          "mean": -0.28149965,
+          "median": -0.34897879,
           "min": -10.92321447,
           "max": 8.45950027,
-          "positive": 192,
-          "positive_rate": 0.337434
+          "positive": 193,
+          "positive_rate": 0.338596
         }
       },
       "snapback": {
-        "equity": 93.98598507,
-        "equity_return_pct": -6.01401493,
+        "equity": 93.94836912,
+        "equity_return_pct": -6.05163088,
         "max_dd_pct": -6.78236329,
         "trade_returns": {
-          "count": 569,
-          "sum": -123.74473853,
-          "mean": -0.21747757,
-          "median": -0.1507916,
+          "count": 570,
+          "sum": -124.54519725,
+          "mean": -0.21850035,
+          "median": -0.15102121,
           "min": -8.95950027,
           "max": 10.42321447,
           "positive": 249,
-          "positive_rate": 0.43761
+          "positive_rate": 0.436842
         }
       }
     },
@@ -173,8 +173,8 @@
     },
     "spot_perp_portfolio_100": {
       "metric_type": "capital_constrained_realized_quote_pnl",
-      "scan_count": 58,
-      "last_scan_ts": 1790874948.608206,
+      "scan_count": 62,
+      "last_scan_ts": 1790875244.015394,
       "resolved_count": 0,
       "positions_count": 2,
       "aborted_count": 0,
@@ -185,7 +185,7 @@
       "open_positions": 2,
       "locked_capital_quote": 100.0,
       "available_capital_quote": 0.0,
-      "open_funding_accrued_quote": 0.01248282,
+      "open_funding_accrued_quote": 0.01309342,
       "resolved_pnl_quote": {
         "count": 0,
         "sum": 0.0,
@@ -199,8 +199,8 @@
     },
     "moex_broad": {
       "metric_type": "trade_return_pct_not_portfolio",
-      "last_new_events": 14,
-      "pending_count": 110,
+      "last_new_events": 8,
+      "pending_count": 118,
       "resolved_count": 1224,
       "resolved_return_pct": {
         "count": 1224,
@@ -218,12 +218,12 @@
     "moex_calendar_matrix": {
       "metric_type": "native_state_summary",
       "last_new_events": 2,
-      "pending_count": 72,
-      "resolved_count": 224,
+      "pending_count": 66,
+      "resolved_count": 232,
       "aborted_count": 0,
-      "continuation_equity": 63.87373256299147,
-      "eligible_pairs": 176,
-      "raw_same_asset_pairs": 200
+      "continuation_equity": 63.006813505924,
+      "eligible_pairs": 177,
+      "raw_same_asset_pairs": 201
     },
     "moex_spread_paper": {
       "metric_type": "native_state_summary",
@@ -234,7 +234,7 @@
     },
     "spot_perp_shadow": {
       "metric_type": "native_state_summary",
-      "scan_count": 172,
+      "scan_count": 175,
       "pending_count": 24,
       "resolved_count": 0
     },
