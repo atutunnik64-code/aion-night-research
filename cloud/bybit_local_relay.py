@@ -17,15 +17,30 @@ RELAY = DATA / "bybit_local_relay_v1.json"
 RUNTIME = Path(os.getenv("AION_BYBIT_RUNTIME", str(ROOT.parent / "aion-bybit-runtime")))
 RUNTIME.mkdir(parents=True, exist_ok=True)
 FUNDING_REFRESH_SEC = 180.0
+SHADOW_REFRESH_SEC = 60.0
 
 # Keep local collector state outside the git checkout so pulling/pushing the
 # compact relay file never conflicts with cloud-generated state.
 import app.services.crossvenue_spot_arb_cloud_v1 as arbmod
+import app.services.crossvenue_liquidation_asymmetry_collector as liqmod
+import app.services.funding_oi_bybit_shadow_v1 as foimod
+import app.services.bybit_price_shock_shadow_v1 as shockmod
 from app.services.perp_funding_spread import PerpFundingSpreadScanner
 
 arbmod.STATE = RUNTIME / "crossvenue_spot_arb_local_v1.json"
+liqmod.BY_RAW = RUNTIME / "crossvenue_bybit_liquidations_local_v1.jsonl"
+liqmod.BY_CTX = RUNTIME / "crossvenue_bybit_liq_context_local_v1.jsonl"
+liqmod.STATE = RUNTIME / "crossvenue_liquidation_asymmetry_collector_local_v1.json"
+foimod.SNAPS = liqmod.BY_CTX
+foimod.STATE = RUNTIME / "funding_oi_bybit_shadow_local_v1.json"
+shockmod.SNAPS = liqmod.BY_CTX
+shockmod.STATE = RUNTIME / "bybit_price_shock_shadow_local_v1.json"
+
 arb = arbmod.CrossVenueSpotArbCloudV1()
 funding = PerpFundingSpreadScanner()
+liq = liqmod.CrossVenueLiquidationAsymmetryCollector()
+funding_oi = foimod.FundingOiBybitShadowV1()
+price_shock = shockmod.BybitPriceShockShadowV1()
 
 
 def _atomic_json(path: Path, payload: dict) -> None:
@@ -76,12 +91,15 @@ def _relay_payload() -> dict:
     signals = _bybit_signals()
     funding_rows = _bybit_funding_rows()
     funding_candidates = [x for x in funding_rows if x.get("status") == "PAPER_CANDIDATE"]
+    liq_status = liq.status()
+    foi_status = funding_oi.status()
+    shock_status = price_shock.status()
     return {
-        "version": "BYBIT_LOCAL_RELAY_V2_SPOT_AND_PERP",
+        "version": "BYBIT_LOCAL_RELAY_V3_FULL_PUBLIC_RESEARCH",
         "generated_at": time.time(),
         "paper_only": True,
         "live_enabled": False,
-        "source": "LOCAL_WINDOWS_DIRECT_BYBIT_PUBLIC_API",
+        "source": "LOCAL_WINDOWS_DIRECT_BYBIT_PUBLIC_API_AND_WS",
         "source_health": {
             "bybit_spot_symbol_count": int(counts.get("Bybit") or 0),
             "bybit_guarded_common_assets": bybit_guarded,
@@ -90,6 +108,10 @@ def _relay_payload() -> dict:
             "bybit_perp_symbol_count": int((funding.venue_asset_counts or {}).get("Bybit") or 0),
             "all_perp_venue_symbol_counts": funding.venue_asset_counts or {},
             "funding_last_error": funding.last_error,
+            "bybit_ws_connected": bool(liq_status.get("bybit_connected")),
+            "bybit_context_count": int(liq_status.get("context_count") or 0),
+            "bybit_liquidation_events": int(liq_status.get("bybit_events") or 0),
+            "bybit_context_last_error": liq_status.get("last_error"),
         },
         "spot_arb": {
             "scan_count": int(arb.state.get("scan_count") or 0),
@@ -112,6 +134,33 @@ def _relay_payload() -> dict:
             "bybit_paper_candidate_count": len(funding_candidates),
             "top_bybit_routes": funding_rows,
         },
+        "bybit_liquidation_context": {
+            "connected": bool(liq_status.get("bybit_connected")),
+            "context_count": int(liq_status.get("context_count") or 0),
+            "liquidation_events": int(liq_status.get("bybit_events") or 0),
+            "liquidation_notional_usdt": float(liq_status.get("bybit_notional_usdt") or 0),
+            "last_event_at": liq_status.get("last_event_at"),
+            "last_context_at": liq_status.get("last_context_at"),
+            "last_error": liq_status.get("last_error"),
+        },
+        "funding_oi_shadow": {
+            "pending_count": int(foi_status.get("pending_count") or 0),
+            "resolved_count": int(foi_status.get("resolved_count") or 0),
+            "last_new_events": int(foi_status.get("last_new_events") or 0),
+            "follow": foi_status.get("follow") or {},
+            "fade": foi_status.get("fade") or {},
+            "future_gate": foi_status.get("future_gate") or {},
+            "last_error": foi_status.get("last_error"),
+        },
+        "price_shock_shadow": {
+            "pending_count": int(shock_status.get("pending_count") or 0),
+            "resolved_count": int(shock_status.get("resolved_count") or 0),
+            "last_new_events": int(shock_status.get("last_new_events") or 0),
+            "continuation": shock_status.get("continuation") or {},
+            "reversal": shock_status.get("reversal") or {},
+            "future_gate": shock_status.get("future_gate") or {},
+            "last_error": shock_status.get("last_error"),
+        },
         "policy": {
             "no_grid": True,
             "no_martingale": True,
@@ -128,8 +177,6 @@ def _git(*args: str, check: bool = True) -> subprocess.CompletedProcess:
 
 def sync_relay() -> tuple[bool, str]:
     try:
-        # Relay is the only local file we intentionally publish. Runtime state
-        # remains outside the checkout and therefore cannot conflict with cloud state.
         _git("fetch", "origin", "main")
         _git("pull", "--rebase", "--autostash", "origin", "main")
         _git("add", RELAY.relative_to(ROOT).as_posix())
@@ -146,33 +193,47 @@ def sync_relay() -> tuple[bool, str]:
 async def run(interval: float, sync_every: float, do_sync: bool, once: bool) -> None:
     last_sync = 0.0
     last_funding = 0.0
-    while True:
-        await arb.refresh()
-        now = time.time()
-        if last_funding == 0.0 or now - last_funding >= FUNDING_REFRESH_SEC:
-            await funding.refresh()
-            last_funding = time.time()
-        payload = _relay_payload()
-        _atomic_json(RELAY, payload)
-        print(
-            f"BYBIT_RELAY scan={payload['spot_arb']['scan_count']} "
-            f"spot_symbols={payload['source_health']['bybit_spot_symbol_count']} "
-            f"guarded={payload['source_health']['bybit_guarded_common_assets']} "
-            f"spot_events={payload['spot_arb']['recent_bybit_event_count']} "
-            f"perp_symbols={payload['source_health']['bybit_perp_symbol_count']} "
-            f"funding_candidates={payload['perp_funding']['bybit_paper_candidate_count']} "
-            f"spot_err={payload['source_health']['bybit_spot_error']} "
-            f"funding_err={payload['source_health']['funding_last_error']}",
-            flush=True,
-        )
-        now = time.time()
-        if do_sync and now - last_sync >= sync_every:
-            ok, msg = sync_relay()
-            print(f"BYBIT_RELAY_SYNC ok={ok} msg={msg}", flush=True)
-            last_sync = now
-        if once:
-            return
-        await asyncio.sleep(max(5.0, interval))
+    last_shadow = 0.0
+    await liq.start()
+    if once:
+        await asyncio.sleep(3.0)
+    try:
+        while True:
+            await arb.refresh()
+            now = time.time()
+            if last_funding == 0.0 or now - last_funding >= FUNDING_REFRESH_SEC:
+                await funding.refresh()
+                last_funding = time.time()
+            if last_shadow == 0.0 or now - last_shadow >= SHADOW_REFRESH_SEC:
+                await funding_oi.refresh()
+                await price_shock.refresh()
+                last_shadow = time.time()
+            payload = _relay_payload()
+            _atomic_json(RELAY, payload)
+            print(
+                f"BYBIT_RELAY scan={payload['spot_arb']['scan_count']} "
+                f"spot_symbols={payload['source_health']['bybit_spot_symbol_count']} "
+                f"guarded={payload['source_health']['bybit_guarded_common_assets']} "
+                f"spot_events={payload['spot_arb']['recent_bybit_event_count']} "
+                f"perp_symbols={payload['source_health']['bybit_perp_symbol_count']} "
+                f"funding_candidates={payload['perp_funding']['bybit_paper_candidate_count']} "
+                f"ctx={payload['source_health']['bybit_context_count']} "
+                f"liq_events={payload['source_health']['bybit_liquidation_events']} "
+                f"ws={payload['source_health']['bybit_ws_connected']} "
+                f"spot_err={payload['source_health']['bybit_spot_error']} "
+                f"ctx_err={payload['source_health']['bybit_context_last_error']}",
+                flush=True,
+            )
+            now = time.time()
+            if do_sync and now - last_sync >= sync_every:
+                ok, msg = sync_relay()
+                print(f"BYBIT_RELAY_SYNC ok={ok} msg={msg}", flush=True)
+                last_sync = now
+            if once:
+                return
+            await asyncio.sleep(max(5.0, interval))
+    finally:
+        await liq.stop()
 
 
 def main() -> None:
