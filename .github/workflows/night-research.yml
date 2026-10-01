@@ -32,6 +32,7 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
@@ -52,13 +53,23 @@ jobs:
       - name: Persist research state
         shell: bash
         run: |
+          set -euo pipefail
           git config user.name "aion-night-bot"
           git config user.email "aion-night-bot@users.noreply.github.com"
+
+          # Preserve the freshly collected state, then move onto the current
+          # main tip. This avoids rebasing generated JSON/JSONL state files.
+          rm -rf /tmp/aion-data
+          cp -a data /tmp/aion-data
+          git fetch origin main
+          git reset --hard origin/main
+          rm -rf data
+          cp -a /tmp/aion-data data
+
           git add data/
           if git diff --cached --quiet; then
             echo "No research-state changes"
             exit 0
           fi
           git commit -m "research: cloud snapshot"
-          git pull --rebase origin main
           git push origin HEAD:main
