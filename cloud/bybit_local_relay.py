@@ -10,6 +10,8 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 DATA = ROOT / "data"
 RELAY = DATA / "bybit_local_relay_v1.json"
 RUNTIME = Path(os.getenv("AION_BYBIT_RUNTIME", str(ROOT.parent / "aion-bybit-runtime")))
