@@ -20,7 +20,8 @@ class CrossVenueMomentumDivergenceShadowV1:
         try:self.state=json.loads(STATE.read_text(encoding='utf-8-sig'))
         except Exception:self.state=_blank()
         self.state['version']='CROSSVENUE_MOMENTUM_DIVERGENCE_V2_DYNAMIC'
-    def _save(self): STATE.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8')
+    def _save(self):
+        tmp=STATE.with_suffix(STATE.suffix+'.tmp');tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
     @staticmethod
     def _old(hist,target):
         for x in reversed(hist):
@@ -96,7 +97,7 @@ class CrossVenueMomentumDivergenceShadowV1:
              'scan_count':self.state.get('scan_count',0),'pending_count':len(self.state.get('pending') or []),'resolved_count':len(r),'last_new_events':self.state.get('last_new_events',0),
              'future_gate':{'collection_hours':hours,'required_hours':MIN_HOURS,'resolved_events':len(r),'required_resolved_events':MIN_RESOLVED,'resolved_symbols':len(syms),'required_symbols':MIN_SYMBOLS,
                             'sample_ready':bool(hours>=MIN_HOURS and len(r)>=MIN_RESOLVED and len(syms)>=MIN_SYMBOLS)},
-             'promotion_eligible':False,'last_error':self.last_error,'policy':{'dynamic_perp_universe':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_parameter_tuning':True,'no_live_orders':True}}
+             'promotion_eligible':False,'last_error':self.last_error,'policy':{'dynamic_perp_universe':True,'atomic_state_write':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_parameter_tuning':True,'no_live_orders':True}}
         for name in ('continuation','snapback'):
             wins=sum(1 for x in r if float(x.get(name+'_net_return_pct') or 0)>0)
             out[name]={'return_pct':float(self.state.get(name+'_equity',100.0))-100.0,'equity':self.state.get(name+'_equity',100.0),'max_dd_pct':self.state.get(name+'_max_dd_pct',0.0),
