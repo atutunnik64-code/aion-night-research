@@ -18,8 +18,8 @@ class CrossVenueArbVerifierV1:
     def __init__(self):
         self.enabled=True;self.live_enabled=False;self.interval=30.0;self.task=None;self.last_error=None;self.last_refresh=None
         try:self.state=json.loads(STATE.read_text(encoding='utf-8-sig'))
-        except Exception:self.state={'version':'CROSSVENUE_ARB_VERIFIER_V1','started_at':time.time(),'verified':{},'rejected':{},'watch':{},'scan_count':0}
-        self.state['version']='CROSSVENUE_ARB_VERIFIER_V1';self.meta_cache={}
+        except Exception:self.state={'version':'CROSSVENUE_ARB_VERIFIER_V2_ALL_REVIEW','started_at':time.time(),'verified':{},'rejected':{},'watch':{},'scan_count':0}
+        self.state['version']='CROSSVENUE_ARB_VERIFIER_V2_ALL_REVIEW';self.meta_cache={}
     def _save(self):
         STATE.parent.mkdir(parents=True,exist_ok=True);tmp=STATE.with_suffix(STATE.suffix+'.tmp')
         tmp.write_text(json.dumps(self.state,ensure_ascii=False,indent=2),encoding='utf-8');tmp.replace(STATE)
@@ -63,10 +63,19 @@ class CrossVenueArbVerifierV1:
     @staticmethod
     def _sig(row):return f"{row.get('base')}:{row.get('buy_venue')}>{row.get('sell_venue')}"
     def _queue_groups(self):
-        q=list(crossvenue_spot_arb_cloud_v1.state.get('verification_queue') or [])[-1000:];groups={}
+        # Verify both the explicit high-edge queue and every recent event that
+        # the market guard itself labelled REVIEW_REQUIRED. This prevents a
+        # 2.49% edge from escaping identity checks merely because it sits just
+        # below the 2.50% high-spread review boundary.
+        q=list(crossvenue_spot_arb_cloud_v1.state.get('verification_queue') or [])[-1000:]
+        ev=list(crossvenue_spot_arb_cloud_v1.state.get('events') or [])[-1500:]
+        q.extend(x for x in ev if x.get('identity_confidence')=='REVIEW_REQUIRED' and float(x.get('execution_net_pct') or 0)>0)
+        groups={};seen=set()
         for x in q:
-            sig=self._sig(x);g=groups.setdefault(sig,{'rows':[],'first_ts':float(x.get('ts') or 0),'last_ts':0.0})
-            g['rows'].append(x);ts=float(x.get('ts') or 0);g['first_ts']=min(g['first_ts'] or ts,ts);g['last_ts']=max(g['last_ts'],ts)
+            sig=self._sig(x);ts=float(x.get('ts') or 0);dedupe=(sig,ts)
+            if not sig or dedupe in seen:continue
+            seen.add(dedupe);g=groups.setdefault(sig,{'rows':[],'first_ts':ts,'last_ts':0.0})
+            g['rows'].append(x);g['first_ts']=min(g['first_ts'] or ts,ts);g['last_ts']=max(g['last_ts'],ts)
         return groups
     async def refresh(self):
         now=time.time()
@@ -101,21 +110,24 @@ class CrossVenueArbVerifierV1:
                     else:
                         rec['reason']='NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE';self.state.setdefault('watch',{})[sig]=rec
             self.state['scan_count']=int(self.state.get('scan_count') or 0)+1;self.state['last_scan_ts']=now
-            self.state['last_processed']=processed;self.state['last_new_verified']=new_verified;self.state['last_new_rejected']=new_rejected;self._save()
+            self.state['candidate_signature_count']=len(groups);self.state['last_processed']=processed;self.state['last_new_verified']=new_verified;self.state['last_new_rejected']=new_rejected;self._save()
             self.last_error=None
-        except Exception as exc:self.last_error=str(exc)[:500]
+        except Exception as exc:
+            self.last_error=str(exc)[:500];self.state['last_error']=self.last_error;self.state['last_error_ts']=time.time()
+            try:self._save()
+            except Exception:pass
         self.last_refresh=now;return self.status()
     def status(self):
         verified=list((self.state.get('verified') or {}).values());rejected=list((self.state.get('rejected') or {}).values());watch=list((self.state.get('watch') or {}).values())
         edge=sum(float(x.get('paper_edge_quote') or 0) for x in verified)
-        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_ARB_VERIFIER_V1','mode':'PAPER_IDENTITY_VERIFICATION','paper_only':True,'live_enabled':False,
-                'verified_count':len(verified),'rejected_count':len(rejected),'watch_count':len(watch),'verified_paper_edge_quote':round(edge,6),
+        return {'ok':self.last_error is None,'strategy':'CROSSVENUE_ARB_VERIFIER_V2_ALL_REVIEW','mode':'PAPER_IDENTITY_VERIFICATION','paper_only':True,'live_enabled':False,
+                'candidate_signature_count':self.state.get('candidate_signature_count',0),'verified_count':len(verified),'rejected_count':len(rejected),'watch_count':len(watch),'verified_paper_edge_quote':round(edge,6),
                 'last_processed':self.state.get('last_processed',0),'last_new_verified':self.state.get('last_new_verified',0),'last_new_rejected':self.state.get('last_new_rejected',0),
                 'recent_verified':verified[-20:],'recent_rejected':rejected[-20:],'last_error':self.last_error,
-                'policy':{'high_edge_not_discarded':True,'contract_match_preferred':True,'market_consensus_fallback_paper_only':True,'no_live_orders':True}}
+                'policy':{'all_review_required_positive_events_verified':True,'high_edge_not_discarded':True,'contract_match_preferred':True,'market_consensus_fallback_paper_only':True,'no_live_orders':True}}
     async def start(self):
         if self.task and not self.task.done():return
-        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-arb-verifier-v1')
+        await self.refresh();self.task=asyncio.create_task(self._loop(),name='crossvenue-arb-verifier-v2')
     async def stop(self):
         if self.task and not self.task.done():self.task.cancel();await asyncio.gather(self.task,return_exceptions=True)
         self.task=None
