@@ -1,0 +1,15 @@
+{
+  "version": "BYBIT_PRICE_SHOCK_V1",
+  "rule_frozen_at": 1790835156.6301072,
+  "last_processed_ts": 1790835156.6301072,
+  "last_event_ts": {},
+  "pending": [],
+  "resolved": [],
+  "continuation_equity": 100.0,
+  "continuation_peak": 100.0,
+  "continuation_max_dd_pct": 0.0,
+  "reversal_equity": 100.0,
+  "reversal_peak": 100.0,
+  "reversal_max_dd_pct": 0.0,
+  "last_new_events": 0
+}
