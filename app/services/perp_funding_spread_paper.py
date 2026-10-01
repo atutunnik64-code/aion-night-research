@@ -9,7 +9,7 @@ STATE=ROOT/'data'/'perp_funding_spread_paper.json'
 class PerpFundingSpreadPaper:
     def __init__(self):
         self.enabled=True; self.interval=60.0; self.task=None; self.last_error=None; self.last_refresh=None
-        self.max_positions=2; self.notional_per_leg=25.0; self.max_hold_hours=72.0; self.stop_usdt=1.0
+        self.max_positions=8; self.max_per_base=1; self.notional_per_leg=25.0; self.max_hold_hours=72.0; self.stop_usdt=1.0
         self.state=self._load(); self.latest={}
     def _load(self):
         try:return json.loads(STATE.read_text(encoding='utf-8'))
@@ -64,7 +64,7 @@ class PerpFundingSpreadPaper:
         try:
             if not perp_funding_spread_scanner.market:await perp_funding_spread_scanner.refresh()
             now=time.time(); now_ms=now*1000.0; positions=list(self.state.get('positions') or []); closed=list(self.state.get('closed') or [])
-            still=[]; open_marks=[]
+            still=[]
             for p in positions:
                 longm,shortm=self._market(p)
                 if not longm or not shortm:still.append(p); continue
@@ -79,36 +79,39 @@ class PerpFundingSpreadPaper:
                 if close_reason:
                     p.update({'status':'CLOSED','closed_at':now,'close_reason':close_reason,'realized_pnl':pnl,'exit_fee':exit_fee})
                     closed.append(p); self.state['closed_pnl']=float(self.state.get('closed_pnl') or 0)+pnl
-                else:
-                    still.append(p); open_marks.append({'signature':p['signature'],'pnl':round(pnl,6),'age_hours':round(age_h,2),'funding':round(float(p.get('funding_realized') or 0),6),'events':p.get('funding_events',0),'carry_hour_pct':round(carry_hour,7)})
-            self.state['positions']=still; self.state['closed']=closed[-200:]
+                else:still.append(p)
+            self.state['positions']=still; self.state['closed']=closed[-500:]
 
-            existing={p['signature'] for p in still}
-            candidates=[x for x in perp_funding_spread_scanner.rows if x.get('status')=='PAPER_CANDIDATE' and x['signature'] not in existing]
+            existing_sig={p['signature'] for p in still}; active_bases={p['base'] for p in still}
+            candidates=[x for x in perp_funding_spread_scanner.rows if x.get('status')=='PAPER_CANDIDATE' and x['signature'] not in existing_sig]
             for row in candidates:
                 if len(self.state['positions'])>=self.max_positions:break
+                if row['base'] in active_bases:continue
                 if float(row.get('net_24h_conservative_pct') or 0)<0.05:continue
-                self.state['positions'].append(self._open(row,now))
+                self.state['positions'].append(self._open(row,now)); active_bases.add(row['base'])
             self._save()
+
             open_marks=[]; open_pnl=0.0
             for p in self.state['positions']:
                 longm,shortm=self._market(p)
                 if not longm or not shortm:continue
                 pnl,_,_,_=self._mark(p,longm,shortm); open_pnl+=pnl
-                open_marks.append({'signature':p['signature'],'pnl':round(pnl,6),'funding':round(float(p.get('funding_realized') or 0),6),
+                open_marks.append({'signature':p['signature'],'base':p['base'],'pnl':round(pnl,6),'funding':round(float(p.get('funding_realized') or 0),6),
                                    'events':int(p.get('funding_events') or 0),'age_hours':round((now-float(p['opened_at']))/3600.0,2)})
             closed_pnl=float(self.state.get('closed_pnl') or 0); equity=100.0+closed_pnl+open_pnl
             self.latest={'mode':'PAPER_SHADOW','research_equity':round(equity,6),'research_return_pct':round(equity-100.0,4),
                          'closed_pnl':round(closed_pnl,6),'open_mark_pnl':round(open_pnl,6),'open_count':len(self.state['positions']),
-                         'closed_count':len(self.state.get('closed') or []),'allocatable':False,'deployable':False,
-                         'reason':'NO_PRIVATE_PERP_EXECUTOR_YET','open_positions':open_marks,'recent_closed':(self.state.get('closed') or [])[-10:]}
+                         'closed_count':len(self.state.get('closed') or []),'candidate_count':sum(1 for x in perp_funding_spread_scanner.rows if x.get('status')=='PAPER_CANDIDATE'),
+                         'max_positions':self.max_positions,'max_per_base':self.max_per_base,'allocatable':False,'deployable':False,
+                         'reason':'PAPER_RESEARCH_ONLY','open_positions':open_marks,'recent_closed':(self.state.get('closed') or [])[-20:]}
             self.last_refresh=now; self.last_error=None
-        except Exception as exc:self.last_error=str(exc)[:300]
+        except Exception as exc:self.last_error=str(exc)[:500]
         return self.status()
 
     def status(self):
         return {'ok':self.last_error is None,'enabled':self.enabled,'mode':'PAPER_SHADOW','interval_seconds':self.interval,
-                'last_refresh':self.last_refresh,'last_error':self.last_error,'latest':self.latest}
+                'last_refresh':self.last_refresh,'last_error':self.last_error,'latest':self.latest,
+                'policy':{'diversified_bases':True,'no_grid':True,'no_martingale':True,'no_dca':True,'no_live_orders':True}}
     async def start(self):
         if self.task and not self.task.done():return
         self.task=asyncio.create_task(self._loop(),name='perp-funding-spread-paper')
