@@ -74,6 +74,24 @@ def build():
             "verified_paper_edge_quote":round(sum(f(x.get("paper_edge_quote")) for x in verified),8),
             "verified_execution_net_pct":stats([x.get("execution_net_pct") for x in verified]),"last_error":s.get("last_error")}
 
+    s, err = load("bybit_local_relay_v1.json")
+    if err: dash["errors"]["bybit_local_relay"] = err
+    elif isinstance(s, dict):
+        h=s.get("source_health") or {}; sa=s.get("spot_arb") or {}; pf=s.get("perp_funding") or {}
+        foi=s.get("funding_oi_shadow") or {}; ps=s.get("price_shock_shadow") or {}
+        lr=s.get("liquidation_regime_shadow") or {}; vc=s.get("volatility_compression_shadow") or {}
+        age=max(0.0,now-f(s.get("generated_at"),now))
+        dash["branches"]["bybit_local_relay"]={"metric_type":"local_bybit_public_data_research","fresh":age<=900,"age_sec":round(age,3),
+            "spot_symbols":int(h.get("bybit_spot_symbol_count") or 0),"guarded_common_assets":int(h.get("bybit_guarded_common_assets") or 0),
+            "perp_symbols":int(h.get("bybit_perp_symbol_count") or 0),"ws_connected":bool(h.get("bybit_ws_connected")),
+            "context_count":int(h.get("bybit_context_count") or 0),"liquidation_events":int(h.get("bybit_liquidation_events") or 0),
+            "spot_scan_count":int(sa.get("scan_count") or 0),"recent_bybit_arb_events":int(sa.get("recent_bybit_event_count") or 0),
+            "bybit_funding_candidates":int(pf.get("bybit_paper_candidate_count") or 0),
+            "funding_oi_pending":int(foi.get("pending_count") or 0),"funding_oi_resolved":int(foi.get("resolved_count") or 0),
+            "price_shock_pending":int(ps.get("pending_count") or 0),"price_shock_resolved":int(ps.get("resolved_count") or 0),
+            "liquidation_regime_pending":int(lr.get("pending_count") or 0),"liquidation_regime_resolved":int(lr.get("resolved_count") or 0),
+            "vol_compression_pending":int(vc.get("pending_count") or 0),"vol_compression_resolved":int(vc.get("resolved_count") or 0)}
+
     s, err = load("crossvenue_leadlag_episode_cloud_v1.json")
     if err: dash["errors"]["leadlag"] = err
     elif isinstance(s, dict):
