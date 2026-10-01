@@ -1,11 +1,11 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V1",
   "started_at": 1790832319.6268837,
-  "bybit_events": 38,
-  "bybit_notional_usdt": 56708.10205000001,
+  "bybit_events": 41,
+  "bybit_notional_usdt": 57624.83765000001,
   "context_count": 0,
-  "last_event_at": 1790855288.5127916,
-  "last_context_at": 1790855418.3421125,
+  "last_event_at": 1790855488.9272957,
+  "last_context_at": 1790855636.7525337,
   "recent": [
     {
       "event_time": 1790832689038,
@@ -348,6 +348,33 @@
       "price": 1.1801,
       "qty": 40.0,
       "notional_usdt": 47.20399999999999
+    },
+    {
+      "event_time": 1790855467309,
+      "symbol": "DOGEUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 0.09576,
+      "qty": 105.0,
+      "notional_usdt": 10.0548
+    },
+    {
+      "event_time": 1790855488465,
+      "symbol": "ADAUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 0.2513,
+      "qty": 3512.0,
+      "notional_usdt": 882.5656000000001
+    },
+    {
+      "event_time": 1790855488582,
+      "symbol": "ADAUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 0.2512,
+      "qty": 96.0,
+      "notional_usdt": 24.115199999999998
     }
   ],
   "last_context": []
