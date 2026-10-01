@@ -1,9 +1,89 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1790886838.918,
-  "last_event_ts": {},
-  "pending": [],
+  "last_processed_ts": 1790894592.435,
+  "last_event_ts": {
+    "DOGEUSDT": 1790891131.334,
+    "ADAUSDT": 1790891131.333,
+    "LINKUSDT": 1790891131.118,
+    "AVAXUSDT": 1790891132.733,
+    "SUIUSDT": 1790891131.215,
+    "AAVEUSDT": 1790892399.555
+  },
+  "pending": [
+    {
+      "id": "DOGEUSDT:1790891131",
+      "symbol": "DOGEUSDT",
+      "venue": "Bybit",
+      "ts": 1790891131.334,
+      "due_ts": 1790894731.334,
+      "move_15m_pct": -1.128572935344374,
+      "entry": 0.09374,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "ADAUSDT:1790891131",
+      "symbol": "ADAUSDT",
+      "venue": "Bybit",
+      "ts": 1790891131.333,
+      "due_ts": 1790894731.333,
+      "move_15m_pct": -1.609010458567972,
+      "entry": 0.2446,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "LINKUSDT:1790891131",
+      "symbol": "LINKUSDT",
+      "venue": "Bybit",
+      "ts": 1790891131.118,
+      "due_ts": 1790894731.118,
+      "move_15m_pct": -1.379453764037153,
+      "entry": 14.227,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "AVAXUSDT:1790891132",
+      "symbol": "AVAXUSDT",
+      "venue": "Bybit",
+      "ts": 1790891132.733,
+      "due_ts": 1790894732.733,
+      "move_15m_pct": -1.4873934337021555,
+      "entry": 10.862,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "SUIUSDT:1790891131",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1790891131.215,
+      "due_ts": 1790894731.215,
+      "move_15m_pct": -2.076051711795157,
+      "entry": 1.1627,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "AAVEUSDT:1790892399",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1790892399.555,
+      "due_ts": 1790895999.555,
+      "move_15m_pct": 1.0707771959757473,
+      "entry": 171.79,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [],
   "continuation_equity": 100.0,
   "continuation_peak": 100.0,
