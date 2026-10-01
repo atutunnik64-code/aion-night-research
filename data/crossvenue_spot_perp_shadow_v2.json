@@ -13,20 +13,20 @@
       "last_conservative_net_pct": null
     },
     "SOON:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 1.238441558441559,
+      "last_conservative_net_pct": 1.1384415584415588
     },
     "LAB:Bitget>Gate": {
-      "hits": 21,
+      "hits": 24,
       "last_net_pct": null,
-      "last_execution_net_pct": 0.04454336147353494,
-      "last_conservative_net_pct": -0.05545663852646507
+      "last_execution_net_pct": 0.16012291146533048,
+      "last_conservative_net_pct": 0.06012291146533047
     },
     "Q:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.04077867670354368,
+      "last_conservative_net_pct": -0.059221323296456324
     },
     "NAORIS:Bitget>Gate": {
       "hits": 0,
@@ -39,19 +39,19 @@
       "last_conservative_net_pct": null
     },
     "US:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.850767099795511,
-      "last_conservative_net_pct": 0.750767099795511
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "IN:Bitget>Gate": {
-      "hits": 7,
-      "last_execution_net_pct": 0.11184885290148411,
-      "last_conservative_net_pct": 0.011848852901484103
+      "hits": 10,
+      "last_execution_net_pct": 0.05786774628880692,
+      "last_conservative_net_pct": -0.042132253711193085
     },
     "TAG:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.07251028708984225,
-      "last_conservative_net_pct": -0.027489712910157754
+      "hits": 4,
+      "last_execution_net_pct": 0.08565545381221479,
+      "last_conservative_net_pct": -0.014344546187785218
     },
     "B2:Bitget>Gate": {
       "hits": 0,
@@ -84,9 +84,9 @@
       "last_conservative_net_pct": null
     },
     "CT:OKX>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.16573812937324767,
-      "last_conservative_net_pct": 0.06573812937324766
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "DRIFT:Gate>Bitget": {
       "hits": 0,
@@ -104,9 +104,9 @@
       "last_conservative_net_pct": null
     },
     "BLESS:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.026815750030082797,
-      "last_conservative_net_pct": -0.07318424996991721
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "HUMA:Bitget>Gate": {
       "hits": 0,
@@ -129,14 +129,14 @@
       "last_conservative_net_pct": null
     },
     "CT:Gate>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.04976083100006551,
-      "last_conservative_net_pct": -0.0502391689999345
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "CT:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.32014435470012287,
-      "last_conservative_net_pct": 0.22014435470012286
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ARIA:Bitget>Gate": {
       "hits": 0,
@@ -154,9 +154,9 @@
       "last_conservative_net_pct": null
     },
     "CT:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.6838460216532007,
-      "last_conservative_net_pct": 0.5838460216532008
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "NIGHT:OKX>Gate": {
       "hits": 0,
@@ -179,9 +179,9 @@
       "last_conservative_net_pct": null
     },
     "UAI:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.15205201950732966,
-      "last_conservative_net_pct": 0.052052019507329655
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "SOON:Gate>Bitget": {
       "hits": 0,
@@ -234,9 +234,9 @@
       "last_conservative_net_pct": null
     },
     "CP:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.40522159548751296,
-      "last_conservative_net_pct": 0.30522159548751293
+      "hits": 4,
+      "last_execution_net_pct": 0.002320709105561314,
+      "last_conservative_net_pct": -0.09767929089443869
     },
     "O:Bitget>Gate": {
       "hits": 0,
@@ -254,19 +254,19 @@
       "last_conservative_net_pct": null
     },
     "FF:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.10508822585818339,
+      "last_conservative_net_pct": 0.005088225858183387
     },
     "FLOCK:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.1384255453683239,
-      "last_conservative_net_pct": 0.038425545368323905
+      "hits": 4,
+      "last_execution_net_pct": 0.0439816426650011,
+      "last_conservative_net_pct": -0.05601835733499891
     },
     "NMR:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.12424297370808662,
+      "last_conservative_net_pct": 0.024242973708086618
     },
     "KAT:Bitget>Gate": {
       "hits": 0,
@@ -274,9 +274,9 @@
       "last_conservative_net_pct": null
     },
     "BICO:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.04747818098299411,
-      "last_conservative_net_pct": -0.052521819017005894
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "GRASS:Bitget>Gate": {
       "hits": 0,
@@ -289,14 +289,14 @@
       "last_conservative_net_pct": null
     },
     "TRB:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.6800000000000008,
-      "last_conservative_net_pct": 0.5800000000000008
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "TRB:Gate>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.5748119942884247,
-      "last_conservative_net_pct": 0.4748119942884247
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "PONS:Gate>OKX": {
       "hits": 0,
@@ -339,14 +339,14 @@
       "last_conservative_net_pct": null
     },
     "VELVET:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0695004233700261,
-      "last_conservative_net_pct": -0.030499576629973907
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "RECALL:Bitget>Gate": {
-      "hits": 3,
-      "last_execution_net_pct": 0.16076923076922905,
-      "last_conservative_net_pct": 0.06076923076922905
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "MUBARAK:Gate>Bitget": {
       "hits": 0,
@@ -454,9 +454,9 @@
       "last_conservative_net_pct": null
     },
     "CT:Gate>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.1766281231966207,
-      "last_conservative_net_pct": 0.07662812319662068
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "CHILLGUY:Gate>Bitget": {
       "hits": 0,
@@ -474,9 +474,9 @@
       "last_conservative_net_pct": null
     },
     "AIO:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.04323436512950557,
-      "last_conservative_net_pct": -0.056765634870494436
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "FET:OKX>Bitget": {
       "hits": 0,
@@ -484,9 +484,9 @@
       "last_conservative_net_pct": null
     },
     "CP:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.26406124093473227,
-      "last_conservative_net_pct": 0.16406124093473226
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "SUI:OKX>Bitget": {
       "hits": 0,
@@ -874,9 +874,9 @@
       "last_conservative_net_pct": null
     },
     "CP:OKX>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0010272873194197563,
-      "last_conservative_net_pct": -0.09897271268058025
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "IN:Gate>Bitget": {
       "hits": 0,
@@ -1184,14 +1184,14 @@
       "last_conservative_net_pct": null
     },
     "ALICE:Bitget>Gate": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 3,
+      "last_execution_net_pct": 0.6265215333648746,
+      "last_conservative_net_pct": 0.5265215333648746
     },
     "ALICE:Gate>Bitget": {
-      "hits": 0,
-      "last_execution_net_pct": null,
-      "last_conservative_net_pct": null
+      "hits": 1,
+      "last_execution_net_pct": 0.07082732966049249,
+      "last_conservative_net_pct": -0.029172670339507517
     },
     "COOKIE:Gate>Bitget": {
       "hits": 0,
@@ -1284,45 +1284,60 @@
       "last_conservative_net_pct": null
     },
     "TRB:OKX>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.8244921316166034,
-      "last_conservative_net_pct": 0.7244921316166034
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "TRB:OKX>Bitget": {
-      "hits": 1,
-      "last_execution_net_pct": 0.7672675250357621,
-      "last_conservative_net_pct": 0.6672675250357621
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "TRB:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.6047619047619193,
-      "last_conservative_net_pct": 0.5047619047619193
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "TRB:Gate>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.5567348881485026,
-      "last_conservative_net_pct": 0.4567348881485026
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "AERO:Bitget>Gate": {
-      "hits": 1,
-      "last_execution_net_pct": 0.19163980557686894,
-      "last_conservative_net_pct": 0.09163980557686893
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "ZAMA:Bitget>OKX": {
-      "hits": 1,
-      "last_execution_net_pct": 0.0437131277894689,
-      "last_conservative_net_pct": -0.05628687221053111
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
     },
     "INJ:Bitget>OKX": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CYS:Gate>Bitget": {
+      "hits": 0,
+      "last_execution_net_pct": null,
+      "last_conservative_net_pct": null
+    },
+    "CROSS:Bitget>Gate": {
       "hits": 1,
-      "last_execution_net_pct": 0.021845246077501157,
-      "last_conservative_net_pct": -0.07815475392249885
+      "last_execution_net_pct": 0.08382324743615249,
+      "last_conservative_net_pct": -0.016176752563847513
+    },
+    "ALLO:Bitget>Gate": {
+      "hits": 1,
+      "last_execution_net_pct": 0.01475783475782616,
+      "last_conservative_net_pct": -0.08524216524217385
     }
   },
   "pending": {
     "SOON:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "SOON:Bitget>Gate",
       "base": "SOON",
       "spot_venue": "Bitget",
@@ -1334,14 +1349,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04014801525005607,
-      "funding_quote": 0.0015985913258497505,
+      "funding_quote": 0.0016235383170173881,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.5667683337070998,
       "entry_raw_basis_pct": 0.9867683337070998
     },
     "LAB:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "LAB:Bitget>Gate",
       "base": "LAB",
       "spot_venue": "Bitget",
@@ -1353,14 +1368,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04011058601134215,
-      "funding_quote": 0.0011652901465596557,
+      "funding_quote": 0.0011908544172567832,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.31724007561435374,
       "entry_raw_basis_pct": 0.7372400756143538
     },
     "Q:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "Q:Bitget>Gate",
       "base": "Q",
       "spot_venue": "Bitget",
@@ -1372,14 +1387,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.040104850964348335,
-      "funding_quote": 0.0011610522044383047,
+      "funding_quote": 0.0011867172636734788,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.27900642898890193,
       "entry_raw_basis_pct": 0.699006428988902
     },
     "US:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "US:Bitget>Gate",
       "base": "US",
       "spot_venue": "Bitget",
@@ -1391,14 +1406,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008294008294008,
-      "funding_quote": 0.005138096407210352,
+      "funding_quote": 0.005517160984272781,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.13293388626720393,
       "entry_raw_basis_pct": 0.552933886267204
     },
     "TAG:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "TAG:Bitget>Gate",
       "base": "TAG",
       "spot_venue": "Bitget",
@@ -1410,14 +1425,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008119837603248,
-      "funding_quote": 0.0011548843877295801,
+      "funding_quote": 0.001180426434166557,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.12132250688319057,
       "entry_raw_basis_pct": 0.5413225068831906
     },
     "IN:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "IN:Bitget>Gate",
       "base": "IN",
       "spot_venue": "Bitget",
@@ -1429,7 +1444,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008092797410305,
-      "funding_quote": 0.0016559400739324453,
+      "funding_quote": 0.001681896850428607,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.11951982735365163,
       "entry_raw_basis_pct": 0.5395198273536517
@@ -1455,7 +1470,7 @@
     },
     "B2:Bitget>Gate": {
       "opened_at": 1790855385.4625676,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "B2:Bitget>Gate",
       "base": "B2",
       "spot_venue": "Bitget",
@@ -1467,7 +1482,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007413509060956,
-      "funding_quote": 0.0011534034707555009,
+      "funding_quote": 0.001178883043376566,
       "funding_interval_hours": 4.0,
       "entry_net_basis_pct": 0.0742339373970261,
       "entry_raw_basis_pct": 0.49423393739702615
@@ -1512,7 +1527,7 @@
     },
     "UAI:Bitget>Gate": {
       "opened_at": 1790862732.7413192,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "UAI:Bitget>Gate",
       "base": "UAI",
       "spot_venue": "Bitget",
@@ -1524,14 +1539,14 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007060473815461,
-      "funding_quote": 0.000534726832818186,
+      "funding_quote": 0.0005606262018570101,
       "funding_interval_hours": 8.0,
       "entry_net_basis_pct": 0.05069825436409914,
       "entry_raw_basis_pct": 0.4706982543640992
     },
     "CP:Bitget>Gate": {
       "opened_at": 1790863384.7052724,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "CP:Bitget>Gate",
       "base": "CP",
       "spot_venue": "Bitget",
@@ -1543,7 +1558,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007275666936136,
-      "funding_quote": 0.002597203261205983,
+      "funding_quote": 0.0027341808698118247,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.16504446240904552,
       "entry_conservative_net_basis_pct": 0.06504446240904552,
@@ -1552,7 +1567,7 @@
     },
     "GRASS:Bitget>OKX": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "GRASS:Bitget>OKX",
       "base": "GRASS",
       "spot_venue": "Bitget",
@@ -1564,7 +1579,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758461191335741,
-      "funding_quote": 0.000466734414424181,
+      "funding_quote": 0.0004925422497534464,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.37689530685921535,
       "entry_conservative_net_basis_pct": 0.2768953068592154,
@@ -1573,7 +1588,7 @@
     },
     "NMR:Bitget>Gate": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "NMR:Bitget>Gate",
       "base": "NMR",
       "spot_venue": "Bitget",
@@ -1585,7 +1600,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008142742724927,
-      "funding_quote": -0.00159946651284804,
+      "funding_quote": -0.0016953550741941336,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.22284951499510292,
       "entry_conservative_net_basis_pct": 0.12284951499510291,
@@ -1594,7 +1609,7 @@
     },
     "ROBO:Bitget>Gate": {
       "opened_at": 1790863514.790924,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "ROBO:Bitget>Gate",
       "base": "ROBO",
       "spot_venue": "Bitget",
@@ -1606,7 +1621,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04007629367536489,
-      "funding_quote": 0.000465975086577461,
+      "funding_quote": 0.0004921801725719621,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.18862450243256418,
       "entry_conservative_net_basis_pct": 0.08862450243256417,
@@ -1615,7 +1630,7 @@
     },
     "NIGHT:Gate>OKX": {
       "opened_at": 1790863681.495401,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "NIGHT:Gate>OKX",
       "base": "NIGHT",
       "spot_venue": "Gate",
@@ -1627,7 +1642,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758418394191308,
-      "funding_quote": -0.0004131821102404007,
+      "funding_quote": -0.00043431436158280785,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.3734715353046594,
       "entry_conservative_net_basis_pct": 0.2734715353046594,
@@ -1636,7 +1651,7 @@
     },
     "MOVR:Gate>Bitget": {
       "opened_at": 1790863681.495401,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "MOVR:Gate>Bitget",
       "base": "MOVR",
       "spot_venue": "Gate",
@@ -1648,7 +1663,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008828996282528,
-      "funding_quote": -0.001007713357159761,
+      "funding_quote": -0.0010635107134755158,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.2685997521685393,
       "entry_conservative_net_basis_pct": 0.1685997521685393,
@@ -1657,7 +1672,7 @@
     },
     "ENA:Bitget>OKX": {
       "opened_at": 1790863981.8272638,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "ENA:Bitget>OKX",
       "base": "ENA",
       "spot_venue": "Bitget",
@@ -1669,7 +1684,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03761255142435768,
-      "funding_quote": 0.0004083909210383424,
+      "funding_quote": 0.0004333075800052283,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.6004113948614334,
       "entry_conservative_net_basis_pct": 0.5004113948614334,
@@ -1678,7 +1693,7 @@
     },
     "CT:Bitget>OKX": {
       "opened_at": 1790868210.8014357,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "CT:Bitget>OKX",
       "base": "CT",
       "spot_venue": "Bitget",
@@ -1690,7 +1705,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.05,
       "entry_fees": 0.03758894061841181,
-      "funding_quote": -0.001273633969125153,
+      "funding_quote": -0.0018718844383970629,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.41152494729445066,
       "entry_conservative_net_basis_pct": 0.3115249472944507,
@@ -1699,7 +1714,7 @@
     },
     "AEON:Bitget>Gate": {
       "opened_at": 1790868275.8411977,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "AEON:Bitget>Gate",
       "base": "AEON",
       "spot_venue": "Bitget",
@@ -1711,7 +1726,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04017329156060309,
-      "funding_quote": 0.0008398104453608039,
+      "funding_quote": 0.0013205459431224924,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.8352770706872994,
       "entry_conservative_net_basis_pct": 0.7352770706872994,
@@ -1720,7 +1735,7 @@
     },
     "FLOCK:Bitget>Gate": {
       "opened_at": 1790868275.8411977,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "FLOCK:Bitget>Gate",
       "base": "FLOCK",
       "spot_venue": "Bitget",
@@ -1732,7 +1747,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04009442870632672,
-      "funding_quote": -0.00032250439576830256,
+      "funding_quote": -0.0005034326463598591,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.3095247088448086,
       "entry_conservative_net_basis_pct": 0.2095247088448086,
@@ -1741,7 +1756,7 @@
     },
     "ALICE:Bitget>Gate": {
       "opened_at": 1790868447.2433999,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "ALICE:Bitget>Gate",
       "base": "ALICE",
       "spot_venue": "Bitget",
@@ -1753,7 +1768,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.040164520743919886,
-      "funding_quote": 3.2076046068829486e-05,
+      "funding_quote": 5.839142682683063e-05,
       "funding_interval_hours": 8.0,
       "entry_execution_net_basis_pct": 0.7768049594658912,
       "entry_conservative_net_basis_pct": 0.6768049594658913,
@@ -1762,7 +1777,7 @@
     },
     "BR:Bitget>Gate": {
       "opened_at": 1790868512.30419,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "BR:Bitget>Gate",
       "base": "BR",
       "spot_venue": "Bitget",
@@ -1774,7 +1789,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04009691417550627,
-      "funding_quote": 2.6343493898148862e-05,
+      "funding_quote": 5.211278004838387e-05,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.3260945033751164,
       "entry_conservative_net_basis_pct": 0.2260945033751164,
@@ -1783,7 +1798,7 @@
     },
     "BLESS:Bitget>Gate": {
       "opened_at": 1790868512.30419,
-      "last_mark": 1790868815.0763423,
+      "last_mark": 1790869112.9733582,
       "signature": "BLESS:Bitget>Gate",
       "base": "BLESS",
       "spot_venue": "Bitget",
@@ -1795,7 +1810,7 @@
       "spot_fee_pct": 0.1,
       "perp_fee_pct": 0.06,
       "entry_fees": 0.04008371651066525,
-      "funding_quote": 9.956520980233352e-05,
+      "funding_quote": 0.0001935392125090956,
       "funding_interval_hours": 4.0,
       "entry_execution_net_basis_pct": 0.23811007110169174,
       "entry_conservative_net_basis_pct": 0.13811007110169174,
@@ -1863,6 +1878,6 @@
       "reason": "PRESERVED_HIGH_BASIS_REQUIRES_IDENTITY_VERIFICATION"
     }
   },
-  "scan_count": 127,
-  "last_market_refresh": 1790868807.611619
+  "scan_count": 130,
+  "last_market_refresh": 1790869108.0720527
 }

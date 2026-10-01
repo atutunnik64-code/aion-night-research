@@ -32,10 +32,59 @@
     }
   },
   "rejected": {},
-  "watch": {},
-  "scan_count": 35,
-  "last_scan_ts": 1790868858.4927979,
-  "last_processed": 0,
+  "watch": {
+    "PEAQ:Bitget>Gate": {
+      "verified_at": 1790869153.9408367,
+      "signature": "PEAQ:Bitget>Gate",
+      "base": "PEAQ",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "method": null,
+      "repeat_hits": 2,
+      "repeat_span_sec": 81.39704537391663,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 42595.8433946,
+      "sell_quote_volume": 612030.136414,
+      "gross_depth_pct": 2.519246781289497,
+      "execution_net_pct": 2.3167275345082063,
+      "conservative_net_pct": 2.1667275345082064,
+      "paper_edge_quote": 0.5791818836270516,
+      "buy_addresses": [
+        "0x0000000000000000000000000000000000000809"
+      ],
+      "sell_addresses": [],
+      "common_addresses": [],
+      "live_eligible": false,
+      "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
+    },
+    "PEAQ:Bitget>KuCoin": {
+      "verified_at": 1790869153.9408367,
+      "signature": "PEAQ:Bitget>KuCoin",
+      "base": "PEAQ",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "method": null,
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 42595.8433946,
+      "sell_quote_volume": 476281.991334,
+      "gross_depth_pct": 2.5031605562578996,
+      "execution_net_pct": 2.300657395701638,
+      "conservative_net_pct": 2.150657395701638,
+      "paper_edge_quote": 0.5751643489254095,
+      "buy_addresses": [
+        "0x0000000000000000000000000000000000000809"
+      ],
+      "sell_addresses": [],
+      "common_addresses": [],
+      "live_eligible": false,
+      "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
+    }
+  },
+  "scan_count": 42,
+  "last_scan_ts": 1790869153.9408367,
+  "last_processed": 2,
   "last_new_verified": 0,
   "last_new_rejected": 0
 }
