@@ -27,6 +27,7 @@ from app.services.perp_funding_spread import perp_funding_spread_scanner
 from app.services.perp_funding_spread_paper import perp_funding_spread_paper
 from app.services.basis_funding import basis_funding_scanner
 from app.services.crossvenue_spot_perp_shadow_v2 import crossvenue_spot_perp_shadow_v2
+from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_v1
 
 STOP = asyncio.Event()
 SERVICES = [
@@ -48,6 +49,7 @@ SERVICES = [
     perp_funding_spread_paper,
     basis_funding_scanner,
     crossvenue_spot_perp_shadow_v2,
+    crossvenue_spot_arb_cloud_v1,
 ]
 
 async def _start_all():
