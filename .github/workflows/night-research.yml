@@ -50,6 +50,47 @@ jobs:
           fi
           export AION_NIGHT_DURATION_SEC="$D"
           PYTHONPATH=. python cloud/night_agent.py
+      - name: Validate research state
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json
+          import subprocess
+          from pathlib import Path
+
+          unrecoverable = []
+          restored = []
+          for p in sorted(Path("data").rglob("*.json")):
+              rel = p.as_posix()
+              try:
+                  raw = p.read_text(encoding="utf-8-sig")
+                  if not raw.strip():
+                      raise ValueError("zero-byte/blank JSON")
+                  json.loads(raw)
+                  continue
+              except Exception as current_exc:
+                  try:
+                      old = subprocess.check_output(
+                          ["git", "show", f"HEAD:{rel}"], stderr=subprocess.DEVNULL
+                      )
+                      old_text = old.decode("utf-8-sig")
+                      if not old_text.strip():
+                          raise ValueError("baseline is also blank")
+                      json.loads(old_text)
+                      p.write_bytes(old)
+                      restored.append((rel, str(current_exc)))
+                  except Exception as baseline_exc:
+                      unrecoverable.append((rel, str(current_exc), str(baseline_exc)))
+
+          for rel, reason in restored:
+              print(f"STATE_RESTORED {rel}: {reason}")
+          if unrecoverable:
+              for rel, cur, base in unrecoverable:
+                  print(f"STATE_INVALID {rel}: current={cur}; baseline={base}")
+              raise SystemExit("refusing to persist invalid research JSON")
+          print("STATE_JSON_VALIDATION_OK")
+          PY
       - name: Persist research state
         shell: bash
         run: |
@@ -65,6 +106,24 @@ jobs:
           git reset --hard origin/main
           rm -rf data
           cp -a /tmp/aion-data data
+
+          # Validate once more after restore onto the latest main tip.
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          bad=[]
+          for p in sorted(Path("data").rglob("*.json")):
+              try:
+                  raw=p.read_text(encoding="utf-8-sig")
+                  if not raw.strip(): raise ValueError("blank")
+                  json.loads(raw)
+              except Exception as exc:
+                  bad.append(f"{p.as_posix()}: {exc}")
+          if bad:
+              print("\n".join(bad))
+              raise SystemExit("invalid JSON after snapshot restore")
+          print("POST_RESTORE_JSON_VALIDATION_OK")
+          PY
 
           git add data/
           if git diff --cached --quiet; then
