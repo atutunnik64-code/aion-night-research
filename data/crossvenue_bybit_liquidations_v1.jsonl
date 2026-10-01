@@ -4,3 +4,4 @@
 {"event_time":1790835185100,"symbol":"SOLUSDT","position_side":"Sell","pressure_side":"BUY","price":120.17,"qty":0.6,"notional_usdt":72.102}
 {"event_time":1790835259454,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84661.4,"qty":0.012,"notional_usdt":1015.9368}
 {"event_time":1790835259517,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":84663.7,"qty":0.01,"notional_usdt":846.637}
+{"event_time":1790841797480,"symbol":"LINKUSDT","position_side":"Buy","pressure_side":"SELL","price":14.095,"qty":50.9,"notional_usdt":717.4355}
