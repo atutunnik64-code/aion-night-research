@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 32,
-  "last_source_ts": 1790835156.749871,
+  "sample_count": 33,
+  "last_source_ts": 1790835361.1510577,
   "latest": {
-    "source_ts": 1790835156.749871,
+    "source_ts": 1790835361.1510577,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4247.5,
+      "front_px": 4250.7,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4293.0,
-      "curve_pct": 1.0712183637433759
+      "next_px": 4295.7,
+      "curve_pct": 1.058649163667158
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.29,
+      "front_px": 62.42,
       "next": "SVH7",
       "next_name": "SILV-3.27",
-      "next_px": 63.85,
-      "curve_pct": 2.504414833841717
+      "next_px": 63.95,
+      "curve_pct": 2.4511374559436083
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28172.0,
+      "front_px": 28155.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29124.0,
-      "curve_pct": 3.3792418003691704
+      "curve_pct": 3.44166222695792
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11164.9,
-      "oi": 1627626,
-      "volume": 33202
+      "px": 11178.5,
+      "oi": 1627684,
+      "volume": 34450
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 160.9,
-      "oi": 80404,
-      "volume": 759
+      "px": 161.37,
+      "oi": 80440,
+      "volume": 820
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 273.71,
+      "px": 273.52,
       "oi": 232670,
-      "volume": 1075
+      "volume": 1094
     },
-    "gold_silver_ratio": 68.18911542783754,
-    "sber_perp_vs_front_pct": -2.843248615646743,
+    "gold_silver_ratio": 68.0983659083627,
+    "sber_perp_vs_front_pct": -2.852068904279881,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
