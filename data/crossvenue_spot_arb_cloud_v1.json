@@ -1,163 +1,127 @@
 {
-  "version": "CROSSVENUE_SPOT_ARB_CLOUD_V2_DYNAMIC_UNIVERSE",
+  "version": "CROSSVENUE_SPOT_ARB_CLOUD_V3_IDENTITY_GUARD",
   "started_at": 1790835361.142944,
-  "scan_count": 176,
+  "scan_count": 182,
   "signals": {
-    "NFP:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 1019.4535011917243
+    "SOON:Bitget>Gate": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 1.137485792225506
     },
-    "RVV:Bitget>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 690.4938649267585
+    "SOON:Bitget>KuCoin": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 1.1261309388497418
     },
-    "AIR:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 515.7821708351071
+    "MOVR:KuCoin>Bitget": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.7045438916205241
     },
-    "EDGE:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 377.8698015816899
+    "MOVR:KuCoin>Gate": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.4252028129422567
     },
-    "EDGE:Gate>OKX": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 377.4640911601048
+    "ZIG:Bitget>Gate": {
+      "hits": 2,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855708.2069607,
+      "last_all_in_net_pct": 0.09178629533691626
     },
-    "EDGE:Gate>Bitget": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 376.53054516074593
+    "LAB:Bitget>Gate": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.29183673469388305
     },
-    "DIN:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 212.9334526504
+    "LAB:Bitget>KuCoin": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.2540816326530706
     },
-    "RVV:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 206.700363467949
+    "Q:Bitget>KuCoin": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.13843328578869746
     },
-    "PYR:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 152.69081199649753
+    "FLOCK:Bitget>KuCoin": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.1759523072158582
     },
-    "RVV:Bitget>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 150.84618510553327
+    "FLOCK:Bitget>Gate": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.08307013469578209
     },
-    "RWA:Bitget>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 79.67445514103088
+    "UAI:Bitget>KuCoin": {
+      "hits": 5,
+      "last_event": 1790855742.379098,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.06302027704695756
     },
-    "RWA:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 78.73855840447807
+    "US:Bitget>KuCoin": {
+      "hits": 6,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.08771967423918364
     },
-    "ICX:OKX>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 72.02315028092505
+    "US:Bitget>Gate": {
+      "hits": 3,
+      "last_event": 1790855708.2069607,
+      "last_seen": 1790855775.9489236,
+      "last_all_in_net_pct": 0.050057208237968005
     },
-    "ICX:Bitget>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 85.12698417682451
+    "UAI:Bitget>Gate": {
+      "hits": 4,
+      "last_event": 1790855742.379098,
+      "last_seen": 1790855809.152216,
+      "last_all_in_net_pct": 0.052845788093135455
     },
-    "CAMP:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 41.389001219665
+    "STRK:Bitget>OKX": {
+      "hits": 4,
+      "last_event": 1790855742.379098,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.09090592334495032
     },
-    "SCRT:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 39.05572863150443
+    "Q:Bitget>Gate": {
+      "hits": 5,
+      "last_event": 1790855742.379098,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.18815566405794826
     },
-    "XPRT:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 41.86560339823707
+    "MCAT:Bitget>KuCoin": {
+      "hits": 4,
+      "last_event": 1790855742.379098,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.05747483551682289
     },
-    "XRD:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 36.13924404467672
+    "ZIG:Bitget>KuCoin": {
+      "hits": 1,
+      "last_event": 0,
+      "last_seen": 1790855708.2069607,
+      "last_all_in_net_pct": 0.1258331473067813
     },
-    "RAVE:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 33.11728627761194
+    "MCAT:Bitget>Gate": {
+      "hits": 4,
+      "last_event": 1790855742.379098,
+      "last_seen": 1790855842.18312,
+      "last_all_in_net_pct": 0.6635571292387437
     },
-    "RAVE:Bitget>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 33.11728627761194
-    },
-    "POWER:Bitget>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 31.829741219963015
-    },
-    "CRO:Bitget>OKX": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 28.710414623537282
-    },
-    "CRO:Bitget>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 28.679222611672202
-    },
-    "CRO:Bitget>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 28.710414623537282
-    },
-    "ES:Gate>KuCoin": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 25.411825928573105
-    },
-    "SIREN:KuCoin>Gate": {
-      "hits": 25,
-      "last_seen": 1790855603.6860769,
-      "last_event": 1790855394.2242858,
-      "last_all_in_net_pct": 20.477580395861295
+    "ENA:Bitget>OKX": {
+      "hits": 1,
+      "last_event": 0,
+      "last_seen": 1790855809.152216,
+      "last_all_in_net_pct": 0.050524286815716024
     }
   },
   "events": [
@@ -2240,24 +2204,298 @@
       "notional_quote": 25.0,
       "paper_pnl_quote": 5.240180090288294,
       "assumption": "PREFUNDED_INVENTORY_BATCHED_REBALANCE_RESERVE_DEPTH_VALIDATED"
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "SOON:Bitget>Gate",
+      "base": "SOON",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.4458,
+      "sell_vwap": 0.4529,
+      "gross_depth_pct": 1.5926424405563244,
+      "all_in_net_pct": 1.2410497981157618,
+      "paper_pnl_quote": 0.31026244952894044,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "SOON:Bitget>KuCoin",
+      "base": "SOON",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.4458,
+      "sell_vwap": 0.4525,
+      "gross_depth_pct": 1.5029161058770946,
+      "all_in_net_pct": 1.1514131897712137,
+      "paper_pnl_quote": 0.2878532974428034,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "MOVR:KuCoin>Gate",
+      "base": "MOVR",
+      "buy_venue": "KuCoin",
+      "sell_venue": "Gate",
+      "buy_vwap": 2.8909,
+      "sell_vwap": 2.9176,
+      "gross_depth_pct": 0.9235878100245731,
+      "all_in_net_pct": 0.5726642222145468,
+      "paper_pnl_quote": 0.1431660555536367,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "MOVR:KuCoin>Bitget",
+      "base": "MOVR",
+      "buy_venue": "KuCoin",
+      "sell_venue": "Bitget",
+      "buy_vwap": 2.8909,
+      "sell_vwap": 2.919,
+      "gross_depth_pct": 0.9720156352692966,
+      "all_in_net_pct": 0.6210436196340318,
+      "paper_pnl_quote": 0.15526090490850794,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "ZIG:Bitget>Gate",
+      "base": "ZIG",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.05571361848737386,
+      "sell_vwap": 0.05596,
+      "gross_depth_pct": 0.44222852386077705,
+      "all_in_net_pct": 0.09178629533691626,
+      "paper_pnl_quote": 0.022946573834229066,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "LAB:Bitget>Gate",
+      "base": "LAB",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.05291,
+      "sell_vwap": 0.05328,
+      "gross_depth_pct": 0.6993006993007089,
+      "all_in_net_pct": 0.34860139860140643,
+      "paper_pnl_quote": 0.08715034965035161,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "LAB:Bitget>KuCoin",
+      "base": "LAB",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.05291,
+      "sell_vwap": 0.05324,
+      "gross_depth_pct": 0.6237006237006515,
+      "all_in_net_pct": 0.273076923076942,
+      "paper_pnl_quote": 0.0682692307692355,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "US:Bitget>Gate",
+      "base": "US",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.020972,
+      "sell_vwap": 0.021066,
+      "gross_depth_pct": 0.44821666984551367,
+      "all_in_net_pct": 0.09776845317566196,
+      "paper_pnl_quote": 0.02444211329391549,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "FLOCK:Bitget>KuCoin",
+      "base": "FLOCK",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.06447,
+      "sell_vwap": 0.06484,
+      "gross_depth_pct": 0.5739103458973105,
+      "all_in_net_pct": 0.2233364355514061,
+      "paper_pnl_quote": 0.05583410888785152,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "FLOCK:Bitget>Gate",
+      "base": "FLOCK",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.06447,
+      "sell_vwap": 0.06478,
+      "gross_depth_pct": 0.48084380331936405,
+      "all_in_net_pct": 0.13036295951605448,
+      "paper_pnl_quote": 0.03259073987901362,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "Q:Bitget>KuCoin",
+      "base": "Q",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.021406449526063676,
+      "sell_vwap": 0.021505540426424778,
+      "gross_depth_pct": 0.46290208117161225,
+      "all_in_net_pct": 0.11243917909044863,
+      "paper_pnl_quote": 0.028109794772612162,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855708.2069607,
+      "signature": "US:Bitget>KuCoin",
+      "base": "US",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.020887,
+      "sell_vwap": 0.020988,
+      "gross_depth_pct": 0.4835543639584383,
+      "all_in_net_pct": 0.13307080959448875,
+      "paper_pnl_quote": 0.03326770239862219,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855742.379098,
+      "signature": "MCAT:Bitget>KuCoin",
+      "base": "MCAT",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.7321585418998925,
+      "sell_vwap": 0.7379188210363585,
+      "gross_depth_pct": 0.7867529785992255,
+      "all_in_net_pct": 0.4359662256206254,
+      "paper_pnl_quote": 0.10899155640515637,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855742.379098,
+      "signature": "MCAT:Bitget>Gate",
+      "base": "MCAT",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.7321585418998925,
+      "sell_vwap": 0.74186,
+      "gross_depth_pct": 1.3250488172866115,
+      "all_in_net_pct": 0.9737237684693275,
+      "paper_pnl_quote": 0.24343094211733188,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855742.379098,
+      "signature": "UAI:Bitget>KuCoin",
+      "base": "UAI",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "buy_vwap": 0.317812746921326,
+      "sell_vwap": 0.31921,
+      "gross_depth_pct": 0.43964664482758486,
+      "all_in_net_pct": 0.08920699818276262,
+      "paper_pnl_quote": 0.022301749545690655,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855742.379098,
+      "signature": "UAI:Bitget>Gate",
+      "base": "UAI",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.317812746921326,
+      "sell_vwap": 0.3191529269238904,
+      "gross_depth_pct": 0.421688562068967,
+      "all_in_net_pct": 0.07126687350689626,
+      "paper_pnl_quote": 0.017816718376724064,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855742.379098,
+      "signature": "Q:Bitget>Gate",
+      "base": "Q",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "buy_vwap": 0.021395499140102494,
+      "sell_vwap": 0.021502195982772122,
+      "gross_depth_pct": 0.49868826135326394,
+      "all_in_net_pct": 0.14818957309191244,
+      "paper_pnl_quote": 0.03704739327297811,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
+    },
+    {
+      "ts": 1790855742.379098,
+      "signature": "STRK:Bitget>OKX",
+      "base": "STRK",
+      "buy_venue": "Bitget",
+      "sell_venue": "OKX",
+      "buy_vwap": 0.04301693180025454,
+      "sell_vwap": 0.04319,
+      "gross_depth_pct": 0.402325764536382,
+      "all_in_net_pct": 0.05192343877183497,
+      "paper_pnl_quote": 0.012980859692958743,
+      "notional_quote": 25.0,
+      "quality_guard": "PRICE_VOLUME_CONSENSUS_V1",
+      "identity_verified_contract_address": false
     }
   ],
   "pnl_quote": 4785.044996236999,
   "loss_reasons": {
-    "NO_RAW_SPREAD": 4011,
-    "TRADING_FEES": 489,
-    "REBALANCE_AND_SAFETY": 85,
-    "EDGE_TOO_SMALL": 14,
-    "DEPTH_UNAVAILABLE": 8,
-    "SELL_DEPTH_INSUFFICIENT": 6
+    "LOW_VOLUME": 1443,
+    "LOCAL_SPREAD_WIDE": 8,
+    "PRICE_IDENTITY_OUTLIER": 10,
+    "INSUFFICIENT_IDENTITY_VENUES": 686,
+    "TRADING_FEES": 190,
+    "NO_RAW_SPREAD": 1151,
+    "REBALANCE_AND_SAFETY": 18,
+    "EDGE_TOO_SMALL": 4,
+    "DEPTH_EDGE_TOO_SMALL": 1,
+    "DEPTH_TRADING_FEES": 1
   },
-  "last_scan_ts": 1790855603.6860769,
+  "last_scan_ts": 1790855842.18312,
   "last_new_events": 0,
-  "last_depth_checks": 40,
-  "last_depth_pass": 26,
-  "last_raw_positive": 757,
-  "last_after_fees_positive": 268,
-  "last_top_candidates": 169,
+  "last_depth_checks": 17,
+  "last_depth_pass": 15,
+  "last_raw_positive": 229,
+  "last_after_fees_positive": 39,
+  "last_top_candidates": 17,
   "venue_symbol_counts": {
     "Bybit": 0,
     "OKX": 405,
@@ -2265,5 +2503,11 @@
     "Gate": 1624,
     "KuCoin": 836
   },
-  "common_assets": 834
+  "common_assets": 148,
+  "legacy_unverified_event_count": 104,
+  "legacy_unverified_pnl_quote": 4785.044996236999,
+  "legacy_signal_count": 26,
+  "research_pnl_quote": 1.6917225403305596,
+  "quality_version": 3,
+  "raw_common_assets": 834
 }

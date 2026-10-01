@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 53,
-  "last_source_ts": 1790855233.4155226,
+  "sample_count": 54,
+  "last_source_ts": 1790855453.8515983,
   "latest": {
-    "source_ts": 1790855233.4155226,
+    "source_ts": 1790855453.8515983,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4234.2,
+      "front_px": 4236.2,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4285.0,
-      "curve_pct": 1.199754380992868
+      "next_px": 4285.5,
+      "curve_pct": 1.1637788584108355
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 61.92,
+      "front_px": 61.97,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.55,
-      "curve_pct": 2.6324289405684764
+      "curve_pct": 2.5496207842504504
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28291.0,
+      "front_px": 28307.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
       "next_px": 29279.0,
-      "curve_pct": 3.49227669576897
+      "curve_pct": 3.4337796304800827
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11194.9,
-      "oi": 1635594,
-      "volume": 265030
+      "px": 11196.5,
+      "oi": 1636022,
+      "volume": 270163
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 160.93,
-      "oi": 79934,
-      "volume": 2535
+      "px": 161.1,
+      "oi": 79804,
+      "volume": 2621
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 274.81,
+      "px": 275.01,
       "oi": 232532,
-      "volume": 10231
+      "volume": 10234
     },
-    "gold_silver_ratio": 68.38178294573643,
-    "sber_perp_vs_front_pct": -2.863101339648655,
+    "gold_silver_ratio": 68.35888333064386,
+    "sber_perp_vs_front_pct": -2.8473522450277344,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
