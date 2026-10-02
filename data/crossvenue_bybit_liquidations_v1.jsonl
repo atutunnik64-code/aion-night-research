@@ -388,3 +388,5 @@
 {"event_time":1790926250475,"symbol":"AVAXUSDT","position_side":"Buy","pressure_side":"SELL","price":10.921,"qty":334.1,"notional_usdt":3648.7061}
 {"event_time":1790926259131,"symbol":"AVAXUSDT","position_side":"Buy","pressure_side":"SELL","price":10.93,"qty":1.6,"notional_usdt":17.488}
 {"event_time":1790926266411,"symbol":"LINKUSDT","position_side":"Buy","pressure_side":"SELL","price":14.155,"qty":1.5,"notional_usdt":21.232499999999998}
+{"event_time":1790926709384,"symbol":"BTCUSDT","position_side":"Buy","pressure_side":"SELL","price":85532.5,"qty":0.005,"notional_usdt":427.6625}
+{"event_time":1790926714269,"symbol":"BTCUSDT","position_side":"Buy","pressure_side":"SELL","price":85529.6,"qty":0.007,"notional_usdt":598.7072000000001}

@@ -1,18 +1,46 @@
 {
-  "version": "EVIDENCE_DASHBOARD_V3_CAPITAL_NORMALIZED_ARB",
-  "generated_at": 1790926448.7418797,
+  "version": "EVIDENCE_DASHBOARD_V5_CAPITAL_BOOKS",
+  "generated_at": 1790926715.4286067,
   "paper_only": true,
   "live_enabled": false,
   "portfolio_metrics": {
+    "moex_continuation_100": {
+      "starting_capital": 100.0,
+      "equity": 100.0,
+      "pnl": 0.0,
+      "open_positions": 10,
+      "resolved_positions": 0,
+      "max_dd_pct": 0.0,
+      "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER"
+    },
+    "moex_reversal_100": {
+      "starting_capital": 100.0,
+      "equity": 100.0,
+      "pnl": 0.0,
+      "open_positions": 10,
+      "resolved_positions": 0,
+      "max_dd_pct": 0.0,
+      "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER"
+    },
     "classic_spot_arb_100usdt": {
       "starting_capital_quote": 100.0,
-      "realized_equity_quote": 101.3468875129831,
-      "realized_pnl_quote": 1.346887512983102,
-      "realized_return_pct": 1.3468875129831082,
-      "trade_count": 4,
+      "realized_equity_quote": 102.35349497110907,
+      "realized_pnl_quote": 2.353494971109072,
+      "realized_return_pct": 2.3534949711090825,
+      "trade_count": 6,
       "bybit_trade_count": 0,
       "locked_capital_quote": 100.0,
       "metric_type": "CAPITAL_NORMALIZED_REALIZED_CONSERVATIVE_PAPER"
+    },
+    "perp_funding_100usdt": {
+      "starting_capital_quote": 100.0,
+      "realized_equity_quote": 100.0,
+      "realized_pnl_quote": 0.0,
+      "realized_return_pct": 0.0,
+      "open_positions": 0,
+      "resolved_positions": 0,
+      "max_dd_pct": 0.0,
+      "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_REALIZED"
     },
     "spot_perp_100usdt": {
       "starting_capital_quote": 100.0,
@@ -33,18 +61,18 @@
   },
   "research_edge_metrics": {
     "classic_spot_arb": {
-      "scan_count": 594,
-      "execution_edge_quote_sum": 406.54963522199427,
-      "last_raw_positive": 532,
-      "last_after_fees_positive": 73,
+      "scan_count": 600,
+      "execution_edge_quote_sum": 413.6510346216809,
+      "last_raw_positive": 499,
+      "last_after_fees_positive": 86,
       "last_depth_checks": 60,
-      "last_depth_pass": 48,
+      "last_depth_pass": 49,
       "verification_candidates": 0,
       "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
     },
     "bybit_local_relay": {
       "fresh": false,
-      "age_sec": 40175.643,
+      "age_sec": 40442.33,
       "spot_scan_count": 60,
       "spot_recent_bybit_event_count": 100,
       "spot_bybit_signal_count": 25,
@@ -55,35 +83,35 @@
       "metric_type": "LOCAL_BYBIT_PUBLIC_DATA_RELAY_PAPER_RESEARCH"
     },
     "leadlag": {
-      "scan_count": 3636,
-      "pending": 72,
+      "scan_count": 3673,
+      "pending": 83,
       "resolved": 1000,
-      "positive_edge_episodes": 57,
-      "paper_edge_quote_sum": 6.835779366272638,
+      "positive_edge_episodes": 55,
+      "paper_edge_quote_sum": 6.839387836965696,
       "error_count": 0,
       "last_error": null,
       "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
     },
     "orderbook_consensus": {
-      "pending": 21,
-      "resolved": 969,
-      "sum_trade_return_pct": -239.43932696051556,
-      "mean_trade_return_pct": -0.24709940862798302,
-      "positive_trade_rate": 0.3106295149638803,
+      "pending": 41,
+      "resolved": 973,
+      "sum_trade_return_pct": -240.43538262027133,
+      "mean_trade_return_pct": -0.24710727915752448,
+      "positive_trade_rate": 0.3103802672147996,
       "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED"
     },
     "arb_verifier": {
-      "verified_count": 88,
+      "verified_count": 90,
       "rejected_count": 6,
       "watch_count": 47,
-      "verified_paper_edge_quote_sum": 5.667811795848197,
+      "verified_paper_edge_quote_sum": 5.751185115568297,
       "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION"
     }
   },
   "moex_research": {
     "broad_shadow": {
       "resolved": 1904,
-      "pending": 534,
+      "pending": 564,
       "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
     },
     "calendar_matrix": {
@@ -92,18 +120,18 @@
     }
   },
   "source_health": {
-    "arb_bybit_cloud_symbols": 132,
+    "arb_bybit_cloud_symbols": 130,
     "arb_bybit_cloud_error": null,
     "bybit_local_relay_fresh": false,
-    "bybit_local_relay_age_sec": 40175.643,
+    "bybit_local_relay_age_sec": 40442.33,
     "bybit_local_spot_symbols": 390,
     "bybit_local_perp_symbols": 789,
     "bybit_cloud_ws_fresh": true,
-    "bybit_cloud_ws_age_sec": 22.838,
-    "bybit_cloud_ws_ticker_symbols": 222,
-    "bybit_cloud_ws_book_symbols": 132,
+    "bybit_cloud_ws_age_sec": 17.638,
+    "bybit_cloud_ws_ticker_symbols": 224,
+    "bybit_cloud_ws_book_symbols": 131,
     "bybit_effective_source": "CLOUD_WS",
-    "bybit_effective_spot_symbols": 132,
+    "bybit_effective_spot_symbols": 131,
     "bybit_effective_perp_symbols": 0,
     "leadlag_state": "OK",
     "orderbook_state": "OK",
