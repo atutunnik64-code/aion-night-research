@@ -5,7 +5,7 @@ import httpx
 from app.http_shared import SHARED_SSL_CONTEXT
 from app.services.bybit_spot_ws_mirror_v1 import bybit_spot_ws_mirror_v1
 
-ROOT=Path(__file__).parents[2]; DATA=ROOT/'data'; STATE=DATA/'crossvenue_spot_arb_cloud_v1.json'
+ROOT=Path(__file__).parents[2]; DATA=ROOT/'data'; STATE=DATA/'crossvenue_spot_arb_cloud_v1.json'; VERIFIER_STATE=DATA/'crossvenue_arb_verifier_v1.json'
 VENUES=('Bybit','OKX','Bitget','Gate','KuCoin')
 TAKER={v:0.0010 for v in VENUES}
 BYBIT_HOSTS=('https://api.bybit.com','https://api.bytick.com')
@@ -160,6 +160,15 @@ class CrossVenueSpotArbCloudV1:
         if len(vm)>=4 and trusted_liq:return 'HIGH_4VENUE'
         if gross<=REVIEW_RAW_SPREAD_PCT and trusted_liq:return 'MEDIUM_3VENUE'
         return 'REVIEW_REQUIRED'
+    @staticmethod
+    def _verified_signatures():
+        try:
+            raw=VERIFIER_STATE.read_text(encoding='utf-8-sig')
+            obj=json.loads(raw) if raw.strip() else {}
+            return set((obj.get('verified') or {}).keys())
+        except Exception:
+            return set()
+
     async def refresh(self):
         try:
             self.venue_errors={};self.venue_hosts={}
@@ -169,7 +178,7 @@ class CrossVenueSpotArbCloudV1:
                     venue_status[venue]=len(mp)
                     for base,q in mp.items():raw.setdefault(base,{})[venue]=q
                 raw_common={b:vm for b,vm in raw.items() if len(vm)>=2};market,guard_reject=self._guard_market(raw_common);self.market=market
-                now=time.time();events=[];reasons=dict(guard_reject);raw_positive=after_fees=0;candidates=[];verification=[]
+                now=time.time();events=[];reasons=dict(guard_reject);raw_positive=after_fees=0;candidates=[];verification=[];verified_sigs=self._verified_signatures()
                 for base,vm in market.items():
                     qs=list(vm.values())
                     for buy in qs:
@@ -194,13 +203,17 @@ class CrossVenueSpotArbCloudV1:
                     reserve=NOTIONAL*(SAFETY_PCT+REBALANCE_RESERVE_PCT)/100;conservative_q=execution_q-reserve;conservative_pct=conservative_q/NOTIONAL*100;gross_depth=(sf['quote_received']/NOTIONAL-1)*100
                     if execution_pct<=0:reasons['DEPTH_TRADING_FEES']=reasons.get('DEPTH_TRADING_FEES',0)+1;continue
                     depth_pass+=1;high_spread=gross_depth>REVIEW_RAW_SPREAD_PCT
-                    if high_spread and conf=='REVIEW_REQUIRED':
+                    sig=f"{base}:{buy['venue']}>{sell['venue']}"
+                    contract_verified=sig in verified_sigs
+                    if high_spread and conf=='REVIEW_REQUIRED' and not contract_verified:
                         verification.append({'ts':now,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'venue_consensus_count':venue_count,'buy_quote_volume':buy.get('quote_volume',0),'sell_quote_volume':sell.get('quote_volume',0),'reason':'HIGH_EDGE_REQUIRES_STRONGER_IDENTITY_CHECK'});continue
-                    sig=f"{base}:{buy['venue']}>{sell['venue']}";st=self.state.setdefault('signals',{}).get(sig) or {'hits':0,'last_event':0}
+                    if contract_verified:
+                        conf='CONTRACT_VERIFIED'
+                    st=self.state.setdefault('signals',{}).get(sig) or {'hits':0,'last_event':0}
                     st['hits']=int(st.get('hits') or 0)+1;st['last_seen']=now;st['last_execution_net_pct']=execution_pct;st['last_conservative_net_pct']=conservative_pct;self.state['signals'][sig]=st
                     if st['hits']<MIN_HITS or now-float(st.get('last_event') or 0)<COOLDOWN_SEC:continue
                     st['last_event']=now;tier='CONSERVATIVE_POSITIVE' if conservative_pct>=MIN_CONSERVATIVE_NET_PCT else 'EXECUTION_POSITIVE_REBALANCE_SENSITIVE'
-                    ev={'ts':now,'signature':sig,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'buy_vwap':bf['vwap'],'sell_vwap':sf['vwap'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'execution_edge_quote':execution_q,'conservative_pnl_quote':conservative_q,'notional_quote':NOTIONAL,'quality_guard':'PRICE_VOLUME_CONSENSUS_V3_BYBIT_WS','quality_tier':tier,'identity_confidence':conf,'high_spread_review':high_spread,'venue_consensus_count':venue_count,'identity_verified_contract_address':False}
+                    ev={'ts':now,'signature':sig,'base':base,'buy_venue':buy['venue'],'sell_venue':sell['venue'],'buy_vwap':bf['vwap'],'sell_vwap':sf['vwap'],'gross_depth_pct':gross_depth,'execution_net_pct':execution_pct,'conservative_net_pct':conservative_pct,'execution_edge_quote':execution_q,'conservative_pnl_quote':conservative_q,'notional_quote':NOTIONAL,'quality_guard':'PRICE_VOLUME_CONSENSUS_V3_BYBIT_WS','quality_tier':tier,'identity_confidence':conf,'high_spread_review':high_spread,'venue_consensus_count':venue_count,'identity_verified_contract_address':contract_verified}
                     events.append(ev);self.state.setdefault('events',[]).append(ev);self.state['events']=self.state['events'][-3000:];self.state['execution_edge_quote']=float(self.state.get('execution_edge_quote') or 0)+execution_q
                     if tier=='CONSERVATIVE_POSITIVE':self.state['research_pnl_quote']=float(self.state.get('research_pnl_quote') or 0)+conservative_q
                 if verification:
