@@ -125,10 +125,18 @@ class BybitSpotWsMirrorV1:
             await asyncio.sleep(0.03)
 
     async def _subscribe_initial(self, ws):
+        # Spot ticker snapshots provide last/volume/turnover but, unlike
+        # derivatives tickers, do not provide best bid/ask. Subscribe to
+        # orderbooks separately for the highest-priority candidate symbols.
         await self._send_batches(ws, [f"tickers.{s}" for s in self.symbols], "ticker")
+        await self._send_batches(
+            ws,
+            [f"orderbook.50.{s}" for s in self.symbols[:MAX_BOOK_SYMBOLS]],
+            "book-initial",
+        )
 
     async def _subscribe_book(self, ws, symbol: str):
-        if symbol not in self.valid_symbols:
+        if symbol not in self.symbols[:MAX_BOOK_SYMBOLS]:
             return
         if len(self.books) >= MAX_BOOK_SYMBOLS and symbol not in self.books:
             return
@@ -178,16 +186,26 @@ class BybitSpotWsMirrorV1:
             data = msg.get("data") or {}
             if isinstance(data, list):
                 data = data[0] if data else {}
-            bid = self._f(data.get("bid1Price")); ask = self._f(data.get("ask1Price")); qv = self._f(data.get("turnover24h"))
-            if bid > 0 and ask > 0:
-                was_new = symbol not in self.valid_symbols
+            # Bybit spot ticker payload intentionally has no bid1Price/ask1Price.
+            # Treat lastPrice + turnover as ticker validity and obtain executable
+            # bid/ask from the dedicated orderbook stream.
+            last = self._f(data.get("lastPrice"))
+            qv = self._f(data.get("turnover24h"))
+            bid = self._f(data.get("bid1Price"))
+            ask = self._f(data.get("ask1Price"))
+            if last > 0 or (bid > 0 and ask > 0):
                 self.valid_symbols.add(symbol)
-                self.tickers[symbol] = {"bid": bid, "ask": ask, "quote_volume": qv, "ts": ts}
-                if was_new and len(self.books) < MAX_BOOK_SYMBOLS:
-                    await self._subscribe_book(ws, symbol)
+                self.tickers[symbol] = {
+                    "last": last,
+                    "bid": bid,
+                    "ask": ask,
+                    "quote_volume": qv,
+                    "ts": ts,
+                }
         elif topic.startswith("orderbook.50."):
             symbol = topic.rsplit(".", 1)[1]
             data = msg.get("data") or {}
+            self.valid_symbols.add(symbol)
             self._apply_book(symbol, data, str(msg.get("type") or "delta"), ts)
 
     async def _connection_loop(self):
@@ -231,8 +249,27 @@ class BybitSpotWsMirrorV1:
         for symbol, q in self.tickers.items():
             if now - float(q.get("ts") or 0) > STALE_SEC or not symbol.endswith("USDT"):
                 continue
+            rec = self.books.get(symbol)
+            if not rec or now - float(rec.get("ts") or 0) > STALE_SEC:
+                continue
+            bids = rec.get("b") or {}
+            asks = rec.get("a") or {}
+            if not bids or not asks:
+                continue
+            bid = max(bids)
+            ask = min(asks)
+            if bid <= 0 or ask <= 0 or ask < bid:
+                continue
             base = symbol[:-4]
-            out[base] = {"venue": "Bybit", "base": base, "bid": q["bid"], "ask": q["ask"], "quote_volume": q.get("quote_volume", 0), "source": "BYBIT_WS", "source_ts": q.get("ts")}
+            out[base] = {
+                "venue": "Bybit",
+                "base": base,
+                "bid": bid,
+                "ask": ask,
+                "quote_volume": q.get("quote_volume", 0),
+                "source": "BYBIT_WS_BOOK_PLUS_TICKER",
+                "source_ts": min(float(q.get("ts") or 0), float(rec.get("ts") or 0)),
+            }
         return out
 
     def book_snapshot(self, base: str):
