@@ -2,22 +2,22 @@
   "version": "CLASSIC_SPOT_ARB_PORTFOLIO_V1_100USDT",
   "rule_frozen_at": 1790925377.8010478,
   "starting_capital_quote": 100.0,
-  "realized_equity_quote": 103.08923667377104,
-  "realized_pnl_quote": 3.0892366737710404,
-  "peak_equity_quote": 103.08923667377104,
+  "realized_equity_quote": 103.48576252068908,
+  "realized_pnl_quote": 3.4857625206890788,
+  "peak_equity_quote": 103.48576252068908,
   "max_dd_pct": 0.0,
-  "last_processed_ts": 1790927602.04096,
+  "last_processed_ts": 1790927938.284227,
   "locks": [
     {
-      "signature": "LMWR:Bitget>Gate",
-      "opened_ts": 1790927431.2825432,
-      "release_ts": 1790927731.2825432,
+      "signature": "DMC:Bitget>Gate",
+      "opened_ts": 1790927762.7580223,
+      "release_ts": 1790928062.7580223,
       "capital_quote": 50.0
     },
     {
       "signature": "MGO:KuCoin>Bitget",
-      "opened_ts": 1790927431.2825432,
-      "release_ts": 1790927731.2825432,
+      "opened_ts": 1790927762.7580223,
+      "release_ts": 1790928062.7580223,
       "capital_quote": 50.0
     }
   ],
@@ -157,13 +157,47 @@
       "equity_after_quote": 103.08923667377104,
       "release_ts": 1790927731.2825432,
       "includes_bybit": false
+    },
+    {
+      "ts": 1790927762.7580223,
+      "signature": "DMC:Bitget>Gate",
+      "base": "DMC",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "identity_confidence": "CONTRACT_VERIFIED",
+      "notional_per_leg_quote": 25.0,
+      "capital_required_quote": 50.0,
+      "execution_net_pct": 0.9797472446158371,
+      "conservative_net_pct": 0.829747244615837,
+      "realized_conservative_pnl_quote": 0.20743681115395926,
+      "equity_before_quote": 103.08923667377104,
+      "equity_after_quote": 103.296673484925,
+      "release_ts": 1790928062.7580223,
+      "includes_bybit": false
+    },
+    {
+      "ts": 1790927762.7580223,
+      "signature": "MGO:KuCoin>Bitget",
+      "base": "MGO",
+      "buy_venue": "KuCoin",
+      "sell_venue": "Bitget",
+      "identity_confidence": "CONTRACT_VERIFIED",
+      "notional_per_leg_quote": 25.0,
+      "capital_required_quote": 50.0,
+      "execution_net_pct": 0.9063561430563546,
+      "conservative_net_pct": 0.7563561430563546,
+      "realized_conservative_pnl_quote": 0.18908903576408864,
+      "equity_before_quote": 103.296673484925,
+      "equity_after_quote": 103.48576252068908,
+      "release_ts": 1790928062.7580223,
+      "includes_bybit": false
     }
   ],
-  "skipped_capital": 71,
-  "skipped_identity": 53,
-  "skipped_nonpositive_conservative": 37,
+  "skipped_capital": 85,
+  "skipped_identity": 73,
+  "skipped_nonpositive_conservative": 53,
   "last_new_source_events": 0,
   "last_new_trades": 0,
   "locked_capital_quote": 100.0,
-  "available_capital_quote": 3.0892366737710404
+  "available_capital_quote": 3.4857625206890788
 }

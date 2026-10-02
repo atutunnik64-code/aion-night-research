@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 120,
-  "last_source_ts": 1790926503.1423097,
+  "sample_count": 121,
+  "last_source_ts": 1790927429.9596832,
   "latest": {
-    "source_ts": 1790926503.1423097,
+    "source_ts": 1790927429.9596832,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
       "front_px": 4246.9,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4297.9,
-      "curve_pct": 1.2008759330335073
+      "next_px": 4298.9,
+      "curve_pct": 1.2244225199557368
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.23,
+      "front_px": 62.28,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.92,
-      "curve_pct": 2.7157319620761733
+      "curve_pct": 2.633269107257541
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28441.0,
+      "front_px": 28385.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
-      "next_px": 29475.0,
-      "curve_pct": 3.635596498013438
+      "next_px": 29337.0,
+      "curve_pct": 3.353884093711468
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11178.3,
-      "oi": 1615064,
-      "volume": 40082
+      "px": 11175.9,
+      "oi": 1609100,
+      "volume": 47766
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.34,
-      "oi": 80178,
-      "volume": 1266
+      "px": 161.52,
+      "oi": 80198,
+      "volume": 1320
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 276.43,
-      "oi": 240376,
-      "volume": 2556
+      "px": 275.83,
+      "oi": 240004,
+      "volume": 2950
     },
-    "gold_silver_ratio": 68.24521934758155,
-    "sber_perp_vs_front_pct": -2.8058085158749746,
+    "gold_silver_ratio": 68.19043031470777,
+    "sber_perp_vs_front_pct": -2.8254359697023057,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188

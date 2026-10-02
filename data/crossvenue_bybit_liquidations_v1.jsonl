@@ -394,3 +394,14 @@
 {"event_time":1790927516363,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.5376,"qty":1466.7,"notional_usdt":2255.19792}
 {"event_time":1790927647090,"symbol":"ETHUSDT","position_side":"Sell","pressure_side":"BUY","price":2741.37,"qty":0.02,"notional_usdt":54.8274}
 {"event_time":1790927647956,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.5378,"qty":423.3,"notional_usdt":650.95074}
+{"event_time":1790927799012,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.5396,"qty":165.9,"notional_usdt":255.41964000000002}
+{"event_time":1790927818498,"symbol":"SOLUSDT","position_side":"Sell","pressure_side":"BUY","price":122.24,"qty":0.4,"notional_usdt":48.896}
+{"event_time":1790927858183,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":86378.1,"qty":0.028,"notional_usdt":2418.5868}
+{"event_time":1790927868341,"symbol":"ETHUSDT","position_side":"Sell","pressure_side":"BUY","price":2746.89,"qty":0.39,"notional_usdt":1071.2871}
+{"event_time":1790927868571,"symbol":"LINKUSDT","position_side":"Sell","pressure_side":"BUY","price":14.482,"qty":18.5,"notional_usdt":267.917}
+{"event_time":1790927868752,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":86413.3,"qty":0.004,"notional_usdt":345.6532}
+{"event_time":1790927870619,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09725,"qty":2246536.0,"notional_usdt":218475.62600000002}
+{"event_time":1790927882570,"symbol":"ETHUSDT","position_side":"Sell","pressure_side":"BUY","price":2748.5,"qty":0.01,"notional_usdt":27.485}
+{"event_time":1790927887277,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.5417,"qty":13342.4,"notional_usdt":20569.97808}
+{"event_time":1790927890025,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":86432.0,"qty":0.001,"notional_usdt":86.432}
+{"event_time":1790927890172,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":86433.4,"qty":0.004,"notional_usdt":345.73359999999997}

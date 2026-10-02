@@ -1,13 +1,13 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1790927554.235,
+  "last_processed_ts": 1790927883.633,
   "last_event_ts": {
     "DOGEUSDT": 1790925121.334,
     "ADAUSDT": 1790925121.332,
     "LINKUSDT": 1790907582.518,
     "AVAXUSDT": 1790907039.333,
-    "SUIUSDT": 1790906012.715,
+    "SUIUSDT": 1790927883.014,
     "AAVEUSDT": 1790925121.856,
     "BTCUSDT": 1790925122.283,
     "SOLUSDT": 1790925121.88,
@@ -95,6 +95,18 @@
       "due_ts": 1790928721.856,
       "move_15m_pct": 6.464924346629997,
       "entry": 185.76,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "SUIUSDT:1790927883",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1790927883.014,
+      "due_ts": 1790931483.014,
+      "move_15m_pct": 1.0005113345832761,
+      "entry": 1.18514,
       "continuation_side": 1.0,
       "reversal_side": -1.0,
       "round_trip_cost": 0.0012
@@ -288,5 +300,5 @@
   "reversal_equity": 99.56699839874635,
   "reversal_peak": 100.0118812630409,
   "reversal_max_dd_pct": -0.4461083635707297,
-  "last_new_events": 0
+  "last_new_events": 1
 }

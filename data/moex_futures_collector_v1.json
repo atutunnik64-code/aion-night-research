@@ -1,9 +1,9 @@
 {
   "version": "MOEX_FUTURES_COLLECTOR_V1",
   "started_at": 1790788001.5967064,
-  "snapshot_count": 121,
+  "snapshot_count": 122,
   "last_good": {
-    "ts": 1790927429.9596832,
+    "ts": 1790927761.531135,
     "mode": "FUTURE_ONLY_COLLECT",
     "source": "MOEX_ISS_DELAYED",
     "source_delay_minutes": 15,
@@ -13,13 +13,13 @@
         "SHORTNAME": "GOLD-3.27",
         "ASSETCODE": "GOLD",
         "LASTTRADEDATE": "2027-03-19",
-        "LAST": 4298.9,
-        "LAST_RUB": 357864,
-        "SETTLEPRICE": 4298.9,
-        "OPENPOSITION": 11884,
-        "VOLTODAY": 167,
-        "VALTODAY": 59745015,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 4296.4,
+        "LAST_RUB": 357656,
+        "SETTLEPRICE": 4295.4,
+        "OPENPOSITION": 11858,
+        "VOLTODAY": 182,
+        "VALTODAY": 65110023,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GDM7",
@@ -32,46 +32,46 @@
         "OPENPOSITION": 1152,
         "VOLTODAY": 9,
         "VALTODAY": 3266541,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GDU7",
         "SHORTNAME": "GOLD-9.27",
         "ASSETCODE": "GOLD",
         "LASTTRADEDATE": "2027-09-17",
-        "LAST": 4425.4,
-        "LAST_RUB": 368394,
-        "SETTLEPRICE": 4425.4,
+        "LAST": 4423.3,
+        "LAST_RUB": 368219,
+        "SETTLEPRICE": 4423.3,
         "OPENPOSITION": 118,
-        "VOLTODAY": 8,
-        "VALTODAY": 2946995,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "VOLTODAY": 9,
+        "VALTODAY": 3315215,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GDZ6",
         "SHORTNAME": "GOLD-12.26",
         "ASSETCODE": "GOLD",
         "LASTTRADEDATE": "2026-12-18",
-        "LAST": 4246.9,
-        "LAST_RUB": 353535,
-        "SETTLEPRICE": 4248.1,
-        "OPENPOSITION": 291624,
-        "VOLTODAY": 16401,
-        "VALTODAY": 5800493562,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 4244.7,
+        "LAST_RUB": 353352,
+        "SETTLEPRICE": 4244.9,
+        "OPENPOSITION": 291582,
+        "VOLTODAY": 16636,
+        "VALTODAY": 5883552143,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GLDRUBF",
         "SHORTNAME": "GLDRUBF",
         "ASSETCODE": "GLDRUBTOM",
         "LASTTRADEDATE": "2100-01-01",
-        "LAST": 11175.9,
-        "LAST_RUB": 11176,
-        "SETTLEPRICE": 11176.6,
-        "OPENPOSITION": 1609100,
-        "VOLTODAY": 47766,
-        "VALTODAY": 535486898,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 11166.2,
+        "LAST_RUB": 11166,
+        "SETTLEPRICE": 11169.1,
+        "OPENPOSITION": 1607902,
+        "VOLTODAY": 49990,
+        "VALTODAY": 560326717,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GNH7",
@@ -80,11 +80,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 4300.4,
         "LAST_RUB": 35799,
-        "SETTLEPRICE": 4300.1,
+        "SETTLEPRICE": 4296.9,
         "OPENPOSITION": 2034,
         "VOLTODAY": 101,
         "VALTODAY": 3612906,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GNM7",
@@ -97,7 +97,7 @@
         "OPENPOSITION": 468,
         "VOLTODAY": 3,
         "VALTODAY": 109192,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GNU7",
@@ -106,24 +106,24 @@
         "LASTTRADEDATE": "2027-09-17",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 4410.3,
+        "SETTLEPRICE": 4406.9,
         "OPENPOSITION": 88,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "GNZ6",
         "SHORTNAME": "GOLDM-12.26",
         "ASSETCODE": "GOLDM",
         "LASTTRADEDATE": "2026-12-18",
-        "LAST": 4249,
-        "LAST_RUB": 35371,
-        "SETTLEPRICE": 4249.6,
-        "OPENPOSITION": 44806,
-        "VOLTODAY": 5154,
-        "VALTODAY": 182340944,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 4246,
+        "LAST_RUB": 35346,
+        "SETTLEPRICE": 4246.2,
+        "OPENPOSITION": 44820,
+        "VOLTODAY": 5201,
+        "VALTODAY": 184002535,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "S1H7",
@@ -132,11 +132,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 63.89,
         "LAST_RUB": 5319,
-        "SETTLEPRICE": 63.9,
+        "SETTLEPRICE": 63.87,
         "OPENPOSITION": 7810,
         "VOLTODAY": 205,
         "VALTODAY": 1090844,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:56:03"
       },
       {
         "SECID": "S1M7",
@@ -149,7 +149,7 @@
         "OPENPOSITION": 1336,
         "VOLTODAY": 4,
         "VALTODAY": 21814,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:55:51"
       },
       {
         "SECID": "S1U7",
@@ -158,50 +158,50 @@
         "LASTTRADEDATE": "2027-09-17",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 67.08,
+        "SETTLEPRICE": 67.07,
         "OPENPOSITION": 242,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-02 10:50:29"
+        "SYSTIME": "2026-10-02 10:55:54"
       },
       {
         "SECID": "S1Z6",
         "SHORTNAME": "SILVM-12.26",
         "ASSETCODE": "SILVM",
         "LASTTRADEDATE": "2026-12-18",
-        "LAST": 62.32,
-        "LAST_RUB": 5188,
-        "SETTLEPRICE": 62.31,
-        "OPENPOSITION": 201048,
-        "VOLTODAY": 14891,
-        "VALTODAY": 77288968,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 62.27,
+        "LAST_RUB": 5184,
+        "SETTLEPRICE": 62.26,
+        "OPENPOSITION": 201072,
+        "VOLTODAY": 14931,
+        "VALTODAY": 77496308,
+        "SYSTIME": "2026-10-02 10:56:03"
       },
       {
         "SECID": "SBERF",
         "SHORTNAME": "SBERF",
         "ASSETCODE": "SBERF",
         "LASTTRADEDATE": "2100-01-01",
-        "LAST": 275.83,
-        "LAST_RUB": 27583,
-        "SETTLEPRICE": 275.94,
-        "OPENPOSITION": 240004,
-        "VOLTODAY": 2950,
-        "VALTODAY": 81491321,
-        "SYSTIME": "2026-10-02 10:50:28"
+        "LAST": 276.07,
+        "LAST_RUB": 27607,
+        "SETTLEPRICE": 276.09,
+        "OPENPOSITION": 240036,
+        "VOLTODAY": 3035,
+        "VALTODAY": 83837979,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SLVRUBF",
         "SHORTNAME": "SLVRUBF",
         "ASSETCODE": "SLVRUBTOM",
         "LASTTRADEDATE": "2100-01-01",
-        "LAST": 161.52,
-        "LAST_RUB": 16152,
-        "SETTLEPRICE": 161.52,
-        "OPENPOSITION": 80198,
-        "VOLTODAY": 1320,
-        "VALTODAY": 21395561,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 161.4,
+        "LAST_RUB": 16140,
+        "SETTLEPRICE": 161.4,
+        "OPENPOSITION": 80208,
+        "VOLTODAY": 1334,
+        "VALTODAY": 21621562,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SRH7",
@@ -210,11 +210,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 29337,
         "LAST_RUB": 29337,
-        "SETTLEPRICE": 29341,
+        "SETTLEPRICE": 29363,
         "OPENPOSITION": 9744,
         "VOLTODAY": 175,
         "VALTODAY": 5143263,
-        "SYSTIME": "2026-10-02 10:50:29"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SRM7",
@@ -227,7 +227,7 @@
         "OPENPOSITION": 2380,
         "VOLTODAY": 22,
         "VALTODAY": 670530,
-        "SYSTIME": "2026-10-02 10:50:28"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SRU7",
@@ -240,33 +240,33 @@
         "OPENPOSITION": 142,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-02 10:50:28"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SRZ6",
         "SHORTNAME": "SBRF-12.26",
         "ASSETCODE": "SBRF",
         "LASTTRADEDATE": "2026-12-17",
-        "LAST": 28385,
-        "LAST_RUB": 28385,
-        "SETTLEPRICE": 28385,
-        "OPENPOSITION": 329454,
-        "VOLTODAY": 15006,
-        "VALTODAY": 426387343,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 28409,
+        "LAST_RUB": 28409,
+        "SETTLEPRICE": 28406,
+        "OPENPOSITION": 329556,
+        "VOLTODAY": 15256,
+        "VALTODAY": 433484876,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SVH7",
         "SHORTNAME": "SILV-3.27",
         "ASSETCODE": "SILV",
         "LASTTRADEDATE": "2027-03-19",
-        "LAST": 63.92,
-        "LAST_RUB": 53210,
-        "SETTLEPRICE": 63.88,
-        "OPENPOSITION": 7102,
-        "VOLTODAY": 175,
-        "VALTODAY": 9304663,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 63.86,
+        "LAST_RUB": 53161,
+        "SETTLEPRICE": 63.83,
+        "OPENPOSITION": 7104,
+        "VOLTODAY": 177,
+        "VALTODAY": 9410934,
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SVM7",
@@ -275,11 +275,11 @@
         "LASTTRADEDATE": "2027-06-18",
         "LAST": 65.6,
         "LAST_RUB": 54609,
-        "SETTLEPRICE": 65.59,
+        "SETTLEPRICE": 65.55,
         "OPENPOSITION": 1472,
         "VOLTODAY": 1,
         "VALTODAY": 54609,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:56:04"
       },
       {
         "SECID": "SVU7",
@@ -288,29 +288,29 @@
         "LASTTRADEDATE": "2027-09-17",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 67.1,
+        "SETTLEPRICE": 67.04,
         "OPENPOSITION": 306,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "SYSTIME": "2026-10-02 10:55:56"
       },
       {
         "SECID": "SVZ6",
         "SHORTNAME": "SILV-12.26",
         "ASSETCODE": "SILV",
         "LASTTRADEDATE": "2026-12-18",
-        "LAST": 62.28,
-        "LAST_RUB": 51845,
-        "SETTLEPRICE": 62.28,
-        "OPENPOSITION": 473564,
-        "VOLTODAY": 38518,
-        "VALTODAY": 1998938467,
-        "SYSTIME": "2026-10-02 10:50:30"
+        "LAST": 62.22,
+        "LAST_RUB": 51795,
+        "SETTLEPRICE": 62.23,
+        "OPENPOSITION": 473598,
+        "VOLTODAY": 38868,
+        "VALTODAY": 2017074460,
+        "SYSTIME": "2026-10-02 10:56:04"
       }
     ],
     "contracts": 23
   },
-  "last_refresh": 1790927429.9596832,
+  "last_refresh": 1790927761.531135,
   "last_attempt": 1790855035.4081593,
   "last_error": "MOEX_ISS_UNAVAILABLE: [Errno 2] No such file or directory: 'curl.exe'"
 }
