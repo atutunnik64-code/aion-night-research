@@ -34,6 +34,7 @@ from app.services.crossvenue_spot_perp_portfolio_v1 import crossvenue_spot_perp_
 from app.services.bybit_spot_ws_mirror_v1 import bybit_spot_ws_mirror_v1
 from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_v1
 from app.services.crossvenue_arb_verifier_v1 import crossvenue_arb_verifier_v1
+from app.services.classic_spot_arb_portfolio_v1 import classic_spot_arb_portfolio_v1
 from app.services.crossvenue_leadlag_episode_cloud_v1 import crossvenue_leadlag_episode_cloud_v1
 from app.services.crossvenue_orderbook_consensus_shadow_v1 import crossvenue_orderbook_consensus_shadow_v1
 from app.services.crossvenue_momentum_divergence_shadow_v1 import crossvenue_momentum_divergence_shadow_v1
@@ -68,6 +69,7 @@ SERVICES = [
     bybit_spot_ws_mirror_v1,
     crossvenue_spot_arb_cloud_v1,
     crossvenue_arb_verifier_v1,
+    classic_spot_arb_portfolio_v1,
     crossvenue_leadlag_episode_cloud_v1,
     crossvenue_orderbook_consensus_shadow_v1,
     crossvenue_momentum_divergence_shadow_v1,
