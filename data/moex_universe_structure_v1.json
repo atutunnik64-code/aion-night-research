@@ -1,9 +1,9 @@
 {
   "version": "MOEX_UNIVERSE_STRUCTURE_V1",
   "started_at": 1790788001.6843398,
-  "samples": 117,
+  "samples": 118,
   "last": {
-    "ts": 1790908108.589045,
+    "ts": 1790925122.1825929,
     "mode": "FUTURE_ONLY_STRUCTURE",
     "source": "MOEX_UNIVERSE_V1",
     "curve_assets": 147,
@@ -2911,5 +2911,5 @@
       }
     ]
   },
-  "last_refresh": 1790908108.589045
+  "last_refresh": 1790925122.1825929
 }

@@ -1,14 +1,15 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1790908252.035,
+  "last_processed_ts": 1790925243.834,
   "last_event_nft": {
     "XRPUSDT": 1790899200000,
     "DOGEUSDT": 1790899200000,
     "LINKUSDT": 1790899200000,
     "SUIUSDT": 1790899200000
   },
-  "pending": [
+  "pending": [],
+  "resolved": [
     {
       "id": "XRPUSDT:1790899200000",
       "symbol": "XRPUSDT",
@@ -20,7 +21,11 @@
       "revert_side": -1.0,
       "continue_side": 1.0,
       "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
+      "allocation_fraction": 0.05,
+      "exit": 1.5248,
+      "exit_ts": 1790925121.856,
+      "revert_net_return_pct": -2.476179096462374,
+      "continue_net_return_pct": 2.236179096462374
     },
     {
       "id": "DOGEUSDT:1790899200000",
@@ -33,7 +38,11 @@
       "revert_side": -1.0,
       "continue_side": 1.0,
       "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
+      "allocation_fraction": 0.05,
+      "exit": 0.0959,
+      "exit_ts": 1790925121.334,
+      "revert_net_return_pct": -2.7087890457852115,
+      "continue_net_return_pct": 2.4687890457852113
     },
     {
       "id": "LINKUSDT:1790899200000",
@@ -46,7 +55,11 @@
       "revert_side": -1.0,
       "continue_side": 1.0,
       "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
+      "allocation_fraction": 0.05,
+      "exit": 14.394,
+      "exit_ts": 1790925121.12,
+      "revert_net_return_pct": -1.3578674919116593,
+      "continue_net_return_pct": 1.1178674919116596
     },
     {
       "id": "SUIUSDT:1790899200000",
@@ -59,15 +72,18 @@
       "revert_side": -1.0,
       "continue_side": 1.0,
       "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
+      "allocation_fraction": 0.05,
+      "exit": 1.18212,
+      "exit_ts": 1790925121.214,
+      "revert_net_return_pct": -1.2336771875801975,
+      "continue_net_return_pct": 0.9936771875801976
     }
   ],
-  "resolved": [],
-  "revert_equity": 100.0,
+  "revert_equity": 99.61171952546792,
   "revert_peak": 100.0,
-  "revert_max_dd_pct": 0.0,
-  "continue_equity": 100.0,
-  "continue_peak": 100.0,
+  "revert_max_dd_pct": -0.3882804745320767,
+  "continue_equity": 100.34124000727584,
+  "continue_peak": 100.34124000727584,
   "continue_max_dd_pct": 0.0,
   "last_new_events": 0
 }

@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1790908252.035,
+  "last_processed_ts": 1790925243.834,
   "last_event_ts": {
     "AAVEUSDT": 1790907938.056,
     "AVAXUSDT": 1790891616.334,
@@ -14,21 +14,7 @@
     "ETHUSDT": 1790892335.874,
     "XRPUSDT": 1790892456.157
   },
-  "pending": [
-    {
-      "id": "AAVEUSDT:1790907938",
-      "symbol": "AAVEUSDT",
-      "venue": "Bybit",
-      "ts": 1790907938.056,
-      "due_ts": 1790911538.056,
-      "compression_ratio": 0.44243835151185373,
-      "breakout_move_pct": -0.3707083380860121,
-      "entry": 174.69,
-      "breakout_side": -1.0,
-      "fakeout_side": 1.0,
-      "round_trip_cost": 0.0012
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "AAVEUSDT:1790891434",
@@ -219,13 +205,32 @@
       "breakout_paper_equity": 100.13905512474302,
       "fakeout_net_return_pct": 0.2478437667201773,
       "fakeout_paper_equity": 99.7407699783987
+    },
+    {
+      "id": "AAVEUSDT:1790907938",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1790907938.056,
+      "due_ts": 1790911538.056,
+      "compression_ratio": 0.44243835151185373,
+      "breakout_move_pct": -0.3707083380860121,
+      "entry": 174.69,
+      "breakout_side": -1.0,
+      "fakeout_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 185.76,
+      "exit_ts": 1790925121.856,
+      "breakout_net_return_pct": -6.456939721792879,
+      "breakout_paper_equity": 99.81575920337414,
+      "fakeout_net_return_pct": 6.216939721792878,
+      "fakeout_paper_equity": 100.05081115577917
     }
   ],
-  "breakout_equity": 100.13905512474302,
+  "breakout_equity": 99.81575920337414,
   "breakout_peak": 100.25418084541269,
-  "breakout_max_dd_pct": -0.11483383505690448,
-  "fakeout_equity": 99.7407699783987,
-  "fakeout_peak": 100.0,
+  "breakout_max_dd_pct": -0.43731008357105194,
+  "fakeout_equity": 100.05081115577917,
+  "fakeout_peak": 100.05081115577917,
   "fakeout_max_dd_pct": -0.32590214596278644,
   "last_new_events": 0
 }
