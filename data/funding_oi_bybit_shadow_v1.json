@@ -1,7 +1,7 @@
 {
   "version": "FUNDING_OI_BYBIT_V1",
   "rule_frozen_at": 1790832319.629528,
-  "last_processed_ts": 1790929047.432,
+  "last_processed_ts": 1790932855.656,
   "last_event_ts": {
     "DOGEUSDT": 1790925121.334,
     "SUIUSDT": 1790925121.214,
@@ -11,7 +11,8 @@
     "SOLUSDT": 1790925121.88,
     "BTCUSDT": 1790925122.283,
     "AAVEUSDT": 1790925121.856,
-    "LINKUSDT": 1790928382.518
+    "LINKUSDT": 1790928382.518,
+    "AVAXUSDT": 1790929366.733
   },
   "pending": [
     {
@@ -144,6 +145,21 @@
       "oi_30m_pct": 0.5836550669810592,
       "funding_rate": 0.0001,
       "entry": 14.373,
+      "follow_side": 1.0,
+      "fade_side": -1.0,
+      "next_funding_time": 1790956800000,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "AVAXUSDT:1790929366",
+      "symbol": "AVAXUSDT",
+      "venue": "Bybit",
+      "ts": 1790929366.733,
+      "due_ts": 1790943766.733,
+      "event_type": "OI_BUILD",
+      "oi_30m_pct": 0.6870112123234406,
+      "funding_rate": 0.0001,
+      "entry": 11.129,
       "follow_side": 1.0,
       "fade_side": -1.0,
       "next_funding_time": 1790956800000,

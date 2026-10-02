@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1790929047.432,
+  "last_processed_ts": 1790932855.656,
   "last_event_ts": {
     "DOGEUSDT": 1790925121.334,
     "ADAUSDT": 1790925121.332,
@@ -12,22 +12,10 @@
     "BTCUSDT": 1790925122.283,
     "SOLUSDT": 1790925121.88,
     "XRPUSDT": 1790925121.856,
-    "LTCUSDT": 1790925122.735
+    "LTCUSDT": 1790925122.735,
+    "ETHUSDT": 1790929106.874
   },
-  "pending": [
-    {
-      "id": "SUIUSDT:1790927883",
-      "symbol": "SUIUSDT",
-      "venue": "Bybit",
-      "ts": 1790927883.014,
-      "due_ts": 1790931483.014,
-      "move_15m_pct": 1.0005113345832761,
-      "entry": 1.18514,
-      "continuation_side": 1.0,
-      "reversal_side": -1.0,
-      "round_trip_cost": 0.0012
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "DOGEUSDT:1790891131",
@@ -334,12 +322,48 @@
       "continuation_paper_equity": 100.26824199645469,
       "reversal_net_return_pct": 1.4465374677002576,
       "reversal_paper_equity": 99.52832243473213
+    },
+    {
+      "id": "SUIUSDT:1790927883",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1790927883.014,
+      "due_ts": 1790931483.014,
+      "move_15m_pct": 1.0005113345832761,
+      "entry": 1.18514,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 1.1837,
+      "exit_ts": 1790931541.814,
+      "continuation_net_return_pct": -0.2415046323641222,
+      "continuation_paper_equity": 100.25613437399412,
+      "reversal_net_return_pct": 0.0015046323641222442,
+      "reversal_paper_equity": 99.52839731149967
+    },
+    {
+      "id": "ETHUSDT:1790929106",
+      "symbol": "ETHUSDT",
+      "venue": "Bybit",
+      "ts": 1790929106.874,
+      "due_ts": 1790932706.874,
+      "move_15m_pct": 1.353069710677679,
+      "entry": 2773.77,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 2750.56,
+      "exit_ts": 1790932735.474,
+      "continuation_net_return_pct": -0.9567672878428989,
+      "continuation_paper_equity": 100.2081734791068,
+      "reversal_net_return_pct": 0.7167672878428989,
+      "reversal_paper_equity": 99.56406666120182
     }
   ],
-  "continuation_equity": 100.26824199645469,
+  "continuation_equity": 100.2081734791068,
   "continuation_peak": 100.37580454774695,
-  "continuation_max_dd_pct": -0.1071598397411555,
-  "reversal_equity": 99.52832243473213,
+  "continuation_max_dd_pct": -0.16700346203492034,
+  "reversal_equity": 99.56406666120182,
   "reversal_peak": 100.0118812630409,
   "reversal_max_dd_pct": -0.5622050695308078,
   "last_new_events": 0

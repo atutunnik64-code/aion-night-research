@@ -1,11 +1,12 @@
 {
   "version": "BYBIT_LIQUIDATION_REGIME_V1",
   "rule_frozen_at": 1790832884.3502889,
-  "last_bucket": 29848818,
+  "last_bucket": 29848873,
   "last_signal_ts": {
     "BTCUSDT:BUY": 1790929080
   },
-  "pending": [
+  "pending": [],
+  "resolved": [
     {
       "id": "BTCUSDT:29848817:BUY",
       "symbol": "BTCUSDT",
@@ -21,15 +22,19 @@
       "funding_rate": 0.0001,
       "next_funding_time": 1790956800000,
       "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
+      "allocation_fraction": 0.05,
+      "exit": 86190.1,
+      "exit_ts": 1790932735.483,
+      "funding_crossed": false,
+      "continuation_net_return_pct": -0.3867188147270405,
+      "recovery_net_return_pct": 0.14671881472704051
     }
   ],
-  "resolved": [],
-  "continuation_equity": 100.0,
+  "continuation_equity": 99.98066405926365,
   "continuation_peak": 100.0,
-  "continuation_max_dd_pct": 0.0,
-  "recovery_equity": 100.0,
-  "recovery_peak": 100.0,
+  "continuation_max_dd_pct": -0.019335940736353585,
+  "recovery_equity": 100.00733594073634,
+  "recovery_peak": 100.00733594073634,
   "recovery_max_dd_pct": 0.0,
   "last_new_events": 0
 }
