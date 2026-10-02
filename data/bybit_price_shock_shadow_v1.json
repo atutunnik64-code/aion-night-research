@@ -1,16 +1,66 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1790894592.435,
+  "last_processed_ts": 1790908252.035,
   "last_event_ts": {
     "DOGEUSDT": 1790891131.334,
     "ADAUSDT": 1790891131.333,
-    "LINKUSDT": 1790891131.118,
-    "AVAXUSDT": 1790891132.733,
-    "SUIUSDT": 1790891131.215,
-    "AAVEUSDT": 1790892399.555
+    "LINKUSDT": 1790907582.518,
+    "AVAXUSDT": 1790907039.333,
+    "SUIUSDT": 1790906012.715,
+    "AAVEUSDT": 1790904807.855
   },
   "pending": [
+    {
+      "id": "AAVEUSDT:1790904807",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1790904807.855,
+      "due_ts": 1790908407.855,
+      "move_15m_pct": 3.7492711370262333,
+      "entry": 177.93,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "SUIUSDT:1790906012",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1790906012.715,
+      "due_ts": 1790909612.715,
+      "move_15m_pct": 1.0966415352981373,
+      "entry": 1.18,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "AVAXUSDT:1790907039",
+      "symbol": "AVAXUSDT",
+      "venue": "Bybit",
+      "ts": 1790907039.333,
+      "due_ts": 1790910639.333,
+      "move_15m_pct": 1.2017246124208736,
+      "entry": 11.032,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "LINKUSDT:1790907582",
+      "symbol": "LINKUSDT",
+      "venue": "Bybit",
+      "ts": 1790907582.518,
+      "due_ts": 1790911182.518,
+      "move_15m_pct": 1.0302775441547452,
+      "entry": 14.415,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
+  "resolved": [
     {
       "id": "DOGEUSDT:1790891131",
       "symbol": "DOGEUSDT",
@@ -21,7 +71,13 @@
       "entry": 0.09374,
       "continuation_side": -1.0,
       "reversal_side": 1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 0.09348,
+      "exit_ts": 1790904807.334,
+      "continuation_net_return_pct": 0.15736291871134356,
+      "continuation_paper_equity": 100.00786814593556,
+      "reversal_net_return_pct": -0.39736291871134355,
+      "reversal_paper_equity": 99.98013185406444
     },
     {
       "id": "ADAUSDT:1790891131",
@@ -33,7 +89,13 @@
       "entry": 0.2446,
       "continuation_side": -1.0,
       "reversal_side": 1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 0.2451,
+      "exit_ts": 1790904807.333,
+      "continuation_net_return_pct": -0.32441537203597093,
+      "continuation_paper_equity": 99.99164610106003,
+      "reversal_net_return_pct": 0.08441537203597094,
+      "reversal_paper_equity": 99.98435178407777
     },
     {
       "id": "LINKUSDT:1790891131",
@@ -45,7 +107,13 @@
       "entry": 14.227,
       "continuation_side": -1.0,
       "reversal_side": 1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 14.218,
+      "exit_ts": 1790904809.118,
+      "continuation_net_return_pct": -0.05674000140577717,
+      "continuation_paper_equity": 99.98880933798986,
+      "reversal_net_return_pct": -0.18325999859422282,
+      "reversal_paper_equity": 99.97519021799407
     },
     {
       "id": "AVAXUSDT:1790891132",
@@ -57,7 +125,13 @@
       "entry": 10.862,
       "continuation_side": -1.0,
       "reversal_side": 1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 10.908,
+      "exit_ts": 1790904808.733,
+      "continuation_net_return_pct": -0.5434947523476196,
+      "continuation_paper_equity": 99.96163764140552,
+      "reversal_net_return_pct": 0.3034947523476196,
+      "reversal_paper_equity": 99.99036119079213
     },
     {
       "id": "SUIUSDT:1790891131",
@@ -69,7 +143,13 @@
       "entry": 1.1627,
       "continuation_side": -1.0,
       "reversal_side": 1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 1.1691,
+      "exit_ts": 1790904807.214,
+      "continuation_net_return_pct": -0.6704429345488893,
+      "continuation_paper_equity": 99.92812835456421,
+      "reversal_net_return_pct": 0.43044293454888927,
+      "reversal_paper_equity": 100.0118812630409
     },
     {
       "id": "AAVEUSDT:1790892399",
@@ -81,15 +161,20 @@
       "entry": 171.79,
       "continuation_side": 1.0,
       "reversal_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 177.93,
+      "exit_ts": 1790904807.855,
+      "continuation_net_return_pct": 3.454131206705866,
+      "continuation_paper_equity": 100.10071078785282,
+      "reversal_net_return_pct": -3.6941312067058663,
+      "reversal_paper_equity": 99.82715275723332
     }
   ],
-  "resolved": [],
-  "continuation_equity": 100.0,
-  "continuation_peak": 100.0,
-  "continuation_max_dd_pct": 0.0,
-  "reversal_equity": 100.0,
-  "reversal_peak": 100.0,
-  "reversal_max_dd_pct": 0.0,
+  "continuation_equity": 100.10071078785282,
+  "continuation_peak": 100.10071078785282,
+  "continuation_max_dd_pct": -0.0797335178218117,
+  "reversal_equity": 99.82715275723332,
+  "reversal_peak": 100.0118812630409,
+  "reversal_max_dd_pct": -0.18470656033530153,
   "last_new_events": 0
 }

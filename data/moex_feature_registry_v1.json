@@ -1132,75 +1132,207 @@
       "gold_perp_oi": 1612644.0,
       "silver_perp_oi": 79174.0,
       "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790894450.2639472,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790904808.2333372,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790905109.851184,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790905411.3515658,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790905714.0182526,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790906015.3347847,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790906316.6840768,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790906617.7984476,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790906919.1288922,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790907220.4872804,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790907521.9158483,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
+    },
+    {
+      "ts": 1790907823.268004,
+      "gold_curve_pct": 1.0797812146359664,
+      "silver_curve_pct": 2.4131274131274028,
+      "gold_silver_ratio": 68.23680823680824,
+      "sber_curve_pct": 3.3978026606760414,
+      "sber_perp_front_pct": -2.9134051739267752,
+      "gold_perp_oi": 1612644.0,
+      "silver_perp_oi": 79174.0,
+      "sber_perp_oi": 240964.0
     }
   ],
-  "last_source_ts": 1790894148.660891,
-  "sample_count": 103,
+  "last_source_ts": 1790907823.268004,
+  "sample_count": 115,
   "stats": {
     "gold_curve_pct": {
-      "n": 103,
+      "n": 115,
       "last": 1.0797812146359664,
-      "mean": 1.1451582588065965,
+      "mean": 1.1383363063714003,
       "min": 1.0207948462886751,
       "max": 1.3523755388186398,
       "delta": 0.0
     },
     "silver_curve_pct": {
-      "n": 103,
+      "n": 115,
       "last": 2.4131274131274028,
-      "mean": 2.5545372051794217,
+      "mean": 2.539781400791385,
       "min": 2.3455192494338473,
       "max": 2.7196652719665204,
       "delta": 0.0
     },
     "gold_silver_ratio": {
-      "n": 103,
+      "n": 115,
       "last": 68.23680823680824,
-      "mean": 68.40623867743759,
+      "mean": 68.38855897928495,
       "min": 67.95213620301959,
       "max": 68.69834038398959,
       "delta": 0.0
     },
     "sber_curve_pct": {
-      "n": 103,
+      "n": 115,
       "last": 3.3978026606760414,
-      "mean": 3.419455992343101,
+      "mean": 3.4171965142561036,
       "min": 3.234472763264873,
       "max": 3.6112981535953548,
       "delta": 0.0
     },
     "sber_perp_front_pct": {
-      "n": 103,
+      "n": 115,
       "last": -2.9134051739267752,
-      "mean": -2.867855673229779,
+      "mean": -2.8726086646068567,
       "min": -2.9160964312032855,
       "max": -2.7644104113246026,
       "delta": 0.0
     },
     "gold_perp_oi": {
-      "n": 103,
+      "n": 115,
       "last": 1612644.0,
-      "mean": 1625627.145631068,
+      "mean": 1624272.3826086957,
       "min": 1609516.0,
       "max": 1656422.0,
       "delta": 0.0
     },
     "silver_perp_oi": {
-      "n": 103,
+      "n": 115,
       "last": 79174.0,
-      "mean": 79831.04854368932,
+      "mean": 79762.48695652174,
       "min": 78916.0,
       "max": 80956.0,
       "delta": 0.0
     },
     "sber_perp_oi": {
-      "n": 103,
+      "n": 115,
       "last": 240964.0,
-      "mean": 235315.00970873787,
+      "mean": 235904.46956521738,
       "min": 232020.0,
       "max": 241252.0,
       "delta": 0.0
     }
   },
-  "last_refresh": 1790894432.0527763
+  "last_refresh": 1790908108.4693995
 }

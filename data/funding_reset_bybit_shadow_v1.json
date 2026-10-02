@@ -1,9 +1,67 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1790894592.435,
-  "last_event_nft": {},
-  "pending": [],
+  "last_processed_ts": 1790908252.035,
+  "last_event_nft": {
+    "XRPUSDT": 1790899200000,
+    "DOGEUSDT": 1790899200000,
+    "LINKUSDT": 1790899200000,
+    "SUIUSDT": 1790899200000
+  },
+  "pending": [
+    {
+      "id": "XRPUSDT:1790899200000",
+      "symbol": "XRPUSDT",
+      "ts": 1790904807.856,
+      "funding_time_ms": 1790899200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 1.4897,
+      "due_ts": 1790908407.856,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "DOGEUSDT:1790899200000",
+      "symbol": "DOGEUSDT",
+      "ts": 1790904807.334,
+      "funding_time_ms": 1790899200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 0.09348,
+      "due_ts": 1790908407.334,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "LINKUSDT:1790899200000",
+      "symbol": "LINKUSDT",
+      "ts": 1790904809.118,
+      "funding_time_ms": 1790899200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 14.218,
+      "due_ts": 1790908409.118,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "SUIUSDT:1790899200000",
+      "symbol": "SUIUSDT",
+      "ts": 1790904807.214,
+      "funding_time_ms": 1790899200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 1.1691,
+      "due_ts": 1790908407.214,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    }
+  ],
   "resolved": [],
   "revert_equity": 100.0,
   "revert_peak": 100.0,

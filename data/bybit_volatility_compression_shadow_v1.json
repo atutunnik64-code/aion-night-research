@@ -1,9 +1,9 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1790894592.435,
+  "last_processed_ts": 1790908252.035,
   "last_event_ts": {
-    "AAVEUSDT": 1790891434.856,
+    "AAVEUSDT": 1790907938.056,
     "AVAXUSDT": 1790891616.334,
     "LTCUSDT": 1790891743.535,
     "SUIUSDT": 1790891798.414,
@@ -16,6 +16,21 @@
   },
   "pending": [
     {
+      "id": "AAVEUSDT:1790907938",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1790907938.056,
+      "due_ts": 1790911538.056,
+      "compression_ratio": 0.44243835151185373,
+      "breakout_move_pct": -0.3707083380860121,
+      "entry": 174.69,
+      "breakout_side": -1.0,
+      "fakeout_side": 1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
+  "resolved": [
+    {
       "id": "AAVEUSDT:1790891434",
       "symbol": "AAVEUSDT",
       "venue": "Bybit",
@@ -26,7 +41,13 @@
       "entry": 169.95,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 177.93,
+      "exit_ts": 1790904807.855,
+      "breakout_net_return_pct": 4.575498676081211,
+      "breakout_paper_equity": 100.22877493380406,
+      "fakeout_net_return_pct": -4.815498676081211,
+      "fakeout_paper_equity": 99.75922506619594
     },
     {
       "id": "AVAXUSDT:1790891616",
@@ -39,7 +60,13 @@
       "entry": 10.901,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 10.908,
+      "exit_ts": 1790904808.733,
+      "breakout_net_return_pct": -0.05578570773324897,
+      "breakout_paper_equity": 100.22597926723161,
+      "fakeout_net_return_pct": -0.184214292266751,
+      "fakeout_paper_equity": 99.75003652867461
     },
     {
       "id": "LTCUSDT:1790891743",
@@ -52,7 +79,13 @@
       "entry": 68.28,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 68.71,
+      "exit_ts": 1790904808.735,
+      "breakout_net_return_pct": 0.5097598125366122,
+      "breakout_paper_equity": 100.25152485543289,
+      "fakeout_net_return_pct": -0.7497598125366122,
+      "fakeout_paper_equity": 99.71264224433048
     },
     {
       "id": "SUIUSDT:1790891798",
@@ -65,7 +98,13 @@
       "entry": 1.1677,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 1.1691,
+      "exit_ts": 1790904807.214,
+      "breakout_net_return_pct": -0.00010619165881286478,
+      "breakout_paper_equity": 100.25151953249502,
+      "fakeout_net_return_pct": -0.2398938083411871,
+      "fakeout_paper_equity": 99.7006820215866
     },
     {
       "id": "ADAUSDT:1790892097",
@@ -78,7 +117,13 @@
       "entry": 0.2459,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 0.2451,
+      "exit_ts": 1790904807.333,
+      "breakout_net_return_pct": -0.44533550223667884,
+      "breakout_paper_equity": 100.22919675209452,
+      "fakeout_net_return_pct": 0.20533550223667887,
+      "fakeout_paper_equity": 99.71091806639474
     },
     {
       "id": "SOLUSDT:1790892154",
@@ -91,7 +136,13 @@
       "entry": 118.02,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 118.75,
+      "exit_ts": 1790904807.879,
+      "breakout_net_return_pct": 0.4985392306388815,
+      "breakout_paper_equity": 100.25418084541269,
+      "fakeout_net_return_pct": -0.7385392306388815,
+      "fakeout_paper_equity": 99.67409785403721
     },
     {
       "id": "DOGEUSDT:1790892218",
@@ -104,7 +155,13 @@
       "entry": 0.09427,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 0.09348,
+      "exit_ts": 1790904807.334,
+      "breakout_net_return_pct": -0.9580184576217364,
+      "breakout_paper_equity": 100.20615816756087,
+      "fakeout_net_return_pct": 0.7180184576217364,
+      "fakeout_paper_equity": 99.7098817750402
     },
     {
       "id": "LINKUSDT:1790892278",
@@ -117,7 +174,13 @@
       "entry": 14.307,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 14.218,
+      "exit_ts": 1790904809.118,
+      "breakout_net_return_pct": -0.7420731110645139,
+      "breakout_paper_equity": 100.16897801979125,
+      "fakeout_net_return_pct": 0.5020731110645139,
+      "fakeout_paper_equity": 99.73491260031352
     },
     {
       "id": "ETHUSDT:1790892335",
@@ -130,7 +193,13 @@
       "entry": 2700.44,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 2700.72,
+      "exit_ts": 1790904807.874,
+      "breakout_net_return_pct": -0.10963131934055503,
+      "breakout_paper_equity": 100.16348719118261,
+      "fakeout_net_return_pct": -0.13036868065944496,
+      "fakeout_paper_equity": 99.72841144582782
     },
     {
       "id": "XRPUSDT:1790892456",
@@ -143,15 +212,20 @@
       "entry": 1.4952,
       "breakout_side": 1.0,
       "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
+      "round_trip_cost": 0.0012,
+      "exit": 1.4897,
+      "exit_ts": 1790904807.856,
+      "breakout_net_return_pct": -0.48784376672017726,
+      "breakout_paper_equity": 100.13905512474302,
+      "fakeout_net_return_pct": 0.2478437667201773,
+      "fakeout_paper_equity": 99.7407699783987
     }
   ],
-  "resolved": [],
-  "breakout_equity": 100.0,
-  "breakout_peak": 100.0,
-  "breakout_max_dd_pct": 0.0,
-  "fakeout_equity": 100.0,
+  "breakout_equity": 100.13905512474302,
+  "breakout_peak": 100.25418084541269,
+  "breakout_max_dd_pct": -0.11483383505690448,
+  "fakeout_equity": 99.7407699783987,
   "fakeout_peak": 100.0,
-  "fakeout_max_dd_pct": 0.0,
+  "fakeout_max_dd_pct": -0.32590214596278644,
   "last_new_events": 0
 }
