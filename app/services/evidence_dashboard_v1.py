@@ -46,6 +46,8 @@ class EvidenceDashboardV1:
         verifier = self._read("crossvenue_arb_verifier_v1.json")
         leadlag = self._read("crossvenue_leadlag_episode_cloud_v1.json")
         spot_perp = self._read("crossvenue_spot_perp_portfolio_v1.json")
+        classic_arb_portfolio = self._read("classic_spot_arb_portfolio_v1.json")
+        bybit_ws = self._read("bybit_spot_ws_mirror_v1.json")
         orderbook = self._read("crossvenue_orderbook_consensus_shadow_v1.json")
         funding = self._read("perp_funding_spread_paper.json")
         moex = self._read("moex_broad_futures_shadow_v1.json")
@@ -84,6 +86,11 @@ class EvidenceDashboardV1:
         local_spot_symbols = int(relay_health.get("bybit_spot_symbol_count") or relay_health.get("bybit_symbol_count") or 0)
         local_perp_symbols = int(relay_health.get("bybit_perp_symbol_count") or 0)
         cloud_bybit_symbols = int(venue_counts.get("Bybit") or 0)
+        ws_save_ts = self._f(bybit_ws.get("last_save_ts"), 0.0)
+        ws_age = max(0.0, now - ws_save_ts) if ws_save_ts > 0 else None
+        ws_fresh_books = int(bybit_ws.get("fresh_book_symbols") or 0)
+        ws_fresh_tickers = int(bybit_ws.get("fresh_ticker_symbols") or 0)
+        ws_fresh = ws_age is not None and ws_age <= 120.0 and ws_fresh_books > 0
 
         source_health = {
             "arb_bybit_cloud_symbols": cloud_bybit_symbols,
@@ -92,8 +99,12 @@ class EvidenceDashboardV1:
             "bybit_local_relay_age_sec": round(relay_age, 3) if relay_age is not None else None,
             "bybit_local_spot_symbols": local_spot_symbols,
             "bybit_local_perp_symbols": local_perp_symbols,
-            "bybit_effective_source": "LOCAL_WINDOWS_RELAY" if relay_fresh and local_spot_symbols > 0 else "CLOUD_DIRECT",
-            "bybit_effective_spot_symbols": local_spot_symbols if relay_fresh and local_spot_symbols > 0 else cloud_bybit_symbols,
+            "bybit_cloud_ws_fresh": ws_fresh,
+            "bybit_cloud_ws_age_sec": round(ws_age, 3) if ws_age is not None else None,
+            "bybit_cloud_ws_ticker_symbols": ws_fresh_tickers,
+            "bybit_cloud_ws_book_symbols": ws_fresh_books,
+            "bybit_effective_source": "CLOUD_WS" if ws_fresh else ("LOCAL_WINDOWS_RELAY" if relay_fresh and local_spot_symbols > 0 else "CLOUD_DIRECT"),
+            "bybit_effective_spot_symbols": ws_fresh_books if ws_fresh else (local_spot_symbols if relay_fresh and local_spot_symbols > 0 else cloud_bybit_symbols),
             "bybit_effective_perp_symbols": local_perp_symbols if relay_fresh else 0,
             "leadlag_state": leadlag.get("_health", "OK"),
             "orderbook_state": orderbook.get("_health", "OK"),
@@ -101,11 +112,21 @@ class EvidenceDashboardV1:
         }
 
         return {
-            "version": "EVIDENCE_DASHBOARD_V2_BYBIT_RELAY_AWARE",
+            "version": "EVIDENCE_DASHBOARD_V3_CAPITAL_NORMALIZED_ARB",
             "generated_at": now,
             "paper_only": True,
             "live_enabled": False,
             "portfolio_metrics": {
+                "classic_spot_arb_100usdt": {
+                    "starting_capital_quote": self._f(classic_arb_portfolio.get("starting_capital_quote"), 100.0),
+                    "realized_equity_quote": self._f(classic_arb_portfolio.get("realized_equity_quote"), 100.0),
+                    "realized_pnl_quote": self._f(classic_arb_portfolio.get("realized_pnl_quote")),
+                    "realized_return_pct": ((self._f(classic_arb_portfolio.get("realized_equity_quote"), 100.0) / self._f(classic_arb_portfolio.get("starting_capital_quote"), 100.0)) - 1.0) * 100.0 if self._f(classic_arb_portfolio.get("starting_capital_quote"), 100.0) > 0 else None,
+                    "trade_count": len(classic_arb_portfolio.get("trades") or []),
+                    "bybit_trade_count": sum(1 for z in (classic_arb_portfolio.get("trades") or []) if z.get("includes_bybit")),
+                    "locked_capital_quote": self._f(classic_arb_portfolio.get("locked_capital_quote")),
+                    "metric_type": "CAPITAL_NORMALIZED_REALIZED_CONSERVATIVE_PAPER",
+                },
                 "spot_perp_100usdt": {
                     "starting_capital_quote": sp_start,
                     "realized_equity_quote": sp_equity,
@@ -213,7 +234,7 @@ class EvidenceDashboardV1:
     def status(self):
         return {
             "ok": self.last_error is None,
-            "strategy": "EVIDENCE_DASHBOARD_V2_BYBIT_RELAY_AWARE",
+            "strategy": "EVIDENCE_DASHBOARD_V3_CAPITAL_NORMALIZED_ARB",
             "paper_only": True,
             "live_enabled": False,
             "last_refresh": self.last_refresh,
