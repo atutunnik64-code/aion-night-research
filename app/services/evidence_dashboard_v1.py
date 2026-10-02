@@ -54,6 +54,7 @@ class EvidenceDashboardV1:
         funding_portfolio = self._read("perp_funding_spread_portfolio_v1.json")
         moex = self._read("moex_broad_futures_shadow_v1.json")
         moex_portfolio = self._read("moex_broad_portfolio_v1.json")
+        moex_liquid_portfolio = self._read("moex_liquid_portfolio_v1.json")
         calendar = self._read("moex_calendar_matrix_shadow_v1.json")
         bybit_relay = self._read("bybit_local_relay_v1.json")
 
@@ -106,10 +107,9 @@ class EvidenceDashboardV1:
         ws_fresh_tickers = int(bybit_ws.get("fresh_ticker_symbols") or 0)
         ws_fresh = ws_age is not None and ws_age <= 120.0 and ws_fresh_books > 0
 
-        moex_start = self._f(moex_portfolio.get("starting_capital"), 100.0)
-        moex_books = moex_portfolio.get("books") or {}
-
-        def moex_book_metrics(kind: str) -> dict:
+        def moex_book_metrics(portfolio: dict, kind: str) -> dict:
+            moex_start = self._f(portfolio.get("starting_capital"), 100.0)
+            moex_books = portfolio.get("books") or {}
             book = moex_books.get(kind) or {}
             equity = self._f(book.get("equity"), moex_start)
             resolved = book.get("resolved") or []
@@ -165,8 +165,10 @@ class EvidenceDashboardV1:
             "paper_only": True,
             "live_enabled": False,
             "portfolio_metrics": {
-                "moex_continuation_100": moex_book_metrics("continuation"),
-                "moex_reversal_100": moex_book_metrics("reversal"),
+                "moex_continuation_100": moex_book_metrics(moex_portfolio, "continuation"),
+                "moex_reversal_100": moex_book_metrics(moex_portfolio, "reversal"),
+                "moex_liquid_continuation_100": moex_book_metrics(moex_liquid_portfolio, "continuation"),
+                "moex_liquid_reversal_100": moex_book_metrics(moex_liquid_portfolio, "reversal"),
                 "classic_spot_arb_100usdt": {
                     "starting_capital_quote": self._f(classic_arb_portfolio.get("starting_capital_quote"), 100.0),
                     "realized_equity_quote": self._f(classic_arb_portfolio.get("realized_equity_quote"), 100.0),
@@ -175,7 +177,8 @@ class EvidenceDashboardV1:
                     "trade_count": len(classic_arb_portfolio.get("trades") or []),
                     "bybit_trade_count": sum(1 for z in (classic_arb_portfolio.get("trades") or []) if z.get("includes_bybit")),
                     "locked_capital_quote": self._f(classic_arb_portfolio.get("locked_capital_quote")),
-                    "metric_type": "CAPITAL_NORMALIZED_REALIZED_CONSERVATIVE_PAPER",
+                    "metric_type": "CAPITAL_NORMALIZED_MODELED_CONSERVATIVE_PAPER_EDGE",
+                    "interpretation": "SNAPSHOT_VWAP_EDGE_AFTER_FEES_AND_RESERVE_NOT_EXCHANGE_REALIZED_PNL",
                 },
                 "classic_spot_arb_strict_100usdt": {
                     "starting_capital_quote": self._f(classic_arb_strict.get("starting_capital_quote"), 100.0),

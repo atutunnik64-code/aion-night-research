@@ -16,6 +16,7 @@ from app.services.moex_spread_research_v1 import moex_spread_research_v1
 from app.services.moex_spread_paper_v1 import moex_spread_paper_v1
 from app.services.moex_broad_futures_shadow_v1 import moex_broad_futures_shadow_v1
 from app.services.moex_broad_portfolio_v1 import moex_broad_portfolio_v1
+from app.services.moex_liquid_portfolio_v1 import moex_liquid_portfolio_v1
 from app.services.moex_calendar_matrix_shadow_v1 import moex_calendar_matrix_shadow_v1
 
 from app.services.crossvenue_liquidation_asymmetry_collector import crossvenue_liquidation_asymmetry_collector
@@ -49,7 +50,7 @@ SERVICES = [
     moex_futures_collector, moex_futures_shadow, moex_feature_registry,
     moex_futures_universe, moex_universe_structure_v1, moex_universe_features_v1,
     moex_spread_research_v1, moex_spread_paper_v1,
-    moex_broad_futures_shadow_v1, moex_broad_portfolio_v1, moex_calendar_matrix_shadow_v1,
+    moex_broad_futures_shadow_v1, moex_broad_portfolio_v1, moex_liquid_portfolio_v1, moex_calendar_matrix_shadow_v1,
 
     # Crypto public-data collectors + independent PAPER hypotheses
     crossvenue_liquidation_asymmetry_collector,
