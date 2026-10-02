@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1790927883.633,
+  "last_processed_ts": 1790928383.38,
   "last_event_ts": {
     "AAVEUSDT": 1790927491.155,
     "AVAXUSDT": 1790891616.334,
@@ -259,5 +259,5 @@
   "fakeout_equity": 100.05081115577917,
   "fakeout_peak": 100.05081115577917,
   "fakeout_max_dd_pct": -0.32590214596278644,
-  "last_new_events": 1
+  "last_new_events": 0
 }

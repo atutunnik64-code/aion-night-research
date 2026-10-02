@@ -1,6 +1,6 @@
 {
   "version": "EVIDENCE_DASHBOARD_V5_CAPITAL_BOOKS",
-  "generated_at": 1790927976.3025103,
+  "generated_at": 1790928473.7467706,
   "paper_only": true,
   "live_enabled": false,
   "portfolio_metrics": {
@@ -38,13 +38,25 @@
     },
     "classic_spot_arb_100usdt": {
       "starting_capital_quote": 100.0,
-      "realized_equity_quote": 103.48576252068908,
-      "realized_pnl_quote": 3.4857625206890788,
-      "realized_return_pct": 3.485762520689084,
-      "trade_count": 10,
+      "realized_equity_quote": 103.71408437959072,
+      "realized_pnl_quote": 3.714084379590716,
+      "realized_return_pct": 3.7140843795907097,
+      "trade_count": 12,
       "bybit_trade_count": 0,
       "locked_capital_quote": 100.0,
       "metric_type": "CAPITAL_NORMALIZED_REALIZED_CONSERVATIVE_PAPER"
+    },
+    "classic_spot_arb_strict_100usdt": {
+      "starting_capital_quote": 100.0,
+      "paper_equity_quote": 100.19794842945426,
+      "paper_pnl_quote": 0.19794842945425728,
+      "paper_return_pct": 0.19794842945426439,
+      "trade_count": 2,
+      "bybit_trade_count": 0,
+      "locked_capital_quote": 100.0,
+      "skipped_identity": 37,
+      "skipped_base_concentration": 1,
+      "metric_type": "FUTURE_ONLY_STRICT_IDENTITY_CAPITAL_NORMALIZED_PAPER"
     },
     "perp_funding_100usdt": {
       "starting_capital_quote": 100.0,
@@ -69,24 +81,24 @@
       "closed_pnl_quote": 1.678137523949083,
       "open_positions": 128,
       "closed_positions": 10,
-      "open_positions_accrued_funding_quote": 1.6502652647396094,
+      "open_positions_accrued_funding_quote": 2.098510454344598,
       "metric_type": "REALIZED_QUOTE_IF_CLOSED_PLUS_SEPARATE_OPEN_FUNDING_ACCRUAL"
     }
   },
   "research_edge_metrics": {
     "classic_spot_arb": {
-      "scan_count": 612,
-      "execution_edge_quote_sum": 422.13619875202914,
-      "last_raw_positive": 554,
-      "last_after_fees_positive": 75,
+      "scan_count": 618,
+      "execution_edge_quote_sum": 425.3644672352931,
+      "last_raw_positive": 497,
+      "last_after_fees_positive": 82,
       "last_depth_checks": 60,
-      "last_depth_pass": 46,
+      "last_depth_pass": 37,
       "verification_candidates": 0,
       "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
     },
     "bybit_local_relay": {
       "fresh": false,
-      "age_sec": 41703.204,
+      "age_sec": 42200.648,
       "spot_scan_count": 60,
       "spot_recent_bybit_event_count": 100,
       "spot_bybit_signal_count": 25,
@@ -97,44 +109,44 @@
       "metric_type": "LOCAL_BYBIT_PUBLIC_DATA_RELAY_PAPER_RESEARCH"
     },
     "leadlag": {
-      "scan_count": 3749,
-      "pending": 65,
+      "scan_count": 3787,
+      "pending": 53,
       "resolved": 1000,
-      "positive_edge_episodes": 54,
-      "paper_edge_quote_sum": 6.552012475043563,
+      "positive_edge_episodes": 58,
+      "paper_edge_quote_sum": 7.048774512486723,
       "error_count": 0,
       "last_error": null,
       "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
     },
     "orderbook_consensus": {
-      "pending": 51,
-      "resolved_raw": 1003,
-      "timing_valid_resolved": 914,
+      "pending": 59,
+      "resolved_raw": 1011,
+      "timing_valid_resolved": 922,
       "legacy_stale_resolved": 89,
-      "mean_net_return_pct": -0.2533029860838684,
-      "mean_gross_return_pct_before_cost": -0.0033029860838684104,
-      "positive_net_rate": 0.3096280087527352,
-      "long_mean_net_pct": -0.15103087423732503,
-      "long_mean_gross_pct": 0.09896912576267497,
-      "short_mean_net_pct": -0.3709760747731854,
-      "short_mean_gross_pct": -0.1209760747731854,
+      "mean_net_return_pct": -0.25118506581417155,
+      "mean_gross_return_pct_before_cost": -0.0011850658141715337,
+      "positive_net_rate": 0.31019522776572667,
+      "long_mean_net_pct": -0.14879769342247182,
+      "long_mean_gross_pct": 0.10120230657752818,
+      "short_mean_net_pct": -0.36884701124332764,
+      "short_mean_gross_pct": -0.11884701124332764,
       "assumed_round_trip_cost_pct": 0.25,
       "promotion_eligible": false,
       "diagnosis": "TIMING_VALID_SIGNAL_HAS_NO_POSITIVE_NET_EDGE_AT_FROZEN_COST_ASSUMPTION",
       "metric_type": "TIMING_VALID_TRADE_RETURN_DIAGNOSTIC_NOT_PORTFOLIO_RETURN"
     },
     "arb_verifier": {
-      "verified_count": 93,
+      "verified_count": 111,
       "rejected_count": 7,
-      "watch_count": 49,
-      "verified_paper_edge_quote_sum": 6.598580939166778,
+      "watch_count": 53,
+      "verified_paper_edge_quote_sum": 9.743469363085342,
       "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION"
     }
   },
   "moex_research": {
     "broad_shadow": {
-      "resolved": 2386,
-      "pending": 204,
+      "resolved": 2438,
+      "pending": 184,
       "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
     },
     "calendar_matrix": {
@@ -146,12 +158,12 @@
     "arb_bybit_cloud_symbols": 131,
     "arb_bybit_cloud_error": null,
     "bybit_local_relay_fresh": false,
-    "bybit_local_relay_age_sec": 41703.204,
+    "bybit_local_relay_age_sec": 42200.648,
     "bybit_local_spot_symbols": 390,
     "bybit_local_perp_symbols": 789,
     "bybit_cloud_ws_fresh": true,
-    "bybit_cloud_ws_age_sec": 18.2,
-    "bybit_cloud_ws_ticker_symbols": 222,
+    "bybit_cloud_ws_age_sec": 17.964,
+    "bybit_cloud_ws_ticker_symbols": 224,
     "bybit_cloud_ws_book_symbols": 130,
     "bybit_effective_source": "CLOUD_WS",
     "bybit_effective_spot_symbols": 130,

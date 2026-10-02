@@ -1,0 +1,72 @@
+{
+  "version": "CLASSIC_SPOT_ARB_STRICT_PORTFOLIO_V1_100USDT",
+  "rule_frozen_at": 1790928261.5087385,
+  "starting_capital_quote": 100.0,
+  "realized_equity_quote": 100.19794842945426,
+  "realized_pnl_quote": 0.19794842945425728,
+  "peak_equity_quote": 100.19794842945426,
+  "max_dd_pct": 0.0,
+  "last_processed_ts": 1790928435.0420501,
+  "locks": [
+    {
+      "signature": "MGO:KuCoin>Bitget",
+      "base": "MGO",
+      "opened_ts": 1790928262.8138578,
+      "release_ts": 1790928562.8138578,
+      "capital_quote": 50.0
+    },
+    {
+      "signature": "NES:Bitget>KuCoin",
+      "base": "NES",
+      "opened_ts": 1790928262.8138578,
+      "release_ts": 1790928562.8138578,
+      "capital_quote": 50.0
+    }
+  ],
+  "trades": [
+    {
+      "ts": 1790928262.8138578,
+      "signature": "MGO:KuCoin>Bitget",
+      "base": "MGO",
+      "buy_venue": "KuCoin",
+      "sell_venue": "Bitget",
+      "identity_confidence": "CONTRACT_VERIFIED",
+      "strict_identity_method": "CONTRACT_ADDRESS_MATCH",
+      "notional_per_leg_quote": 25.0,
+      "capital_required_quote": 50.0,
+      "execution_net_pct": 0.6322357743350041,
+      "conservative_net_pct": 0.4822357743350041,
+      "realized_conservative_pnl_quote": 0.12055894358375102,
+      "equity_before_quote": 100.0,
+      "equity_after_quote": 100.12055894358375,
+      "release_ts": 1790928562.8138578,
+      "includes_bybit": false
+    },
+    {
+      "ts": 1790928262.8138578,
+      "signature": "NES:Bitget>KuCoin",
+      "base": "NES",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "identity_confidence": "CONTRACT_VERIFIED",
+      "strict_identity_method": "CONTRACT_ADDRESS_MATCH",
+      "notional_per_leg_quote": 25.0,
+      "capital_required_quote": 50.0,
+      "execution_net_pct": 0.45955794348202583,
+      "conservative_net_pct": 0.30955794348202587,
+      "realized_conservative_pnl_quote": 0.07738948587050647,
+      "equity_before_quote": 100.12055894358375,
+      "equity_after_quote": 100.19794842945426,
+      "release_ts": 1790928562.8138578,
+      "includes_bybit": false
+    }
+  ],
+  "skipped_capital": 4,
+  "skipped_identity": 37,
+  "skipped_base_concentration": 1,
+  "skipped_nonpositive_conservative": 14,
+  "last_new_source_events": 0,
+  "last_new_trades": 0,
+  "locked_capital_quote": 100.0,
+  "available_capital_quote": 0.19794842945425728
+}
