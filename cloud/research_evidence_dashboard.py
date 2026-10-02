@@ -160,6 +160,19 @@ def build():
             "trade_pnl_quote":stats([x.get("realized_conservative_pnl_quote") for x in trades]),
             "skipped_capital":int(s.get("skipped_capital") or 0),"skipped_identity":int(s.get("skipped_identity") or 0)}
 
+    s, err = load("classic_spot_arb_strict_portfolio_v1.json")
+    if err: dash["errors"]["classic_spot_arb_strict_portfolio_100"] = err
+    elif isinstance(s, dict):
+        start=f(s.get("starting_capital_quote"),100.0);eq=f(s.get("realized_equity_quote"),start);trades=s.get("trades") or []
+        dash["branches"]["classic_spot_arb_strict_portfolio_100"]={"metric_type":"future_only_strict_identity_capital_normalized_paper",
+            "starting_capital_quote":round(start,8),"paper_equity_quote":round(eq,8),"paper_pnl_quote":round(f(s.get("realized_pnl_quote")),8),
+            "paper_return_pct":round((eq/start-1.0)*100.0,8) if start>0 else None,"trade_count":len(trades),
+            "bybit_trade_count":sum(1 for x in trades if x.get("includes_bybit")),"locked_capital_quote":round(f(s.get("locked_capital_quote")),8),
+            "available_capital_quote":round(f(s.get("available_capital_quote")),8),
+            "trade_pnl_quote":stats([x.get("realized_conservative_pnl_quote") for x in trades]),
+            "skipped_capital":int(s.get("skipped_capital") or 0),"skipped_identity":int(s.get("skipped_identity") or 0),
+            "skipped_base_concentration":int(s.get("skipped_base_concentration") or 0),"rule_frozen_at":s.get("rule_frozen_at")}
+
     s, err = load("perp_funding_spread_portfolio_v1.json")
     if err: dash["errors"]["perp_funding_spread_portfolio_100"] = err
     elif isinstance(s, dict):

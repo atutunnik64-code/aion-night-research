@@ -3,7 +3,7 @@ import asyncio,json,time
 from pathlib import Path
 import httpx
 from app.http_shared import SHARED_SSL_CONTEXT
-from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_v1,TRUSTED_QUOTE_VOLUME,NOTIONAL
+from app.services.crossvenue_spot_arb_cloud_v1 import crossvenue_spot_arb_cloud_v1,TRUSTED_QUOTE_VOLUME,NOTIONAL,CANONICAL_MAJOR
 
 ROOT=Path(__file__).parents[2]
 STATE=ROOT/'data'/'crossvenue_arb_verifier_v1.json'
@@ -63,13 +63,24 @@ class CrossVenueArbVerifierV1:
     @staticmethod
     def _sig(row):return f"{row.get('base')}:{row.get('buy_venue')}>{row.get('sell_venue')}"
     def _queue_groups(self):
-        # Verify both the explicit high-edge queue and every recent event that
-        # the market guard itself labelled REVIEW_REQUIRED. This prevents a
-        # 2.49% edge from escaping identity checks merely because it sits just
-        # below the 2.50% high-spread review boundary.
+        # Verify the explicit high-edge queue, every REVIEW_REQUIRED event,
+        # and every positive non-major route for venues where public contract
+        # metadata is available. The strict $100 portfolio consumes only
+        # CONTRACT_ADDRESS_MATCH results for non-majors.
         q=list(crossvenue_spot_arb_cloud_v1.state.get('verification_queue') or [])[-1000:]
         ev=list(crossvenue_spot_arb_cloud_v1.state.get('events') or [])[-1500:]
-        q.extend(x for x in ev if x.get('identity_confidence')=='REVIEW_REQUIRED' and float(x.get('execution_net_pct') or 0)>0)
+        q.extend(
+            x for x in ev
+            if float(x.get('execution_net_pct') or 0)>0
+            and (
+                x.get('identity_confidence')=='REVIEW_REQUIRED'
+                or (
+                    str(x.get('base') or '') not in CANONICAL_MAJOR
+                    and str(x.get('buy_venue') or '') in SUPPORTED_META
+                    and str(x.get('sell_venue') or '') in SUPPORTED_META
+                )
+            )
+        )
         groups={};seen=set()
         for x in q:
             sig=self._sig(x);ts=float(x.get('ts') or 0);dedupe=(sig,ts)

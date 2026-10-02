@@ -47,6 +47,7 @@ class EvidenceDashboardV1:
         leadlag = self._read("crossvenue_leadlag_episode_cloud_v1.json")
         spot_perp = self._read("crossvenue_spot_perp_portfolio_v1.json")
         classic_arb_portfolio = self._read("classic_spot_arb_portfolio_v1.json")
+        classic_arb_strict = self._read("classic_spot_arb_strict_portfolio_v1.json")
         bybit_ws = self._read("bybit_spot_ws_mirror_v1.json")
         orderbook = self._read("crossvenue_orderbook_consensus_shadow_v1.json")
         funding = self._read("perp_funding_spread_paper.json")
@@ -175,6 +176,18 @@ class EvidenceDashboardV1:
                     "bybit_trade_count": sum(1 for z in (classic_arb_portfolio.get("trades") or []) if z.get("includes_bybit")),
                     "locked_capital_quote": self._f(classic_arb_portfolio.get("locked_capital_quote")),
                     "metric_type": "CAPITAL_NORMALIZED_REALIZED_CONSERVATIVE_PAPER",
+                },
+                "classic_spot_arb_strict_100usdt": {
+                    "starting_capital_quote": self._f(classic_arb_strict.get("starting_capital_quote"), 100.0),
+                    "paper_equity_quote": self._f(classic_arb_strict.get("realized_equity_quote"), 100.0),
+                    "paper_pnl_quote": self._f(classic_arb_strict.get("realized_pnl_quote")),
+                    "paper_return_pct": ((self._f(classic_arb_strict.get("realized_equity_quote"), 100.0) / self._f(classic_arb_strict.get("starting_capital_quote"), 100.0)) - 1.0) * 100.0 if self._f(classic_arb_strict.get("starting_capital_quote"), 100.0) > 0 else None,
+                    "trade_count": len(classic_arb_strict.get("trades") or []),
+                    "bybit_trade_count": sum(1 for z in (classic_arb_strict.get("trades") or []) if z.get("includes_bybit")),
+                    "locked_capital_quote": self._f(classic_arb_strict.get("locked_capital_quote")),
+                    "skipped_identity": int(classic_arb_strict.get("skipped_identity") or 0),
+                    "skipped_base_concentration": int(classic_arb_strict.get("skipped_base_concentration") or 0),
+                    "metric_type": "FUTURE_ONLY_STRICT_IDENTITY_CAPITAL_NORMALIZED_PAPER",
                 },
                 "perp_funding_100usdt": {
                     "starting_capital_quote": self._f(funding_portfolio.get("starting_capital_quote"), 100.0),
