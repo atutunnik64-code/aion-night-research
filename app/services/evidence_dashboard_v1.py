@@ -61,7 +61,18 @@ class EvidenceDashboardV1:
         ll_edge_quote = sum(self._f(x.get("paper_edge_quote")) for x in ll_resolved)
 
         ob_resolved = orderbook.get("resolved") or []
-        ob_returns = [self._f(x.get("net_return_pct")) for x in ob_resolved]
+        ob_valid = []
+        ob_stale = []
+        for x in ob_resolved:
+            lag = self._f(x.get("resolution_lag_sec"), self._f(x.get("exit_ts")) - self._f(x.get("due_ts")))
+            (ob_valid if 0 <= lag <= 180 else ob_stale).append(x)
+        ob_returns = [self._f(x.get("net_return_pct")) for x in ob_valid]
+        ob_cost_pct = self._f(ob_valid[0].get("round_trip_cost"), 0.0025) * 100.0 if ob_valid else 0.25
+        ob_gross_returns = [x + ob_cost_pct for x in ob_returns]
+        ob_mean_net = (sum(ob_returns) / len(ob_returns)) if ob_returns else None
+        ob_mean_gross = (sum(ob_gross_returns) / len(ob_gross_returns)) if ob_gross_returns else None
+        ob_long = [self._f(x.get("net_return_pct")) for x in ob_valid if self._f(x.get("side")) > 0]
+        ob_short = [self._f(x.get("net_return_pct")) for x in ob_valid if self._f(x.get("side")) < 0]
 
         sp_start = self._f(spot_perp.get("starting_capital_quote"), 100.0)
         sp_equity = self._f(spot_perp.get("realized_equity_quote"), sp_start)
@@ -227,11 +238,20 @@ class EvidenceDashboardV1:
                 },
                 "orderbook_consensus": {
                     "pending": len(orderbook.get("pending") or []),
-                    "resolved": len(ob_resolved),
-                    "sum_trade_return_pct": sum(ob_returns),
-                    "mean_trade_return_pct": (sum(ob_returns) / len(ob_returns)) if ob_returns else None,
-                    "positive_trade_rate": (sum(1 for x in ob_returns if x > 0) / len(ob_returns)) if ob_returns else None,
-                    "metric_type": "TRADE_RETURN_SERIES_NOT_CAPITAL_NORMALIZED",
+                    "resolved_raw": len(ob_resolved),
+                    "timing_valid_resolved": len(ob_valid),
+                    "legacy_stale_resolved": len(ob_stale),
+                    "mean_net_return_pct": ob_mean_net,
+                    "mean_gross_return_pct_before_cost": ob_mean_gross,
+                    "positive_net_rate": (sum(1 for x in ob_returns if x > 0) / len(ob_returns)) if ob_returns else None,
+                    "long_mean_net_pct": (sum(ob_long) / len(ob_long)) if ob_long else None,
+                    "long_mean_gross_pct": ((sum(ob_long) / len(ob_long)) + ob_cost_pct) if ob_long else None,
+                    "short_mean_net_pct": (sum(ob_short) / len(ob_short)) if ob_short else None,
+                    "short_mean_gross_pct": ((sum(ob_short) / len(ob_short)) + ob_cost_pct) if ob_short else None,
+                    "assumed_round_trip_cost_pct": ob_cost_pct,
+                    "promotion_eligible": False,
+                    "diagnosis": ("POSITIVE_NET_EVIDENCE_REQUIRES_INDEPENDENT_VALIDATION" if ob_mean_net is not None and ob_mean_net > 0 else "TIMING_VALID_SIGNAL_HAS_NO_POSITIVE_NET_EDGE_AT_FROZEN_COST_ASSUMPTION"),
+                    "metric_type": "TIMING_VALID_TRADE_RETURN_DIAGNOSTIC_NOT_PORTFOLIO_RETURN",
                 },
                 "arb_verifier": {
                     "verified_count": len(verified) if isinstance(verified, dict) else int(verifier.get("verified_count") or 0),

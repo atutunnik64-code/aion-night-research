@@ -112,8 +112,15 @@ def build():
         eq=100.0;peak=100.0;dd=0.0
         for x in valid:
             eq*=1+0.05*(f(x.get("net_return_pct"))/100.0);peak=max(peak,eq);dd=min(dd,(eq/peak-1)*100 if peak else 0.0)
+        net=[f(x.get("net_return_pct")) for x in valid];cost_pct=f(valid[0].get("round_trip_cost"),0.0025)*100.0 if valid else 0.25;gross=[x+cost_pct for x in net]
+        longs=[f(x.get("net_return_pct")) for x in valid if f(x.get("side"))>0];shorts=[f(x.get("net_return_pct")) for x in valid if f(x.get("side"))<0]
         dash["branches"]["orderbook_consensus"]={"metric_type":"capital_normalized_timing_valid_equity",**generic_counts(s),
-            "timing_valid_resolved_count":len(valid),"legacy_stale_resolved_count":len(stale),"timing_valid_net_return_pct":stats([x.get("net_return_pct") for x in valid]),
+            "timing_valid_resolved_count":len(valid),"legacy_stale_resolved_count":len(stale),"timing_valid_net_return_pct":stats(net),
+            "timing_valid_gross_return_pct_before_cost":stats(gross),
+            "long_net_return_pct":stats(longs),"long_gross_return_pct_before_cost":stats([x+cost_pct for x in longs]),
+            "short_net_return_pct":stats(shorts),"short_gross_return_pct_before_cost":stats([x+cost_pct for x in shorts]),
+            "assumed_round_trip_cost_pct":round(cost_pct,8),"promotion_eligible":False,
+            "diagnosis":("POSITIVE_NET_EVIDENCE_REQUIRES_INDEPENDENT_VALIDATION" if net and sum(net)/len(net)>0 else "TIMING_VALID_SIGNAL_HAS_NO_POSITIVE_NET_EDGE_AT_FROZEN_COST_ASSUMPTION"),
             "equity_return_pct":round(eq-100.0,8),"max_dd_pct":round(dd,8)}
 
     s, err = load("crossvenue_momentum_divergence_shadow_v1.json")
