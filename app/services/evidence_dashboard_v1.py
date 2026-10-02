@@ -51,6 +51,7 @@ class EvidenceDashboardV1:
         orderbook = self._read("crossvenue_orderbook_consensus_shadow_v1.json")
         funding = self._read("perp_funding_spread_paper.json")
         moex = self._read("moex_broad_futures_shadow_v1.json")
+        moex_portfolio = self._read("moex_broad_portfolio_v1.json")
         calendar = self._read("moex_calendar_matrix_shadow_v1.json")
         bybit_relay = self._read("bybit_local_relay_v1.json")
 
@@ -112,11 +113,29 @@ class EvidenceDashboardV1:
         }
 
         return {
-            "version": "EVIDENCE_DASHBOARD_V3_CAPITAL_NORMALIZED_ARB",
+            "version": "EVIDENCE_DASHBOARD_V4_MOEX_CAPITAL_NORMALIZED",
             "generated_at": now,
             "paper_only": True,
             "live_enabled": False,
             "portfolio_metrics": {
+                "moex_continuation_100": {
+                    "starting_capital": self._f(moex_portfolio.get("starting_capital"), 100.0),
+                    "equity": self._f(((moex_portfolio.get("books") or {}).get("continuation") or {}).get("equity"), 100.0),
+                    "pnl": self._f(((moex_portfolio.get("books") or {}).get("continuation") or {}).get("equity"), 100.0) - self._f(moex_portfolio.get("starting_capital"), 100.0),
+                    "open_positions": len((((moex_portfolio.get("books") or {}).get("continuation") or {}).get("positions") or {})),
+                    "resolved_positions": len((((moex_portfolio.get("books") or {}).get("continuation") or {}).get("resolved") or [])),
+                    "max_dd_pct": self._f(((moex_portfolio.get("books") or {}).get("continuation") or {}).get("max_dd_pct")),
+                    "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER",
+                },
+                "moex_reversal_100": {
+                    "starting_capital": self._f(moex_portfolio.get("starting_capital"), 100.0),
+                    "equity": self._f(((moex_portfolio.get("books") or {}).get("reversal") or {}).get("equity"), 100.0),
+                    "pnl": self._f(((moex_portfolio.get("books") or {}).get("reversal") or {}).get("equity"), 100.0) - self._f(moex_portfolio.get("starting_capital"), 100.0),
+                    "open_positions": len((((moex_portfolio.get("books") or {}).get("reversal") or {}).get("positions") or {})),
+                    "resolved_positions": len((((moex_portfolio.get("books") or {}).get("reversal") or {}).get("resolved") or [])),
+                    "max_dd_pct": self._f(((moex_portfolio.get("books") or {}).get("reversal") or {}).get("max_dd_pct")),
+                    "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER",
+                },
                 "classic_spot_arb_100usdt": {
                     "starting_capital_quote": self._f(classic_arb_portfolio.get("starting_capital_quote"), 100.0),
                     "realized_equity_quote": self._f(classic_arb_portfolio.get("realized_equity_quote"), 100.0),
@@ -234,7 +253,7 @@ class EvidenceDashboardV1:
     def status(self):
         return {
             "ok": self.last_error is None,
-            "strategy": "EVIDENCE_DASHBOARD_V3_CAPITAL_NORMALIZED_ARB",
+            "strategy": "EVIDENCE_DASHBOARD_V4_MOEX_CAPITAL_NORMALIZED",
             "paper_only": True,
             "live_enabled": False,
             "last_refresh": self.last_refresh,
