@@ -141,6 +141,46 @@ def build():
             "realized_return_pct":round(eq-100.0,8),"open_positions":len(pos),"locked_capital_quote":len(pos)*50.0,"available_capital_quote":round(max(0.0,eq-len(pos)*50.0),8),
             "open_funding_accrued_quote":round(sum(f(x.get("funding_quote")) for x in pos.values()),8),"resolved_pnl_quote":stats([x.get("pnl_quote") for x in resolved])}
 
+    s, err = load("classic_spot_arb_portfolio_v1.json")
+    if err: dash["errors"]["classic_spot_arb_portfolio_100"] = err
+    elif isinstance(s, dict):
+        start=f(s.get("starting_capital_quote"),100.0);eq=f(s.get("realized_equity_quote"),start);trades=s.get("trades") or []
+        dash["branches"]["classic_spot_arb_portfolio_100"]={"metric_type":"capital_normalized_realized_conservative_quote_pnl",
+            "starting_capital_quote":round(start,8),"realized_equity_quote":round(eq,8),"realized_pnl_quote":round(f(s.get("realized_pnl_quote")),8),
+            "realized_return_pct":round((eq/start-1.0)*100.0,8) if start>0 else None,"trade_count":len(trades),
+            "bybit_trade_count":sum(1 for x in trades if x.get("includes_bybit")),"locked_capital_quote":round(f(s.get("locked_capital_quote")),8),
+            "available_capital_quote":round(f(s.get("available_capital_quote")),8),
+            "trade_pnl_quote":stats([x.get("realized_conservative_pnl_quote") for x in trades]),
+            "skipped_capital":int(s.get("skipped_capital") or 0),"skipped_identity":int(s.get("skipped_identity") or 0)}
+
+    s, err = load("perp_funding_spread_portfolio_v1.json")
+    if err: dash["errors"]["perp_funding_spread_portfolio_100"] = err
+    elif isinstance(s, dict):
+        start=f(s.get("starting_capital_quote"),100.0);eq=f(s.get("realized_equity_quote"),start);pos=s.get("positions") or {};resolved=s.get("resolved") or []
+        dash["branches"]["perp_funding_spread_portfolio_100"]={"metric_type":"future_only_capital_normalized_realized_quote_pnl",
+            "starting_capital_quote":round(start,8),"realized_equity_quote":round(eq,8),"realized_pnl_quote":round(f(s.get("realized_pnl_quote")),8),
+            "realized_return_pct":round((eq/start-1.0)*100.0,8) if start>0 else None,"open_positions":len(pos),"resolved_positions":len(resolved),
+            "max_dd_pct":round(f(s.get("max_dd_pct")),8),"resolved_normalized_pnl":stats([x.get("normalized_pnl") for x in resolved]),
+            "rule_frozen_at":s.get("rule_frozen_at")}
+
+    s, err = load("moex_broad_portfolio_v1.json")
+    if err: dash["errors"]["moex_broad_portfolio_100"] = err
+    elif isinstance(s, dict):
+        start=f(s.get("starting_capital"),100.0);books=s.get("books") or {}
+        def moex_book(kind):
+            b=books.get(kind) or {};eq=f(b.get("equity"),start);resolved=b.get("resolved") or []
+            rub=[f(x.get("one_contract_net_rub_stress_estimate")) for x in resolved if x.get("one_contract_net_rub_stress_estimate") is not None]
+            wins=sum(1 for x in resolved if f(x.get("normalized_pnl"))>0)
+            return {"equity":round(eq,8),"pnl":round(eq-start,8),"return_pct":round((eq/start-1.0)*100.0,8) if start>0 else None,
+                "open_positions":len(b.get("positions") or {}),"resolved_positions":len(resolved),"wins":wins,
+                "win_rate":round(wins/len(resolved),6) if resolved else None,"max_dd_pct":round(f(b.get("max_dd_pct")),8),
+                "normalized_pnl":stats([x.get("normalized_pnl") for x in resolved]),
+                "one_contract_net_rub_stress":{"count":len(rub),"sum":round(sum(rub),8),"mean":round(sum(rub)/len(rub),8) if rub else None,
+                    "recent":[{"secid":x.get("secid"),"value_rub":round(f(x.get("one_contract_net_rub_stress_estimate")),8)}
+                              for x in resolved[-12:] if x.get("one_contract_net_rub_stress_estimate") is not None]}}
+        dash["branches"]["moex_broad_portfolio_100"]={"metric_type":"future_only_capital_normalized_paper","starting_capital":round(start,8),
+            "rule_frozen_at":s.get("rule_frozen_at"),"no_historical_backfill":True,"continuation":moex_book("continuation"),"reversal":moex_book("reversal")}
+
     s, err = load("moex_broad_futures_shadow_v1.json")
     if err: dash["errors"]["moex_broad"] = err
     elif isinstance(s, dict):

@@ -94,6 +94,40 @@ class EvidenceDashboardV1:
         ws_fresh_tickers = int(bybit_ws.get("fresh_ticker_symbols") or 0)
         ws_fresh = ws_age is not None and ws_age <= 120.0 and ws_fresh_books > 0
 
+        moex_start = self._f(moex_portfolio.get("starting_capital"), 100.0)
+        moex_books = moex_portfolio.get("books") or {}
+
+        def moex_book_metrics(kind: str) -> dict:
+            book = moex_books.get(kind) or {}
+            equity = self._f(book.get("equity"), moex_start)
+            resolved = book.get("resolved") or []
+            rub = [
+                self._f(x.get("one_contract_net_rub_stress_estimate"))
+                for x in resolved
+                if x.get("one_contract_net_rub_stress_estimate") is not None
+            ]
+            wins = sum(1 for x in resolved if self._f(x.get("normalized_pnl")) > 0)
+            return {
+                "starting_capital": moex_start,
+                "equity": equity,
+                "pnl": equity - moex_start,
+                "return_pct": ((equity / moex_start) - 1.0) * 100.0 if moex_start > 0 else None,
+                "open_positions": len(book.get("positions") or {}),
+                "resolved_positions": len(resolved),
+                "wins": wins,
+                "win_rate": (wins / len(resolved)) if resolved else None,
+                "max_dd_pct": self._f(book.get("max_dd_pct")),
+                "one_contract_net_rub_stress_count": len(rub),
+                "one_contract_net_rub_stress_sum": sum(rub),
+                "one_contract_net_rub_stress_mean": (sum(rub) / len(rub)) if rub else None,
+                "recent_one_contract_net_rub_stress": [
+                    {"secid": x.get("secid"), "value_rub": self._f(x.get("one_contract_net_rub_stress_estimate"))}
+                    for x in resolved[-12:]
+                    if x.get("one_contract_net_rub_stress_estimate") is not None
+                ],
+                "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER",
+            }
+
         source_health = {
             "arb_bybit_cloud_symbols": cloud_bybit_symbols,
             "arb_bybit_cloud_error": venue_errors.get("Bybit"),
@@ -119,24 +153,8 @@ class EvidenceDashboardV1:
             "paper_only": True,
             "live_enabled": False,
             "portfolio_metrics": {
-                "moex_continuation_100": {
-                    "starting_capital": self._f(moex_portfolio.get("starting_capital"), 100.0),
-                    "equity": self._f(((moex_portfolio.get("books") or {}).get("continuation") or {}).get("equity"), 100.0),
-                    "pnl": self._f(((moex_portfolio.get("books") or {}).get("continuation") or {}).get("equity"), 100.0) - self._f(moex_portfolio.get("starting_capital"), 100.0),
-                    "open_positions": len((((moex_portfolio.get("books") or {}).get("continuation") or {}).get("positions") or {})),
-                    "resolved_positions": len((((moex_portfolio.get("books") or {}).get("continuation") or {}).get("resolved") or [])),
-                    "max_dd_pct": self._f(((moex_portfolio.get("books") or {}).get("continuation") or {}).get("max_dd_pct")),
-                    "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER",
-                },
-                "moex_reversal_100": {
-                    "starting_capital": self._f(moex_portfolio.get("starting_capital"), 100.0),
-                    "equity": self._f(((moex_portfolio.get("books") or {}).get("reversal") or {}).get("equity"), 100.0),
-                    "pnl": self._f(((moex_portfolio.get("books") or {}).get("reversal") or {}).get("equity"), 100.0) - self._f(moex_portfolio.get("starting_capital"), 100.0),
-                    "open_positions": len((((moex_portfolio.get("books") or {}).get("reversal") or {}).get("positions") or {})),
-                    "resolved_positions": len((((moex_portfolio.get("books") or {}).get("reversal") or {}).get("resolved") or [])),
-                    "max_dd_pct": self._f(((moex_portfolio.get("books") or {}).get("reversal") or {}).get("max_dd_pct")),
-                    "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER",
-                },
+                "moex_continuation_100": moex_book_metrics("continuation"),
+                "moex_reversal_100": moex_book_metrics("reversal"),
                 "classic_spot_arb_100usdt": {
                     "starting_capital_quote": self._f(classic_arb_portfolio.get("starting_capital_quote"), 100.0),
                     "realized_equity_quote": self._f(classic_arb_portfolio.get("realized_equity_quote"), 100.0),
