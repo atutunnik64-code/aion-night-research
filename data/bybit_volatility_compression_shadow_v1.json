@@ -1,9 +1,9 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1790926624.48,
+  "last_processed_ts": 1790927554.235,
   "last_event_ts": {
-    "AAVEUSDT": 1790907938.056,
+    "AAVEUSDT": 1790927491.155,
     "AVAXUSDT": 1790891616.334,
     "LTCUSDT": 1790891743.535,
     "SUIUSDT": 1790891798.414,
@@ -14,7 +14,21 @@
     "ETHUSDT": 1790892335.874,
     "XRPUSDT": 1790892456.157
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "AAVEUSDT:1790927491",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1790927491.155,
+      "due_ts": 1790931091.155,
+      "compression_ratio": 0.4368269812608579,
+      "breakout_move_pct": -0.6868949104873123,
+      "entry": 183.62,
+      "breakout_side": -1.0,
+      "fakeout_side": 1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [
     {
       "id": "AAVEUSDT:1790891434",
