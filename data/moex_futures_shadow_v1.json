@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 123,
-  "last_source_ts": 1790928261.6629813,
+  "sample_count": 124,
+  "last_source_ts": 1790928511.076941,
   "latest": {
-    "source_ts": 1790928261.6629813,
+    "source_ts": 1790928511.076941,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4245.1,
+      "front_px": 4247.2,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
       "next_px": 4295.0,
-      "curve_pct": 1.175472898164931
+      "curve_pct": 1.1254473535505793
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.22,
+      "front_px": 62.29,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.86,
-      "curve_pct": 2.6358084217293465
+      "curve_pct": 2.5204687750842947
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28382.0,
+      "front_px": 28404.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
-      "next_px": 29337.0,
-      "curve_pct": 3.3648086815587286
+      "next_px": 29360.0,
+      "curve_pct": 3.3657231375862517
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11177.7,
-      "oi": 1607484,
-      "volume": 51617
+      "px": 11181.1,
+      "oi": 1607400,
+      "volume": 52702
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.4,
-      "oi": 80208,
-      "volume": 1334
+      "px": 161.6,
+      "oi": 80198,
+      "volume": 1344
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 275.84,
-      "oi": 240068,
-      "volume": 3074
+      "px": 276.05,
+      "oi": 240078,
+      "volume": 3085
     },
-    "gold_silver_ratio": 68.22725811636131,
-    "sber_perp_vs_front_pct": -2.8116411810302333,
+    "gold_silver_ratio": 68.18429924546476,
+    "sber_perp_vs_front_pct": -2.812984086748349,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
