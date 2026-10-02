@@ -50,6 +50,7 @@ class EvidenceDashboardV1:
         bybit_ws = self._read("bybit_spot_ws_mirror_v1.json")
         orderbook = self._read("crossvenue_orderbook_consensus_shadow_v1.json")
         funding = self._read("perp_funding_spread_paper.json")
+        funding_portfolio = self._read("perp_funding_spread_portfolio_v1.json")
         moex = self._read("moex_broad_futures_shadow_v1.json")
         moex_portfolio = self._read("moex_broad_portfolio_v1.json")
         calendar = self._read("moex_calendar_matrix_shadow_v1.json")
@@ -113,7 +114,7 @@ class EvidenceDashboardV1:
         }
 
         return {
-            "version": "EVIDENCE_DASHBOARD_V4_MOEX_CAPITAL_NORMALIZED",
+            "version": "EVIDENCE_DASHBOARD_V5_CAPITAL_BOOKS",
             "generated_at": now,
             "paper_only": True,
             "live_enabled": False,
@@ -145,6 +146,16 @@ class EvidenceDashboardV1:
                     "bybit_trade_count": sum(1 for z in (classic_arb_portfolio.get("trades") or []) if z.get("includes_bybit")),
                     "locked_capital_quote": self._f(classic_arb_portfolio.get("locked_capital_quote")),
                     "metric_type": "CAPITAL_NORMALIZED_REALIZED_CONSERVATIVE_PAPER",
+                },
+                "perp_funding_100usdt": {
+                    "starting_capital_quote": self._f(funding_portfolio.get("starting_capital_quote"), 100.0),
+                    "realized_equity_quote": self._f(funding_portfolio.get("realized_equity_quote"), 100.0),
+                    "realized_pnl_quote": self._f(funding_portfolio.get("realized_pnl_quote")),
+                    "realized_return_pct": ((self._f(funding_portfolio.get("realized_equity_quote"), 100.0) / self._f(funding_portfolio.get("starting_capital_quote"), 100.0)) - 1.0) * 100.0 if self._f(funding_portfolio.get("starting_capital_quote"), 100.0) > 0 else None,
+                    "open_positions": len(funding_portfolio.get("positions") or {}),
+                    "resolved_positions": len(funding_portfolio.get("resolved") or []),
+                    "max_dd_pct": self._f(funding_portfolio.get("max_dd_pct")),
+                    "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_REALIZED",
                 },
                 "spot_perp_100usdt": {
                     "starting_capital_quote": sp_start,
@@ -253,7 +264,7 @@ class EvidenceDashboardV1:
     def status(self):
         return {
             "ok": self.last_error is None,
-            "strategy": "EVIDENCE_DASHBOARD_V4_MOEX_CAPITAL_NORMALIZED",
+            "strategy": "EVIDENCE_DASHBOARD_V5_CAPITAL_BOOKS",
             "paper_only": True,
             "live_enabled": False,
             "last_refresh": self.last_refresh,
