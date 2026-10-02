@@ -1,7 +1,7 @@
 {
   "version": "FUNDING_OI_BYBIT_V1",
   "rule_frozen_at": 1790832319.629528,
-  "last_processed_ts": 1790928383.38,
+  "last_processed_ts": 1790928572.434,
   "last_event_ts": {
     "DOGEUSDT": 1790925121.334,
     "SUIUSDT": 1790925121.214,
@@ -290,5 +290,5 @@
   "fade_equity": 100.01221027723432,
   "fade_peak": 100.11129303763069,
   "fade_max_dd_pct": -0.0989726107714195,
-  "last_new_events": 1
+  "last_new_events": 0
 }
