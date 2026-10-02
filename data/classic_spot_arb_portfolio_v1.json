@@ -1,0 +1,67 @@
+{
+  "version": "CLASSIC_SPOT_ARB_PORTFOLIO_V1_100USDT",
+  "rule_frozen_at": 1790925377.8010478,
+  "starting_capital_quote": 100.0,
+  "realized_equity_quote": 100.41404784319307,
+  "realized_pnl_quote": 0.4140478431930745,
+  "peak_equity_quote": 100.41404784319307,
+  "max_dd_pct": 0.0,
+  "last_processed_ts": 1790925573.774709,
+  "locks": [
+    {
+      "signature": "DMC:Bitget>Gate",
+      "opened_ts": 1790925402.5603611,
+      "release_ts": 1790925702.5603611,
+      "capital_quote": 50.0
+    },
+    {
+      "signature": "DMC:Bitget>KuCoin",
+      "opened_ts": 1790925402.5603611,
+      "release_ts": 1790925702.5603611,
+      "capital_quote": 50.0
+    }
+  ],
+  "trades": [
+    {
+      "ts": 1790925402.5603611,
+      "signature": "DMC:Bitget>Gate",
+      "base": "DMC",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "identity_confidence": "CONTRACT_VERIFIED",
+      "notional_per_leg_quote": 25.0,
+      "capital_required_quote": 50.0,
+      "execution_net_pct": 1.0573803921744551,
+      "conservative_net_pct": 0.9073803921744551,
+      "realized_conservative_pnl_quote": 0.22684509804361377,
+      "equity_before_quote": 100.0,
+      "equity_after_quote": 100.22684509804361,
+      "release_ts": 1790925702.5603611,
+      "includes_bybit": false
+    },
+    {
+      "ts": 1790925402.5603611,
+      "signature": "DMC:Bitget>KuCoin",
+      "base": "DMC",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "identity_confidence": "CONTRACT_VERIFIED",
+      "notional_per_leg_quote": 25.0,
+      "capital_required_quote": 50.0,
+      "execution_net_pct": 0.8988109805978549,
+      "conservative_net_pct": 0.7488109805978548,
+      "realized_conservative_pnl_quote": 0.1872027451494637,
+      "equity_before_quote": 100.22684509804361,
+      "equity_after_quote": 100.41404784319307,
+      "release_ts": 1790925702.5603611,
+      "includes_bybit": false
+    }
+  ],
+  "skipped_capital": 15,
+  "skipped_identity": 7,
+  "skipped_nonpositive_conservative": 2,
+  "last_new_source_events": 0,
+  "last_new_trades": 0,
+  "locked_capital_quote": 100.0,
+  "available_capital_quote": 0.4140478431930745
+}
