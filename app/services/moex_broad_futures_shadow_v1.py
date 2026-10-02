@@ -61,7 +61,7 @@ class MoexBroadFuturesShadowV1:
                     if (sec,kind) in active:continue
                     key=f'{sec}:{kind}';prev=float((self.state.get('last_event_ts') or {}).get(key) or 0)
                     if now-prev<COOLDOWN_SEC:continue
-                    p={'id':f'{sec}:{kind}:{int(now)}','secid':sec,'asset':r.get('ASSETCODE'),'tier':tier,'kind':kind,'opened_at':now,'due_ts':now+HOLD_SEC,'entry':px,'side':side,'trigger_move_pct':move,'round_trip_cost_pct':cost,'liquidity_value_today':float(r.get('VALTODAY') or 0),'liquidity_volume_today':float(r.get('VOLTODAY') or 0)}
+                    p={'id':f'{sec}:{kind}:{int(now)}','secid':sec,'asset':r.get('ASSETCODE'),'tier':tier,'kind':kind,'opened_at':now,'due_ts':now+HOLD_SEC,'entry':px,'side':side,'trigger_move_pct':move,'round_trip_cost_pct':cost,'contract_value_rub':float(r.get('LAST_RUB') or 0),'liquidity_value_today':float(r.get('VALTODAY') or 0),'liquidity_volume_today':float(r.get('VOLTODAY') or 0)}
                     self.state.setdefault('pending',[]).append(p);self.state.setdefault('last_event_ts',{})[key]=now;active.add((sec,kind));new_events+=1
             self.state['last_source_ts']=src;self.state['last_refresh']=now;self.state['observed_contracts']=len(rows);self.state['priced_contracts']=len(pxmap);self.state['tier_counts']=tier_counts;self.state['last_new_events']=new_events;self._save();self.last_error=None
         except Exception as exc:self.last_error=str(exc)[:500]
