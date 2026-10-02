@@ -1,57 +1,57 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 117,
-  "last_source_ts": 1790925122.1352627,
+  "sample_count": 118,
+  "last_source_ts": 1790925377.8913271,
   "latest": {
-    "source_ts": 1790925122.1352627,
+    "source_ts": 1790925377.8913271,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
-      "front_px": 4243.6,
+      "front_px": 4242.5,
       "next": "GDH7",
       "next_name": "GOLD-3.27",
-      "next_px": 4294.8,
-      "curve_pct": 1.206522763691198
+      "next_px": 4293.5,
+      "curve_pct": 1.202121390689448
     },
     "silver": {
       "front": "SVZ6",
       "front_name": "SILV-12.26",
-      "front_px": 62.2,
+      "front_px": 62.19,
       "next": "SVH7",
       "next_name": "SILV-3.27",
       "next_px": 63.76,
-      "curve_pct": 2.508038585209005
+      "curve_pct": 2.524521627271259
     },
     "sber": {
       "front": "SRZ6",
       "front_name": "SBRF-12.26",
-      "front_px": 28413.0,
+      "front_px": 28408.0,
       "next": "SRH7",
       "next_name": "SBRF-3.27",
-      "next_px": 29389.0,
-      "curve_pct": 3.4350473374863633
+      "next_px": 29364.0,
+      "curve_pct": 3.365249225570266
     },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11213.4,
-      "oi": 1614422,
-      "volume": 30577
+      "px": 11201.1,
+      "oi": 1613866,
+      "volume": 31646
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 161.9,
-      "oi": 79814,
-      "volume": 854
+      "px": 161.72,
+      "oi": 80210,
+      "volume": 1109
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 276.21,
-      "oi": 240730,
-      "volume": 1614
+      "px": 276.13,
+      "oi": 240564,
+      "volume": 1707
     },
-    "gold_silver_ratio": 68.2250803858521,
-    "sber_perp_vs_front_pct": -2.7874564459930307,
+    "gold_silver_ratio": 68.21836308088118,
+    "sber_perp_vs_front_pct": -2.7985074626865725,
     "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188

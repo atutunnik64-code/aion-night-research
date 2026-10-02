@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1790925500.134,
+  "last_processed_ts": 1790926350.18,
   "last_event_ts": {
     "DOGEUSDT": 1790925121.334,
     "ADAUSDT": 1790925121.332,
