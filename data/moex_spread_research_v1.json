@@ -1,14 +1,14 @@
 {
   "version": "MOEX_SPREAD_RESEARCH_V1",
   "started_at": 1790788001.686441,
-  "refresh_count": 174,
+  "refresh_count": 186,
   "last": {
-    "ts": 1790990285.1746624,
+    "ts": 1791011784.8294702,
     "mode": "MOEX_SPREAD_RESEARCH_ONLY",
     "paper_only": true,
     "live_enabled": false,
-    "source_samples": 108,
-    "collection_hours": 51.922408989601664,
+    "source_samples": 110,
+    "collection_hours": 57.894535325103334,
     "gate_ready": false,
     "assets": [
       {
@@ -37,15 +37,15 @@
       },
       {
         "asset": "BR",
-        "samples": 85,
+        "samples": 87,
         "front": "BRX6",
         "next": "BRZ6",
-        "curve_pct": -3.55892648774796,
-        "mean_curve_pct": -3.457128142959555,
-        "stdev_curve_pct": 1.097655720471283,
-        "zscore": -0.0927,
+        "curve_pct": -3.5344659246240973,
+        "mean_curve_pct": -3.459270718471962,
+        "stdev_curve_pct": 1.0850582062935905,
+        "zscore": -0.0693,
         "front_tier": "CORE",
-        "next_tier": "CORE"
+        "next_tier": "WATCH"
       },
       {
         "asset": "GOLD",
@@ -1179,5 +1179,5 @@
       }
     ]
   },
-  "last_refresh": 1790990285.1746624
+  "last_refresh": 1791011784.8294702
 }

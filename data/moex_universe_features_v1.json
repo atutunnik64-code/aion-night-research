@@ -1,8 +1,8 @@
 {
   "version": "MOEX_UNIVERSE_FEATURES_V1",
   "started_at": 1790803364.5022998,
-  "samples": 108,
-  "last_source_ts": 1790989985.1472852,
+  "samples": 110,
+  "last_source_ts": 1791011484.7623327,
   "assets": {
     "CNY": {
       "curve_pct": [
@@ -764,7 +764,9 @@
         -3.567262830482121,
         -3.5314719330674316,
         -3.571081054782521,
-        -3.55892648774796
+        -3.55892648774796,
+        -3.5661944308744475,
+        -3.5344659246240973
       ],
       "front_value_today": [
         27076449865.0,
@@ -851,7 +853,9 @@
         94285561624.0,
         94462707003.0,
         94677065157.0,
-        95409497869.0
+        95409497869.0,
+        109651411.0,
+        152148899.0
       ],
       "next_value_today": [
         40180369675.0,
@@ -938,13 +942,15 @@
         3723849743.0,
         3724758084.0,
         3725500666.0,
-        3748538930.0
+        3748538930.0,
+        1895485.0,
+        2307729.0
       ],
-      "samples": 85,
+      "samples": 87,
       "front": "BRX6",
       "next": "BRZ6",
       "front_tier": "CORE",
-      "next_tier": "CORE"
+      "next_tier": "WATCH"
     },
     "GOLD": {
       "curve_pct": [
@@ -17429,9 +17435,9 @@
       "next_tier": "WATCH"
     }
   },
-  "last_refresh": 1790975000.2006142,
+  "last_refresh": 1791011784.5169408,
   "quality_version": 2,
   "legacy_duplicate_samples_compacted": 1260,
-  "last_market_fingerprint": "d97e76b4a9b1df445b0b7c740c5afe0a15410fed8b9880c2dbdfdf3f37c3ba55",
-  "last_unchanged_skip": 1790990285.1189866
+  "last_market_fingerprint": "63ed35dad02c943d71a7a05595be5691df267fb46c1ef81204a0d366157fb3a9",
+  "last_unchanged_skip": 1791011183.6921895
 }
