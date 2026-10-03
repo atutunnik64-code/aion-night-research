@@ -1,31 +1,58 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 184,
-  "last_source_ts": 1791011497.2830873,
+  "sample_count": 196,
+  "last_source_ts": 1791033388.8994348,
   "latest": {
-    "source_ts": 1791011497.2830873,
-    "gold": null,
-    "silver": null,
-    "sber": null,
+    "source_ts": 1791033388.8994348,
+    "gold": {
+      "front": "GDZ6",
+      "front_name": "GOLD-12.26",
+      "front_px": 4199.8,
+      "next": "GDH7",
+      "next_name": "GOLD-3.27",
+      "next_px": 4248.9,
+      "curve_pct": 1.1691032906328669
+    },
+    "silver": {
+      "front": "SVZ6",
+      "front_name": "SILV-12.26",
+      "front_px": 61.51,
+      "next": "SVH7",
+      "next_name": "SILV-3.27",
+      "next_px": 63.12,
+      "curve_pct": 2.617460575516173
+    },
+    "sber": {
+      "front": "SRZ6",
+      "front_name": "SBRF-12.26",
+      "front_px": 28356.0,
+      "next": "SRH7",
+      "next_name": "SBRF-3.27",
+      "next_px": 29315.0,
+      "curve_pct": 3.382000282127229
+    },
     "gldrubl_perp": {
       "secid": "GLDRUBF",
-      "px": 11143.0,
-      "oi": 1547800,
-      "volume": 436
+      "px": 11148.8,
+      "oi": 1551912,
+      "volume": 7020
     },
     "slvrubl_perp": {
       "secid": "SLVRUBF",
-      "px": 0.0,
-      "oi": 79682,
-      "volume": 0
+      "px": 161.3,
+      "oi": 79782,
+      "volume": 206
     },
     "sber_perp": {
       "secid": "SBERF",
-      "px": 275.98,
-      "oi": 240758,
-      "volume": 97
-    }
+      "px": 275.8,
+      "oi": 240732,
+      "volume": 342
+    },
+    "gold_silver_ratio": 68.27832872703625,
+    "sber_perp_vs_front_pct": -2.73663422203414,
+    "sber_perp_normalization": "MOEX_LAST_RUB"
   },
   "first_source_ts": 1790788001.7400188
 }
