@@ -1,426 +1,12 @@
 {
   "version": "CROSSVENUE_LIQUIDATION_ASYMMETRY_COLLECTOR_V2_WS_CONTEXT",
   "started_at": 1790832319.6268837,
-  "bybit_events": 730,
-  "bybit_notional_usdt": 4267520.728740005,
-  "context_count": 4007,
-  "last_event_at": 1790976799.4784544,
-  "last_context_at": 1790977016.9415202,
+  "bybit_events": 776,
+  "bybit_notional_usdt": 4535444.399420006,
+  "context_count": 4715,
+  "last_event_at": 1790990246.0841067,
+  "last_context_at": 1790990496.7354858,
   "recent": [
-    {
-      "event_time": 1790930721343,
-      "symbol": "LTCUSDT",
-      "position_side": "Sell",
-      "pressure_side": "BUY",
-      "price": 71.05,
-      "qty": 6.7,
-      "notional_usdt": 476.03499999999997
-    },
-    {
-      "event_time": 1790931082730,
-      "symbol": "AAVEUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 180.05,
-      "qty": 0.85,
-      "notional_usdt": 153.04250000000002
-    },
-    {
-      "event_time": 1790931180900,
-      "symbol": "ADAUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 0.2529,
-      "qty": 21505.0,
-      "notional_usdt": 5438.614500000001
-    },
-    {
-      "event_time": 1790931295871,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2743.41,
-      "qty": 0.05,
-      "notional_usdt": 137.1705
-    },
-    {
-      "event_time": 1790931297203,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2742.52,
-      "qty": 0.87,
-      "notional_usdt": 2385.9924
-    },
-    {
-      "event_time": 1790931526454,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 85941.5,
-      "qty": 0.082,
-      "notional_usdt": 7047.203
-    },
-    {
-      "event_time": 1790931661361,
-      "symbol": "SOLUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 121.35,
-      "qty": 0.3,
-      "notional_usdt": 36.404999999999994
-    },
-    {
-      "event_time": 1790931671197,
-      "symbol": "SOLUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 121.31,
-      "qty": 99.3,
-      "notional_usdt": 12046.083
-    },
-    {
-      "event_time": 1790931676003,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2741.95,
-      "qty": 0.2,
-      "notional_usdt": 548.39
-    },
-    {
-      "event_time": 1790931678088,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2741.78,
-      "qty": 0.51,
-      "notional_usdt": 1398.3078
-    },
-    {
-      "event_time": 1790931722135,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2741.19,
-      "qty": 0.05,
-      "notional_usdt": 137.0595
-    },
-    {
-      "event_time": 1790931806066,
-      "symbol": "SOLUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 121.15,
-      "qty": 4.8,
-      "notional_usdt": 581.52
-    },
-    {
-      "event_time": 1790931808947,
-      "symbol": "SUIUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 1.1682,
-      "qty": 1400.0,
-      "notional_usdt": 1635.4799999999998
-    },
-    {
-      "event_time": 1790931813927,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 85866.4,
-      "qty": 0.001,
-      "notional_usdt": 85.8664
-    },
-    {
-      "event_time": 1790931819695,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 85861.6,
-      "qty": 0.004,
-      "notional_usdt": 343.44640000000004
-    },
-    {
-      "event_time": 1790931823874,
-      "symbol": "SOLUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 121.09,
-      "qty": 9.2,
-      "notional_usdt": 1114.028
-    },
-    {
-      "event_time": 1790931835278,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 85854.6,
-      "qty": 0.002,
-      "notional_usdt": 171.7092
-    },
-    {
-      "event_time": 1790931868742,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2738.71,
-      "qty": 35.0,
-      "notional_usdt": 95854.85
-    },
-    {
-      "event_time": 1790931868742,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 85829.9,
-      "qty": 2.3,
-      "notional_usdt": 197408.76999999996
-    },
-    {
-      "event_time": 1790932393719,
-      "symbol": "LTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 69.53,
-      "qty": 35.2,
-      "notional_usdt": 2447.456
-    },
-    {
-      "event_time": 1790955972836,
-      "symbol": "XRPUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 1.496,
-      "qty": 50.5,
-      "notional_usdt": 75.548
-    },
-    {
-      "event_time": 1790955981495,
-      "symbol": "XRPUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 1.4956,
-      "qty": 792.6,
-      "notional_usdt": 1185.41256
-    },
-    {
-      "event_time": 1790955982252,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84975.0,
-      "qty": 0.005,
-      "notional_usdt": 424.875
-    },
-    {
-      "event_time": 1790955982465,
-      "symbol": "XRPUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 1.4951,
-      "qty": 135.8,
-      "notional_usdt": 203.03458000000003
-    },
-    {
-      "event_time": 1790955982879,
-      "symbol": "XRPUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 1.4948,
-      "qty": 664.2,
-      "notional_usdt": 992.84616
-    },
-    {
-      "event_time": 1790956354705,
-      "symbol": "BTCUSDT",
-      "position_side": "Sell",
-      "pressure_side": "BUY",
-      "price": 85600.6,
-      "qty": 0.01,
-      "notional_usdt": 856.0060000000001
-    },
-    {
-      "event_time": 1790956445160,
-      "symbol": "AAVEUSDT",
-      "position_side": "Sell",
-      "pressure_side": "BUY",
-      "price": 184.62,
-      "qty": 0.98,
-      "notional_usdt": 180.9276
-    },
-    {
-      "event_time": 1790956445747,
-      "symbol": "AAVEUSDT",
-      "position_side": "Sell",
-      "pressure_side": "BUY",
-      "price": 185.0,
-      "qty": 0.23,
-      "notional_usdt": 42.550000000000004
-    },
-    {
-      "event_time": 1790956483760,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84942.0,
-      "qty": 0.006,
-      "notional_usdt": 509.652
-    },
-    {
-      "event_time": 1790956484361,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84937.4,
-      "qty": 0.033,
-      "notional_usdt": 2802.9342
-    },
-    {
-      "event_time": 1790956486938,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84932.3,
-      "qty": 0.008,
-      "notional_usdt": 679.4584
-    },
-    {
-      "event_time": 1790956487876,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84922.1,
-      "qty": 0.002,
-      "notional_usdt": 169.84420000000003
-    },
-    {
-      "event_time": 1790956487927,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84922.6,
-      "qty": 0.004,
-      "notional_usdt": 339.6904
-    },
-    {
-      "event_time": 1790956487983,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84924.7,
-      "qty": 0.006,
-      "notional_usdt": 509.5482
-    },
-    {
-      "event_time": 1790956488012,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84929.1,
-      "qty": 0.002,
-      "notional_usdt": 169.8582
-    },
-    {
-      "event_time": 1790956488093,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84927.9,
-      "qty": 0.09,
-      "notional_usdt": 7643.5109999999995
-    },
-    {
-      "event_time": 1790956488568,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84923.7,
-      "qty": 0.004,
-      "notional_usdt": 339.6948
-    },
-    {
-      "event_time": 1790956502337,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84911.9,
-      "qty": 0.211,
-      "notional_usdt": 17916.4109
-    },
-    {
-      "event_time": 1790956502925,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84903.4,
-      "qty": 0.097,
-      "notional_usdt": 8235.629799999999
-    },
-    {
-      "event_time": 1790956521081,
-      "symbol": "ETHUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 2682.9,
-      "qty": 15.46,
-      "notional_usdt": 41477.634000000005
-    },
-    {
-      "event_time": 1790956521023,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84887.6,
-      "qty": 0.003,
-      "notional_usdt": 254.66280000000003
-    },
-    {
-      "event_time": 1790956521081,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84883.9,
-      "qty": 0.554,
-      "notional_usdt": 47025.6806
-    },
-    {
-      "event_time": 1790956522406,
-      "symbol": "XRPUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 1.4944,
-      "qty": 252.6,
-      "notional_usdt": 377.48544
-    },
-    {
-      "event_time": 1790956522977,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84882.1,
-      "qty": 0.142,
-      "notional_usdt": 12053.2582
-    },
-    {
-      "event_time": 1790956526994,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84875.1,
-      "qty": 0.011,
-      "notional_usdt": 933.6261000000001
-    },
-    {
-      "event_time": 1790956527121,
-      "symbol": "BTCUSDT",
-      "position_side": "Buy",
-      "pressure_side": "SELL",
-      "price": 84868.1,
-      "qty": 0.028,
-      "notional_usdt": 2376.3068000000003
-    },
     {
       "event_time": 1790956527453,
       "symbol": "XRPUSDT",
@@ -906,154 +492,568 @@
       "price": 2646.89,
       "qty": 0.05,
       "notional_usdt": 132.3445
+    },
+    {
+      "event_time": 1790986984680,
+      "symbol": "AAVEUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 177.26,
+      "qty": 3.13,
+      "notional_usdt": 554.8238
+    },
+    {
+      "event_time": 1790986994125,
+      "symbol": "AAVEUSDT",
+      "position_side": "Buy",
+      "pressure_side": "SELL",
+      "price": 177.2,
+      "qty": 0.24,
+      "notional_usdt": 42.528
+    },
+    {
+      "event_time": 1790987111936,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.48,
+      "qty": 0.6,
+      "notional_usdt": 71.688
+    },
+    {
+      "event_time": 1790987130578,
+      "symbol": "SUIUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.1816,
+      "qty": 2220.0,
+      "notional_usdt": 2623.152
+    },
+    {
+      "event_time": 1790987209653,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2679.11,
+      "qty": 0.02,
+      "notional_usdt": 53.5822
+    },
+    {
+      "event_time": 1790987262487,
+      "symbol": "DOGEUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 0.09394,
+      "qty": 1015.0,
+      "notional_usdt": 95.34909999999999
+    },
+    {
+      "event_time": 1790987281368,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2679.93,
+      "qty": 0.64,
+      "notional_usdt": 1715.1552
+    },
+    {
+      "event_time": 1790987285197,
+      "symbol": "SUIUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.1866,
+      "qty": 1020.0,
+      "notional_usdt": 1210.332
+    },
+    {
+      "event_time": 1790987350586,
+      "symbol": "DOGEUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 0.09411,
+      "qty": 132071.0,
+      "notional_usdt": 12429.20181
+    },
+    {
+      "event_time": 1790987448144,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.58,
+      "qty": 294.2,
+      "notional_usdt": 35180.436
+    },
+    {
+      "event_time": 1790987473191,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.59,
+      "qty": 11.5,
+      "notional_usdt": 1375.285
+    },
+    {
+      "event_time": 1790987473835,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2681.59,
+      "qty": 0.73,
+      "notional_usdt": 1957.5607
+    },
+    {
+      "event_time": 1790987478126,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.4966,
+      "qty": 103.0,
+      "notional_usdt": 154.1498
+    },
+    {
+      "event_time": 1790987508294,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.7,
+      "qty": 0.4,
+      "notional_usdt": 47.88
+    },
+    {
+      "event_time": 1790987530017,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84846.0,
+      "qty": 0.148,
+      "notional_usdt": 12557.207999999999
+    },
+    {
+      "event_time": 1790987650392,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84869.0,
+      "qty": 0.013,
+      "notional_usdt": 1103.297
+    },
+    {
+      "event_time": 1790987653055,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2682.88,
+      "qty": 5.21,
+      "notional_usdt": 13977.8048
+    },
+    {
+      "event_time": 1790987676973,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2683.41,
+      "qty": 1.74,
+      "notional_usdt": 4669.1334
+    },
+    {
+      "event_time": 1790987788424,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84880.0,
+      "qty": 0.048,
+      "notional_usdt": 4074.2400000000002
+    },
+    {
+      "event_time": 1790987828910,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84890.8,
+      "qty": 0.102,
+      "notional_usdt": 8658.8616
+    },
+    {
+      "event_time": 1790987832578,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2684.84,
+      "qty": 0.04,
+      "notional_usdt": 107.3936
+    },
+    {
+      "event_time": 1790988268735,
+      "symbol": "AAVEUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 180.7,
+      "qty": 0.24,
+      "notional_usdt": 43.367999999999995
+    },
+    {
+      "event_time": 1790988268735,
+      "symbol": "SUIUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.1966,
+      "qty": 50.0,
+      "notional_usdt": 59.830000000000005
+    },
+    {
+      "event_time": 1790988268735,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.62,
+      "qty": 0.5,
+      "notional_usdt": 59.81
+    },
+    {
+      "event_time": 1790988454673,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84857.7,
+      "qty": 0.148,
+      "notional_usdt": 12558.9396
+    },
+    {
+      "event_time": 1790988630164,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84907.5,
+      "qty": 0.007,
+      "notional_usdt": 594.3525
+    },
+    {
+      "event_time": 1790988639171,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84909.6,
+      "qty": 0.014,
+      "notional_usdt": 1188.7344
+    },
+    {
+      "event_time": 1790988648203,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84918.2,
+      "qty": 0.075,
+      "notional_usdt": 6368.865
+    },
+    {
+      "event_time": 1790988648383,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84918.5,
+      "qty": 0.066,
+      "notional_usdt": 5604.621
+    },
+    {
+      "event_time": 1790988648676,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84919.5,
+      "qty": 0.006,
+      "notional_usdt": 509.517
+    },
+    {
+      "event_time": 1790988649905,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2685.33,
+      "qty": 0.1,
+      "notional_usdt": 268.533
+    },
+    {
+      "event_time": 1790989874616,
+      "symbol": "SUIUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.2056,
+      "qty": 430.0,
+      "notional_usdt": 518.408
+    },
+    {
+      "event_time": 1790989878302,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.4982,
+      "qty": 222.7,
+      "notional_usdt": 333.64914
+    },
+    {
+      "event_time": 1790990083127,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.79,
+      "qty": 250.0,
+      "notional_usdt": 29947.5
+    },
+    {
+      "event_time": 1790990120046,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 119.91,
+      "qty": 2.0,
+      "notional_usdt": 239.82
+    },
+    {
+      "event_time": 1790990146222,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 120.01,
+      "qty": 32.8,
+      "notional_usdt": 3936.328
+    },
+    {
+      "event_time": 1790990164698,
+      "symbol": "ETHUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 2689.02,
+      "qty": 0.51,
+      "notional_usdt": 1371.4002
+    },
+    {
+      "event_time": 1790990177328,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 120.1,
+      "qty": 14.0,
+      "notional_usdt": 1681.3999999999999
+    },
+    {
+      "event_time": 1790990178443,
+      "symbol": "XRPUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.4993,
+      "qty": 2819.1,
+      "notional_usdt": 4226.67663
+    },
+    {
+      "event_time": 1790990201679,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 120.11,
+      "qty": 297.6,
+      "notional_usdt": 35744.736000000004
+    },
+    {
+      "event_time": 1790990203761,
+      "symbol": "SOLUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 120.14,
+      "qty": 418.3,
+      "notional_usdt": 50254.562
+    },
+    {
+      "event_time": 1790990209443,
+      "symbol": "AAVEUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 182.24,
+      "qty": 15.01,
+      "notional_usdt": 2735.4224
+    },
+    {
+      "event_time": 1790990227085,
+      "symbol": "SUIUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 1.2087,
+      "qty": 4320.0,
+      "notional_usdt": 5221.584000000001
+    },
+    {
+      "event_time": 1790990230993,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84941.8,
+      "qty": 0.018,
+      "notional_usdt": 1528.9524
+    },
+    {
+      "event_time": 1790990243092,
+      "symbol": "ADAUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 0.2502,
+      "qty": 51.0,
+      "notional_usdt": 12.7602
+    },
+    {
+      "event_time": 1790990245691,
+      "symbol": "BTCUSDT",
+      "position_side": "Sell",
+      "pressure_side": "BUY",
+      "price": 84946.4,
+      "qty": 0.003,
+      "notional_usdt": 254.83919999999998
     }
   ],
   "last_context": [
     {
-      "ts": 1790976990.356,
-      "symbol": "XRPUSDT",
-      "venue": "Bybit",
-      "open_interest": 229031796.2,
-      "mark_price": 1.4731,
-      "index_price": 1.474,
-      "funding_rate": -2.248e-05,
-      "next_funding_time": 1790985600000,
-      "funding_interval_hours": 8.0,
-      "source": "BYBIT_LINEAR_WS"
-    },
-    {
-      "ts": 1790976990.48,
-      "symbol": "SOLUSDT",
-      "venue": "Bybit",
-      "open_interest": 5709871.8,
-      "mark_price": 117.94,
-      "index_price": 118.033,
-      "funding_rate": -0.00023822,
-      "next_funding_time": 1790985600000,
-      "funding_interval_hours": 8.0,
-      "source": "BYBIT_LINEAR_WS"
-    },
-    {
-      "ts": 1790976991.383,
+      "ts": 1790990471.283,
       "symbol": "BTCUSDT",
       "venue": "Bybit",
-      "open_interest": 56576.355,
-      "mark_price": 84430.32,
-      "index_price": 84473.85,
-      "funding_rate": -3.985e-05,
-      "next_funding_time": 1790985600000,
+      "open_interest": 56248.85,
+      "mark_price": 84577.4,
+      "index_price": 84624.26,
+      "funding_rate": -5.279e-05,
+      "next_funding_time": 1791014400000,
       "funding_interval_hours": 8.0,
       "source": "BYBIT_LINEAR_WS"
     },
     {
-      "ts": 1790976991.574,
-      "symbol": "ETHUSDT",
+      "ts": 1790990471.48,
+      "symbol": "SOLUSDT",
       "venue": "Bybit",
-      "open_interest": 809519.65,
-      "mark_price": 2659.06,
-      "index_price": 2660.61,
-      "funding_rate": -5.893e-05,
-      "next_funding_time": 1790985600000,
+      "open_interest": 5739137.3,
+      "mark_price": 119.22,
+      "index_price": 119.296,
+      "funding_rate": -0.00016599,
+      "next_funding_time": 1791014400000,
       "funding_interval_hours": 8.0,
       "source": "BYBIT_LINEAR_WS"
     },
     {
-      "ts": 1790976991.633,
-      "symbol": "ADAUSDT",
+      "ts": 1790990472.156,
+      "symbol": "XRPUSDT",
       "venue": "Bybit",
-      "open_interest": 280364345.0,
-      "mark_price": 0.2403,
-      "index_price": 0.2405,
-      "funding_rate": -0.00016435,
-      "next_funding_time": 1790985600000,
+      "open_interest": 229589776.6,
+      "mark_price": 1.4892,
+      "index_price": 1.4899,
+      "funding_rate": -0.00013594,
+      "next_funding_time": 1791014400000,
       "funding_interval_hours": 8.0,
       "source": "BYBIT_LINEAR_WS"
     },
     {
-      "ts": 1790976992.535,
-      "symbol": "DOGEUSDT",
-      "venue": "Bybit",
-      "open_interest": 1453330604.0,
-      "mark_price": 0.09171,
-      "index_price": 0.09176,
-      "funding_rate": -0.0001326,
-      "next_funding_time": 1790985600000,
-      "funding_interval_hours": 8.0,
-      "source": "BYBIT_LINEAR_WS"
-    },
-    {
-      "ts": 1790976993.855,
-      "symbol": "AAVEUSDT",
-      "venue": "Bybit",
-      "open_interest": 427467.1,
-      "mark_price": 180.83,
-      "index_price": 180.91,
-      "funding_rate": 0.0001,
-      "next_funding_time": 1790985600000,
-      "funding_interval_hours": 8.0,
-      "source": "BYBIT_LINEAR_WS"
-    },
-    {
-      "ts": 1790976997.734,
-      "symbol": "AVAXUSDT",
-      "venue": "Bybit",
-      "open_interest": 7225020.0,
-      "mark_price": 10.62,
-      "index_price": 10.628,
-      "funding_rate": -6.939e-05,
-      "next_funding_time": 1790985600000,
-      "funding_interval_hours": 8.0,
-      "source": "BYBIT_LINEAR_WS"
-    },
-    {
-      "ts": 1790977005.318,
-      "symbol": "LINKUSDT",
-      "venue": "Bybit",
-      "open_interest": 6092441.9,
-      "mark_price": 13.623,
-      "index_price": 13.634,
-      "funding_rate": -6.948e-05,
-      "next_funding_time": 1790985600000,
-      "funding_interval_hours": 8.0,
-      "source": "BYBIT_LINEAR_WS"
-    },
-    {
-      "ts": 1790977010.414,
+      "ts": 1790990475.314,
       "symbol": "SUIUSDT",
       "venue": "Bybit",
-      "open_interest": 87321320.0,
-      "mark_price": 1.1245,
-      "index_price": 1.12518,
-      "funding_rate": 0.0,
-      "next_funding_time": 1790985600000,
+      "open_interest": 86003240.0,
+      "mark_price": 1.18723,
+      "index_price": 1.18774,
+      "funding_rate": 0.0001,
+      "next_funding_time": 1791014400000,
       "funding_interval_hours": 8.0,
       "source": "BYBIT_LINEAR_WS"
     },
     {
-      "ts": 1790977013.08,
-      "symbol": "BNBUSDT",
+      "ts": 1790990475.575,
+      "symbol": "ETHUSDT",
       "venue": "Bybit",
-      "open_interest": 157816.49,
-      "mark_price": 765.2,
-      "index_price": 765.6,
-      "funding_rate": -0.00014988,
-      "next_funding_time": 1790985600000,
+      "open_interest": 808437.38,
+      "mark_price": 2677.36,
+      "index_price": 2678.55,
+      "funding_rate": -1.314e-05,
+      "next_funding_time": 1791014400000,
       "funding_interval_hours": 8.0,
       "source": "BYBIT_LINEAR_WS"
     },
     {
-      "ts": 1790977016.835,
+      "ts": 1790990475.634,
+      "symbol": "DOGEUSDT",
+      "venue": "Bybit",
+      "open_interest": 1425321235.0,
+      "mark_price": 0.09326,
+      "index_price": 0.09331,
+      "funding_rate": -3.814e-05,
+      "next_funding_time": 1791014400000,
+      "funding_interval_hours": 8.0,
+      "source": "BYBIT_LINEAR_WS"
+    },
+    {
+      "ts": 1790990477.733,
+      "symbol": "ADAUSDT",
+      "venue": "Bybit",
+      "open_interest": 273266512.0,
+      "mark_price": 0.2472,
+      "index_price": 0.2473,
+      "funding_rate": 0.0001,
+      "next_funding_time": 1791014400000,
+      "funding_interval_hours": 8.0,
+      "source": "BYBIT_LINEAR_WS"
+    },
+    {
+      "ts": 1790990482.155,
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "open_interest": 424928.83,
+      "mark_price": 180.27,
+      "index_price": 180.42,
+      "funding_rate": 0.0001,
+      "next_funding_time": 1791014400000,
+      "funding_interval_hours": 8.0,
+      "source": "BYBIT_LINEAR_WS"
+    },
+    {
+      "ts": 1790990482.235,
       "symbol": "LTCUSDT",
       "venue": "Bybit",
-      "open_interest": 1294439.7,
-      "mark_price": 69.32,
-      "index_price": 69.37,
+      "open_interest": 1294833.9,
+      "mark_price": 70.67,
+      "index_price": 70.73,
+      "funding_rate": -6.053e-05,
+      "next_funding_time": 1791014400000,
+      "funding_interval_hours": 8.0,
+      "source": "BYBIT_LINEAR_WS"
+    },
+    {
+      "ts": 1790990486.08,
+      "symbol": "BNBUSDT",
+      "venue": "Bybit",
+      "open_interest": 157554.07,
+      "mark_price": 768.19,
+      "index_price": 768.76,
+      "funding_rate": -0.00014285,
+      "next_funding_time": 1791014400000,
+      "funding_interval_hours": 8.0,
+      "source": "BYBIT_LINEAR_WS"
+    },
+    {
+      "ts": 1790990492.718,
+      "symbol": "LINKUSDT",
+      "venue": "Bybit",
+      "open_interest": 6090777.9,
+      "mark_price": 13.907,
+      "index_price": 13.911,
+      "funding_rate": 8.922e-05,
+      "next_funding_time": 1791014400000,
+      "funding_interval_hours": 8.0,
+      "source": "BYBIT_LINEAR_WS"
+    },
+    {
+      "ts": 1790990496.634,
+      "symbol": "AVAXUSDT",
+      "venue": "Bybit",
+      "open_interest": 7245615.0,
+      "mark_price": 10.908,
+      "index_price": 10.912,
       "funding_rate": 0.0001,
-      "next_funding_time": 1790985600000,
+      "next_funding_time": 1791014400000,
       "funding_interval_hours": 8.0,
       "source": "BYBIT_LINEAR_WS"
     }
   ],
-  "ws_reconnects": 15,
-  "ticker_messages": 1263421
+  "ws_reconnects": 16,
+  "ticker_messages": 1453461
 }

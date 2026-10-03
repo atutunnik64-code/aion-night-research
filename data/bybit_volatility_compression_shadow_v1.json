@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1790976993.855,
+  "last_processed_ts": 1790990436.034,
   "last_event_ts": {
     "AAVEUSDT": 1790927491.155,
     "AVAXUSDT": 1790931116.133,
@@ -14,21 +14,7 @@
     "ETHUSDT": 1790892335.874,
     "XRPUSDT": 1790892456.157
   },
-  "pending": [
-    {
-      "id": "SUIUSDT:1790976648",
-      "symbol": "SUIUSDT",
-      "venue": "Bybit",
-      "ts": 1790976648.515,
-      "due_ts": 1790980248.515,
-      "compression_ratio": 0.4116560879554307,
-      "breakout_move_pct": -0.6879327354658682,
-      "entry": 1.11737,
-      "breakout_side": -1.0,
-      "fakeout_side": 1.0,
-      "round_trip_cost": 0.0012
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "AAVEUSDT:1790891434",
@@ -352,12 +338,31 @@
       "breakout_paper_equity": 100.0923785681176,
       "fakeout_net_return_pct": -2.171546391752579,
       "fakeout_paper_equity": 99.70223312752191
+    },
+    {
+      "id": "SUIUSDT:1790976648",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1790976648.515,
+      "due_ts": 1790980248.515,
+      "compression_ratio": 0.4116560879554307,
+      "breakout_move_pct": -0.6879327354658682,
+      "entry": 1.11737,
+      "breakout_side": -1.0,
+      "fakeout_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 1.16858,
+      "exit_ts": 1790986983.214,
+      "breakout_net_return_pct": -4.703083490696893,
+      "breakout_paper_equity": 99.85700716152344,
+      "fakeout_net_return_pct": 4.463083490696893,
+      "fakeout_paper_equity": 99.92472282285044
     }
   ],
-  "breakout_equity": 100.0923785681176,
+  "breakout_equity": 99.85700716152344,
   "breakout_peak": 100.25418084541269,
   "breakout_max_dd_pct": -0.43731008357105194,
-  "fakeout_equity": 99.70223312752191,
+  "fakeout_equity": 99.92472282285044,
   "fakeout_peak": 100.05081115577917,
   "fakeout_max_dd_pct": -0.3484010016815642,
   "last_new_events": 0
