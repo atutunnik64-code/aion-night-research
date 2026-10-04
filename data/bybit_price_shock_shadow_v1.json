@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1791074599.683,
+  "last_processed_ts": 1791095863.335,
   "last_event_ts": {
     "DOGEUSDT": 1790986983.334,
     "ADAUSDT": 1791048187.232,
@@ -16,20 +16,7 @@
     "ETHUSDT": 1790973800.974,
     "BNBUSDT": 1791047463.88
   },
-  "pending": [
-    {
-      "id": "LTCUSDT:1791071104",
-      "symbol": "LTCUSDT",
-      "venue": "Bybit",
-      "ts": 1791071104.735,
-      "due_ts": 1791074704.735,
-      "move_15m_pct": 1.4733497038855958,
-      "entry": 70.25,
-      "continuation_side": 1.0,
-      "reversal_side": -1.0,
-      "round_trip_cost": 0.0012
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "DOGEUSDT:1790891131",
@@ -1128,12 +1115,30 @@
       "continuation_paper_equity": 99.45024933009894,
       "reversal_net_return_pct": -0.2196567379027757,
       "reversal_paper_equity": 99.81474633846284
+    },
+    {
+      "id": "LTCUSDT:1791071104",
+      "symbol": "LTCUSDT",
+      "venue": "Bybit",
+      "ts": 1791071104.735,
+      "due_ts": 1791074704.735,
+      "move_15m_pct": 1.4733497038855958,
+      "entry": 70.25,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 70.65,
+      "exit_ts": 1791092402.735,
+      "continuation_net_return_pct": 0.4493950177936058,
+      "continuation_paper_equity": 99.47259555338259,
+      "reversal_net_return_pct": -0.6893950177936058,
+      "reversal_paper_equity": 99.7803404440488
     }
   ],
-  "continuation_equity": 99.45024933009894,
+  "continuation_equity": 99.47259555338259,
   "continuation_peak": 101.10715155444083,
   "continuation_max_dd_pct": -1.638758682119279,
-  "reversal_equity": 99.81474633846284,
+  "reversal_equity": 99.7803404440488,
   "reversal_peak": 100.0118812630409,
   "reversal_max_dd_pct": -1.4414462552389873,
   "last_new_events": 0

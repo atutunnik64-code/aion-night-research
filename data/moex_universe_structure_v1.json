@@ -1,9 +1,9 @@
 {
   "version": "MOEX_UNIVERSE_STRUCTURE_V1",
   "started_at": 1790788001.6843398,
-  "samples": 234,
+  "samples": 246,
   "last": {
-    "ts": 1791074406.8785796,
+    "ts": 1791095704.5358415,
     "mode": "FUTURE_ONLY_STRUCTURE",
     "source": "MOEX_UNIVERSE_V1",
     "curve_assets": 147,
@@ -1094,8 +1094,8 @@
         "front_px": 842.2,
         "next": "MYH7",
         "next_expiry": "2027-03-18",
-        "next_px": 852.1,
-        "curve_pct": 1.1754927570648332,
+        "next_px": 853.1,
+        "curve_pct": 1.2942293991925924,
         "front_tier": "WATCH",
         "next_tier": "THIN",
         "front_value_today": 1196367.0,
@@ -1332,8 +1332,8 @@
         "front_px": 3865.0,
         "next": "HYH7",
         "next_expiry": "2027-03-18",
-        "next_px": 3964.0,
-        "curve_pct": 2.561448900388097,
+        "next_px": 3975.0,
+        "curve_pct": 2.846054333764547,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 356210.0,
@@ -1542,8 +1542,8 @@
         "front_px": 520.4,
         "next": "DJH7",
         "next_expiry": "2027-03-19",
-        "next_px": 525.2,
-        "curve_pct": 0.9223674096848766,
+        "next_px": 526.4,
+        "curve_pct": 1.1529592621060791,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 86890.0,
@@ -1626,8 +1626,8 @@
         "front_px": 12800.0,
         "next": "MDH7",
         "next_expiry": "2027-03-18",
-        "next_px": 13086.0,
-        "curve_pct": 2.2343750000000107,
+        "next_px": 13087.0,
+        "curve_pct": 2.2421875000000036,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 63997.0,
@@ -1710,8 +1710,8 @@
         "front_px": 24404.0,
         "next": "HSH7",
         "next_expiry": "2027-03-19",
-        "next_px": 25002.0,
-        "curve_pct": 2.450417964268148,
+        "next_px": 25023.0,
+        "curve_pct": 2.536469431240773,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 38964.0,
@@ -2477,5 +2477,5 @@
       }
     ]
   },
-  "last_refresh": 1791074406.8785796
+  "last_refresh": 1791095704.5358415
 }
