@@ -1,22 +1,75 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1791065048.135,
+  "last_processed_ts": 1791074571.733,
   "last_event_nft": {
     "XRPUSDT": 1791043200000,
     "DOGEUSDT": 1790985600000,
     "LINKUSDT": 1790956800000,
-    "SUIUSDT": 1791043200000,
+    "SUIUSDT": 1791072000000,
     "BTCUSDT": 1790956800000,
     "ETHUSDT": 1790928000000,
     "SOLUSDT": 1790985600000,
     "ADAUSDT": 1791043200000,
-    "LTCUSDT": 1791043200000,
-    "AAVEUSDT": 1790985600000,
-    "AVAXUSDT": 1791043200000,
+    "LTCUSDT": 1791072000000,
+    "AAVEUSDT": 1791072000000,
+    "AVAXUSDT": 1791072000000,
     "BNBUSDT": 1791014400000
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "AVAXUSDT:1791072000000",
+      "symbol": "AVAXUSDT",
+      "ts": 1791072016.433,
+      "funding_time_ms": 1791072000000,
+      "pre_funding_rate": 0.0001,
+      "entry": 11.117,
+      "due_ts": 1791075616.433,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "LTCUSDT:1791072000000",
+      "symbol": "LTCUSDT",
+      "ts": 1791072017.235,
+      "funding_time_ms": 1791072000000,
+      "pre_funding_rate": 0.0001,
+      "entry": 70.24,
+      "due_ts": 1791075617.235,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "SUIUSDT:1791072000000",
+      "symbol": "SUIUSDT",
+      "ts": 1791072010.814,
+      "funding_time_ms": 1791072000000,
+      "pre_funding_rate": 0.0001,
+      "entry": 1.184,
+      "due_ts": 1791075610.814,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "AAVEUSDT:1791072000000",
+      "symbol": "AAVEUSDT",
+      "ts": 1791072014.256,
+      "funding_time_ms": 1791072000000,
+      "pre_funding_rate": 0.0001,
+      "entry": 181.42,
+      "due_ts": 1791075614.256,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    }
+  ],
   "resolved": [
     {
       "id": "XRPUSDT:1790899200000",

@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1791065065.056,
+  "last_processed_ts": 1791074599.683,
   "last_event_ts": {
     "DOGEUSDT": 1790986983.334,
     "ADAUSDT": 1791048187.232,
@@ -12,19 +12,19 @@
     "BTCUSDT": 1790973741.084,
     "SOLUSDT": 1790987584.18,
     "XRPUSDT": 1790987284.456,
-    "LTCUSDT": 1791008482.735,
+    "LTCUSDT": 1791071104.735,
     "ETHUSDT": 1790973800.974,
     "BNBUSDT": 1791047463.88
   },
   "pending": [
     {
-      "id": "AAVEUSDT:1791061573",
-      "symbol": "AAVEUSDT",
+      "id": "LTCUSDT:1791071104",
+      "symbol": "LTCUSDT",
       "venue": "Bybit",
-      "ts": 1791061573.856,
-      "due_ts": 1791065173.856,
-      "move_15m_pct": 1.006598814450288,
-      "entry": 180.62,
+      "ts": 1791071104.735,
+      "due_ts": 1791074704.735,
+      "move_15m_pct": 1.4733497038855958,
+      "entry": 70.25,
       "continuation_side": 1.0,
       "reversal_side": -1.0,
       "round_trip_cost": 0.0012
@@ -1110,12 +1110,30 @@
       "continuation_paper_equity": 99.45126091163226,
       "reversal_net_return_pct": 1.2266502076085797,
       "reversal_paper_equity": 99.82571003337522
+    },
+    {
+      "id": "AAVEUSDT:1791061573",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1791061573.856,
+      "due_ts": 1791065173.856,
+      "move_15m_pct": 1.006598814450288,
+      "entry": 180.62,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 180.8,
+      "exit_ts": 1791071105.856,
+      "continuation_net_return_pct": -0.02034326209722425,
+      "continuation_paper_equity": 99.45024933009894,
+      "reversal_net_return_pct": -0.2196567379027757,
+      "reversal_paper_equity": 99.81474633846284
     }
   ],
-  "continuation_equity": 99.45126091163226,
+  "continuation_equity": 99.45024933009894,
   "continuation_peak": 101.10715155444083,
-  "continuation_max_dd_pct": -1.6377581776863326,
-  "reversal_equity": 99.82571003337522,
+  "continuation_max_dd_pct": -1.638758682119279,
+  "reversal_equity": 99.81474633846284,
   "reversal_peak": 100.0118812630409,
   "reversal_max_dd_pct": -1.4414462552389873,
   "last_new_events": 0
