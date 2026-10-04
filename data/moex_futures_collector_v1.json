@@ -1,9 +1,9 @@
 {
   "version": "MOEX_FUTURES_COLLECTOR_V1",
   "started_at": 1790788001.5967064,
-  "snapshot_count": 269,
+  "snapshot_count": 281,
   "last_good": {
-    "ts": 1791138117.8809884,
+    "ts": 1791151802.5670352,
     "mode": "FUTURE_ONLY_COLLECT",
     "source": "MOEX_ISS_DELAYED",
     "source_delay_minutes": 15,
@@ -19,7 +19,7 @@
         "OPENPOSITION": 11602,
         "VOLTODAY": 73,
         "VALTODAY": 25881829,
-        "SYSTIME": "2026-10-04 21:01:34"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "GDM7",
@@ -32,7 +32,7 @@
         "OPENPOSITION": 1138,
         "VOLTODAY": 24,
         "VALTODAY": 8630048,
-        "SYSTIME": "2026-10-04 21:01:22"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "GDU7",
@@ -45,7 +45,7 @@
         "OPENPOSITION": 128,
         "VOLTODAY": 3,
         "VALTODAY": 1094825,
-        "SYSTIME": "2026-10-04 21:01:22"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "GDZ6",
@@ -58,7 +58,7 @@
         "OPENPOSITION": 300084,
         "VOLTODAY": 4824,
         "VALTODAY": 1690512401,
-        "SYSTIME": "2026-10-04 21:12:16"
+        "SYSTIME": "2026-10-05 00:40:45"
       },
       {
         "SECID": "GLDRUBF",
@@ -71,7 +71,7 @@
         "OPENPOSITION": 1551450,
         "VOLTODAY": 13076,
         "VALTODAY": 145747230,
-        "SYSTIME": "2026-10-04 21:10:18"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "GNH7",
@@ -84,7 +84,7 @@
         "OPENPOSITION": 2292,
         "VOLTODAY": 146,
         "VALTODAY": 5181161,
-        "SYSTIME": "2026-10-04 21:01:34"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "GNM7",
@@ -97,7 +97,7 @@
         "OPENPOSITION": 504,
         "VOLTODAY": 2,
         "VALTODAY": 72316,
-        "SYSTIME": "2026-10-04 21:01:53"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "GNU7",
@@ -110,7 +110,7 @@
         "OPENPOSITION": 104,
         "VOLTODAY": 1,
         "VALTODAY": 36731,
-        "SYSTIME": "2026-10-04 21:01:23"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "GNZ6",
@@ -123,7 +123,7 @@
         "OPENPOSITION": 48598,
         "VOLTODAY": 1970,
         "VALTODAY": 69047386,
-        "SYSTIME": "2026-10-04 20:43:01"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "S1H7",
@@ -136,7 +136,7 @@
         "OPENPOSITION": 8218,
         "VOLTODAY": 55,
         "VALTODAY": 289932,
-        "SYSTIME": "2026-10-04 21:09:52"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "S1M7",
@@ -145,11 +145,11 @@
         "LASTTRADEDATE": "2027-06-18",
         "LAST": 64.65,
         "LAST_RUB": 5397,
-        "SETTLEPRICE": 64.77,
+        "SETTLEPRICE": 64.72,
         "OPENPOSITION": 1336,
         "VOLTODAY": 12,
         "VALTODAY": 64999,
-        "SYSTIME": "2026-10-04 21:09:56"
+        "SYSTIME": "2026-10-05 00:06:14"
       },
       {
         "SECID": "S1U7",
@@ -162,7 +162,7 @@
         "OPENPOSITION": 258,
         "VOLTODAY": 2,
         "VALTODAY": 11070,
-        "SYSTIME": "2026-10-04 21:09:56"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "S1Z6",
@@ -175,7 +175,7 @@
         "OPENPOSITION": 213770,
         "VOLTODAY": 3111,
         "VALTODAY": 15970220,
-        "SYSTIME": "2026-10-04 20:47:32"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "SBERF",
@@ -188,7 +188,7 @@
         "OPENPOSITION": 240480,
         "VOLTODAY": 1119,
         "VALTODAY": 30864743,
-        "SYSTIME": "2026-10-04 20:14:13"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "SLVRUBF",
@@ -201,7 +201,7 @@
         "OPENPOSITION": 79998,
         "VOLTODAY": 443,
         "VALTODAY": 7146369,
-        "SYSTIME": "2026-10-04 21:08:43"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "SRH7",
@@ -214,7 +214,7 @@
         "OPENPOSITION": 10224,
         "VOLTODAY": 87,
         "VALTODAY": 2551045,
-        "SYSTIME": "2026-10-04 20:56:32"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "SRM7",
@@ -227,7 +227,7 @@
         "OPENPOSITION": 2390,
         "VOLTODAY": 6,
         "VALTODAY": 182333,
-        "SYSTIME": "2026-10-04 19:23:45"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "SRU7",
@@ -253,7 +253,7 @@
         "OPENPOSITION": 333406,
         "VOLTODAY": 6435,
         "VALTODAY": 182492755,
-        "SYSTIME": "2026-10-04 20:56:32"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "SVH7",
@@ -262,11 +262,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 63.02,
         "LAST_RUB": 52612,
-        "SETTLEPRICE": 63.04,
+        "SETTLEPRICE": 63.02,
         "OPENPOSITION": 7366,
         "VOLTODAY": 79,
         "VALTODAY": 4159135,
-        "SYSTIME": "2026-10-04 20:06:05"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "SVM7",
@@ -275,11 +275,11 @@
         "LASTTRADEDATE": "2027-06-18",
         "LAST": 64.46,
         "LAST_RUB": 53814,
-        "SETTLEPRICE": 64.55,
+        "SETTLEPRICE": 64.53,
         "OPENPOSITION": 1546,
         "VOLTODAY": 8,
         "VALTODAY": 430844,
-        "SYSTIME": "2026-10-04 21:09:54"
+        "SYSTIME": "2026-10-05 00:15:01"
       },
       {
         "SECID": "SVU7",
@@ -292,7 +292,7 @@
         "OPENPOSITION": 286,
         "VOLTODAY": 18,
         "VALTODAY": 990645,
-        "SYSTIME": "2026-10-04 21:09:54"
+        "SYSTIME": "2026-10-05 00:15:00"
       },
       {
         "SECID": "SVZ6",
@@ -305,12 +305,12 @@
         "OPENPOSITION": 515270,
         "VOLTODAY": 4508,
         "VALTODAY": 231370962,
-        "SYSTIME": "2026-10-04 21:02:39"
+        "SYSTIME": "2026-10-05 00:15:00"
       }
     ],
     "contracts": 23
   },
-  "last_refresh": 1791138117.8809884,
+  "last_refresh": 1791151802.5670352,
   "last_attempt": 1790855035.4081593,
   "last_error": "MOEX_ISS_UNAVAILABLE: [Errno 2] No such file or directory: 'curl.exe'"
 }
