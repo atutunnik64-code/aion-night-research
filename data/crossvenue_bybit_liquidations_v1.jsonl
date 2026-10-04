@@ -877,3 +877,8 @@
 {"event_time":1791094935056,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":85286.3,"qty":0.137,"notional_usdt":11684.223100000001}
 {"event_time":1791094935462,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":85283.8,"qty":0.872,"notional_usdt":74367.4736}
 {"event_time":1791094935649,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":85298.6,"qty":0.004,"notional_usdt":341.19440000000003}
+{"event_time":1791116197875,"symbol":"AVAXUSDT","position_side":"Buy","pressure_side":"SELL","price":10.881,"qty":7.9,"notional_usdt":85.9599}
+{"event_time":1791118463192,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2686.81,"qty":2.79,"notional_usdt":7496.1999}
+{"event_time":1791118464683,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2686.69,"qty":1.52,"notional_usdt":4083.7688000000003}
+{"event_time":1791118541926,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2684.76,"qty":2.25,"notional_usdt":6040.710000000001}
+{"event_time":1791118980479,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2684.74,"qty":2.95,"notional_usdt":7919.983}

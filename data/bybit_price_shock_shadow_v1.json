@@ -1,14 +1,14 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1791095863.335,
+  "last_processed_ts": 1791119478.117,
   "last_event_ts": {
     "DOGEUSDT": 1790986983.334,
     "ADAUSDT": 1791048187.232,
     "LINKUSDT": 1791030606.617,
     "AVAXUSDT": 1791030364.733,
     "SUIUSDT": 1791030365.214,
-    "AAVEUSDT": 1791061573.856,
+    "AAVEUSDT": 1791116025.855,
     "BTCUSDT": 1790973741.084,
     "SOLUSDT": 1790987584.18,
     "XRPUSDT": 1790987284.456,
@@ -16,7 +16,20 @@
     "ETHUSDT": 1790973800.974,
     "BNBUSDT": 1791047463.88
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "AAVEUSDT:1791116025",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1791116025.855,
+      "due_ts": 1791119625.855,
+      "move_15m_pct": -1.4825389852844317,
+      "entry": 179.42,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [
     {
       "id": "DOGEUSDT:1790891131",
