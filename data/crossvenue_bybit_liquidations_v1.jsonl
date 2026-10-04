@@ -882,3 +882,10 @@
 {"event_time":1791118464683,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2686.69,"qty":1.52,"notional_usdt":4083.7688000000003}
 {"event_time":1791118541926,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2684.76,"qty":2.25,"notional_usdt":6040.710000000001}
 {"event_time":1791118980479,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2684.74,"qty":2.95,"notional_usdt":7919.983}
+{"event_time":1791135778258,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09624,"qty":802.0,"notional_usdt":77.18448000000001}
+{"event_time":1791135779375,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09633,"qty":118277.0,"notional_usdt":11393.62341}
+{"event_time":1791135892719,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09672,"qty":653518.0,"notional_usdt":63208.26096}
+{"event_time":1791135894057,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09675,"qty":9394.0,"notional_usdt":908.8695}
+{"event_time":1791135894543,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09676,"qty":1439.0,"notional_usdt":139.23764}
+{"event_time":1791135963681,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.09686,"qty":5315.0,"notional_usdt":514.8109000000001}
+{"event_time":1791136300018,"symbol":"SUIUSDT","position_side":"Buy","pressure_side":"SELL","price":1.2019,"qty":160.0,"notional_usdt":192.304}
