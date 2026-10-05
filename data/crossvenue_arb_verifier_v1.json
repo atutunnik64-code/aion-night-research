@@ -5563,6 +5563,304 @@
         "0x0bc529c00c6401aef6d220be8c6ea1667f6ad93e"
       ],
       "live_eligible": false
+    },
+    "ZTC:Gate>KuCoin": {
+      "verified_at": 1791215561.8129716,
+      "signature": "ZTC:Gate>KuCoin",
+      "base": "ZTC",
+      "buy_venue": "Gate",
+      "sell_venue": "KuCoin",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 19319.6923001,
+      "sell_quote_volume": 63958.1980316,
+      "gross_depth_pct": 0.5174214740274019,
+      "execution_net_pct": 0.3169040525533736,
+      "conservative_net_pct": 0.1669040525533736,
+      "paper_edge_quote": 0.0792260131383434,
+      "buy_addresses": [
+        "0xa6773c4f26c80c86bc04aa6506533693a39d1195"
+      ],
+      "sell_addresses": [
+        "0xa6773c4f26c80c86bc04aa6506533693a39d1195"
+      ],
+      "common_addresses": [
+        "0xa6773c4f26c80c86bc04aa6506533693a39d1195"
+      ],
+      "live_eligible": false
+    },
+    "ZTC:Gate>Bitget": {
+      "verified_at": 1791215561.8129716,
+      "signature": "ZTC:Gate>Bitget",
+      "base": "ZTC",
+      "buy_venue": "Gate",
+      "sell_venue": "Bitget",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 19319.6923001,
+      "sell_quote_volume": 54421.137478229,
+      "gross_depth_pct": 0.48165987402739585,
+      "execution_net_pct": 0.2811782141533729,
+      "conservative_net_pct": 0.13117821415337289,
+      "paper_edge_quote": 0.07029455353834323,
+      "buy_addresses": [
+        "0xa6773c4f26c80c86bc04aa6506533693a39d1195"
+      ],
+      "sell_addresses": [
+        "0xa6773c4f26c80c86bc04aa6506533693a39d1195"
+      ],
+      "common_addresses": [
+        "0xa6773c4f26c80c86bc04aa6506533693a39d1195"
+      ],
+      "live_eligible": false
+    },
+    "EVAA:Gate>KuCoin": {
+      "verified_at": 1791215561.8129716,
+      "signature": "EVAA:Gate>KuCoin",
+      "base": "EVAA",
+      "buy_venue": "Gate",
+      "sell_venue": "KuCoin",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 329581.43976,
+      "sell_quote_volume": 1482276.299738,
+      "gross_depth_pct": 0.38141730901670723,
+      "execution_net_pct": 0.18103589170769496,
+      "conservative_net_pct": 0.031035891707694944,
+      "paper_edge_quote": 0.04525897292692374,
+      "buy_addresses": [
+        "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1",
+        "eqbkmfjx_a_dsolm-juxyvzytfp7_kknzgv6j01kgc72gvbp"
+      ],
+      "sell_addresses": [
+        "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1"
+      ],
+      "common_addresses": [
+        "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1"
+      ],
+      "live_eligible": false
+    },
+    "HMSTR:KuCoin>Bitget": {
+      "verified_at": 1791215561.8129716,
+      "signature": "HMSTR:KuCoin>Bitget",
+      "base": "HMSTR",
+      "buy_venue": "KuCoin",
+      "sell_venue": "Bitget",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 153796.9062924,
+      "sell_quote_volume": 23009.77286516,
+      "gross_depth_pct": 0.36295185620607295,
+      "execution_net_pct": 0.16258890434986067,
+      "conservative_net_pct": 0.012588904349860652,
+      "paper_edge_quote": 0.04064722608746517,
+      "buy_addresses": [
+        "eqaj8uwd7ebqsmpswardf_i-8r8-xhwh3gsnkhy-urdrpcuo"
+      ],
+      "sell_addresses": [
+        "eqaj8uwd7ebqsmpswardf_i-8r8-xhwh3gsnkhy-urdrpcuo"
+      ],
+      "common_addresses": [
+        "eqaj8uwd7ebqsmpswardf_i-8r8-xhwh3gsnkhy-urdrpcuo"
+      ],
+      "live_eligible": false
+    },
+    "RLC:Bitget>Gate": {
+      "verified_at": 1791215561.8129716,
+      "signature": "RLC:Bitget>Gate",
+      "base": "RLC",
+      "buy_venue": "Bitget",
+      "sell_venue": "Gate",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 564418.29292566,
+      "sell_quote_volume": 551755.35664,
+      "gross_depth_pct": 0.31347962382444194,
+      "execution_net_pct": 0.1131661442006104,
+      "conservative_net_pct": -0.03683385579938962,
+      "paper_edge_quote": 0.0282915360501526,
+      "buy_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "sell_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "common_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "live_eligible": false
+    },
+    "EVAA:Bitget>KuCoin": {
+      "verified_at": 1791215595.8404922,
+      "signature": "EVAA:Bitget>KuCoin",
+      "base": "EVAA",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 231433.083928,
+      "sell_quote_volume": 1485337.314122,
+      "gross_depth_pct": 0.2931430028039861,
+      "execution_net_pct": 0.09284985980118297,
+      "conservative_net_pct": -0.05715014019881705,
+      "paper_edge_quote": 0.02321246495029574,
+      "buy_addresses": [
+        "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1"
+      ],
+      "sell_addresses": [
+        "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1"
+      ],
+      "common_addresses": [
+        "0xaa036928c9c0df07d525b55ea8ee690bb5a628c1"
+      ],
+      "live_eligible": false
+    },
+    "RLC:KuCoin>Gate": {
+      "verified_at": 1791215777.2099328,
+      "signature": "RLC:KuCoin>Gate",
+      "base": "RLC",
+      "buy_venue": "KuCoin",
+      "sell_venue": "Gate",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 420573.25409914,
+      "sell_quote_volume": 564142.08172,
+      "gross_depth_pct": 0.5451911365079276,
+      "execution_net_pct": 0.34464594537143034,
+      "conservative_net_pct": 0.19464594537143032,
+      "paper_edge_quote": 0.08616148634285759,
+      "buy_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "sell_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "common_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "live_eligible": false
+    },
+    "CARV:Gate>Bitget": {
+      "verified_at": 1791215897.4573493,
+      "signature": "CARV:Gate>Bitget",
+      "base": "CARV",
+      "buy_venue": "Gate",
+      "sell_venue": "Bitget",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 606778.64645,
+      "sell_quote_volume": 568773.7467782,
+      "gross_depth_pct": 0.4421376393694665,
+      "execution_net_pct": 0.2416955017301077,
+      "conservative_net_pct": 0.09169550173010765,
+      "paper_edge_quote": 0.060423875432526926,
+      "buy_addresses": [
+        "0xc08cd26474722ce93f4d0c34d16201461c10aa8c"
+      ],
+      "sell_addresses": [
+        "0xc08cd26474722ce93f4d0c34d16201461c10aa8c"
+      ],
+      "common_addresses": [
+        "0xc08cd26474722ce93f4d0c34d16201461c10aa8c"
+      ],
+      "live_eligible": false
+    },
+    "OGN:Bitget>KuCoin": {
+      "verified_at": 1791216504.4728906,
+      "signature": "OGN:Bitget>KuCoin",
+      "base": "OGN",
+      "buy_venue": "Bitget",
+      "sell_venue": "KuCoin",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 116313.839798084,
+      "sell_quote_volume": 96460.87747973,
+      "gross_depth_pct": 0.4146517169830055,
+      "execution_net_pct": 0.21423706526603317,
+      "conservative_net_pct": 0.06423706526603315,
+      "paper_edge_quote": 0.05355926631650829,
+      "buy_addresses": [
+        "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26"
+      ],
+      "sell_addresses": [
+        "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26"
+      ],
+      "common_addresses": [
+        "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26"
+      ],
+      "live_eligible": false
+    },
+    "OGN:Gate>KuCoin": {
+      "verified_at": 1791216897.5019984,
+      "signature": "OGN:Gate>KuCoin",
+      "base": "OGN",
+      "buy_venue": "Gate",
+      "sell_venue": "KuCoin",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 88942.637772,
+      "sell_quote_volume": 96450.6621092,
+      "gross_depth_pct": 0.45310376076121983,
+      "execution_net_pct": 0.252650657000448,
+      "conservative_net_pct": 0.10265065700044795,
+      "paper_edge_quote": 0.063162664250112,
+      "buy_addresses": [
+        "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26"
+      ],
+      "sell_addresses": [
+        "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26"
+      ],
+      "common_addresses": [
+        "0x8207c1ffc5b6804f6024322ccf34f29c3541ae26"
+      ],
+      "live_eligible": false
+    },
+    "RLC:Gate>Bitget": {
+      "verified_at": 1791218912.0206451,
+      "signature": "RLC:Gate>Bitget",
+      "base": "RLC",
+      "buy_venue": "Gate",
+      "sell_venue": "Bitget",
+      "method": "CONTRACT_ADDRESS_MATCH",
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 704869.62334,
+      "sell_quote_volume": 614309.97296157,
+      "gross_depth_pct": 0.40097123829740955,
+      "execution_net_pct": 0.20057026705911835,
+      "conservative_net_pct": 0.05057026705911835,
+      "paper_edge_quote": 0.050142566764779586,
+      "buy_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "sell_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "common_addresses": [
+        "0x607f4c5bb672230e8672085532f7e901544a7375"
+      ],
+      "live_eligible": false
     }
   },
   "rejected": {
@@ -6000,7 +6298,7 @@
   },
   "watch": {
     "PEAQ:Bitget>Gate": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "PEAQ:Bitget>Gate",
       "base": "PEAQ",
       "buy_venue": "Bitget",
@@ -6009,8 +6307,8 @@
       "repeat_hits": 66,
       "repeat_span_sec": 314268.9323377609,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 123418.7362445,
-      "sell_quote_volume": 346876.017582,
+      "buy_quote_volume": 144449.4162614,
+      "sell_quote_volume": 594363.303306,
       "gross_depth_pct": 0.2854156753832271,
       "execution_net_pct": 0.08513025970785096,
       "conservative_net_pct": -0.06486974029214906,
@@ -6024,7 +6322,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "PEAQ:Bitget>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "PEAQ:Bitget>KuCoin",
       "base": "PEAQ",
       "buy_venue": "Bitget",
@@ -6033,8 +6331,8 @@
       "repeat_hits": 69,
       "repeat_span_sec": 24583.442860126495,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 123418.7362445,
-      "sell_quote_volume": 324480.111218,
+      "buy_quote_volume": 144449.4162614,
+      "sell_quote_volume": 399905.828676,
       "gross_depth_pct": 2.518970671406473,
       "execution_net_pct": 2.3164517007350716,
       "conservative_net_pct": 2.1664517007350717,
@@ -6048,7 +6346,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "WARD:Bitget>Gate": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "WARD:Bitget>Gate",
       "base": "WARD",
       "buy_venue": "Bitget",
@@ -6057,8 +6355,8 @@
       "repeat_hits": 7,
       "repeat_span_sec": 18207.24154472351,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 55146.71033468,
-      "sell_quote_volume": 26505.45337,
+      "buy_quote_volume": 75734.86887285,
+      "sell_quote_volume": 50777.962114,
       "gross_depth_pct": 0.3931043024950842,
       "execution_net_pct": 0.19271119819259447,
       "conservative_net_pct": 0.042711198192594446,
@@ -6072,21 +6370,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "LUNC:KuCoin>Bitget": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "LUNC:KuCoin>Bitget",
       "base": "LUNC",
       "buy_venue": "KuCoin",
       "sell_venue": "Bitget",
       "method": null,
-      "repeat_hits": 66,
-      "repeat_span_sec": 93666.71817731857,
+      "repeat_hits": 68,
+      "repeat_span_sec": 123129.11142802238,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 170753.91236179104,
-      "sell_quote_volume": 73743.48539971,
-      "gross_depth_pct": 0.79241943446684,
-      "execution_net_pct": 0.5916270150323697,
-      "conservative_net_pct": 0.4416270150323697,
-      "paper_edge_quote": 0.14790675375809242,
+      "buy_quote_volume": 201743.5531501084,
+      "sell_quote_volume": 68526.53033871,
+      "gross_depth_pct": 0.6257421114828743,
+      "execution_net_pct": 0.42511636937139585,
+      "conservative_net_pct": 0.27511636937139583,
+      "paper_edge_quote": 0.10627909234284896,
       "buy_addresses": [],
       "sell_addresses": [],
       "common_addresses": [],
@@ -6094,7 +6392,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "SNEK:Bitget>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "SNEK:Bitget>KuCoin",
       "base": "SNEK",
       "buy_venue": "Bitget",
@@ -6103,8 +6401,8 @@
       "repeat_hits": 11,
       "repeat_span_sec": 3430.3231542110443,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 78541.706534235,
-      "sell_quote_volume": 41496.814384,
+      "buy_quote_volume": 111734.083575887,
+      "sell_quote_volume": 157828.130702,
       "gross_depth_pct": 0.7455290993481078,
       "execution_net_pct": 0.5447835702487562,
       "conservative_net_pct": 0.3947835702487562,
@@ -6164,21 +6462,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "EGLD:KuCoin>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "EGLD:KuCoin>OKX",
       "base": "EGLD",
       "buy_venue": "KuCoin",
       "sell_venue": "OKX",
       "method": null,
-      "repeat_hits": 66,
-      "repeat_span_sec": 93666.71817731857,
+      "repeat_hits": 67,
+      "repeat_span_sec": 122902.32310175896,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 28749.635608,
-      "sell_quote_volume": 50935.655210846,
-      "gross_depth_pct": 0.7238530559912748,
-      "execution_net_pct": 0.5231292029352933,
-      "conservative_net_pct": 0.3731292029352933,
-      "paper_edge_quote": 0.13078230073382333,
+      "buy_quote_volume": 18773.120378,
+      "sell_quote_volume": 46384.108019257,
+      "gross_depth_pct": 0.3141300440528738,
+      "execution_net_pct": 0.11381591400882093,
+      "conservative_net_pct": -0.03618408599117909,
+      "paper_edge_quote": 0.028453978502205234,
       "buy_addresses": [],
       "sell_addresses": [],
       "common_addresses": [],
@@ -6211,21 +6509,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "EGLD:Gate>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "EGLD:Gate>OKX",
       "base": "EGLD",
       "buy_venue": "Gate",
       "sell_venue": "OKX",
       "method": null,
-      "repeat_hits": 62,
-      "repeat_span_sec": 93630.60075616837,
+      "repeat_hits": 63,
+      "repeat_span_sec": 102945.68311047554,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 57235.65541,
-      "sell_quote_volume": 50935.655210846,
-      "gross_depth_pct": 0.3958492522258661,
-      "execution_net_pct": 0.19545340297363228,
-      "conservative_net_pct": 0.045453402973632234,
-      "paper_edge_quote": 0.04886335074340807,
+      "buy_quote_volume": 118518.609,
+      "sell_quote_volume": 46384.108019257,
+      "gross_depth_pct": 0.26978640264025966,
+      "execution_net_pct": 0.06951661623762383,
+      "conservative_net_pct": -0.0804833837623762,
+      "paper_edge_quote": 0.017379154059405957,
       "buy_addresses": [],
       "sell_addresses": [],
       "common_addresses": [],
@@ -6304,21 +6602,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIL:Bitget>Gate": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "ZIL:Bitget>Gate",
       "base": "ZIL",
       "buy_venue": "Bitget",
       "sell_venue": "Gate",
       "method": null,
-      "repeat_hits": 10,
-      "repeat_span_sec": 2805.4326236248016,
+      "repeat_hits": 5,
+      "repeat_span_sec": 1506.9025311470032,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 14650.397685357,
-      "sell_quote_volume": 16922.65827645,
-      "gross_depth_pct": 0.4185905762984721,
-      "execution_net_pct": 0.21817198572217184,
-      "conservative_net_pct": 0.06817198572217181,
-      "paper_edge_quote": 0.05454299643054296,
+      "buy_quote_volume": 18293.608951663,
+      "sell_quote_volume": 24503.56733912,
+      "gross_depth_pct": 0.2982962511744569,
+      "execution_net_pct": 0.09799795492328865,
+      "conservative_net_pct": -0.05200204507671137,
+      "paper_edge_quote": 0.024499488730822163,
       "buy_addresses": [
         "0xb86abcb37c3a4b64f74f59301aff131a1becc787"
       ],
@@ -6512,17 +6810,17 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIL:Bitget>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791216594.9005487,
       "signature": "ZIL:Bitget>OKX",
       "base": "ZIL",
       "buy_venue": "Bitget",
       "sell_venue": "OKX",
       "method": null,
-      "repeat_hits": 19,
-      "repeat_span_sec": 93593.45016241074,
+      "repeat_hits": 15,
+      "repeat_span_sec": 92353.58801627159,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 14650.397685357,
-      "sell_quote_volume": 109738.74737676731,
+      "buy_quote_volume": 18021.7917758,
+      "sell_quote_volume": 127843.70498612722,
       "gross_depth_pct": 0.30454042081948796,
       "execution_net_pct": 0.1042358803986587,
       "conservative_net_pct": -0.045764119601341316,
@@ -6837,7 +7135,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIG:Bitget>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "ZIG:Bitget>KuCoin",
       "base": "ZIG",
       "buy_venue": "Bitget",
@@ -6846,8 +7144,8 @@
       "repeat_hits": 1,
       "repeat_span_sec": 0.0,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 30695.631443,
-      "sell_quote_volume": 43106.59827,
+      "buy_quote_volume": 26833.678561,
+      "sell_quote_volume": 31693.794572,
       "gross_depth_pct": 2.6075124220518386,
       "execution_net_pct": 2.4049049096297885,
       "conservative_net_pct": 2.2549049096297886,
@@ -6861,7 +7159,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIL:Gate>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "ZIL:Gate>OKX",
       "base": "ZIL",
       "buy_venue": "Gate",
@@ -6870,8 +7168,8 @@
       "repeat_hits": 4,
       "repeat_span_sec": 2304.159755706787,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 16922.65827645,
-      "sell_quote_volume": 109738.74737676731,
+      "buy_quote_volume": 24503.56733912,
+      "sell_quote_volume": 127800.18168392735,
       "gross_depth_pct": 0.37707586438724405,
       "execution_net_pct": 0.17669878852286391,
       "conservative_net_pct": 0.026698788522863892,
@@ -7048,21 +7346,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "LUNC:KuCoin>Gate": {
-      "verified_at": 1791186325.8807945,
+      "verified_at": 1791219036.733387,
       "signature": "LUNC:KuCoin>Gate",
       "base": "LUNC",
       "buy_venue": "KuCoin",
       "sell_venue": "Gate",
       "method": null,
-      "repeat_hits": 64,
-      "repeat_span_sec": 93154.11129832268,
+      "repeat_hits": 59,
+      "repeat_span_sec": 121792.97956585884,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 172631.54161231872,
-      "sell_quote_volume": 53842.564106,
-      "gross_depth_pct": 0.3486222238240355,
-      "execution_net_pct": 0.14827360160021325,
-      "conservative_net_pct": -0.001726398399786777,
-      "paper_edge_quote": 0.03706840040005331,
+      "buy_quote_volume": 201743.5531501084,
+      "sell_quote_volume": 58189.006634646,
+      "gross_depth_pct": 0.27379357423011896,
+      "execution_net_pct": 0.07351978065589594,
+      "conservative_net_pct": -0.07648021934410408,
+      "paper_edge_quote": 0.018379945163973985,
       "buy_addresses": [],
       "sell_addresses": [],
       "common_addresses": [],
@@ -7162,21 +7460,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "IRYS:OKX>KuCoin": {
-      "verified_at": 1791094560.268508,
+      "verified_at": 1791217200.6625645,
       "signature": "IRYS:OKX>KuCoin",
       "base": "IRYS",
       "buy_venue": "OKX",
       "sell_venue": "KuCoin",
       "method": null,
-      "repeat_hits": 10,
-      "repeat_span_sec": 3492.6401455402374,
-      "venue_consensus_count": 0,
-      "buy_quote_volume": 0.0,
-      "sell_quote_volume": 0.0,
-      "gross_depth_pct": 0.2515723270440251,
-      "execution_net_pct": 0.0513207547169722,
-      "conservative_net_pct": -0.09867924528302782,
-      "paper_edge_quote": 0.01283018867924305,
+      "repeat_hits": 8,
+      "repeat_span_sec": 55204.9027402401,
+      "venue_consensus_count": 4,
+      "buy_quote_volume": 225213.834839,
+      "sell_quote_volume": 41234.692668,
+      "gross_depth_pct": 0.3138731952291307,
+      "execution_net_pct": 0.113559322033906,
+      "conservative_net_pct": -0.036440677966094015,
+      "paper_edge_quote": 0.0283898305084765,
       "buy_addresses": [],
       "sell_addresses": [
         "0x50f41f589afaca2ef41fdf590fe7b90cd26dee64"
@@ -7234,7 +7532,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "WARD:Gate>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "WARD:Gate>KuCoin",
       "base": "WARD",
       "buy_venue": "Gate",
@@ -7243,8 +7541,8 @@
       "repeat_hits": 3,
       "repeat_span_sec": 2879.1422035694122,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 26505.45337,
-      "sell_quote_volume": 85477.4306728,
+      "buy_quote_volume": 50777.962114,
+      "sell_quote_volume": 120109.2713726,
       "gross_depth_pct": 0.41500495756034983,
       "execution_net_pct": 0.21458995260278152,
       "conservative_net_pct": 0.0645899526027815,
@@ -7302,21 +7600,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "SNEK:Gate>Bitget": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "SNEK:Gate>Bitget",
       "base": "SNEK",
       "buy_venue": "Gate",
       "sell_venue": "Bitget",
       "method": null,
-      "repeat_hits": 32,
-      "repeat_span_sec": 151481.90815210342,
+      "repeat_hits": 29,
+      "repeat_span_sec": 209078.84947419167,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 104757.253182,
-      "sell_quote_volume": 78541.706534235,
-      "gross_depth_pct": 0.29103731157797963,
-      "execution_net_pct": 0.09074627426640253,
-      "conservative_net_pct": -0.059253725733597495,
-      "paper_edge_quote": 0.02268656856660063,
+      "buy_quote_volume": 166156.9955393,
+      "sell_quote_volume": 111734.083575887,
+      "gross_depth_pct": 0.9733888289269466,
+      "execution_net_pct": 0.7724154400980303,
+      "conservative_net_pct": 0.6224154400980303,
+      "paper_edge_quote": 0.19310386002450758,
       "buy_addresses": [
         "279c909f348e533da5808898f87f9a14bb2c3dfbbacccd631d927a3f534e454b"
       ],
@@ -7326,21 +7624,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "SNEK:KuCoin>Bitget": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "SNEK:KuCoin>Bitget",
       "base": "SNEK",
       "buy_venue": "KuCoin",
       "sell_venue": "Bitget",
       "method": null,
-      "repeat_hits": 26,
-      "repeat_span_sec": 69726.92262721062,
+      "repeat_hits": 28,
+      "repeat_span_sec": 102945.68311047554,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 41496.814384,
-      "sell_quote_volume": 78541.706534235,
-      "gross_depth_pct": 0.3733384475087753,
-      "execution_net_pct": 0.172965109061263,
-      "conservative_net_pct": 0.022965109061262978,
-      "paper_edge_quote": 0.04324127726531575,
+      "buy_quote_volume": 157828.130702,
+      "sell_quote_volume": 111734.083575887,
+      "gross_depth_pct": 1.129321864329902,
+      "execution_net_pct": 0.92819254246558,
+      "conservative_net_pct": 0.7781925424655799,
+      "paper_edge_quote": 0.232048135616395,
       "buy_addresses": [
         "279c909f348e533da5808898f87f9a14bb2c3dfbbacccd631d927a3f.534e454b"
       ],
@@ -7398,21 +7696,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "AI:Gate>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "AI:Gate>OKX",
       "base": "AI",
       "buy_venue": "Gate",
       "sell_venue": "OKX",
       "method": null,
-      "repeat_hits": 21,
-      "repeat_span_sec": 26414.475102186203,
-      "venue_consensus_count": 3,
-      "buy_quote_volume": 0.0,
-      "sell_quote_volume": 240281.536096,
-      "gross_depth_pct": 2.218417962598429,
-      "execution_net_pct": 2.0161995446358243,
-      "conservative_net_pct": 1.8661995446358244,
-      "paper_edge_quote": 0.5040498861589561,
+      "repeat_hits": 23,
+      "repeat_span_sec": 102985.10245323181,
+      "venue_consensus_count": 4,
+      "buy_quote_volume": 12407.5332989,
+      "sell_quote_volume": 195025.278798,
+      "gross_depth_pct": 2.003003862941166,
+      "execution_net_pct": 1.8010008590782292,
+      "conservative_net_pct": 1.651000859078229,
+      "paper_edge_quote": 0.4502502147695573,
       "buy_addresses": [
         "0xbda011d7f8ec00f66c1923b049b94c67d148d8b2"
       ],
@@ -7446,7 +7744,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "AI:OKX>Gate": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "AI:OKX>Gate",
       "base": "AI",
       "buy_venue": "OKX",
@@ -7454,9 +7752,9 @@
       "method": null,
       "repeat_hits": 3,
       "repeat_span_sec": 121.7431070804596,
-      "venue_consensus_count": 3,
-      "buy_quote_volume": 240281.536096,
-      "sell_quote_volume": 54479.9221477,
+      "venue_consensus_count": 4,
+      "buy_quote_volume": 195025.278798,
+      "sell_quote_volume": 12407.5332989,
       "gross_depth_pct": 2.6908023483366073,
       "execution_net_pct": 2.488111545988267,
       "conservative_net_pct": 2.338111545988267,
@@ -7867,16 +8165,16 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIL:Bitget>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "ZIL:Bitget>KuCoin",
       "base": "ZIL",
       "buy_venue": "Bitget",
       "sell_venue": "KuCoin",
       "method": null,
-      "repeat_hits": 23,
+      "repeat_hits": 20,
       "repeat_span_sec": 25831.134293317795,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 14650.397685357,
+      "buy_quote_volume": 18293.608951663,
       "sell_quote_volume": 0.0,
       "gross_depth_pct": 2.12869462979286,
       "execution_net_pct": 1.926565935163068,
@@ -7891,21 +8189,21 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIL:Gate>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "ZIL:Gate>KuCoin",
       "base": "ZIL",
       "buy_venue": "Gate",
       "sell_venue": "KuCoin",
       "method": null,
-      "repeat_hits": 8,
-      "repeat_span_sec": 1642.4480831623077,
+      "repeat_hits": 2,
+      "repeat_span_sec": 37.986334800720215,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 16922.65827645,
-      "sell_quote_volume": 0.0,
-      "gross_depth_pct": 2.467405468811723,
-      "execution_net_pct": 2.264938063342922,
-      "conservative_net_pct": 2.114938063342922,
-      "paper_edge_quote": 0.5662345158357305,
+      "buy_quote_volume": 24503.56733912,
+      "sell_quote_volume": 29791.010956,
+      "gross_depth_pct": 2.5226228623126845,
+      "execution_net_pct": 2.3201002394503742,
+      "conservative_net_pct": 2.1701002394503743,
+      "paper_edge_quote": 0.5800250598625936,
       "buy_addresses": [],
       "sell_addresses": [],
       "common_addresses": [],
@@ -7913,16 +8211,16 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ZIL:OKX>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "ZIL:OKX>KuCoin",
       "base": "ZIL",
       "buy_venue": "OKX",
       "sell_venue": "KuCoin",
       "method": null,
-      "repeat_hits": 7,
-      "repeat_span_sec": 25794.54377388954,
+      "repeat_hits": 1,
+      "repeat_span_sec": 0.0,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 109738.74737676731,
+      "buy_quote_volume": 127800.18168392735,
       "sell_quote_volume": 0.0,
       "gross_depth_pct": 1.6227159647827172,
       "execution_net_pct": 1.421093248817945,
@@ -7983,7 +8281,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "CARDS:OKX>Gate": {
-      "verified_at": 1791186449.90894,
+      "verified_at": 1791218383.372454,
       "signature": "CARDS:OKX>Gate",
       "base": "CARDS",
       "buy_venue": "OKX",
@@ -7992,8 +8290,8 @@
       "repeat_hits": 1,
       "repeat_span_sec": 0.0,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 474721.950675,
-      "sell_quote_volume": 128798.53855,
+      "buy_quote_volume": 918142.769756,
+      "sell_quote_volume": 209105.80648,
       "gross_depth_pct": 0.2772277227722775,
       "execution_net_pct": 0.07695049504949454,
       "conservative_net_pct": -0.07304950495050548,
@@ -8007,7 +8305,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "METIS:Bitget>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "METIS:Bitget>KuCoin",
       "base": "METIS",
       "buy_venue": "Bitget",
@@ -8016,8 +8314,8 @@
       "repeat_hits": 15,
       "repeat_span_sec": 16870.050182580948,
       "venue_consensus_count": 4,
-      "buy_quote_volume": 28841.2463794,
-      "sell_quote_volume": 30165.187562,
+      "buy_quote_volume": 29112.9105593,
+      "sell_quote_volume": 30548.29038,
       "gross_depth_pct": 0.44709388971684305,
       "execution_net_pct": 0.24664679582712268,
       "conservative_net_pct": 0.09664679582712266,
@@ -8031,7 +8329,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "METIS:OKX>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "METIS:OKX>KuCoin",
       "base": "METIS",
       "buy_venue": "OKX",
@@ -8040,8 +8338,8 @@
       "repeat_hits": 8,
       "repeat_span_sec": 3364.3106610774994,
       "venue_consensus_count": 4,
-      "buy_quote_volume": 54952.961463611,
-      "sell_quote_volume": 30165.187562,
+      "buy_quote_volume": 66431.125300648,
+      "sell_quote_volume": 30548.29038,
       "gross_depth_pct": 0.44709388971684305,
       "execution_net_pct": 0.24664679582712268,
       "conservative_net_pct": 0.09664679582712266,
@@ -8079,7 +8377,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "KSM:KuCoin>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "KSM:KuCoin>OKX",
       "base": "KSM",
       "buy_venue": "KuCoin",
@@ -8087,9 +8385,9 @@
       "method": null,
       "repeat_hits": 4,
       "repeat_span_sec": 937.9736015796661,
-      "venue_consensus_count": 3,
-      "buy_quote_volume": 26362.033,
-      "sell_quote_volume": 162202.429905312,
+      "venue_consensus_count": 4,
+      "buy_quote_volume": 32404.0366,
+      "sell_quote_volume": 165087.715964238,
       "gross_depth_pct": 0.3082851637764783,
       "execution_net_pct": 0.10797687861271246,
       "conservative_net_pct": -0.04202312138728756,
@@ -8126,7 +8424,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "HMSTR:KuCoin>OKX": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "HMSTR:KuCoin>OKX",
       "base": "HMSTR",
       "buy_venue": "KuCoin",
@@ -8135,8 +8433,8 @@
       "repeat_hits": 8,
       "repeat_span_sec": 15821.679356336594,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 124578.97737,
-      "sell_quote_volume": 122177.22231298,
+      "buy_quote_volume": 163353.414459,
+      "sell_quote_volume": 123249.09266141,
       "gross_depth_pct": 0.27811939077997394,
       "execution_net_pct": 0.07784127138919751,
       "conservative_net_pct": -0.07215872861080251,
@@ -8150,7 +8448,7 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "WIN:OKX>KuCoin": {
-      "verified_at": 1791186574.0833201,
+      "verified_at": 1791219036.733387,
       "signature": "WIN:OKX>KuCoin",
       "base": "WIN",
       "buy_venue": "OKX",
@@ -8159,8 +8457,8 @@
       "repeat_hits": 1,
       "repeat_span_sec": 0.0,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 25688.022584,
-      "sell_quote_volume": 164619.2786720686,
+      "buy_quote_volume": 20593.61435874,
+      "sell_quote_volume": 192614.19695629997,
       "gross_depth_pct": 0.8847600514916287,
       "execution_net_pct": 0.6838752914401478,
       "conservative_net_pct": 0.5338752914401478,
@@ -8174,32 +8472,81 @@
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     },
     "ETHW:Gate>OKX": {
-      "verified_at": 1791185707.115282,
+      "verified_at": 1791218569.5637343,
       "signature": "ETHW:Gate>OKX",
       "base": "ETHW",
       "buy_venue": "Gate",
       "sell_venue": "OKX",
       "method": null,
-      "repeat_hits": 8,
-      "repeat_span_sec": 2285.987342596054,
+      "repeat_hits": 13,
+      "repeat_span_sec": 34380.0198366642,
       "venue_consensus_count": 3,
-      "buy_quote_volume": 34283.241327,
-      "sell_quote_volume": 180375.88641238,
-      "gross_depth_pct": 0.2867871293718238,
-      "execution_net_pct": 0.08650034224245909,
-      "conservative_net_pct": -0.06349965775754093,
-      "paper_edge_quote": 0.021625085560614772,
+      "buy_quote_volume": 32343.30324,
+      "sell_quote_volume": 127469.89271014,
+      "gross_depth_pct": 0.2910603525751787,
+      "execution_net_pct": 0.0907692922225973,
+      "conservative_net_pct": -0.05923070777740272,
+      "paper_edge_quote": 0.022692323055649326,
       "buy_addresses": [],
+      "sell_addresses": [],
+      "common_addresses": [],
+      "live_eligible": false,
+      "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
+    },
+    "MOVE:KuCoin>OKX": {
+      "verified_at": 1791218912.0206451,
+      "signature": "MOVE:KuCoin>OKX",
+      "base": "MOVE",
+      "buy_venue": "KuCoin",
+      "sell_venue": "OKX",
+      "method": null,
+      "repeat_hits": 2,
+      "repeat_span_sec": 1926.035017490387,
+      "venue_consensus_count": 4,
+      "buy_quote_volume": 46652.688148,
+      "sell_quote_volume": 157397.5715522,
+      "gross_depth_pct": 0.29471544715446996,
+      "execution_net_pct": 0.09442073170730483,
+      "conservative_net_pct": -0.05557926829269519,
+      "paper_edge_quote": 0.02360518292682621,
+      "buy_addresses": [
+        "0x1::aptos_coin::aptoscoin",
+        "0x3073f7aaa4db83f95e9fff17424f71d4751a3073"
+      ],
+      "sell_addresses": [],
+      "common_addresses": [],
+      "live_eligible": false,
+      "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
+    },
+    "ILV:KuCoin>OKX": {
+      "verified_at": 1791218975.0066843,
+      "signature": "ILV:KuCoin>OKX",
+      "base": "ILV",
+      "buy_venue": "KuCoin",
+      "sell_venue": "OKX",
+      "method": null,
+      "repeat_hits": 10,
+      "repeat_span_sec": 3030.0651364326477,
+      "venue_consensus_count": 3,
+      "buy_quote_volume": 42074.6683996,
+      "sell_quote_volume": 53013.312480975,
+      "gross_depth_pct": 0.26722853628751153,
+      "execution_net_pct": 0.06696130775121692,
+      "conservative_net_pct": -0.0830386922487831,
+      "paper_edge_quote": 0.01674032693780423,
+      "buy_addresses": [
+        "0x767fe9edc9e0df98e07454847909b5e959d7ca0e"
+      ],
       "sell_addresses": [],
       "common_addresses": [],
       "live_eligible": false,
       "reason": "NEEDS_MORE_IDENTITY_OR_REPEAT_EVIDENCE"
     }
   },
-  "scan_count": 2267,
-  "last_scan_ts": 1791186574.0833201,
+  "scan_count": 2382,
+  "last_scan_ts": 1791219036.733387,
   "last_processed": 24,
   "last_new_verified": 0,
   "last_new_rejected": 0,
-  "candidate_signature_count": 152
+  "candidate_signature_count": 159
 }
