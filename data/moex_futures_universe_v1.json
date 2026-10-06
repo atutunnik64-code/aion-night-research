@@ -1,9 +1,9 @@
 {
   "version": "MOEX_FUTURES_UNIVERSE_V1",
   "started_at": 1790788001.683229,
-  "refresh_count": 315,
+  "refresh_count": 327,
   "last": {
-    "ts": 1791242829.0789554,
+    "ts": 1791258519.451888,
     "mode": "FUTURE_ONLY_UNIVERSE",
     "source": "MOEX_ISS_DELAYED",
     "source_delay_minutes": 15,
@@ -9739,5 +9739,5 @@
       }
     ]
   },
-  "last_refresh": 1791242829.0789554
+  "last_refresh": 1791258519.451888
 }

@@ -1,16 +1,16 @@
 {
   "version": "BYBIT_SPOT_WS_MIRROR_V1",
   "started_at": 1790886715.9034045,
-  "connect_count": 29,
-  "message_count": 54913173,
+  "connect_count": 30,
+  "message_count": 57825337,
   "error_count": 0,
   "discovery_candidates": 836,
-  "discovery_ts": 1791239516.9166474,
-  "last_connect_ts": 1791239517.4863422,
-  "last_save_ts": 1791243023.648196,
+  "discovery_ts": 1791255209.1249735,
+  "last_connect_ts": 1791255209.8286972,
+  "last_save_ts": 1791258713.1394758,
   "configured_symbols": 350,
-  "valid_symbols": 219,
-  "fresh_ticker_symbols": 213,
+  "valid_symbols": 222,
+  "fresh_ticker_symbols": 221,
   "fresh_book_symbols": 125,
   "last_error": null
 }
