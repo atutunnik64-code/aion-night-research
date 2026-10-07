@@ -5087,3 +5087,8 @@
 {"event_time":1791391931676,"symbol":"ADAUSDT","position_side":"Buy","pressure_side":"SELL","price":0.2547,"qty":270.0,"notional_usdt":68.76899999999999}
 {"event_time":1791392005578,"symbol":"XRPUSDT","position_side":"Buy","pressure_side":"SELL","price":1.4208,"qty":21.6,"notional_usdt":30.689280000000004}
 {"event_time":1791392157330,"symbol":"XRPUSDT","position_side":"Buy","pressure_side":"SELL","price":1.4202,"qty":1012.0,"notional_usdt":1437.2423999999999}
+{"event_time":1791411861133,"symbol":"SUIUSDT","position_side":"Sell","pressure_side":"BUY","price":1.1317,"qty":20.0,"notional_usdt":22.634}
+{"event_time":1791412113472,"symbol":"SOLUSDT","position_side":"Sell","pressure_side":"BUY","price":116.48,"qty":3.4,"notional_usdt":396.032}
+{"event_time":1791412131219,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.4253,"qty":4.3,"notional_usdt":6.1287899999999995}
+{"event_time":1791413050624,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.4267,"qty":6.8,"notional_usdt":9.70156}
+{"event_time":1791413544261,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":83447.4,"qty":0.033,"notional_usdt":2753.7642}

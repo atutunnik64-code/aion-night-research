@@ -1,7 +1,7 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1791393480.974,
+  "last_processed_ts": 1791413632.856,
   "last_event_nft": {
     "XRPUSDT": 1791360000000,
     "DOGEUSDT": 1791331200000,
@@ -16,34 +16,7 @@
     "AVAXUSDT": 1791360000000,
     "BNBUSDT": 1791388800000
   },
-  "pending": [
-    {
-      "id": "ETHUSDT:1791388800000",
-      "symbol": "ETHUSDT",
-      "ts": 1791389991.974,
-      "funding_time_ms": 1791388800000,
-      "pre_funding_rate": -0.00025027,
-      "entry": 2574.15,
-      "due_ts": 1791393591.974,
-      "revert_side": 1.0,
-      "continue_side": -1.0,
-      "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
-    },
-    {
-      "id": "BNBUSDT:1791388800000",
-      "symbol": "BNBUSDT",
-      "ts": 1791389991.98,
-      "funding_time_ms": 1791388800000,
-      "pre_funding_rate": -0.00015545,
-      "entry": 771.11,
-      "due_ts": 1791393591.98,
-      "revert_side": 1.0,
-      "continue_side": -1.0,
-      "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "XRPUSDT:1790899200000",
@@ -1608,12 +1581,46 @@
       "exit_ts": 1791389991.315,
       "revert_net_return_pct": 0.7453254853729364,
       "continue_net_return_pct": -0.9853254853729364
+    },
+    {
+      "id": "ETHUSDT:1791388800000",
+      "symbol": "ETHUSDT",
+      "ts": 1791389991.974,
+      "funding_time_ms": 1791388800000,
+      "pre_funding_rate": -0.00025027,
+      "entry": 2574.15,
+      "due_ts": 1791393591.974,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05,
+      "exit": 2565.35,
+      "exit_ts": 1791410139.974,
+      "revert_net_return_pct": -0.4618604199444508,
+      "continue_net_return_pct": 0.22186041994445085
+    },
+    {
+      "id": "BNBUSDT:1791388800000",
+      "symbol": "BNBUSDT",
+      "ts": 1791389991.98,
+      "funding_time_ms": 1791388800000,
+      "pre_funding_rate": -0.00015545,
+      "entry": 771.11,
+      "due_ts": 1791393591.98,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05,
+      "exit": 768.47,
+      "exit_ts": 1791410139.98,
+      "revert_net_return_pct": -0.4623636057112489,
+      "continue_net_return_pct": 0.22236360571124894
     }
   ],
-  "revert_equity": 100.09984761161544,
+  "revert_equity": 100.05359561356865,
   "revert_peak": 101.24785430903898,
   "revert_max_dd_pct": -1.7224500927362385,
-  "continue_equity": 98.79680938671225,
+  "continue_equity": 98.81875456340873,
   "continue_peak": 100.34124000727584,
   "continue_max_dd_pct": -2.0311962307876352,
   "last_new_events": 0
