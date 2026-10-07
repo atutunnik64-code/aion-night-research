@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1791325963.984,
+  "last_processed_ts": 1791339770.617,
   "last_event_ts": {
     "AAVEUSDT": 1790927491.155,
     "AVAXUSDT": 1790931116.133,
@@ -9,12 +9,66 @@
     "SUIUSDT": 1790976648.515,
     "ADAUSDT": 1790892097.033,
     "SOLUSDT": 1790931111.479,
-    "DOGEUSDT": 1790931293.534,
+    "DOGEUSDT": 1791339464.234,
     "LINKUSDT": 1790931055.818,
-    "ETHUSDT": 1790892335.874,
-    "XRPUSDT": 1790892456.157
+    "ETHUSDT": 1791339703.275,
+    "XRPUSDT": 1791339585.256,
+    "BNBUSDT": 1791339712.18
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "DOGEUSDT:1791339464",
+      "symbol": "DOGEUSDT",
+      "venue": "Bybit",
+      "ts": 1791339464.234,
+      "due_ts": 1791343064.234,
+      "compression_ratio": 0.39282065818141254,
+      "breakout_move_pct": 0.6023424428332591,
+      "entry": 0.09019,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "XRPUSDT:1791339585",
+      "symbol": "XRPUSDT",
+      "venue": "Bybit",
+      "ts": 1791339585.256,
+      "due_ts": 1791343185.256,
+      "compression_ratio": 0.447862468408747,
+      "breakout_move_pct": 0.5160668822679515,
+      "entry": 1.4608,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "ETHUSDT:1791339703",
+      "symbol": "ETHUSDT",
+      "venue": "Bybit",
+      "ts": 1791339703.275,
+      "due_ts": 1791343303.275,
+      "compression_ratio": 0.40951280863901773,
+      "breakout_move_pct": 0.35047893675272945,
+      "entry": 2617.0,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "BNBUSDT:1791339712",
+      "symbol": "BNBUSDT",
+      "venue": "Bybit",
+      "ts": 1791339712.18,
+      "due_ts": 1791343312.18,
+      "compression_ratio": 0.43593363211831404,
+      "breakout_move_pct": 0.6825938566553003,
+      "entry": 767.0,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [
     {
       "id": "AAVEUSDT:1790891434",
@@ -365,5 +419,5 @@
   "fakeout_equity": 99.92472282285044,
   "fakeout_peak": 100.05081115577917,
   "fakeout_max_dd_pct": -0.3484010016815642,
-  "last_new_events": 0
+  "last_new_events": 1
 }
