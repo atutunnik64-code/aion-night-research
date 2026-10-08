@@ -1,22 +1,68 @@
 {
   "version": "FUNDING_OI_BYBIT_V1",
   "rule_frozen_at": 1790832319.629528,
-  "last_processed_ts": 1791413631.574,
+  "last_processed_ts": 1791427508.456,
   "last_event_ts": {
     "DOGEUSDT": 1791323675.234,
-    "SUIUSDT": 1791339106.314,
-    "XRPUSDT": 1791389991.956,
+    "SUIUSDT": 1791424017.314,
+    "XRPUSDT": 1791424017.956,
     "ETHUSDT": 1791361957.974,
     "ADAUSDT": 1791389991.432,
     "SOLUSDT": 1791390113.38,
     "BTCUSDT": 1791216024.984,
-    "AAVEUSDT": 1791389991.955,
+    "AAVEUSDT": 1791426254.055,
     "LINKUSDT": 1791336277.118,
     "AVAXUSDT": 1791389992.934,
     "LTCUSDT": 1791239506.735,
     "BNBUSDT": 1791389991.98
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "XRPUSDT:1791424017",
+      "symbol": "XRPUSDT",
+      "venue": "Bybit",
+      "ts": 1791424017.956,
+      "due_ts": 1791438417.956,
+      "event_type": "OI_BUILD",
+      "oi_30m_pct": 1.3996896424738337,
+      "funding_rate": -0.00010877,
+      "entry": 1.4251,
+      "follow_side": -1.0,
+      "fade_side": 1.0,
+      "next_funding_time": 1791446400000,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "SUIUSDT:1791424017",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1791424017.314,
+      "due_ts": 1791438417.314,
+      "event_type": "OI_BUILD",
+      "oi_30m_pct": 1.6853052914291178,
+      "funding_rate": -0.0002082,
+      "entry": 1.13124,
+      "follow_side": -1.0,
+      "fade_side": 1.0,
+      "next_funding_time": 1791446400000,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "AAVEUSDT:1791426254",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1791426254.055,
+      "due_ts": 1791440654.055,
+      "event_type": "OI_BUILD",
+      "oi_30m_pct": 0.6290609543376346,
+      "funding_rate": 0.0001,
+      "entry": 175.01,
+      "follow_side": 1.0,
+      "fade_side": -1.0,
+      "next_funding_time": 1791446400000,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [
     {
       "id": "SUIUSDT:1790891131",
