@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_LIQUIDATION_REGIME_V1",
   "rule_frozen_at": 1790832884.3502889,
-  "last_bucket": 29857120,
+  "last_bucket": 29857543,
   "last_signal_ts": {
     "BTCUSDT:BUY": 1790929080,
     "BTCUSDT:SELL": 1791338280,
