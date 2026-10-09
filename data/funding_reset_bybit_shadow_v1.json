@@ -1,22 +1,88 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1791500239.733,
+  "last_processed_ts": 1791514584.084,
   "last_event_nft": {
-    "XRPUSDT": 1791475200000,
+    "XRPUSDT": 1791504000000,
     "DOGEUSDT": 1791331200000,
-    "LINKUSDT": 1791475200000,
-    "SUIUSDT": 1791475200000,
+    "LINKUSDT": 1791504000000,
+    "SUIUSDT": 1791504000000,
     "BTCUSDT": 1790956800000,
     "ETHUSDT": 1791388800000,
     "SOLUSDT": 1791331200000,
-    "ADAUSDT": 1791360000000,
+    "ADAUSDT": 1791504000000,
     "LTCUSDT": 1791475200000,
     "AAVEUSDT": 1791475200000,
     "AVAXUSDT": 1791360000000,
-    "BNBUSDT": 1791475200000
+    "BNBUSDT": 1791504000000
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "XRPUSDT:1791504000000",
+      "symbol": "XRPUSDT",
+      "ts": 1791511095.956,
+      "funding_time_ms": 1791504000000,
+      "pre_funding_rate": -0.00010721,
+      "entry": 1.3896,
+      "due_ts": 1791514695.956,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "BNBUSDT:1791504000000",
+      "symbol": "BNBUSDT",
+      "ts": 1791511095.98,
+      "funding_time_ms": 1791504000000,
+      "pre_funding_rate": -0.00033686,
+      "entry": 736.43,
+      "due_ts": 1791514695.98,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "ADAUSDT:1791504000000",
+      "symbol": "ADAUSDT",
+      "ts": 1791511095.432,
+      "funding_time_ms": 1791504000000,
+      "pre_funding_rate": -0.00024028,
+      "entry": 0.2335,
+      "due_ts": 1791514695.432,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "LINKUSDT:1791504000000",
+      "symbol": "LINKUSDT",
+      "ts": 1791511095.318,
+      "funding_time_ms": 1791504000000,
+      "pre_funding_rate": -0.00016189,
+      "entry": 12.8,
+      "due_ts": 1791514695.318,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "SUIUSDT:1791504000000",
+      "symbol": "SUIUSDT",
+      "ts": 1791511095.314,
+      "funding_time_ms": 1791504000000,
+      "pre_funding_rate": -0.000148,
+      "entry": 1.05372,
+      "due_ts": 1791514695.314,
+      "revert_side": 1.0,
+      "continue_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    }
+  ],
   "resolved": [
     {
       "id": "XRPUSDT:1790899200000",
