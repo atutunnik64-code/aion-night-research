@@ -1,25 +1,25 @@
 {
   "version": "LIQUIDITY_MIGRATION_PERP_COLLECTOR_V1",
-  "snapshot_count": 3873,
+  "snapshot_count": 3973,
   "started_at": 1790832319.6316378,
   "last": {
-    "ts": 1791514601.845546,
+    "ts": 1791539417.2431464,
     "market": "USDT_PERPETUAL",
     "symbols": {
       "BTCUSDT": {
         "venues": {
           "OKX": {
-            "bid": 82167.5,
-            "ask": 82167.6,
-            "mid": 82167.55,
-            "spread_bps": 0.012170261964872253,
-            "bid_depth_quote": 3326117.6240000003,
-            "ask_depth_quote": 93923828.45,
-            "depth_quote": 97249946.074,
-            "imbalance": -0.9315965147894464,
-            "funding_rate": 4.89623163587e-05,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 82593.8,
+            "ask": 82593.9,
+            "mid": 82593.85,
+            "spread_bps": 0.012107446321074633,
+            "bid_depth_quote": 41123977.775,
+            "ask_depth_quote": 115559933.54199998,
+            "depth_quote": 156683911.31699997,
+            "imbalance": -0.47507082980844506,
+            "funding_rate": -2.28502672127e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -30,17 +30,17 @@
       "ETHUSDT": {
         "venues": {
           "OKX": {
-            "bid": 2491.14,
-            "ask": 2491.15,
-            "mid": 2491.145,
-            "spread_bps": 0.04014226418602718,
-            "bid_depth_quote": 1971032.5495,
-            "ask_depth_quote": 17139847.07,
-            "depth_quote": 19110879.6195,
-            "imbalance": -0.7937266532212537,
-            "funding_rate": -4.02585394289e-05,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 2502.98,
+            "ask": 2502.99,
+            "mid": 2502.9849999999997,
+            "spread_bps": 0.03995237676690522,
+            "bid_depth_quote": 2465506.5849,
+            "ask_depth_quote": 17432461.1816,
+            "depth_quote": 19897967.7665,
+            "imbalance": -0.7521850860517626,
+            "funding_rate": -9.05987163557e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -51,17 +51,17 @@
       "SOLUSDT": {
         "venues": {
           "OKX": {
-            "bid": 110.43,
-            "ask": 110.44,
-            "mid": 110.435,
-            "spread_bps": 0.9055510277988787,
-            "bid_depth_quote": 3757011.0353,
-            "ask_depth_quote": 3813170.3326,
-            "depth_quote": 7570181.3679,
-            "imbalance": -0.007418487691475029,
-            "funding_rate": 2.03552709113e-05,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 110.29,
+            "ask": 110.3,
+            "mid": 110.295,
+            "spread_bps": 0.9067005168184039,
+            "bid_depth_quote": 4373805.2287,
+            "ask_depth_quote": 10188270.5929,
+            "depth_quote": 14562075.821600001,
+            "imbalance": -0.39928822205247516,
+            "funding_rate": -6.24248195781e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -72,17 +72,17 @@
       "XRPUSDT": {
         "venues": {
           "OKX": {
-            "bid": 1.3934,
-            "ask": 1.3935,
-            "mid": 1.39345,
-            "spread_bps": 0.717669011052191,
-            "bid_depth_quote": 16209.108561,
-            "ask_depth_quote": 17929.912635,
-            "depth_quote": 34139.021196,
-            "imbalance": -0.05040578240718936,
-            "funding_rate": -8.99462063618e-05,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 1.3997,
+            "ask": 1.3998,
+            "mid": 1.39975,
+            "spread_bps": 0.7144388083157871,
+            "bid_depth_quote": 19630.080418999998,
+            "ask_depth_quote": 16551.916708,
+            "depth_quote": 36181.997126999995,
+            "imbalance": 0.08507445568014231,
+            "funding_rate": -6.47264827479e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -93,17 +93,17 @@
       "DOGEUSDT": {
         "venues": {
           "OKX": {
-            "bid": 0.08487,
-            "ask": 0.08488,
-            "mid": 0.084875,
-            "spread_bps": 1.1782726522913123,
-            "bid_depth_quote": 1470.7004553,
-            "ask_depth_quote": 1394.6492771,
-            "depth_quote": 2865.3497324,
-            "imbalance": 0.02654167389762221,
-            "funding_rate": 4.21089561567e-05,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 0.085,
+            "ask": 0.08501,
+            "mid": 0.085005,
+            "spread_bps": 1.1764705882355564,
+            "bid_depth_quote": 1613.9761324,
+            "ask_depth_quote": 1655.567182,
+            "depth_quote": 3269.5433144,
+            "imbalance": -0.012720751982951589,
+            "funding_rate": -3.27580129062e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -114,17 +114,17 @@
       "ADAUSDT": {
         "venues": {
           "OKX": {
-            "bid": 0.2341,
-            "ask": 0.2342,
-            "mid": 0.23415,
-            "spread_bps": 4.271678769756093,
-            "bid_depth_quote": 9756.86642,
-            "ask_depth_quote": 11526.82532,
-            "depth_quote": 21283.691740000002,
-            "imbalance": -0.08316033334919928,
-            "funding_rate": -0.0001967919510723,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 0.2382,
+            "ask": 0.2383,
+            "mid": 0.23825000000000002,
+            "spread_bps": 4.198152812762146,
+            "bid_depth_quote": 11647.05498,
+            "ask_depth_quote": 10733.32469,
+            "depth_quote": 22380.379670000002,
+            "imbalance": 0.040827291738255,
+            "funding_rate": 1.30258622768e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -135,17 +135,17 @@
       "LINKUSDT": {
         "venues": {
           "OKX": {
-            "bid": 12.788,
-            "ask": 12.789,
-            "mid": 12.788499999999999,
-            "spread_bps": 0.7819831091637752,
-            "bid_depth_quote": 202090.8046,
-            "ask_depth_quote": 197470.8873,
-            "depth_quote": 399561.6919,
-            "imbalance": 0.011562463053030238,
-            "funding_rate": -3.80279650428e-05,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 12.888,
+            "ask": 12.889,
+            "mid": 12.8885,
+            "spread_bps": 0.7759155803843676,
+            "bid_depth_quote": 97657.6892,
+            "ask_depth_quote": 149284.6103,
+            "depth_quote": 246942.2995,
+            "imbalance": -0.20906471351620345,
+            "funding_rate": -1.68300381591e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -156,17 +156,17 @@
       "AVAXUSDT": {
         "venues": {
           "OKX": {
-            "bid": 10.282,
-            "ask": 10.283,
-            "mid": 10.282499999999999,
-            "spread_bps": 0.9725734292942434,
-            "bid_depth_quote": 126758.0995,
-            "ask_depth_quote": 143815.9744,
-            "depth_quote": 270574.0739,
-            "imbalance": -0.06304327186315839,
-            "funding_rate": -3.8855102487e-06,
-            "funding_time": 1791532800000,
-            "next_funding_time": 1791561600000,
+            "bid": 10.406,
+            "ask": 10.407,
+            "mid": 10.406500000000001,
+            "spread_bps": 0.960984047664315,
+            "bid_depth_quote": 221105.9665,
+            "ask_depth_quote": 159195.4005,
+            "depth_quote": 380301.36699999997,
+            "imbalance": 0.16279343534413335,
+            "funding_rate": -1.04025275163e-05,
+            "funding_time": 1791561600000,
+            "next_funding_time": 1791590400000,
             "funding_interval_hours": 8.0,
             "depth_share": 1.0
           }
@@ -194,5 +194,5 @@
       "AVAXUSDT:Bybit": "HTTP Error 403: Forbidden"
     }
   },
-  "last_refresh": 1791514601.845546
+  "last_refresh": 1791539417.2431464
 }
