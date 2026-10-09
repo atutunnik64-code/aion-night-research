@@ -6069,3 +6069,13 @@
 {"event_time":1791563228044,"symbol":"BTCUSDT","position_side":"Buy","pressure_side":"SELL","price":82398.7,"qty":0.013,"notional_usdt":1071.1831}
 {"event_time":1791563969219,"symbol":"ETHUSDT","position_side":"Buy","pressure_side":"SELL","price":2479.11,"qty":0.51,"notional_usdt":1264.3461}
 {"event_time":1791565417338,"symbol":"XRPUSDT","position_side":"Buy","pressure_side":"SELL","price":1.3776,"qty":299.6,"notional_usdt":412.72896000000003}
+{"event_time":1791579761742,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.08554,"qty":35000.0,"notional_usdt":2993.9}
+{"event_time":1791579881054,"symbol":"AVAXUSDT","position_side":"Sell","pressure_side":"BUY","price":10.305,"qty":2.9,"notional_usdt":29.8845}
+{"event_time":1791580046389,"symbol":"AVAXUSDT","position_side":"Sell","pressure_side":"BUY","price":10.308,"qty":3.6,"notional_usdt":37.1088}
+{"event_time":1791580046413,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":82811.1,"qty":0.048,"notional_usdt":3974.9328000000005}
+{"event_time":1791580054939,"symbol":"BTCUSDT","position_side":"Sell","pressure_side":"BUY","price":82829.5,"qty":0.03,"notional_usdt":2484.8849999999998}
+{"event_time":1791580425438,"symbol":"AVAXUSDT","position_side":"Sell","pressure_side":"BUY","price":10.325,"qty":18.1,"notional_usdt":186.8825}
+{"event_time":1791580877837,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.4007,"qty":702.8,"notional_usdt":984.41196}
+{"event_time":1791580880151,"symbol":"DOGEUSDT","position_side":"Sell","pressure_side":"BUY","price":0.08584,"qty":554.0,"notional_usdt":47.55536}
+{"event_time":1791580892539,"symbol":"ETHUSDT","position_side":"Sell","pressure_side":"BUY","price":2492.23,"qty":10.83,"notional_usdt":26990.8509}
+{"event_time":1791582251349,"symbol":"XRPUSDT","position_side":"Sell","pressure_side":"BUY","price":1.399,"qty":220.8,"notional_usdt":308.8992}
