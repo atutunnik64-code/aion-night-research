@@ -1,9 +1,9 @@
 {
   "version": "MOEX_FUTURES_COLLECTOR_V1",
   "started_at": 1790788001.5967064,
-  "snapshot_count": 508,
+  "snapshot_count": 520,
   "last_good": {
-    "ts": 1791582247.1026227,
+    "ts": 1791596231.2465491,
     "mode": "FUTURE_ONLY_COLLECT",
     "source": "MOEX_ISS_DELAYED",
     "source_delay_minutes": 15,
@@ -310,7 +310,7 @@
     ],
     "contracts": 23
   },
-  "last_refresh": 1791582247.1026227,
+  "last_refresh": 1791596231.2465491,
   "last_attempt": 1791218757.4962,
   "last_error": "MOEX_ISS_UNAVAILABLE: [Errno 2] No such file or directory: 'curl.exe'"
 }

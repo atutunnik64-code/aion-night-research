@@ -1,10 +1,10 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1791582429.934,
+  "last_processed_ts": 1791596409.234,
   "last_event_ts": {
     "DOGEUSDT": 1791496743.434,
-    "ADAUSDT": 1791535927.432,
+    "ADAUSDT": 1791592913.432,
     "LINKUSDT": 1791496745.318,
     "AVAXUSDT": 1791561930.933,
     "SUIUSDT": 1791535927.314,
@@ -18,15 +18,15 @@
   },
   "pending": [
     {
-      "id": "AAVEUSDT:1791578929",
-      "symbol": "AAVEUSDT",
+      "id": "ADAUSDT:1791592913",
+      "symbol": "ADAUSDT",
       "venue": "Bybit",
-      "ts": 1791578929.956,
-      "due_ts": 1791582529.956,
-      "move_15m_pct": -1.6476403436507026,
-      "entry": 167.14,
-      "continuation_side": -1.0,
-      "reversal_side": 1.0,
+      "ts": 1791592913.432,
+      "due_ts": 1791596513.432,
+      "move_15m_pct": 1.744186046511631,
+      "entry": 0.245,
+      "continuation_side": 1.0,
+      "reversal_side": -1.0,
       "round_trip_cost": 0.0012
     }
   ],
@@ -3342,12 +3342,30 @@
       "continuation_paper_equity": 99.80427604001916,
       "reversal_net_return_pct": 1.7413117256767177,
       "reversal_paper_equity": 97.99060769623799
+    },
+    {
+      "id": "AAVEUSDT:1791578929",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1791578929.956,
+      "due_ts": 1791582529.956,
+      "move_15m_pct": -1.6476403436507026,
+      "entry": 167.14,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 168.34,
+      "exit_ts": 1791592913.955,
+      "continuation_net_return_pct": -0.8379609907861817,
+      "continuation_paper_equity": 99.76245999500156,
+      "reversal_net_return_pct": 0.5979609907861817,
+      "reversal_paper_equity": 98.01990497667087
     }
   ],
-  "continuation_equity": 99.80427604001916,
+  "continuation_equity": 99.76245999500156,
   "continuation_peak": 101.10715155444083,
   "continuation_max_dd_pct": -3.114380241718051,
-  "reversal_equity": 97.99060769623799,
+  "reversal_equity": 98.01990497667087,
   "reversal_peak": 100.84669250025122,
   "reversal_max_dd_pct": -3.2739770998805873,
   "last_new_events": 0
