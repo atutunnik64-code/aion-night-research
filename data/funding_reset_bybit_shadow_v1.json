@@ -1,7 +1,7 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1791618892.384,
+  "last_processed_ts": 1791642610.435,
   "last_event_nft": {
     "XRPUSDT": 1791561600000,
     "DOGEUSDT": 1791532800000,
@@ -10,13 +10,53 @@
     "BTCUSDT": 1791532800000,
     "ETHUSDT": 1791388800000,
     "SOLUSDT": 1791331200000,
-    "ADAUSDT": 1791590400000,
+    "ADAUSDT": 1791619200000,
     "LTCUSDT": 1791475200000,
     "AAVEUSDT": 1791590400000,
-    "AVAXUSDT": 1791532800000,
-    "BNBUSDT": 1791561600000
+    "AVAXUSDT": 1791619200000,
+    "BNBUSDT": 1791619200000
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "BNBUSDT:1791619200000",
+      "symbol": "BNBUSDT",
+      "ts": 1791639141.98,
+      "funding_time_ms": 1791619200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 749.56,
+      "due_ts": 1791642741.98,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "ADAUSDT:1791619200000",
+      "symbol": "ADAUSDT",
+      "ts": 1791639141.432,
+      "funding_time_ms": 1791619200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 0.2551,
+      "due_ts": 1791642741.432,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "AVAXUSDT:1791619200000",
+      "symbol": "AVAXUSDT",
+      "ts": 1791639140.933,
+      "funding_time_ms": 1791619200000,
+      "pre_funding_rate": 0.0001,
+      "entry": 10.505,
+      "due_ts": 1791642740.933,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    }
+  ],
   "resolved": [
     {
       "id": "XRPUSDT:1790899200000",
