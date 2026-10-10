@@ -1,9 +1,9 @@
 {
   "version": "MOEX_FUTURES_UNIVERSE_V1",
   "started_at": 1790788001.683229,
-  "refresh_count": 555,
+  "refresh_count": 567,
   "last": {
-    "ts": 1791660108.3711982,
+    "ts": 1791674397.9267592,
     "mode": "FUTURE_ONLY_UNIVERSE",
     "source": "MOEX_ISS_DELAYED",
     "source_delay_minutes": 15,
@@ -2805,7 +2805,7 @@
         "OPENPOSITION": 992,
         "VOLTODAY": 1,
         "VALTODAY": 69500,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2820,7 +2820,7 @@
         "OPENPOSITION": 888,
         "VOLTODAY": 2,
         "VALTODAY": 137650,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2835,7 +2835,7 @@
         "OPENPOSITION": 534,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2850,7 +2850,7 @@
         "OPENPOSITION": 1060,
         "VOLTODAY": 1,
         "VALTODAY": 69890,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2861,11 +2861,11 @@
         "LASTTRADEDATE": "2026-11-27",
         "LAST": 68820,
         "LAST_RUB": 68820,
-        "SETTLEPRICE": 68990,
+        "SETTLEPRICE": 68830,
         "OPENPOSITION": 684,
         "VOLTODAY": 4,
         "VALTODAY": 275640,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2880,7 +2880,7 @@
         "OPENPOSITION": 176,
         "VOLTODAY": 1,
         "VALTODAY": 67300,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2891,11 +2891,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 1875,
         "LAST_RUB": 15920,
-        "SETTLEPRICE": 1855.2,
+        "SETTLEPRICE": 1855.3,
         "OPENPOSITION": 306,
         "VOLTODAY": 1,
         "VALTODAY": 15920,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2925,7 +2925,7 @@
         "OPENPOSITION": 398,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2940,7 +2940,7 @@
         "OPENPOSITION": 162,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2955,7 +2955,7 @@
         "OPENPOSITION": 4618,
         "VOLTODAY": 63,
         "VALTODAY": 141437,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -2970,7 +2970,7 @@
         "OPENPOSITION": 70,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:05:00",
         "tier": "THIN",
         "active": true
       },
@@ -2985,7 +2985,7 @@
         "OPENPOSITION": 2550,
         "VOLTODAY": 94,
         "VALTODAY": 338515,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -3000,7 +3000,7 @@
         "OPENPOSITION": 79424,
         "VOLTODAY": 8297,
         "VALTODAY": 29231930,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -3045,7 +3045,7 @@
         "OPENPOSITION": 960,
         "VOLTODAY": 19,
         "VALTODAY": 147205,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -3060,7 +3060,7 @@
         "OPENPOSITION": 87260,
         "VOLTODAY": 4422,
         "VALTODAY": 33253786,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -3075,7 +3075,7 @@
         "OPENPOSITION": 4078,
         "VOLTODAY": 493,
         "VALTODAY": 1023929,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -3090,7 +3090,7 @@
         "OPENPOSITION": 357700,
         "VOLTODAY": 19930,
         "VALTODAY": 40376225,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -3105,7 +3105,7 @@
         "OPENPOSITION": 3056,
         "VOLTODAY": 3,
         "VALTODAY": 155495,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3120,7 +3120,7 @@
         "OPENPOSITION": 3304,
         "VOLTODAY": 9,
         "VALTODAY": 202498,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3135,7 +3135,7 @@
         "OPENPOSITION": 928,
         "VOLTODAY": 14,
         "VALTODAY": 364581,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3146,11 +3146,11 @@
         "LASTTRADEDATE": "2026-12-15",
         "LAST": 3102,
         "LAST_RUB": 26337,
-        "SETTLEPRICE": 3101.5,
+        "SETTLEPRICE": 3102,
         "OPENPOSITION": 62994,
         "VOLTODAY": 197,
         "VALTODAY": 5176476,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3165,7 +3165,7 @@
         "OPENPOSITION": 4,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3180,7 +3180,7 @@
         "OPENPOSITION": 34,
         "VOLTODAY": 2,
         "VALTODAY": 47139,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3195,7 +3195,7 @@
         "OPENPOSITION": 22,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3210,7 +3210,7 @@
         "OPENPOSITION": 98,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3225,7 +3225,7 @@
         "OPENPOSITION": 240740,
         "VOLTODAY": 6841,
         "VALTODAY": 1533832,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3240,7 +3240,7 @@
         "OPENPOSITION": 40,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -3255,7 +3255,7 @@
         "OPENPOSITION": 248,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3266,11 +3266,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 113.45,
         "LAST_RUB": 9632,
-        "SETTLEPRICE": 113.24,
+        "SETTLEPRICE": 113.45,
         "OPENPOSITION": 19360,
         "VOLTODAY": 112,
         "VALTODAY": 1074328,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3285,7 +3285,7 @@
         "OPENPOSITION": 176,
         "VOLTODAY": 1,
         "VALTODAY": 7696,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3296,11 +3296,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 88.24,
         "LAST_RUB": 7492,
-        "SETTLEPRICE": 88.22,
+        "SETTLEPRICE": 88.24,
         "OPENPOSITION": 24182,
         "VOLTODAY": 55,
         "VALTODAY": 410175,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3315,7 +3315,7 @@
         "OPENPOSITION": 6954,
         "VOLTODAY": 241,
         "VALTODAY": 1995536,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3330,7 +3330,7 @@
         "OPENPOSITION": 1894,
         "VOLTODAY": 179,
         "VALTODAY": 1448085,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3345,7 +3345,7 @@
         "OPENPOSITION": 1822,
         "VOLTODAY": 62,
         "VALTODAY": 495738,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3360,7 +3360,7 @@
         "OPENPOSITION": 948,
         "VOLTODAY": 7,
         "VALTODAY": 55284,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3375,7 +3375,7 @@
         "OPENPOSITION": 258,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3390,7 +3390,7 @@
         "OPENPOSITION": 161422,
         "VOLTODAY": 9958,
         "VALTODAY": 87839622,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -3405,7 +3405,7 @@
         "OPENPOSITION": 47006,
         "VOLTODAY": 1687,
         "VALTODAY": 14390523,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -3416,11 +3416,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 1364,
         "LAST_RUB": 1364,
-        "SETTLEPRICE": 1335,
+        "SETTLEPRICE": 1360,
         "OPENPOSITION": 252,
         "VOLTODAY": 6,
         "VALTODAY": 8189,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3435,7 +3435,7 @@
         "OPENPOSITION": 18176,
         "VOLTODAY": 5213,
         "VALTODAY": 6916107,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3450,7 +3450,7 @@
         "OPENPOSITION": 5858,
         "VOLTODAY": 377,
         "VALTODAY": 31193531,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -3465,7 +3465,7 @@
         "OPENPOSITION": 2390,
         "VOLTODAY": 271,
         "VALTODAY": 21926894,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -3480,7 +3480,7 @@
         "OPENPOSITION": 1544,
         "VOLTODAY": 48,
         "VALTODAY": 3839302,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -3491,11 +3491,11 @@
         "LASTTRADEDATE": "2027-04-01",
         "LAST": 93.1,
         "LAST_RUB": 79046,
-        "SETTLEPRICE": 93.15,
+        "SETTLEPRICE": 93.1,
         "OPENPOSITION": 906,
         "VOLTODAY": 7,
         "VALTODAY": 553197,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3506,11 +3506,11 @@
         "LASTTRADEDATE": "2027-05-03",
         "LAST": 92.48,
         "LAST_RUB": 78520,
-        "SETTLEPRICE": 92.5,
+        "SETTLEPRICE": 92.48,
         "OPENPOSITION": 262,
         "VOLTODAY": 7,
         "VALTODAY": 549810,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3525,7 +3525,7 @@
         "OPENPOSITION": 368950,
         "VOLTODAY": 19307,
         "VALTODAY": 1698569607,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -3540,7 +3540,7 @@
         "OPENPOSITION": 31882,
         "VOLTODAY": 1886,
         "VALTODAY": 160947161,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -3555,7 +3555,7 @@
         "OPENPOSITION": 634,
         "VOLTODAY": 66,
         "VALTODAY": 173640,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3566,11 +3566,11 @@
         "LASTTRADEDATE": "2100-01-01",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 42.57,
+        "SETTLEPRICE": 42.69,
         "OPENPOSITION": 632,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3585,7 +3585,7 @@
         "OPENPOSITION": 51260,
         "VOLTODAY": 939,
         "VALTODAY": 2414660,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3600,7 +3600,7 @@
         "OPENPOSITION": 83544,
         "VOLTODAY": 3792,
         "VALTODAY": 26684552,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -3615,7 +3615,7 @@
         "OPENPOSITION": 422824,
         "VOLTODAY": 19894,
         "VALTODAY": 140526964,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -3630,7 +3630,7 @@
         "OPENPOSITION": 53184,
         "VOLTODAY": 3689,
         "VALTODAY": 26222098,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -3645,7 +3645,7 @@
         "OPENPOSITION": 18592,
         "VOLTODAY": 291,
         "VALTODAY": 2086305,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3660,7 +3660,7 @@
         "OPENPOSITION": 14,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3675,7 +3675,7 @@
         "OPENPOSITION": 16,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3690,7 +3690,7 @@
         "OPENPOSITION": 2364,
         "VOLTODAY": 13,
         "VALTODAY": 46163,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3705,7 +3705,7 @@
         "OPENPOSITION": 10,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -3720,7 +3720,7 @@
         "OPENPOSITION": 67740,
         "VOLTODAY": 587,
         "VALTODAY": 2953876,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3735,7 +3735,7 @@
         "OPENPOSITION": 1320836,
         "VOLTODAY": 23898,
         "VALTODAY": 116169390,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -3750,7 +3750,7 @@
         "OPENPOSITION": 5562,
         "VOLTODAY": 186,
         "VALTODAY": 2298355,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3765,7 +3765,7 @@
         "OPENPOSITION": 79128,
         "VOLTODAY": 434,
         "VALTODAY": 5364816,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3776,11 +3776,11 @@
         "LASTTRADEDATE": "2026-12-17",
         "LAST": 0.8037,
         "LAST_RUB": 82106,
-        "SETTLEPRICE": 0.8178,
+        "SETTLEPRICE": 0.8177,
         "OPENPOSITION": 756,
         "VOLTODAY": 1,
         "VALTODAY": 81728,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3795,7 +3795,7 @@
         "OPENPOSITION": 1150,
         "VOLTODAY": 6,
         "VALTODAY": 26255,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3810,7 +3810,7 @@
         "OPENPOSITION": 226,
         "VOLTODAY": 13,
         "VALTODAY": 94648,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3825,7 +3825,7 @@
         "OPENPOSITION": 80964,
         "VOLTODAY": 5304,
         "VALTODAY": 37467956,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -3840,7 +3840,7 @@
         "OPENPOSITION": 986,
         "VOLTODAY": 26,
         "VALTODAY": 68250,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3851,11 +3851,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 9470,
         "LAST_RUB": 9470,
-        "SETTLEPRICE": 9466,
+        "SETTLEPRICE": 9470,
         "OPENPOSITION": 1246,
         "VOLTODAY": 32,
         "VALTODAY": 301812,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3870,7 +3870,7 @@
         "OPENPOSITION": 21156,
         "VOLTODAY": 1213,
         "VALTODAY": 11714488,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -3885,7 +3885,7 @@
         "OPENPOSITION": 20926454,
         "VOLTODAY": 179247,
         "VALTODAY": 2256011290,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -3900,7 +3900,7 @@
         "OPENPOSITION": 710,
         "VOLTODAY": 1,
         "VALTODAY": 26533,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3911,11 +3911,11 @@
         "LASTTRADEDATE": "2100-01-01",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 184.3,
+        "SETTLEPRICE": 193.1,
         "OPENPOSITION": 142,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3930,7 +3930,7 @@
         "OPENPOSITION": 2944028,
         "VOLTODAY": 15803,
         "VALTODAY": 205332850,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -3941,11 +3941,11 @@
         "LASTTRADEDATE": "2028-03-16",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 14.05,
+        "SETTLEPRICE": 14.095,
         "OPENPOSITION": 104,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -3960,7 +3960,7 @@
         "OPENPOSITION": 125844,
         "VOLTODAY": 716,
         "VALTODAY": 9486470,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3975,7 +3975,7 @@
         "OPENPOSITION": 10430,
         "VOLTODAY": 91,
         "VALTODAY": 1225830,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -3990,7 +3990,7 @@
         "OPENPOSITION": 1134,
         "VOLTODAY": 1,
         "VALTODAY": 23230,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4005,7 +4005,7 @@
         "OPENPOSITION": 33356828,
         "VOLTODAY": 291732,
         "VALTODAY": 3736800040,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -4016,11 +4016,11 @@
         "LASTTRADEDATE": "2027-12-16",
         "LAST": 13.72,
         "LAST_RUB": 13720,
-        "SETTLEPRICE": 13.731,
+        "SETTLEPRICE": 13.868,
         "OPENPOSITION": 5112,
         "VOLTODAY": 5,
         "VALTODAY": 68610,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4035,7 +4035,7 @@
         "OPENPOSITION": 310,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -4050,7 +4050,7 @@
         "OPENPOSITION": 48,
         "VOLTODAY": 14,
         "VALTODAY": 77480,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4061,11 +4061,11 @@
         "LASTTRADEDATE": "2100-01-01",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 193.6,
+        "SETTLEPRICE": 191.7,
         "OPENPOSITION": 22,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4076,11 +4076,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 82,
+        "SETTLEPRICE": 77.79,
         "OPENPOSITION": 220,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4095,7 +4095,7 @@
         "OPENPOSITION": 46,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4110,7 +4110,7 @@
         "OPENPOSITION": 792,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4125,7 +4125,7 @@
         "OPENPOSITION": 1100,
         "VOLTODAY": 36,
         "VALTODAY": 2429830,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4140,7 +4140,7 @@
         "OPENPOSITION": 630,
         "VOLTODAY": 26,
         "VALTODAY": 1679950,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4151,11 +4151,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 64490,
         "LAST_RUB": 64490,
-        "SETTLEPRICE": 64330,
+        "SETTLEPRICE": 64490,
         "OPENPOSITION": 120,
         "VOLTODAY": 17,
         "VALTODAY": 1078180,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4166,11 +4166,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 2184,
+        "SETTLEPRICE": 2172,
         "OPENPOSITION": 1020,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4185,7 +4185,7 @@
         "OPENPOSITION": 110688,
         "VOLTODAY": 2910,
         "VALTODAY": 6165189,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4200,7 +4200,7 @@
         "OPENPOSITION": 126,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4215,7 +4215,7 @@
         "OPENPOSITION": 3490,
         "VOLTODAY": 5,
         "VALTODAY": 99223,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4241,11 +4241,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 3212,
+        "SETTLEPRICE": 3207,
         "OPENPOSITION": 154,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4260,7 +4260,7 @@
         "OPENPOSITION": 18930,
         "VOLTODAY": 604,
         "VALTODAY": 1903848,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4275,7 +4275,7 @@
         "OPENPOSITION": 15936,
         "VOLTODAY": 15,
         "VALTODAY": 1426401,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -4290,7 +4290,7 @@
         "OPENPOSITION": 22,
         "VOLTODAY": 1,
         "VALTODAY": 95093,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:05:00",
         "tier": "THIN",
         "active": true
       },
@@ -4320,7 +4320,7 @@
         "OPENPOSITION": 270366,
         "VOLTODAY": 1455,
         "VALTODAY": 138569728,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -4335,7 +4335,7 @@
         "OPENPOSITION": 166090,
         "VOLTODAY": 8670,
         "VALTODAY": 18532419,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4350,7 +4350,7 @@
         "OPENPOSITION": 58008,
         "VOLTODAY": 1232,
         "VALTODAY": 2651647,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4365,7 +4365,7 @@
         "OPENPOSITION": 9970,
         "VOLTODAY": 144,
         "VALTODAY": 311521,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4380,7 +4380,7 @@
         "OPENPOSITION": 916,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4391,11 +4391,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 97.38,
+        "SETTLEPRICE": 98.13,
         "OPENPOSITION": 40,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4406,11 +4406,11 @@
         "LASTTRADEDATE": "2026-12-17",
         "LAST": 96.02,
         "LAST_RUB": 9602,
-        "SETTLEPRICE": 96.02,
+        "SETTLEPRICE": 96.58,
         "OPENPOSITION": 1286,
         "VOLTODAY": 35,
         "VALTODAY": 335736,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4425,7 +4425,7 @@
         "OPENPOSITION": 107622,
         "VOLTODAY": 15927,
         "VALTODAY": 33882143,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4440,7 +4440,7 @@
         "OPENPOSITION": 362472,
         "VOLTODAY": 1609,
         "VALTODAY": 2596723,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4451,11 +4451,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 97210,
         "LAST_RUB": 97210,
-        "SETTLEPRICE": 97160,
+        "SETTLEPRICE": 97210,
         "OPENPOSITION": 52030,
         "VOLTODAY": 143,
         "VALTODAY": 13903240,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4470,7 +4470,7 @@
         "OPENPOSITION": 150,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -4485,7 +4485,7 @@
         "OPENPOSITION": 97364,
         "VOLTODAY": 743,
         "VALTODAY": 70302990,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -4515,7 +4515,7 @@
         "OPENPOSITION": 1590772,
         "VOLTODAY": 1845,
         "VALTODAY": 176951436,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -4530,7 +4530,7 @@
         "OPENPOSITION": 44,
         "VOLTODAY": 9,
         "VALTODAY": 59763,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4545,7 +4545,7 @@
         "OPENPOSITION": 15558,
         "VOLTODAY": 1357,
         "VALTODAY": 8841088,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4560,7 +4560,7 @@
         "OPENPOSITION": 84798,
         "VOLTODAY": 1804,
         "VALTODAY": 13817673,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4575,7 +4575,7 @@
         "OPENPOSITION": 23030,
         "VOLTODAY": 1511,
         "VALTODAY": 11723831,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4590,7 +4590,7 @@
         "OPENPOSITION": 60,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4605,7 +4605,7 @@
         "OPENPOSITION": 1904,
         "VOLTODAY": 97,
         "VALTODAY": 389431,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4616,11 +4616,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 8949,
         "LAST_RUB": 8949,
-        "SETTLEPRICE": 8960,
+        "SETTLEPRICE": 8949,
         "OPENPOSITION": 124,
         "VOLTODAY": 67,
         "VALTODAY": 599109,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4635,7 +4635,7 @@
         "OPENPOSITION": 21086,
         "VOLTODAY": 7863,
         "VALTODAY": 69636301,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -4646,11 +4646,11 @@
         "LASTTRADEDATE": "2026-12-17",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 8440,
+        "SETTLEPRICE": 8438,
         "OPENPOSITION": 230,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4680,7 +4680,7 @@
         "OPENPOSITION": 23506,
         "VOLTODAY": 496,
         "VALTODAY": 2686127,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -4695,7 +4695,7 @@
         "OPENPOSITION": 743994,
         "VOLTODAY": 64353,
         "VALTODAY": 664061964,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:30:45",
         "tier": "CORE",
         "active": true
       },
@@ -4706,11 +4706,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 4310.1,
         "LAST_RUB": 365948,
-        "SETTLEPRICE": 4310,
+        "SETTLEPRICE": 4310.1,
         "OPENPOSITION": 9800,
         "VOLTODAY": 87,
         "VALTODAY": 31834316,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4721,11 +4721,11 @@
         "LASTTRADEDATE": "2027-06-18",
         "LAST": 4375.9,
         "LAST_RUB": 371535,
-        "SETTLEPRICE": 4372.9,
+        "SETTLEPRICE": 4375.9,
         "OPENPOSITION": 1202,
         "VOLTODAY": 4,
         "VALTODAY": 1485248,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4740,7 +4740,7 @@
         "OPENPOSITION": 94,
         "VOLTODAY": 1,
         "VALTODAY": 375738,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -4755,7 +4755,7 @@
         "OPENPOSITION": 268778,
         "VOLTODAY": 2801,
         "VALTODAY": 1010649564,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -4770,7 +4770,7 @@
         "OPENPOSITION": 9236,
         "VOLTODAY": 947,
         "VALTODAY": 1157973,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -4785,7 +4785,7 @@
         "OPENPOSITION": 1119306,
         "VOLTODAY": 58410,
         "VALTODAY": 69375994,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -4800,7 +4800,7 @@
         "OPENPOSITION": 1522142,
         "VOLTODAY": 9516,
         "VALTODAY": 108376746,
-        "SYSTIME": "2026-10-10 22:08:40",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -4815,7 +4815,7 @@
         "OPENPOSITION": 20238,
         "VOLTODAY": 155,
         "VALTODAY": 1862593,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4845,7 +4845,7 @@
         "OPENPOSITION": 956,
         "VOLTODAY": 2,
         "VALTODAY": 25602,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4860,7 +4860,7 @@
         "OPENPOSITION": 1347582,
         "VOLTODAY": 3445,
         "VALTODAY": 40126893,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -4875,7 +4875,7 @@
         "OPENPOSITION": 2698,
         "VOLTODAY": 67,
         "VALTODAY": 2452337,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -4890,7 +4890,7 @@
         "OPENPOSITION": 566,
         "VOLTODAY": 15,
         "VALTODAY": 558643,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4905,7 +4905,7 @@
         "OPENPOSITION": 108,
         "VOLTODAY": 1,
         "VALTODAY": 37799,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -4920,7 +4920,7 @@
         "OPENPOSITION": 43480,
         "VOLTODAY": 1909,
         "VALTODAY": 68900572,
-        "SYSTIME": "2026-10-10 22:18:51",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -4935,7 +4935,7 @@
         "OPENPOSITION": 2,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -4950,7 +4950,7 @@
         "OPENPOSITION": 6656,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -4965,7 +4965,7 @@
         "OPENPOSITION": 53720,
         "VOLTODAY": 5653,
         "VALTODAY": 61555353,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -4980,7 +4980,7 @@
         "OPENPOSITION": 8478,
         "VOLTODAY": 345,
         "VALTODAY": 3831739,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -4995,7 +4995,7 @@
         "OPENPOSITION": 496,
         "VOLTODAY": 53,
         "VALTODAY": 606388,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -5010,7 +5010,7 @@
         "OPENPOSITION": 1129344,
         "VOLTODAY": 164198,
         "VALTODAY": 1734096237,
-        "SYSTIME": "2026-10-10 22:15:13",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -5025,7 +5025,7 @@
         "OPENPOSITION": 776,
         "VOLTODAY": 4,
         "VALTODAY": 11619,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5040,7 +5040,7 @@
         "OPENPOSITION": 95502,
         "VOLTODAY": 563,
         "VALTODAY": 1605524,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5055,7 +5055,7 @@
         "OPENPOSITION": 48,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5070,7 +5070,7 @@
         "OPENPOSITION": 60,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5081,11 +5081,11 @@
         "LASTTRADEDATE": "2027-03-24",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 42090,
+        "SETTLEPRICE": 42080,
         "OPENPOSITION": 28,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5100,7 +5100,7 @@
         "OPENPOSITION": 396,
         "VOLTODAY": 13,
         "VALTODAY": 122517,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5115,7 +5115,7 @@
         "OPENPOSITION": 518,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -5130,7 +5130,7 @@
         "OPENPOSITION": 76,
         "VOLTODAY": 11,
         "VALTODAY": 29363,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5145,7 +5145,7 @@
         "OPENPOSITION": 107770,
         "VOLTODAY": 339,
         "VALTODAY": 904213,
-        "SYSTIME": "2026-10-10 22:12:49",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5160,7 +5160,7 @@
         "OPENPOSITION": 3998,
         "VOLTODAY": 2,
         "VALTODAY": 20944,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5190,7 +5190,7 @@
         "OPENPOSITION": 24626,
         "VOLTODAY": 317,
         "VALTODAY": 1281681,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5220,7 +5220,7 @@
         "OPENPOSITION": 30,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:05:00",
         "tier": "THIN",
         "active": true
       },
@@ -5235,7 +5235,7 @@
         "OPENPOSITION": 25922,
         "VOLTODAY": 12,
         "VALTODAY": 49485,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5250,7 +5250,7 @@
         "OPENPOSITION": 942146,
         "VOLTODAY": 4685,
         "VALTODAY": 18936777,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -5265,7 +5265,7 @@
         "OPENPOSITION": 2136926,
         "VOLTODAY": 524172,
         "VALTODAY": 12668270870,
-        "SYSTIME": "2026-10-10 22:19:21",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -5280,7 +5280,7 @@
         "OPENPOSITION": 226,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5295,7 +5295,7 @@
         "OPENPOSITION": 2954,
         "VOLTODAY": 84,
         "VALTODAY": 42003,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5310,7 +5310,7 @@
         "OPENPOSITION": 96,
         "VOLTODAY": 3,
         "VALTODAY": 77777,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -5325,7 +5325,7 @@
         "OPENPOSITION": 8852,
         "VOLTODAY": 322,
         "VALTODAY": 8115019,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5340,7 +5340,7 @@
         "OPENPOSITION": 228,
         "VOLTODAY": 72,
         "VALTODAY": 32610,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5355,7 +5355,7 @@
         "OPENPOSITION": 5094,
         "VOLTODAY": 75,
         "VALTODAY": 33070,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5366,11 +5366,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 6616,
         "LAST_RUB": 6616,
-        "SETTLEPRICE": 6616,
+        "SETTLEPRICE": 6777,
         "OPENPOSITION": 50,
         "VOLTODAY": 7,
         "VALTODAY": 46772,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5381,11 +5381,11 @@
         "LASTTRADEDATE": "2026-12-17",
         "LAST": 6568,
         "LAST_RUB": 6568,
-        "SETTLEPRICE": 6568,
+        "SETTLEPRICE": 6580,
         "OPENPOSITION": 2094,
         "VOLTODAY": 20,
         "VALTODAY": 131507,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5396,11 +5396,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 27.48,
+        "SETTLEPRICE": 25.34,
         "OPENPOSITION": 112,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5411,11 +5411,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 156.77,
+        "SETTLEPRICE": 156.79,
         "OPENPOSITION": 18,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5430,7 +5430,7 @@
         "OPENPOSITION": 2960,
         "VOLTODAY": 10,
         "VALTODAY": 839915,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -5445,7 +5445,7 @@
         "OPENPOSITION": 74192,
         "VOLTODAY": 360,
         "VALTODAY": 876525,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5460,7 +5460,7 @@
         "OPENPOSITION": 1130588,
         "VOLTODAY": 18174,
         "VALTODAY": 44299591,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -5475,7 +5475,7 @@
         "OPENPOSITION": 124,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5486,11 +5486,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 13.86,
+        "SETTLEPRICE": 13.87,
         "OPENPOSITION": 30,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5505,7 +5505,7 @@
         "OPENPOSITION": 2822,
         "VOLTODAY": 72,
         "VALTODAY": 40166,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5520,7 +5520,7 @@
         "OPENPOSITION": 21192,
         "VOLTODAY": 704,
         "VALTODAY": 386292,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5531,11 +5531,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 181.59,
+        "SETTLEPRICE": 181.66,
         "OPENPOSITION": 64,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5550,7 +5550,7 @@
         "OPENPOSITION": 468,
         "VOLTODAY": 3,
         "VALTODAY": 45049,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5565,7 +5565,7 @@
         "OPENPOSITION": 48,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5580,7 +5580,7 @@
         "OPENPOSITION": 1696,
         "VOLTODAY": 113,
         "VALTODAY": 1157837,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5595,7 +5595,7 @@
         "OPENPOSITION": 482,
         "VOLTODAY": 6,
         "VALTODAY": 64020,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5610,7 +5610,7 @@
         "OPENPOSITION": 94,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5625,7 +5625,7 @@
         "OPENPOSITION": 32670,
         "VOLTODAY": 325,
         "VALTODAY": 3231584,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5640,7 +5640,7 @@
         "OPENPOSITION": 3854,
         "VOLTODAY": 313,
         "VALTODAY": 205050,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5655,7 +5655,7 @@
         "OPENPOSITION": 144,
         "VOLTODAY": 28,
         "VALTODAY": 2597229,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5670,7 +5670,7 @@
         "OPENPOSITION": 3438,
         "VOLTODAY": 489,
         "VALTODAY": 28894453,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -5685,7 +5685,7 @@
         "OPENPOSITION": 360,
         "VOLTODAY": 95,
         "VALTODAY": 5539824,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5696,11 +5696,11 @@
         "LASTTRADEDATE": "2027-09-16",
         "LAST": 59384,
         "LAST_RUB": 59384,
-        "SETTLEPRICE": 59458,
+        "SETTLEPRICE": 59384,
         "OPENPOSITION": 48,
         "VOLTODAY": 34,
         "VALTODAY": 2032964,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5715,7 +5715,7 @@
         "OPENPOSITION": 71400,
         "VOLTODAY": 21799,
         "VALTODAY": 1266999306,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -5726,11 +5726,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 1774,
         "LAST_RUB": 1774,
-        "SETTLEPRICE": 1776,
+        "SETTLEPRICE": 1774,
         "OPENPOSITION": 198,
         "VOLTODAY": 2,
         "VALTODAY": 3548,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5745,7 +5745,7 @@
         "OPENPOSITION": 16642,
         "VOLTODAY": 607,
         "VALTODAY": 1089493,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5760,7 +5760,7 @@
         "OPENPOSITION": 828,
         "VOLTODAY": 45,
         "VALTODAY": 666739,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5775,7 +5775,7 @@
         "OPENPOSITION": 246,
         "VOLTODAY": 3,
         "VALTODAY": 45614,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:05:00",
         "tier": "THIN",
         "active": true
       },
@@ -5790,7 +5790,7 @@
         "OPENPOSITION": 40,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:05:00",
         "tier": "THIN",
         "active": true
       },
@@ -5805,7 +5805,7 @@
         "OPENPOSITION": 12644,
         "VOLTODAY": 276,
         "VALTODAY": 4005642,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5820,7 +5820,7 @@
         "OPENPOSITION": 124,
         "VOLTODAY": 52,
         "VALTODAY": 418131,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5831,11 +5831,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 4538,
+        "SETTLEPRICE": 4532,
         "OPENPOSITION": 8,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5846,11 +5846,11 @@
         "LASTTRADEDATE": "2026-12-17",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 4401,
+        "SETTLEPRICE": 4400,
         "OPENPOSITION": 118,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5865,7 +5865,7 @@
         "OPENPOSITION": 708,
         "VOLTODAY": 109,
         "VALTODAY": 473024,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5880,7 +5880,7 @@
         "OPENPOSITION": 140240,
         "VOLTODAY": 2014,
         "VALTODAY": 8812259,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5895,7 +5895,7 @@
         "OPENPOSITION": 30,
         "VOLTODAY": 1,
         "VALTODAY": 13140,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -5910,7 +5910,7 @@
         "OPENPOSITION": 3256,
         "VOLTODAY": 534,
         "VALTODAY": 6922285,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -5925,7 +5925,7 @@
         "OPENPOSITION": 592,
         "VOLTODAY": 164,
         "VALTODAY": 2697413,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5940,7 +5940,7 @@
         "OPENPOSITION": 25664,
         "VOLTODAY": 1759,
         "VALTODAY": 28160269,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -5955,7 +5955,7 @@
         "OPENPOSITION": 652,
         "VOLTODAY": 97,
         "VALTODAY": 2268953,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -5970,7 +5970,7 @@
         "OPENPOSITION": 52276,
         "VOLTODAY": 1724,
         "VALTODAY": 39693425,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -5985,7 +5985,7 @@
         "OPENPOSITION": 9468,
         "VOLTODAY": 2843,
         "VALTODAY": 70474396,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -6000,7 +6000,7 @@
         "OPENPOSITION": 126,
         "VOLTODAY": 8,
         "VALTODAY": 218474,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -6015,7 +6015,7 @@
         "OPENPOSITION": 2314,
         "VOLTODAY": 341,
         "VALTODAY": 8574685,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6026,11 +6026,11 @@
         "LASTTRADEDATE": "2028-06-15",
         "LAST": 2800,
         "LAST_RUB": 28000,
-        "SETTLEPRICE": 2800,
+        "SETTLEPRICE": 2837.95,
         "OPENPOSITION": 164,
         "VOLTODAY": 11,
         "VALTODAY": 308000,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6045,7 +6045,7 @@
         "OPENPOSITION": 1148,
         "VOLTODAY": 116,
         "VALTODAY": 2958854,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6056,11 +6056,11 @@
         "LASTTRADEDATE": "2028-09-21",
         "LAST": 2762.85,
         "LAST_RUB": 27628,
-        "SETTLEPRICE": 2877.7,
+        "SETTLEPRICE": 2930.7,
         "OPENPOSITION": 16,
         "VOLTODAY": 1,
         "VALTODAY": 27629,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6075,7 +6075,7 @@
         "OPENPOSITION": 367542,
         "VOLTODAY": 128340,
         "VALTODAY": 3123844524,
-        "SYSTIME": "2026-10-10 22:19:22",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -6090,7 +6090,7 @@
         "OPENPOSITION": 1448,
         "VOLTODAY": 77,
         "VALTODAY": 2048659,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6105,7 +6105,7 @@
         "OPENPOSITION": 5232,
         "VOLTODAY": 51,
         "VALTODAY": 87488,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -6120,7 +6120,7 @@
         "OPENPOSITION": 543724,
         "VOLTODAY": 23322,
         "VALTODAY": 39660876,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -6135,7 +6135,7 @@
         "OPENPOSITION": 3566,
         "VOLTODAY": 136,
         "VALTODAY": 2352538,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6150,7 +6150,7 @@
         "OPENPOSITION": 41820,
         "VOLTODAY": 1345,
         "VALTODAY": 23398072,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -6165,7 +6165,7 @@
         "OPENPOSITION": 1456,
         "VOLTODAY": 5,
         "VALTODAY": 2045,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6180,7 +6180,7 @@
         "OPENPOSITION": 134662,
         "VOLTODAY": 3228,
         "VALTODAY": 1372652,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6195,7 +6195,7 @@
         "OPENPOSITION": 4880,
         "VOLTODAY": 737,
         "VALTODAY": 182617450,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -6225,7 +6225,7 @@
         "OPENPOSITION": 622,
         "VOLTODAY": 156,
         "VALTODAY": 39333575,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -6255,7 +6255,7 @@
         "OPENPOSITION": 246,
         "VOLTODAY": 16,
         "VALTODAY": 4098725,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6285,7 +6285,7 @@
         "OPENPOSITION": 311986,
         "VOLTODAY": 93951,
         "VALTODAY": 22876840375,
-        "SYSTIME": "2026-10-10 22:19:10",
+        "SYSTIME": "2026-10-11 00:33:53",
         "tier": "CORE",
         "active": true
       },
@@ -6315,7 +6315,7 @@
         "OPENPOSITION": 96,
         "VOLTODAY": 43,
         "VALTODAY": 478755,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6330,7 +6330,7 @@
         "OPENPOSITION": 1336,
         "VOLTODAY": 205,
         "VALTODAY": 2250519,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6360,7 +6360,7 @@
         "OPENPOSITION": 22860,
         "VOLTODAY": 9,
         "VALTODAY": 34590,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6375,7 +6375,7 @@
         "OPENPOSITION": 39418,
         "VOLTODAY": 191,
         "VALTODAY": 5042433,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6390,7 +6390,7 @@
         "OPENPOSITION": 9580,
         "VOLTODAY": 8,
         "VALTODAY": 211332,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6405,7 +6405,7 @@
         "OPENPOSITION": 1054,
         "VOLTODAY": 3,
         "VALTODAY": 79279,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6420,7 +6420,7 @@
         "OPENPOSITION": 706932,
         "VOLTODAY": 8494,
         "VALTODAY": 223513400,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -6435,7 +6435,7 @@
         "OPENPOSITION": 13220,
         "VOLTODAY": 1,
         "VALTODAY": 18832,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6450,7 +6450,7 @@
         "OPENPOSITION": 101734,
         "VOLTODAY": 5051,
         "VALTODAY": 1332539,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6465,7 +6465,7 @@
         "OPENPOSITION": 14,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6480,7 +6480,7 @@
         "OPENPOSITION": 4004,
         "VOLTODAY": 34,
         "VALTODAY": 449809,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6495,7 +6495,7 @@
         "OPENPOSITION": 6,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6510,7 +6510,7 @@
         "OPENPOSITION": 694,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6525,7 +6525,7 @@
         "OPENPOSITION": 110,
         "VOLTODAY": 7,
         "VALTODAY": 18642,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6540,7 +6540,7 @@
         "OPENPOSITION": 9166,
         "VOLTODAY": 1068,
         "VALTODAY": 2793355,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6555,7 +6555,7 @@
         "OPENPOSITION": 1110,
         "VOLTODAY": 36,
         "VALTODAY": 218427,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6570,7 +6570,7 @@
         "OPENPOSITION": 6882,
         "VOLTODAY": 125,
         "VALTODAY": 3807386,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6585,7 +6585,7 @@
         "OPENPOSITION": 16130,
         "VOLTODAY": 148,
         "VALTODAY": 3610237,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6600,7 +6600,7 @@
         "OPENPOSITION": 7390,
         "VOLTODAY": 20,
         "VALTODAY": 482769,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -6615,7 +6615,7 @@
         "OPENPOSITION": 404,
         "VOLTODAY": 1,
         "VALTODAY": 24707,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -6630,7 +6630,7 @@
         "OPENPOSITION": 355872,
         "VOLTODAY": 10262,
         "VALTODAY": 279986229,
-        "SYSTIME": "2026-10-10 22:15:27",
+        "SYSTIME": "2026-10-11 00:47:10",
         "tier": "CORE",
         "active": true
       },
@@ -6645,7 +6645,7 @@
         "OPENPOSITION": 46620,
         "VOLTODAY": 1575,
         "VALTODAY": 47258436,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -6660,7 +6660,7 @@
         "OPENPOSITION": 31898,
         "VOLTODAY": 168,
         "VALTODAY": 5652282,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -6675,7 +6675,7 @@
         "OPENPOSITION": 732,
         "VOLTODAY": 80,
         "VALTODAY": 646834,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -6690,7 +6690,7 @@
         "OPENPOSITION": 74714,
         "VOLTODAY": 3760,
         "VALTODAY": 29571298,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -6701,11 +6701,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 149.74,
+        "SETTLEPRICE": 146.21,
         "OPENPOSITION": 34,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6716,11 +6716,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 144.71,
+        "SETTLEPRICE": 150.9,
         "OPENPOSITION": 88,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6735,7 +6735,7 @@
         "OPENPOSITION": 87556,
         "VOLTODAY": 1875,
         "VALTODAY": 575283,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6750,7 +6750,7 @@
         "OPENPOSITION": 185256,
         "VOLTODAY": 2716,
         "VALTODAY": 671225,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6765,7 +6765,7 @@
         "OPENPOSITION": 84384,
         "VOLTODAY": 5722,
         "VALTODAY": 1385492,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6780,7 +6780,7 @@
         "OPENPOSITION": 5286,
         "VOLTODAY": 228,
         "VALTODAY": 56619,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6795,7 +6795,7 @@
         "OPENPOSITION": 1371428,
         "VOLTODAY": 86664,
         "VALTODAY": 23650646,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -6810,7 +6810,7 @@
         "OPENPOSITION": 228372,
         "VOLTODAY": 8036,
         "VALTODAY": 2411443,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6825,7 +6825,7 @@
         "OPENPOSITION": 72458,
         "VOLTODAY": 1551,
         "VALTODAY": 521246,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6836,11 +6836,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 11461,
         "LAST_RUB": 11461,
-        "SETTLEPRICE": 11445,
+        "SETTLEPRICE": 11461,
         "OPENPOSITION": 2540,
         "VOLTODAY": 714,
         "VALTODAY": 8183151,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6855,7 +6855,7 @@
         "OPENPOSITION": 188894,
         "VOLTODAY": 19079,
         "VALTODAY": 212436729,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -6885,7 +6885,7 @@
         "OPENPOSITION": 1484,
         "VOLTODAY": 13,
         "VALTODAY": 87035,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -6900,7 +6900,7 @@
         "OPENPOSITION": 3736,
         "VOLTODAY": 34,
         "VALTODAY": 450165,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6915,7 +6915,7 @@
         "OPENPOSITION": 27890,
         "VOLTODAY": 466,
         "VALTODAY": 5862761,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6930,7 +6930,7 @@
         "OPENPOSITION": 15370,
         "VOLTODAY": 1157,
         "VALTODAY": 3898224,
-        "SYSTIME": "2026-10-10 22:17:04",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -6945,7 +6945,7 @@
         "OPENPOSITION": 812564,
         "VOLTODAY": 36949,
         "VALTODAY": 121507947,
-        "SYSTIME": "2026-10-10 22:17:52",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -6956,11 +6956,11 @@
         "LASTTRADEDATE": "2100-01-01",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 428.9,
+        "SETTLEPRICE": 417.6,
         "OPENPOSITION": 86,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -6975,7 +6975,7 @@
         "OPENPOSITION": 1254,
         "VOLTODAY": 103,
         "VALTODAY": 10556622,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -6990,7 +6990,7 @@
         "OPENPOSITION": 458,
         "VOLTODAY": 37,
         "VALTODAY": 3917208,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -7020,7 +7020,7 @@
         "OPENPOSITION": 59220,
         "VOLTODAY": 306,
         "VALTODAY": 30415379,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7035,7 +7035,7 @@
         "OPENPOSITION": 696,
         "VOLTODAY": 39,
         "VALTODAY": 217917,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -7050,7 +7050,7 @@
         "OPENPOSITION": 48600,
         "VOLTODAY": 2284,
         "VALTODAY": 12621071,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7065,7 +7065,7 @@
         "OPENPOSITION": 6746,
         "VOLTODAY": 44,
         "VALTODAY": 51257,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7080,7 +7080,7 @@
         "OPENPOSITION": 219152,
         "VOLTODAY": 5720,
         "VALTODAY": 6492081,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7095,7 +7095,7 @@
         "OPENPOSITION": 616,
         "VOLTODAY": 56,
         "VALTODAY": 8296235,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -7140,7 +7140,7 @@
         "OPENPOSITION": 48816,
         "VOLTODAY": 104,
         "VALTODAY": 15085774,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7151,11 +7151,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 10708,
         "LAST_RUB": 10708,
-        "SETTLEPRICE": 10713,
+        "SETTLEPRICE": 10708,
         "OPENPOSITION": 4336,
         "VOLTODAY": 324,
         "VALTODAY": 3474194,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7166,11 +7166,11 @@
         "LASTTRADEDATE": "2026-12-17",
         "LAST": 10386,
         "LAST_RUB": 10386,
-        "SETTLEPRICE": 10385,
+        "SETTLEPRICE": 10386,
         "OPENPOSITION": 181344,
         "VOLTODAY": 5344,
         "VALTODAY": 55460703,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -7181,11 +7181,11 @@
         "LASTTRADEDATE": "2100-01-01",
         "LAST": 754.8,
         "LAST_RUB": 64086,
-        "SETTLEPRICE": 754.2,
+        "SETTLEPRICE": 754.8,
         "OPENPOSITION": 4472,
         "VOLTODAY": 28,
         "VALTODAY": 1793300,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7200,7 +7200,7 @@
         "OPENPOSITION": 24,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7215,7 +7215,7 @@
         "OPENPOSITION": 594,
         "VOLTODAY": 21,
         "VALTODAY": 508198,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7230,7 +7230,7 @@
         "OPENPOSITION": 1138,
         "VOLTODAY": 50,
         "VALTODAY": 66900,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -7245,7 +7245,7 @@
         "OPENPOSITION": 17930,
         "VOLTODAY": 589,
         "VALTODAY": 777561,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -7260,7 +7260,7 @@
         "OPENPOSITION": 83994,
         "VOLTODAY": 5889,
         "VALTODAY": 66266115,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -7275,7 +7275,7 @@
         "OPENPOSITION": 15794,
         "VOLTODAY": 23,
         "VALTODAY": 260450,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7290,7 +7290,7 @@
         "OPENPOSITION": 622,
         "VOLTODAY": 6,
         "VALTODAY": 68401,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7305,7 +7305,7 @@
         "OPENPOSITION": 956918,
         "VOLTODAY": 20708,
         "VALTODAY": 231307769,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -7316,11 +7316,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 7318,
+        "SETTLEPRICE": 7341,
         "OPENPOSITION": 142,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7335,7 +7335,7 @@
         "OPENPOSITION": 6994,
         "VOLTODAY": 69,
         "VALTODAY": 503130,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7410,7 +7410,7 @@
         "OPENPOSITION": 351936,
         "VOLTODAY": 6864,
         "VALTODAY": 76149151,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -7425,7 +7425,7 @@
         "OPENPOSITION": 6022,
         "VOLTODAY": 228,
         "VALTODAY": 34715144,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7470,7 +7470,7 @@
         "OPENPOSITION": 83184,
         "VOLTODAY": 12007,
         "VALTODAY": 1827955888,
-        "SYSTIME": "2026-10-10 22:16:37",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -7496,11 +7496,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 2602,
         "LAST_RUB": 2602,
-        "SETTLEPRICE": 2603,
+        "SETTLEPRICE": 2602,
         "OPENPOSITION": 3894,
         "VOLTODAY": 620,
         "VALTODAY": 1599872,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7515,7 +7515,7 @@
         "OPENPOSITION": 171592,
         "VOLTODAY": 6357,
         "VALTODAY": 15922464,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7530,7 +7530,7 @@
         "OPENPOSITION": 588,
         "VOLTODAY": 208,
         "VALTODAY": 3156412,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -7545,7 +7545,7 @@
         "OPENPOSITION": 14764,
         "VOLTODAY": 2812,
         "VALTODAY": 42831823,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7560,7 +7560,7 @@
         "OPENPOSITION": 2900,
         "VOLTODAY": 659,
         "VALTODAY": 26077332,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -7575,7 +7575,7 @@
         "OPENPOSITION": 458,
         "VOLTODAY": 23,
         "VALTODAY": 942540,
-        "SYSTIME": "2026-10-10 22:18:07",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -7586,11 +7586,11 @@
         "LASTTRADEDATE": "2027-09-16",
         "LAST": 42309,
         "LAST_RUB": 42309,
-        "SETTLEPRICE": 41340,
+        "SETTLEPRICE": 41522,
         "OPENPOSITION": 44,
         "VOLTODAY": 2,
         "VALTODAY": 84618,
-        "SYSTIME": "2026-10-10 22:18:07",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -7605,7 +7605,7 @@
         "OPENPOSITION": 71458,
         "VOLTODAY": 27206,
         "VALTODAY": 1057597160,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -7620,7 +7620,7 @@
         "OPENPOSITION": 84,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7635,7 +7635,7 @@
         "OPENPOSITION": 3330,
         "VOLTODAY": 89,
         "VALTODAY": 384565,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7650,7 +7650,7 @@
         "OPENPOSITION": 368,
         "VOLTODAY": 1,
         "VALTODAY": 4243,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -7665,7 +7665,7 @@
         "OPENPOSITION": 66068,
         "VOLTODAY": 672,
         "VALTODAY": 2787328,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -7680,7 +7680,7 @@
         "OPENPOSITION": 836,
         "VOLTODAY": 107,
         "VALTODAY": 104367,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7695,7 +7695,7 @@
         "OPENPOSITION": 115136,
         "VOLTODAY": 31877,
         "VALTODAY": 29900390,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -7710,7 +7710,7 @@
         "OPENPOSITION": 138,
         "VOLTODAY": 2,
         "VALTODAY": 15025,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7725,7 +7725,7 @@
         "OPENPOSITION": 28818,
         "VOLTODAY": 627,
         "VALTODAY": 4567945,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7740,7 +7740,7 @@
         "OPENPOSITION": 1218,
         "VOLTODAY": 6,
         "VALTODAY": 3062,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7755,7 +7755,7 @@
         "OPENPOSITION": 49546,
         "VOLTODAY": 1638,
         "VALTODAY": 824900,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7770,7 +7770,7 @@
         "OPENPOSITION": 8724,
         "VOLTODAY": 82,
         "VALTODAY": 441319,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7785,7 +7785,7 @@
         "OPENPOSITION": 1402,
         "VOLTODAY": 15,
         "VALTODAY": 82714,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7800,7 +7800,7 @@
         "OPENPOSITION": 268,
         "VOLTODAY": 1,
         "VALTODAY": 5655,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7815,7 +7815,7 @@
         "OPENPOSITION": 201450,
         "VOLTODAY": 1714,
         "VALTODAY": 9005746,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7830,7 +7830,7 @@
         "OPENPOSITION": 182,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7845,7 +7845,7 @@
         "OPENPOSITION": 10638,
         "VOLTODAY": 43,
         "VALTODAY": 720178,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7860,7 +7860,7 @@
         "OPENPOSITION": 4976,
         "VOLTODAY": 42,
         "VALTODAY": 394096,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7875,7 +7875,7 @@
         "OPENPOSITION": 782,
         "VOLTODAY": 8,
         "VALTODAY": 76476,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7886,11 +7886,11 @@
         "LASTTRADEDATE": "2026-12-25",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 113.62,
+        "SETTLEPRICE": 113.18,
         "OPENPOSITION": 380,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7905,7 +7905,7 @@
         "OPENPOSITION": 19710,
         "VOLTODAY": 81,
         "VALTODAY": 3310799,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -7920,7 +7920,7 @@
         "OPENPOSITION": 658,
         "VOLTODAY": 10,
         "VALTODAY": 403769,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -7935,7 +7935,7 @@
         "OPENPOSITION": 261790,
         "VOLTODAY": 8027,
         "VALTODAY": 229685537,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -7950,7 +7950,7 @@
         "OPENPOSITION": 8144,
         "VOLTODAY": 321,
         "VALTODAY": 339534,
-        "SYSTIME": "2026-10-10 22:18:17",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -7965,7 +7965,7 @@
         "OPENPOSITION": 1369752,
         "VOLTODAY": 36499,
         "VALTODAY": 37510667,
-        "SYSTIME": "2026-10-10 22:18:17",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -7976,11 +7976,11 @@
         "LASTTRADEDATE": "2027-03-19",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 36.83,
+        "SETTLEPRICE": 36.82,
         "OPENPOSITION": 6,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -7995,7 +7995,7 @@
         "OPENPOSITION": 652,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8040,7 +8040,7 @@
         "OPENPOSITION": 10718,
         "VOLTODAY": 201,
         "VALTODAY": 13327720,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -8055,7 +8055,7 @@
         "OPENPOSITION": 2002,
         "VOLTODAY": 17,
         "VALTODAY": 1127784,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8070,7 +8070,7 @@
         "OPENPOSITION": 374,
         "VOLTODAY": 3,
         "VALTODAY": 199483,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8085,7 +8085,7 @@
         "OPENPOSITION": 457946,
         "VOLTODAY": 1447,
         "VALTODAY": 95933795,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8115,7 +8115,7 @@
         "OPENPOSITION": 21320,
         "VOLTODAY": 811,
         "VALTODAY": 35185784,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -8126,11 +8126,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 541,
         "LAST_RUB": 541,
-        "SETTLEPRICE": 541,
+        "SETTLEPRICE": 545,
         "OPENPOSITION": 4052,
         "VOLTODAY": 51,
         "VALTODAY": 27541,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8145,7 +8145,7 @@
         "OPENPOSITION": 78064,
         "VOLTODAY": 7045,
         "VALTODAY": 3884542,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8160,7 +8160,7 @@
         "OPENPOSITION": 247960,
         "VOLTODAY": 1069,
         "VALTODAY": 92784538,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8175,7 +8175,7 @@
         "OPENPOSITION": 56,
         "VOLTODAY": 4,
         "VALTODAY": 378390,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8190,7 +8190,7 @@
         "OPENPOSITION": 15614,
         "VOLTODAY": 62,
         "VALTODAY": 5474503,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8205,7 +8205,7 @@
         "OPENPOSITION": 2010,
         "VOLTODAY": 1,
         "VALTODAY": 90186,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8220,7 +8220,7 @@
         "OPENPOSITION": 9048308,
         "VOLTODAY": 38961,
         "VALTODAY": 3331710400,
-        "SYSTIME": "2026-10-10 22:14:25",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8235,7 +8235,7 @@
         "OPENPOSITION": 914,
         "VOLTODAY": 7,
         "VALTODAY": 649309,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8250,7 +8250,7 @@
         "OPENPOSITION": 1796,
         "VOLTODAY": 10,
         "VALTODAY": 161713,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8265,7 +8265,7 @@
         "OPENPOSITION": 85574,
         "VOLTODAY": 400,
         "VALTODAY": 6524819,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8276,11 +8276,11 @@
         "LASTTRADEDATE": "2100-01-01",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 41.18,
+        "SETTLEPRICE": 41.61,
         "OPENPOSITION": 160,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8295,7 +8295,7 @@
         "OPENPOSITION": 364,
         "VOLTODAY": 1,
         "VALTODAY": 135016,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8325,7 +8325,7 @@
         "OPENPOSITION": 33026,
         "VOLTODAY": 5004,
         "VALTODAY": 84948130,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8340,7 +8340,7 @@
         "OPENPOSITION": 1126,
         "VOLTODAY": 455,
         "VALTODAY": 2810530,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8355,7 +8355,7 @@
         "OPENPOSITION": 1696,
         "VOLTODAY": 12,
         "VALTODAY": 112087,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8370,7 +8370,7 @@
         "OPENPOSITION": 143136,
         "VOLTODAY": 14129,
         "VALTODAY": 85490516,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8385,7 +8385,7 @@
         "OPENPOSITION": 4520,
         "VOLTODAY": 65,
         "VALTODAY": 4308435,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8400,7 +8400,7 @@
         "OPENPOSITION": 314,
         "VOLTODAY": 84,
         "VALTODAY": 2555648,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8415,7 +8415,7 @@
         "OPENPOSITION": 194,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8426,11 +8426,11 @@
         "LASTTRADEDATE": "2027-09-16",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 30780,
+        "SETTLEPRICE": 30924,
         "OPENPOSITION": 20,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8445,7 +8445,7 @@
         "OPENPOSITION": 10416,
         "VOLTODAY": 956,
         "VALTODAY": 28132771,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -8460,7 +8460,7 @@
         "OPENPOSITION": 648,
         "VOLTODAY": 1,
         "VALTODAY": 8492,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8475,7 +8475,7 @@
         "OPENPOSITION": 42126,
         "VOLTODAY": 103,
         "VALTODAY": 871689,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8490,7 +8490,7 @@
         "OPENPOSITION": 8830,
         "VOLTODAY": 739,
         "VALTODAY": 22403188,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -8505,7 +8505,7 @@
         "OPENPOSITION": 2484,
         "VOLTODAY": 30,
         "VALTODAY": 934101,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8520,7 +8520,7 @@
         "OPENPOSITION": 232,
         "VOLTODAY": 2,
         "VALTODAY": 59259,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8535,7 +8535,7 @@
         "OPENPOSITION": 526090,
         "VOLTODAY": 25353,
         "VALTODAY": 744713549,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8550,7 +8550,7 @@
         "OPENPOSITION": 111696,
         "VOLTODAY": 5463,
         "VALTODAY": 1389739,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8565,7 +8565,7 @@
         "OPENPOSITION": 4607478,
         "VOLTODAY": 185976,
         "VALTODAY": 46012402,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -8580,7 +8580,7 @@
         "OPENPOSITION": 6652,
         "VOLTODAY": 24,
         "VALTODAY": 104401,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8595,7 +8595,7 @@
         "OPENPOSITION": 924,
         "VOLTODAY": 40,
         "VALTODAY": 187239,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8606,11 +8606,11 @@
         "LASTTRADEDATE": "2026-12-15",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 47170,
+        "SETTLEPRICE": 47020,
         "OPENPOSITION": 2,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8625,7 +8625,7 @@
         "OPENPOSITION": 8004,
         "VOLTODAY": 98,
         "VALTODAY": 5270457,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8640,7 +8640,7 @@
         "OPENPOSITION": 1744,
         "VOLTODAY": 1,
         "VALTODAY": 55180,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8655,7 +8655,7 @@
         "OPENPOSITION": 314,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -8670,7 +8670,7 @@
         "OPENPOSITION": 540260,
         "VOLTODAY": 2946,
         "VALTODAY": 154751046,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -8685,7 +8685,7 @@
         "OPENPOSITION": 1162,
         "VOLTODAY": 8,
         "VALTODAY": 46915,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8700,7 +8700,7 @@
         "OPENPOSITION": 12462,
         "VOLTODAY": 105,
         "VALTODAY": 626444,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8711,11 +8711,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 24.05,
+        "SETTLEPRICE": 24.4,
         "OPENPOSITION": 92,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8730,7 +8730,7 @@
         "OPENPOSITION": 11360,
         "VOLTODAY": 1816,
         "VALTODAY": 1169458,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8745,7 +8745,7 @@
         "OPENPOSITION": 454582,
         "VOLTODAY": 25937,
         "VALTODAY": 17302071,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -8760,7 +8760,7 @@
         "OPENPOSITION": 7380,
         "VOLTODAY": 865,
         "VALTODAY": 2420041,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8775,7 +8775,7 @@
         "OPENPOSITION": 826678,
         "VOLTODAY": 33617,
         "VALTODAY": 92550729,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -8790,7 +8790,7 @@
         "OPENPOSITION": 468,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8805,7 +8805,7 @@
         "OPENPOSITION": 506,
         "VOLTODAY": 4,
         "VALTODAY": 264657,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8820,7 +8820,7 @@
         "OPENPOSITION": 9070,
         "VOLTODAY": 17,
         "VALTODAY": 1138497,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8835,7 +8835,7 @@
         "OPENPOSITION": 5952,
         "VOLTODAY": 1687,
         "VALTODAY": 1883474,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8850,7 +8850,7 @@
         "OPENPOSITION": 460834,
         "VOLTODAY": 32717,
         "VALTODAY": 35409946,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "LIQUID",
         "active": true
       },
@@ -8861,11 +8861,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 190.36,
         "LAST_RUB": 16163,
-        "SETTLEPRICE": 189.49,
+        "SETTLEPRICE": 190.36,
         "OPENPOSITION": 76,
         "VOLTODAY": 1,
         "VALTODAY": 16163,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8880,7 +8880,7 @@
         "OPENPOSITION": 866,
         "VOLTODAY": 547,
         "VALTODAY": 3534911,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -8895,7 +8895,7 @@
         "OPENPOSITION": 16342,
         "VOLTODAY": 4264,
         "VALTODAY": 27152217,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -8910,7 +8910,7 @@
         "OPENPOSITION": 574,
         "VOLTODAY": 24,
         "VALTODAY": 67329,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8925,7 +8925,7 @@
         "OPENPOSITION": 2,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8940,7 +8940,7 @@
         "OPENPOSITION": 3236,
         "VOLTODAY": 5,
         "VALTODAY": 163348,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8951,11 +8951,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 459,
+        "SETTLEPRICE": 457.3,
         "OPENPOSITION": 112,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -8970,7 +8970,7 @@
         "OPENPOSITION": 418,
         "VOLTODAY": 40,
         "VALTODAY": 2744177,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -8985,7 +8985,7 @@
         "OPENPOSITION": 19662,
         "VOLTODAY": 1466,
         "VALTODAY": 98291092,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -9000,7 +9000,7 @@
         "OPENPOSITION": 3082,
         "VOLTODAY": 1,
         "VALTODAY": 2802,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9015,7 +9015,7 @@
         "OPENPOSITION": 190,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9026,11 +9026,11 @@
         "LASTTRADEDATE": "2027-03-18",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 1.56,
+        "SETTLEPRICE": 1.571,
         "OPENPOSITION": 148,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9045,7 +9045,7 @@
         "OPENPOSITION": 1444,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9060,7 +9060,7 @@
         "OPENPOSITION": 112,
         "VOLTODAY": 1,
         "VALTODAY": 6077,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9090,7 +9090,7 @@
         "OPENPOSITION": 28,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9101,11 +9101,11 @@
         "LASTTRADEDATE": "2027-09-16",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 6.396,
+        "SETTLEPRICE": 6.377,
         "OPENPOSITION": 8,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9120,7 +9120,7 @@
         "OPENPOSITION": 173932,
         "VOLTODAY": 2316,
         "VALTODAY": 196066213,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -9135,7 +9135,7 @@
         "OPENPOSITION": 310,
         "VOLTODAY": 179,
         "VALTODAY": 1559190,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9150,7 +9150,7 @@
         "OPENPOSITION": 18514,
         "VOLTODAY": 913,
         "VALTODAY": 7806882,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9180,7 +9180,7 @@
         "OPENPOSITION": 7766,
         "VOLTODAY": 914,
         "VALTODAY": 10115257,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -9195,7 +9195,7 @@
         "OPENPOSITION": 849956,
         "VOLTODAY": 13143,
         "VALTODAY": 1109231730,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -9210,7 +9210,7 @@
         "OPENPOSITION": 4,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9225,7 +9225,7 @@
         "OPENPOSITION": 18344,
         "VOLTODAY": 1680,
         "VALTODAY": 9863240,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "WATCH",
         "active": true
       },
@@ -9240,7 +9240,7 @@
         "OPENPOSITION": 1011344,
         "VOLTODAY": 68886,
         "VALTODAY": 391592878,
-        "SYSTIME": "2026-10-10 22:15:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "CORE",
         "active": true
       },
@@ -9255,7 +9255,7 @@
         "OPENPOSITION": 720,
         "VOLTODAY": 1,
         "VALTODAY": 5553,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -9270,7 +9270,7 @@
         "OPENPOSITION": 312,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:53",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -9285,7 +9285,7 @@
         "OPENPOSITION": 46,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:07:08",
+        "SYSTIME": "2026-10-11 00:15:01",
         "tier": "THIN",
         "active": true
       },
@@ -9300,7 +9300,7 @@
         "OPENPOSITION": 28606,
         "VOLTODAY": 338,
         "VALTODAY": 451830,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9315,7 +9315,7 @@
         "OPENPOSITION": 460504,
         "VOLTODAY": 57480,
         "VALTODAY": 74236705,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -9330,7 +9330,7 @@
         "OPENPOSITION": 8186,
         "VOLTODAY": 305,
         "VALTODAY": 4104080,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9345,7 +9345,7 @@
         "OPENPOSITION": 7414,
         "VOLTODAY": 149,
         "VALTODAY": 2159370,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9360,7 +9360,7 @@
         "OPENPOSITION": 7336,
         "VOLTODAY": 149,
         "VALTODAY": 2201240,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9375,7 +9375,7 @@
         "OPENPOSITION": 1552,
         "VOLTODAY": 51,
         "VALTODAY": 808840,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9390,7 +9390,7 @@
         "OPENPOSITION": 1326,
         "VOLTODAY": 74,
         "VALTODAY": 1178970,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9405,7 +9405,7 @@
         "OPENPOSITION": 1326,
         "VOLTODAY": 44,
         "VALTODAY": 706600,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9420,7 +9420,7 @@
         "OPENPOSITION": 706,
         "VOLTODAY": 41,
         "VALTODAY": 658150,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9435,7 +9435,7 @@
         "OPENPOSITION": 318,
         "VOLTODAY": 97,
         "VALTODAY": 1557140,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9450,7 +9450,7 @@
         "OPENPOSITION": 47818,
         "VOLTODAY": 1540,
         "VALTODAY": 17220100,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -9465,7 +9465,7 @@
         "OPENPOSITION": 16112,
         "VOLTODAY": 2223,
         "VALTODAY": 26669670,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -9480,7 +9480,7 @@
         "OPENPOSITION": 13278,
         "VOLTODAY": 839,
         "VALTODAY": 10661600,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -9495,7 +9495,7 @@
         "OPENPOSITION": 20,
         "VOLTODAY": 3,
         "VALTODAY": 225881,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9510,7 +9510,7 @@
         "OPENPOSITION": 24,
         "VOLTODAY": 3,
         "VALTODAY": 227825,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9525,7 +9525,7 @@
         "OPENPOSITION": 18,
         "VOLTODAY": 1,
         "VALTODAY": 74937,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9540,7 +9540,7 @@
         "OPENPOSITION": 972,
         "VOLTODAY": 79,
         "VALTODAY": 6111397,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9555,7 +9555,7 @@
         "OPENPOSITION": 94,
         "VOLTODAY": 4,
         "VALTODAY": 312619,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9566,11 +9566,11 @@
         "LASTTRADEDATE": "2026-12-21",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 89.24,
+        "SETTLEPRICE": 88.87,
         "OPENPOSITION": 2,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9585,7 +9585,7 @@
         "OPENPOSITION": 8958,
         "VOLTODAY": 6585,
         "VALTODAY": 2516877,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9600,7 +9600,7 @@
         "OPENPOSITION": 268444,
         "VOLTODAY": 25612,
         "VALTODAY": 9470819,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9615,7 +9615,7 @@
         "OPENPOSITION": 18608,
         "VOLTODAY": 578,
         "VALTODAY": 1190428,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9630,7 +9630,7 @@
         "OPENPOSITION": 695216,
         "VOLTODAY": 19968,
         "VALTODAY": 40763381,
-        "SYSTIME": "2026-10-10 22:08:34",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -9641,11 +9641,11 @@
         "LASTTRADEDATE": "2026-12-18",
         "LAST": 26.5,
         "LAST_RUB": 28666,
-        "SETTLEPRICE": 26.49,
+        "SETTLEPRICE": 26.5,
         "OPENPOSITION": 1124,
         "VOLTODAY": 9,
         "VALTODAY": 257787,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9660,7 +9660,7 @@
         "OPENPOSITION": 2164,
         "VOLTODAY": 99,
         "VALTODAY": 1183406,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9675,7 +9675,7 @@
         "OPENPOSITION": 4038,
         "VOLTODAY": 160,
         "VALTODAY": 1921061,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "WATCH",
         "active": true
       },
@@ -9690,7 +9690,7 @@
         "OPENPOSITION": 596,
         "VOLTODAY": 5,
         "VALTODAY": 60113,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9701,11 +9701,11 @@
         "LASTTRADEDATE": "2026-12-25",
         "LAST": 1.399,
         "LAST_RUB": 11878,
-        "SETTLEPRICE": 1.44,
+        "SETTLEPRICE": 1.4236,
         "OPENPOSITION": 268,
         "VOLTODAY": 1,
         "VALTODAY": 11887,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9720,7 +9720,7 @@
         "OPENPOSITION": 43226,
         "VOLTODAY": 5897,
         "VALTODAY": 21519794,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "LIQUID",
         "active": true
       },
@@ -9735,7 +9735,7 @@
         "OPENPOSITION": 880946,
         "VOLTODAY": 133016,
         "VALTODAY": 477384265,
-        "SYSTIME": "2026-10-10 22:08:38",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "CORE",
         "active": true
       },
@@ -9746,11 +9746,11 @@
         "LASTTRADEDATE": "2027-03-16",
         "LAST": 0,
         "LAST_RUB": 0,
-        "SETTLEPRICE": 3831.5,
+        "SETTLEPRICE": 3832,
         "OPENPOSITION": 44,
         "VOLTODAY": 0,
         "VALTODAY": 0,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       },
@@ -9761,15 +9761,15 @@
         "LASTTRADEDATE": "2026-12-15",
         "LAST": 3832,
         "LAST_RUB": 32536,
-        "SETTLEPRICE": 3831.5,
+        "SETTLEPRICE": 3832,
         "OPENPOSITION": 680,
         "VOLTODAY": 2,
         "VALTODAY": 65012,
-        "SYSTIME": "2026-10-10 22:08:08",
+        "SYSTIME": "2026-10-11 00:15:02",
         "tier": "THIN",
         "active": true
       }
     ]
   },
-  "last_refresh": 1791660108.3711982
+  "last_refresh": 1791674397.9267592
 }

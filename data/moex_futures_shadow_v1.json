@@ -1,10 +1,10 @@
 {
   "version": "MOEX_FUTURES_SHADOW_V1",
   "started_at": 1790803364.481732,
-  "sample_count": 555,
-  "last_source_ts": 1791659803.9160058,
+  "sample_count": 567,
+  "last_source_ts": 1791674093.891594,
   "latest": {
-    "source_ts": 1791659803.9160058,
+    "source_ts": 1791674093.891594,
     "gold": {
       "front": "GDZ6",
       "front_name": "GOLD-12.26",
