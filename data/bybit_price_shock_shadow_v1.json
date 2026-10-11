@@ -1,14 +1,14 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1791686762.181,
+  "last_processed_ts": 1791711518.283,
   "last_event_ts": {
     "DOGEUSDT": 1791496743.434,
     "ADAUSDT": 1791656789.433,
-    "LINKUSDT": 1791639202.418,
+    "LINKUSDT": 1791708021.318,
     "AVAXUSDT": 1791615396.933,
-    "SUIUSDT": 1791656789.315,
-    "AAVEUSDT": 1791656787.955,
+    "SUIUSDT": 1791708021.314,
+    "AAVEUSDT": 1791708021.955,
     "BTCUSDT": 1791496744.384,
     "SOLUSDT": 1791496743.98,
     "XRPUSDT": 1791561931.956,
@@ -16,7 +16,44 @@
     "ETHUSDT": 1791496743.974,
     "BNBUSDT": 1791496743.98
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "LINKUSDT:1791708021",
+      "symbol": "LINKUSDT",
+      "venue": "Bybit",
+      "ts": 1791708021.318,
+      "due_ts": 1791711621.318,
+      "move_15m_pct": -1.091971701015071,
+      "entry": 12.862,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "SUIUSDT:1791708021",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1791708021.314,
+      "due_ts": 1791711621.314,
+      "move_15m_pct": -1.5542039870273472,
+      "entry": 1.09581,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "AAVEUSDT:1791708021",
+      "symbol": "AAVEUSDT",
+      "venue": "Bybit",
+      "ts": 1791708021.955,
+      "due_ts": 1791711621.955,
+      "move_15m_pct": -1.3680051889851996,
+      "entry": 167.27,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [
     {
       "id": "DOGEUSDT:1790891131",
