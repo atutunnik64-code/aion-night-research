@@ -1,9 +1,9 @@
 {
   "version": "MOEX_UNIVERSE_STRUCTURE_V1",
   "started_at": 1790788001.6843398,
-  "samples": 618,
+  "samples": 630,
   "last": {
-    "ts": 1791736145.0766904,
+    "ts": 1791752693.0017385,
     "mode": "FUTURE_ONLY_STRUCTURE",
     "source": "MOEX_UNIVERSE_V1",
     "curve_assets": 150,
@@ -1738,8 +1738,8 @@
         "front_px": 20900.0,
         "next": "DXH7",
         "next_expiry": "2027-03-19",
-        "next_px": 20945.0,
-        "curve_pct": 0.21531100478469067,
+        "next_px": 20972.0,
+        "curve_pct": 0.34449760765549176,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 257945.0,
@@ -1931,11 +1931,11 @@
         "asset": "SAP",
         "front": "APZ6",
         "front_expiry": "2026-12-18",
-        "front_px": 212.3,
+        "front_px": 209.55,
         "next": "APH7",
         "next_expiry": "2027-03-19",
-        "next_px": 219.1,
-        "curve_pct": 3.2030146019783157,
+        "next_px": 216.47,
+        "curve_pct": 3.302314483416846,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 0.0,
@@ -2046,8 +2046,8 @@
         "front_px": 144.67,
         "next": "NOH7",
         "next_expiry": "2027-03-19",
-        "next_px": 152.32,
-        "curve_pct": 5.287896592244423,
+        "next_px": 149.71,
+        "curve_pct": 3.483790696066924,
         "front_tier": "THIN",
         "next_tier": "THIN",
         "front_value_today": 0.0,
@@ -3023,5 +3023,5 @@
       }
     ]
   },
-  "last_refresh": 1791736145.0766904
+  "last_refresh": 1791752693.0017385
 }

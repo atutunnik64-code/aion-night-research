@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_LIQUIDATION_REGIME_V1",
   "rule_frozen_at": 1790832884.3502889,
-  "last_bucket": 29862270,
+  "last_bucket": 29862545,
   "last_signal_ts": {
     "BTCUSDT:BUY": 1791733260,
     "BTCUSDT:SELL": 1791479280,
@@ -11,25 +11,7 @@
     "SUIUSDT:SELL": 1791338520,
     "SOLUSDT:SELL": 1791338520
   },
-  "pending": [
-    {
-      "id": "BTCUSDT:29862220:BUY",
-      "symbol": "BTCUSDT",
-      "ts": 1791733260,
-      "due_ts": 1791736860,
-      "pressure_side": "BUY",
-      "liquidation_notional": 729324.7684,
-      "liquidation_events": 51,
-      "oi_15m_pct": -0.21023848687865554,
-      "entry": 83279.16,
-      "continuation_side": 1.0,
-      "recovery_side": -1.0,
-      "funding_rate": 1.618e-05,
-      "next_funding_time": 1791734400000,
-      "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "BTCUSDT:29848817:BUY",
@@ -250,12 +232,34 @@
       "funding_crossed": false,
       "continuation_net_return_pct": -1.3040257942679065,
       "recovery_net_return_pct": 1.0640257942679068
+    },
+    {
+      "id": "BTCUSDT:29862220:BUY",
+      "symbol": "BTCUSDT",
+      "ts": 1791733260,
+      "due_ts": 1791736860,
+      "pressure_side": "BUY",
+      "liquidation_notional": 729324.7684,
+      "liquidation_events": 51,
+      "oi_15m_pct": -0.21023848687865554,
+      "entry": 83279.16,
+      "continuation_side": 1.0,
+      "recovery_side": -1.0,
+      "funding_rate": 1.618e-05,
+      "next_funding_time": 1791734400000,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05,
+      "exit": 83629.38,
+      "exit_ts": 1791749392.384,
+      "funding_crossed": true,
+      "continuation_net_return_pct": 0.298919382941899,
+      "recovery_net_return_pct": -0.538919382941899
     }
   ],
-  "continuation_equity": 99.71869086196249,
+  "continuation_equity": 99.7335947867326,
   "continuation_peak": 100.06274936444612,
   "continuation_max_dd_pct": -0.3438427433474889,
-  "recovery_equity": 100.16138657822793,
+  "recovery_equity": 100.13439712190326,
   "recovery_peak": 100.16138657822793,
   "recovery_max_dd_pct": -0.16751152036488248,
   "last_new_events": 0
