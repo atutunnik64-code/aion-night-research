@@ -1,7 +1,7 @@
 {
   "version": "FUNDING_RESET_BYBIT_V1",
   "rule_frozen_at": 1790832884.3532043,
-  "last_processed_ts": 1791711514.18,
+  "last_processed_ts": 1791736346.535,
   "last_event_nft": {
     "XRPUSDT": 1791561600000,
     "DOGEUSDT": 1791532800000,
@@ -13,18 +13,18 @@
     "ADAUSDT": 1791676800000,
     "LTCUSDT": 1791475200000,
     "AAVEUSDT": 1791590400000,
-    "AVAXUSDT": 1791648000000,
+    "AVAXUSDT": 1791734400000,
     "BNBUSDT": 1791648000000
   },
   "pending": [
     {
-      "id": "LINKUSDT:1791705600000",
-      "symbol": "LINKUSDT",
-      "ts": 1791708021.318,
-      "funding_time_ms": 1791705600000,
+      "id": "AVAXUSDT:1791734400000",
+      "symbol": "AVAXUSDT",
+      "ts": 1791734407.933,
+      "funding_time_ms": 1791734400000,
       "pre_funding_rate": 0.0001,
-      "entry": 12.862,
-      "due_ts": 1791711621.318,
+      "entry": 10.836,
+      "due_ts": 1791738007.933,
       "revert_side": -1.0,
       "continue_side": 1.0,
       "round_trip_cost": 0.0012,
@@ -2241,12 +2241,29 @@
       "exit_ts": 1791708021.432,
       "revert_net_return_pct": 0.48216780409474425,
       "continue_net_return_pct": -0.7221678040947442
+    },
+    {
+      "id": "LINKUSDT:1791705600000",
+      "symbol": "LINKUSDT",
+      "ts": 1791708021.318,
+      "funding_time_ms": 1791705600000,
+      "pre_funding_rate": 0.0001,
+      "entry": 12.862,
+      "due_ts": 1791711621.318,
+      "revert_side": -1.0,
+      "continue_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05,
+      "exit": 13.191,
+      "exit_ts": 1791732843.318,
+      "revert_net_return_pct": -2.677922562587467,
+      "continue_net_return_pct": 2.4379225625874668
     }
   ],
-  "revert_equity": 100.1152064659918,
+  "revert_equity": 99.98115608086512,
   "revert_peak": 101.24785430903898,
   "revert_max_dd_pct": -1.7224500927362385,
-  "continue_equity": 98.32845271247785,
+  "continue_equity": 98.44831128918389,
   "continue_peak": 100.34124000727584,
   "continue_max_dd_pct": -2.0311962307876352,
   "last_new_events": 0

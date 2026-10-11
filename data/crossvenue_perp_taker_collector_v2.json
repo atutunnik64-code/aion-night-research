@@ -13,14 +13,14 @@
     },
     "Bybit": {
       "connected": false,
-      "messages": 3058342,
-      "trades": 8997282,
-      "buckets": 6912,
-      "errors": 1,
-      "prior_errors": 1,
+      "messages": 3205599,
+      "trades": 9436944,
+      "buckets": 7056,
+      "errors": 0,
+      "prior_errors": 2,
       "last_error": null,
-      "last_trade_at": 1791711526.3209045
+      "last_trade_at": 1791736356.707676
     }
   },
-  "updated_at": 1791711530.3752654
+  "updated_at": 1791736360.015055
 }

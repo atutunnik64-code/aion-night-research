@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1791711518.283,
+  "last_processed_ts": 1791736346.535,
   "last_event_ts": {
     "AAVEUSDT": 1790927491.155,
     "AVAXUSDT": 1790931116.133,
@@ -9,13 +9,40 @@
     "SUIUSDT": 1790976648.515,
     "ADAUSDT": 1790892097.033,
     "SOLUSDT": 1790931111.479,
-    "DOGEUSDT": 1791339464.234,
+    "DOGEUSDT": 1791735909.234,
     "LINKUSDT": 1790931055.818,
-    "ETHUSDT": 1791339703.275,
+    "ETHUSDT": 1791734346.274,
     "XRPUSDT": 1791339585.256,
     "BNBUSDT": 1791339712.18
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "ETHUSDT:1791734346",
+      "symbol": "ETHUSDT",
+      "venue": "Bybit",
+      "ts": 1791734346.274,
+      "due_ts": 1791737946.274,
+      "compression_ratio": 0.43860649288266756,
+      "breakout_move_pct": 0.39744904220322397,
+      "entry": 2536.15,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012
+    },
+    {
+      "id": "DOGEUSDT:1791735909",
+      "symbol": "DOGEUSDT",
+      "venue": "Bybit",
+      "ts": 1791735909.234,
+      "due_ts": 1791739509.234,
+      "compression_ratio": 0.39781408073861374,
+      "breakout_move_pct": -0.36709877251348555,
+      "entry": 0.08685,
+      "breakout_side": -1.0,
+      "fakeout_side": 1.0,
+      "round_trip_cost": 0.0012
+    }
+  ],
   "resolved": [
     {
       "id": "AAVEUSDT:1790891434",
