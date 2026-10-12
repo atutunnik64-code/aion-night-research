@@ -1,14 +1,14 @@
 {
   "version": "MOEX_SPREAD_RESEARCH_V1",
   "started_at": 1790788001.686441,
-  "refresh_count": 630,
+  "refresh_count": 642,
   "last": {
-    "ts": 1791752693.0202682,
+    "ts": 1791768094.1217618,
     "mode": "MOEX_SPREAD_RESEARCH_ONLY",
     "paper_only": true,
     "live_enabled": false,
     "source_samples": 296,
-    "collection_hours": 263.70236610233786,
+    "collection_hours": 267.98044985055924,
     "gate_ready": true,
     "assets": [
       {
@@ -1395,5 +1395,5 @@
       }
     ]
   },
-  "last_refresh": 1791752693.0202682
+  "last_refresh": 1791768094.1217618
 }

@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_PRICE_SHOCK_V1",
   "rule_frozen_at": 1790835156.6301072,
-  "last_processed_ts": 1791752887.156,
+  "last_processed_ts": 1791768297.433,
   "last_event_ts": {
     "DOGEUSDT": 1791732843.434,
     "ADAUSDT": 1791732843.432,
@@ -16,20 +16,7 @@
     "ETHUSDT": 1791733264.975,
     "BNBUSDT": 1791496743.98
   },
-  "pending": [
-    {
-      "id": "SUIUSDT:1791749393",
-      "symbol": "SUIUSDT",
-      "venue": "Bybit",
-      "ts": 1791749393.314,
-      "due_ts": 1791752993.314,
-      "move_15m_pct": -1.153228510420523,
-      "entry": 1.12027,
-      "continuation_side": -1.0,
-      "reversal_side": 1.0,
-      "round_trip_cost": 0.0012
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "DOGEUSDT:1790891131",
@@ -3792,12 +3779,30 @@
       "continuation_paper_equity": 99.68366921488082,
       "reversal_net_return_pct": -0.7272874493927127,
       "reversal_paper_equity": 97.81440941422014
+    },
+    {
+      "id": "SUIUSDT:1791749393",
+      "symbol": "SUIUSDT",
+      "venue": "Bybit",
+      "ts": 1791749393.314,
+      "due_ts": 1791752993.314,
+      "move_15m_pct": -1.153228510420523,
+      "entry": 1.12027,
+      "continuation_side": -1.0,
+      "reversal_side": 1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 1.1245,
+      "exit_ts": 1791764793.314,
+      "continuation_net_return_pct": -0.4975875458594813,
+      "continuation_paper_equity": 99.65886853871737,
+      "reversal_net_return_pct": 0.2575875458594813,
+      "reversal_paper_equity": 97.82700730105549
     }
   ],
-  "continuation_equity": 99.68366921488082,
+  "continuation_equity": 99.65886853871737,
   "continuation_peak": 101.10715155444083,
   "continuation_max_dd_pct": -3.114380241718051,
-  "reversal_equity": 97.81440941422014,
+  "reversal_equity": 97.82700730105549,
   "reversal_peak": 100.84669250025122,
   "reversal_max_dd_pct": -3.2739770998805873,
   "last_new_events": 0

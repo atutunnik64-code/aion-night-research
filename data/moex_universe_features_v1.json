@@ -2,7 +2,7 @@
   "version": "MOEX_UNIVERSE_FEATURES_V1",
   "started_at": 1790803364.5022998,
   "samples": 296,
-  "last_source_ts": 1791752392.9673998,
+  "last_source_ts": 1791767794.0111008,
   "assets": {
     "CNY": {
       "curve_pct": [
@@ -47112,5 +47112,5 @@
   "quality_version": 2,
   "legacy_duplicate_samples_compacted": 1260,
   "last_market_fingerprint": "2893aae674326d96589216574f3fdfb232af091dab815044f9fe6ad5ef790357",
-  "last_unchanged_skip": 1791752692.964723
+  "last_unchanged_skip": 1791768093.9461985
 }
