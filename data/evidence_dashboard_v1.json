@@ -1,250 +1,290 @@
 {
   "version": "EVIDENCE_DASHBOARD_V5_CAPITAL_BOOKS",
-  "generated_at": 1791792799.9640317,
+  "generated_at": 1791830581.1485212,
   "paper_only": true,
   "live_enabled": false,
   "portfolio_metrics": {
     "moex_continuation_100": {
       "starting_capital": 100.0,
-      "equity": 76.47496698603086,
-      "pnl": -23.525033013969136,
-      "return_pct": -23.525033013969132,
+      "equity": 75.8606746199909,
+      "pnl": -24.139325380009097,
+      "return_pct": -24.1393253800091,
       "open_positions": 10,
-      "resolved_positions": 481,
-      "wins": 61,
-      "win_rate": 0.12681912681912683,
-      "max_dd_pct": -23.525033013969132,
-      "one_contract_net_rub_stress_count": 359,
-      "one_contract_net_rub_stress_sum": -27514.623483906656,
-      "one_contract_net_rub_stress_mean": -76.64240524765086,
+      "resolved_positions": 501,
+      "wins": 66,
+      "win_rate": 0.1317365269461078,
+      "max_dd_pct": -24.1393253800091,
+      "one_contract_net_rub_stress_count": 379,
+      "one_contract_net_rub_stress_sum": -26924.863648148286,
+      "one_contract_net_rub_stress_mean": -71.04185659142028,
       "recent_one_contract_net_rub_stress": [
         {
-          "secid": "92V6",
-          "value_rub": -408.06
+          "secid": "HDZ6",
+          "value_rub": -9.993999999999977
         },
         {
-          "secid": "95X6",
-          "value_rub": -422.4
+          "secid": "MCZ6",
+          "value_rub": -101.00159999999974
         },
         {
-          "secid": "AFH7",
-          "value_rub": -10.026800000000001
+          "secid": "CRH8",
+          "value_rub": -83.98199999999999
         },
         {
-          "secid": "AKH7",
-          "value_rub": -33.699999999999925
+          "secid": "GNZ6",
+          "value_rub": -82.93682053224852
         },
         {
-          "secid": "ALH7",
-          "value_rub": -4.905200000000035
+          "secid": "IRZ6",
+          "value_rub": -50.174800000000424
         },
         {
-          "secid": "AMZNF",
-          "value_rub": -62.857200000000006
+          "secid": "SFZ6",
+          "value_rub": -93.85230465437773
         },
         {
-          "secid": "ANH7",
-          "value_rub": -220.61530825082332
+          "secid": "TPZ6",
+          "value_rub": -26.64759999999987
+        },
+        {
+          "secid": "W4N7",
+          "value_rub": -95.64
+        },
+        {
+          "secid": "DRZ6",
+          "value_rub": -1.4112000000001803
+        },
+        {
+          "secid": "SCH7",
+          "value_rub": 3.034799999999988
+        },
+        {
+          "secid": "SEZ6",
+          "value_rub": -6.723200000000033
+        },
+        {
+          "secid": "SOZ6",
+          "value_rub": -5.269599999999649
         }
       ],
       "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER"
     },
     "moex_reversal_100": {
       "starting_capital": 100.0,
-      "equity": 85.1250330139678,
-      "pnl": -14.874966986032206,
-      "return_pct": -14.8749669860322,
+      "equity": 84.80332538000779,
+      "pnl": -15.196674619992208,
+      "return_pct": -15.196674619992212,
       "open_positions": 10,
-      "resolved_positions": 481,
-      "wins": 87,
-      "win_rate": 0.18087318087318088,
-      "max_dd_pct": -15.165164750560034,
-      "one_contract_net_rub_stress_count": 359,
-      "one_contract_net_rub_stress_sum": -20182.458116093345,
-      "one_contract_net_rub_stress_mean": -56.218546284382576,
+      "resolved_positions": 501,
+      "wins": 93,
+      "win_rate": 0.18562874251497005,
+      "max_dd_pct": -15.449525527133867,
+      "one_contract_net_rub_stress_count": 379,
+      "one_contract_net_rub_stress_sum": -21955.133151851715,
+      "one_contract_net_rub_stress_mean": -57.92911121860611,
       "recent_one_contract_net_rub_stress": [
         {
-          "secid": "92V6",
-          "value_rub": -408.06
+          "secid": "HDZ6",
+          "value_rub": -5.994000000000025
         },
         {
-          "secid": "95X6",
-          "value_rub": -422.4
+          "secid": "MCZ6",
+          "value_rub": 86.99839999999975
         },
         {
-          "secid": "AFH7",
-          "value_rub": -10.026800000000001
+          "secid": "CRH8",
+          "value_rub": -83.98199999999999
         },
         {
-          "secid": "AKH7",
-          "value_rub": -9.700000000000076
+          "secid": "GNZ6",
+          "value_rub": -3.1271794677514904
         },
         {
-          "secid": "ALH7",
-          "value_rub": -6.905199999999966
+          "secid": "IRZ6",
+          "value_rub": -12.174799999999577
         },
         {
-          "secid": "AMZNF",
-          "value_rub": -62.857200000000006
+          "secid": "SFZ6",
+          "value_rub": -64.98449534562226
         },
         {
-          "secid": "ANH7",
-          "value_rub": 76.5497082508233
+          "secid": "TPZ6",
+          "value_rub": 11.35239999999987
+        },
+        {
+          "secid": "W4N7",
+          "value_rub": -95.64
+        },
+        {
+          "secid": "DRZ6",
+          "value_rub": -5.411199999999821
+        },
+        {
+          "secid": "SCH7",
+          "value_rub": -8.965199999999989
+        },
+        {
+          "secid": "SEZ6",
+          "value_rub": 1.276800000000033
+        },
+        {
+          "secid": "SOZ6",
+          "value_rub": -9.26960000000035
         }
       ],
       "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER"
     },
     "moex_liquid_continuation_100": {
       "starting_capital": 100.0,
-      "equity": 98.26431393671493,
-      "pnl": -1.7356860632850726,
-      "return_pct": -1.735686063285069,
+      "equity": 97.84097614548766,
+      "pnl": -2.1590238545123412,
+      "return_pct": -2.159023854512343,
       "open_positions": 10,
-      "resolved_positions": 354,
-      "wins": 113,
-      "win_rate": 0.3192090395480226,
-      "max_dd_pct": -2.5997529277087983,
-      "one_contract_net_rub_stress_count": 354,
-      "one_contract_net_rub_stress_sum": 127.90322063299976,
-      "one_contract_net_rub_stress_mean": 0.36130853286158127,
+      "resolved_positions": 372,
+      "wins": 120,
+      "win_rate": 0.3225806451612903,
+      "max_dd_pct": -2.915159106924292,
+      "one_contract_net_rub_stress_count": 372,
+      "one_contract_net_rub_stress_sum": 1255.9402060089717,
+      "one_contract_net_rub_stress_mean": 3.376183349486483,
       "recent_one_contract_net_rub_stress": [
         {
-          "secid": "RNH7",
-          "value_rub": -63.68
+          "secid": "NVZ6",
+          "value_rub": 43.71120000000039
         },
         {
-          "secid": "SZZ6",
-          "value_rub": -1.0656
+          "secid": "VBH7",
+          "value_rub": 9.657599999999816
         },
         {
-          "secid": "AFZ6",
-          "value_rub": -11.212000000000234
+          "secid": "BMX6",
+          "value_rub": -247.4515557953547
         },
         {
-          "secid": "AKZ6",
-          "value_rub": -54.04079999999931
+          "secid": "SSZ6",
+          "value_rub": -0.294
         },
         {
-          "secid": "ALZ6",
-          "value_rub": 8.543599999999829
+          "secid": "GNZ6",
+          "value_rub": -82.93682053224852
         },
         {
-          "secid": "ANZ6",
-          "value_rub": -133.10442297650036
+          "secid": "IRZ6",
+          "value_rub": -50.174800000000424
         },
         {
-          "secid": "BTV6",
-          "value_rub": -18.726966828496437
+          "secid": "SFZ6",
+          "value_rub": -93.85230465437773
         },
         {
-          "secid": "CMZ6",
-          "value_rub": -46.15039999999924
+          "secid": "TPZ6",
+          "value_rub": -26.64759999999987
         },
         {
-          "secid": "EHV6",
-          "value_rub": -4.845024002472065
+          "secid": "DRZ6",
+          "value_rub": -1.4112000000001803
         },
         {
-          "secid": "ETHUSDF",
-          "value_rub": -3.555942102195321
+          "secid": "SEZ6",
+          "value_rub": -6.723200000000033
         },
         {
-          "secid": "ETZ6",
-          "value_rub": -0.9606818599897033
+          "secid": "SOZ6",
+          "value_rub": -5.269599999999649
         },
         {
-          "secid": "FFV6",
-          "value_rub": 34.338588909203224
+          "secid": "TTZ6",
+          "value_rub": 52.303200000004225
         }
       ],
       "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER"
     },
     "moex_liquid_reversal_100": {
       "starting_capital": 100.0,
-      "equity": 91.83968606328455,
-      "pnl": -8.160313936715454,
-      "return_pct": -8.160313936715458,
+      "equity": 91.78302385451185,
+      "pnl": -8.216976145488147,
+      "return_pct": -8.216976145488141,
       "open_positions": 10,
-      "resolved_positions": 354,
-      "wins": 91,
-      "win_rate": 0.2570621468926554,
-      "max_dd_pct": -8.160313936715458,
-      "one_contract_net_rub_stress_count": 354,
-      "one_contract_net_rub_stress_sum": -21237.194420633,
-      "one_contract_net_rub_stress_mean": -59.9920746345565,
+      "resolved_positions": 372,
+      "wins": 96,
+      "win_rate": 0.25806451612903225,
+      "max_dd_pct": -8.581510128463554,
+      "one_contract_net_rub_stress_count": 372,
+      "one_contract_net_rub_stress_sum": -23318.781006008972,
+      "one_contract_net_rub_stress_mean": -62.68489517744347,
       "recent_one_contract_net_rub_stress": [
         {
-          "secid": "RNH7",
-          "value_rub": -63.68
+          "secid": "NVZ6",
+          "value_rub": -70.28880000000039
         },
         {
-          "secid": "SZZ6",
-          "value_rub": -1.0656
+          "secid": "VBH7",
+          "value_rub": -28.342399999999817
         },
         {
-          "secid": "AFZ6",
-          "value_rub": 2.7880000000002347
+          "secid": "BMX6",
+          "value_rub": 226.30275579535467
         },
         {
-          "secid": "AKZ6",
-          "value_rub": 35.959199999999306
+          "secid": "SSZ6",
+          "value_rub": -0.294
         },
         {
-          "secid": "ALZ6",
-          "value_rub": -13.456399999999828
+          "secid": "GNZ6",
+          "value_rub": -3.1271794677514904
         },
         {
-          "secid": "ANZ6",
-          "value_rub": 70.66842297650037
+          "secid": "IRZ6",
+          "value_rub": -12.174799999999577
         },
         {
-          "secid": "BTV6",
-          "value_rub": 1.478166828496439
+          "secid": "SFZ6",
+          "value_rub": -64.98449534562226
         },
         {
-          "secid": "CMZ6",
-          "value_rub": 15.849599999999237
+          "secid": "TPZ6",
+          "value_rub": 11.35239999999987
         },
         {
-          "secid": "EHV6",
-          "value_rub": -0.4301759975279349
+          "secid": "DRZ6",
+          "value_rub": -5.411199999999821
         },
         {
-          "secid": "ETHUSDF",
-          "value_rub": -1.688057897804679
+          "secid": "SEZ6",
+          "value_rub": 1.276800000000033
         },
         {
-          "secid": "ETZ6",
-          "value_rub": -4.357718140010297
+          "secid": "SOZ6",
+          "value_rub": -9.26960000000035
         },
         {
-          "secid": "FFV6",
-          "value_rub": -53.04178890920323
+          "secid": "TTZ6",
+          "value_rub": -211.69680000000423
         }
       ],
       "metric_type": "FUTURE_ONLY_CAPITAL_NORMALIZED_PAPER"
     },
     "classic_spot_arb_100usdt": {
       "starting_capital_quote": 100.0,
-      "realized_equity_quote": 521.4946453868345,
-      "realized_pnl_quote": 421.49464538683446,
-      "realized_return_pct": 421.4946453868345,
-      "trade_count": 1897,
+      "realized_equity_quote": 522.2675434809048,
+      "realized_pnl_quote": 422.2675434809048,
+      "realized_return_pct": 422.2675434809048,
+      "trade_count": 1921,
       "bybit_trade_count": 94,
-      "locked_capital_quote": 450.0,
+      "locked_capital_quote": 150.0,
       "metric_type": "CAPITAL_NORMALIZED_MODELED_CONSERVATIVE_PAPER_EDGE",
       "interpretation": "SNAPSHOT_VWAP_EDGE_AFTER_FEES_AND_RESERVE_NOT_EXCHANGE_REALIZED_PNL"
     },
     "classic_spot_arb_strict_100usdt": {
       "starting_capital_quote": 100.0,
-      "paper_equity_quote": 321.05244655957733,
-      "paper_pnl_quote": 221.05244655957733,
-      "paper_return_pct": 221.05244655957733,
-      "trade_count": 1200,
+      "paper_equity_quote": 321.7926385929476,
+      "paper_pnl_quote": 221.79263859294758,
+      "paper_return_pct": 221.79263859294758,
+      "trade_count": 1223,
       "bybit_trade_count": 0,
-      "locked_capital_quote": 250.0,
-      "skipped_identity": 8467,
-      "skipped_base_concentration": 675,
+      "locked_capital_quote": 100.0,
+      "skipped_identity": 8625,
+      "skipped_base_concentration": 678,
       "metric_type": "FUTURE_ONLY_STRICT_IDENTITY_CAPITAL_NORMALIZED_PAPER"
     },
     "perp_funding_100usdt": {
@@ -267,27 +307,27 @@
       "metric_type": "CAPITAL_NORMALIZED_REALIZED"
     },
     "perp_funding_spread": {
-      "closed_pnl_quote": -20.251552221298592,
-      "open_positions": 128,
-      "closed_positions": 522,
-      "open_positions_accrued_funding_quote": 2.009174237315386,
+      "closed_pnl_quote": -20.512169906790206,
+      "open_positions": 127,
+      "closed_positions": 537,
+      "open_positions_accrued_funding_quote": 2.630153993265429,
       "metric_type": "REALIZED_QUOTE_IF_CLOSED_PLUS_SEPARATE_OPEN_FUNDING_ACCRUAL"
     }
   },
   "research_edge_metrics": {
     "classic_spot_arb": {
-      "scan_count": 4677,
-      "execution_edge_quote_sum": 2117.449626218008,
-      "last_raw_positive": 376,
-      "last_after_fees_positive": 40,
-      "last_depth_checks": 40,
-      "last_depth_pass": 19,
+      "scan_count": 4775,
+      "execution_edge_quote_sum": 2139.112327157041,
+      "last_raw_positive": 414,
+      "last_after_fees_positive": 31,
+      "last_depth_checks": 31,
+      "last_depth_pass": 18,
       "verification_candidates": 0,
       "metric_type": "SUM_OF_PAPER_EDGE_EVENTS_NOT_PORTFOLIO_RETURN"
     },
     "bybit_local_relay": {
       "fresh": false,
-      "age_sec": 906526.865,
+      "age_sec": 944308.05,
       "spot_scan_count": 60,
       "spot_recent_bybit_event_count": 100,
       "spot_bybit_signal_count": 25,
@@ -298,64 +338,64 @@
       "metric_type": "LOCAL_BYBIT_PUBLIC_DATA_RELAY_PAPER_RESEARCH"
     },
     "leadlag": {
-      "scan_count": 33863,
-      "pending": 39,
+      "scan_count": 34543,
+      "pending": 68,
       "resolved": 1000,
-      "positive_edge_episodes": 21,
-      "paper_edge_quote_sum": 1.8679267688889754,
+      "positive_edge_episodes": 34,
+      "paper_edge_quote_sum": 2.7855270979753377,
       "error_count": 0,
       "last_error": null,
       "metric_type": "EPISODE_EDGE_NOT_PORTFOLIO_RETURN"
     },
     "orderbook_consensus": {
-      "pending": 80,
+      "pending": 67,
       "resolved_raw": 3000,
       "timing_valid_resolved": 3000,
       "legacy_stale_resolved": 0,
-      "mean_net_return_pct": -0.283734882715203,
-      "mean_gross_return_pct_before_cost": -0.03373488271520299,
-      "positive_net_rate": 0.218,
-      "long_mean_net_pct": -0.31553694063958526,
-      "long_mean_gross_pct": -0.06553694063958526,
-      "short_mean_net_pct": -0.24082576305685482,
-      "short_mean_gross_pct": 0.009174236943145175,
+      "mean_net_return_pct": -0.2728128704800319,
+      "mean_gross_return_pct_before_cost": -0.022812870480031874,
+      "positive_net_rate": 0.21233333333333335,
+      "long_mean_net_pct": -0.28391903722536316,
+      "long_mean_gross_pct": -0.03391903722536316,
+      "short_mean_net_pct": -0.2576011065492227,
+      "short_mean_gross_pct": -0.0076011065492226915,
       "assumed_round_trip_cost_pct": 0.25,
       "promotion_eligible": false,
       "diagnosis": "TIMING_VALID_SIGNAL_HAS_NO_POSITIVE_NET_EDGE_AT_FROZEN_COST_ASSUMPTION",
       "metric_type": "TIMING_VALID_TRADE_RETURN_DIAGNOSTIC_NOT_PORTFOLIO_RETURN"
     },
     "arb_verifier": {
-      "verified_count": 377,
+      "verified_count": 384,
       "rejected_count": 20,
-      "watch_count": 174,
-      "verified_paper_edge_quote_sum": 34.750297463136754,
+      "watch_count": 178,
+      "verified_paper_edge_quote_sum": 35.16397610273643,
       "metric_type": "IDENTITY_AND_EXECUTION_VALIDATION"
     }
   },
   "moex_research": {
     "broad_shadow": {
       "resolved": 10000,
-      "pending": 244,
+      "pending": 106,
       "note": "Do not interpret legacy equity-like sums as portfolio return unless capital-normalized."
     },
     "calendar_matrix": {
-      "sample_keys": 356,
+      "sample_keys": 360,
       "metric_type": "BASELINE_AND_SIGNAL_RESEARCH"
     }
   },
   "source_health": {
-    "arb_bybit_cloud_symbols": 127,
+    "arb_bybit_cloud_symbols": 129,
     "arb_bybit_cloud_error": null,
     "bybit_local_relay_fresh": false,
-    "bybit_local_relay_age_sec": 906526.865,
+    "bybit_local_relay_age_sec": 944308.05,
     "bybit_local_spot_symbols": 390,
     "bybit_local_perp_symbols": 789,
     "bybit_cloud_ws_fresh": true,
-    "bybit_cloud_ws_age_sec": 3.296,
-    "bybit_cloud_ws_ticker_symbols": 224,
-    "bybit_cloud_ws_book_symbols": 128,
+    "bybit_cloud_ws_age_sec": 7.163,
+    "bybit_cloud_ws_ticker_symbols": 223,
+    "bybit_cloud_ws_book_symbols": 129,
     "bybit_effective_source": "CLOUD_WS",
-    "bybit_effective_spot_symbols": 128,
+    "bybit_effective_spot_symbols": 129,
     "bybit_effective_perp_symbols": 0,
     "leadlag_state": "OK",
     "orderbook_state": "OK",
