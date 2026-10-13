@@ -3,18 +3,6 @@
   "started_at": 1790854584.4076161,
   "pending": [
     {
-      "id": "ETH:1791827136",
-      "asset": "ETH",
-      "front": "EHV6",
-      "next": "EHX6",
-      "opened_at": 1791827136.730211,
-      "due_ts": 1791855936.730211,
-      "entry_curve_pct": 0.9928252860190057,
-      "entry_z": 2.4314,
-      "side": -1,
-      "round_trip_cost_bps": 10.0
-    },
-    {
       "id": "NIKK:1791827136",
       "asset": "NIKK",
       "front": "N2Z6",
@@ -23,18 +11,6 @@
       "due_ts": 1791855936.730211,
       "entry_curve_pct": -1.2143870756467612,
       "entry_z": -2.7749,
-      "side": 1,
-      "round_trip_cost_bps": 10.0
-    },
-    {
-      "id": "AFKS:1791827136",
-      "asset": "AFKS",
-      "front": "AKZ6",
-      "next": "AKH7",
-      "opened_at": 1791827136.730211,
-      "due_ts": 1791855936.730211,
-      "entry_curve_pct": 2.2057852331264005,
-      "entry_z": -2.0818,
       "side": 1,
       "round_trip_cost_bps": 10.0
     },
@@ -60,18 +36,6 @@
       "entry_curve_pct": 2.6925485284909234,
       "entry_z": -3.2225,
       "side": 1,
-      "round_trip_cost_bps": 10.0
-    },
-    {
-      "id": "FEES:1791827136",
-      "asset": "FEES",
-      "front": "FSZ6",
-      "next": "FSH7",
-      "opened_at": 1791827136.730211,
-      "due_ts": 1791855936.730211,
-      "entry_curve_pct": 2.8598130841121394,
-      "entry_z": 2.1474,
-      "side": -1,
       "round_trip_cost_bps": 10.0
     },
     {
@@ -131,6 +95,66 @@
       "due_ts": 1791859180.4203162,
       "entry_curve_pct": 3.2786885245901676,
       "entry_z": 2.394,
+      "side": -1,
+      "round_trip_cost_bps": 10.0
+    },
+    {
+      "id": "ENPG:1791851570",
+      "asset": "ENPG",
+      "front": "EAZ6",
+      "next": "EAH7",
+      "opened_at": 1791851570.3602645,
+      "due_ts": 1791880370.3602645,
+      "entry_curve_pct": 2.0543615676358984,
+      "entry_z": -3.1623,
+      "side": 1,
+      "round_trip_cost_bps": 10.0
+    },
+    {
+      "id": "RTKM:1791851870",
+      "asset": "RTKM",
+      "front": "RTZ6",
+      "next": "RTH7",
+      "opened_at": 1791851870.4017828,
+      "due_ts": 1791880670.4017828,
+      "entry_curve_pct": 2.1025277580911883,
+      "entry_z": -2.0564,
+      "side": 1,
+      "round_trip_cost_bps": 10.0
+    },
+    {
+      "id": "ALRS:1791852170",
+      "asset": "ALRS",
+      "front": "ALZ6",
+      "next": "ALH7",
+      "opened_at": 1791852170.483726,
+      "due_ts": 1791880970.483726,
+      "entry_curve_pct": 4.001905669366357,
+      "entry_z": 2.0717,
+      "side": -1,
+      "round_trip_cost_bps": 10.0
+    },
+    {
+      "id": "RAGR:1791852170",
+      "asset": "RAGR",
+      "front": "RZZ6",
+      "next": "RZH7",
+      "opened_at": 1791852170.483726,
+      "due_ts": 1791880970.483726,
+      "entry_curve_pct": 3.610926049300467,
+      "entry_z": 2.4937,
+      "side": -1,
+      "round_trip_cost_bps": 10.0
+    },
+    {
+      "id": "HEAD:1791852170",
+      "asset": "HEAD",
+      "front": "HDZ6",
+      "next": "HDH7",
+      "opened_at": 1791852170.483726,
+      "due_ts": 1791880970.483726,
+      "entry_curve_pct": 1.5119549929676568,
+      "entry_z": 3.4641,
       "side": -1,
       "round_trip_cost_bps": 10.0
     }
@@ -1070,11 +1094,62 @@
       "resolved_at": 1791827678.5740483,
       "gross_return_pct": 0.21311601607276742,
       "net_return_pct": 0.11311601607276742
+    },
+    {
+      "id": "ETH:1791827136",
+      "asset": "ETH",
+      "front": "EHV6",
+      "next": "EHX6",
+      "opened_at": 1791827136.730211,
+      "due_ts": 1791855936.730211,
+      "entry_curve_pct": 0.9928252860190057,
+      "entry_z": 2.4314,
+      "side": -1,
+      "round_trip_cost_bps": 10.0,
+      "exit_curve_pct": 0.4936808846761398,
+      "exit_z": -0.1653,
+      "resolved_at": 1791851570.3602645,
+      "gross_return_pct": 0.49914440134286586,
+      "net_return_pct": 0.3991444013428659
+    },
+    {
+      "id": "FEES:1791827136",
+      "asset": "FEES",
+      "front": "FSZ6",
+      "next": "FSH7",
+      "opened_at": 1791827136.730211,
+      "due_ts": 1791855936.730211,
+      "entry_curve_pct": 2.8598130841121394,
+      "entry_z": 2.1474,
+      "side": -1,
+      "round_trip_cost_bps": 10.0,
+      "exit_curve_pct": 2.524893314367005,
+      "exit_z": -0.4705,
+      "resolved_at": 1791851870.4017828,
+      "gross_return_pct": 0.3349197697451345,
+      "net_return_pct": 0.23491976974513448
+    },
+    {
+      "id": "AFKS:1791827136",
+      "asset": "AFKS",
+      "front": "AKZ6",
+      "next": "AKH7",
+      "opened_at": 1791827136.730211,
+      "due_ts": 1791855936.730211,
+      "entry_curve_pct": 2.2057852331264005,
+      "entry_z": -2.0818,
+      "side": 1,
+      "round_trip_cost_bps": 10.0,
+      "exit_curve_pct": 3.0063291139240444,
+      "exit_z": 0.4838,
+      "resolved_at": 1791852170.483726,
+      "gross_return_pct": 0.8005438807976439,
+      "net_return_pct": 0.700543880797644
     }
   ],
-  "last_source_ts": 1791830378.6745598,
-  "equity": 108.65344999375381,
-  "peak": 108.9815300302103,
+  "last_source_ts": 1791854810.8772788,
+  "equity": 109.98805804563945,
+  "peak": 109.98805804563945,
   "max_dd_pct": -1.3226005768261717,
   "last_event_ts": {
     "SBRF": 1791827136.730211,
@@ -1083,7 +1158,7 @@
     "ROSN": 1791827678.5740483,
     "RGBI": 1791828278.9815867,
     "SMLT": 1791830380.4203162,
-    "ALRS": 1791789345.5177128,
+    "ALRS": 1791852170.483726,
     "NIKK": 1791827136.730211,
     "AFKS": 1791827136.730211,
     "SPBE": 1791827136.730211,
@@ -1111,7 +1186,11 @@
     "RTSM": 1791791147.0868149,
     "NOTKM": 1791791147.0868149,
     "NLMK": 1791827136.730211,
-    "MOEX": 1791791447.862559
+    "MOEX": 1791791447.862559,
+    "ENPG": 1791851570.3602645,
+    "RTKM": 1791851870.4017828,
+    "RAGR": 1791852170.483726,
+    "HEAD": 1791852170.483726
   },
-  "last_new_events": 1
+  "last_new_events": 0
 }
