@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_VOLATILITY_COMPRESSION_V1",
   "rule_frozen_at": 1790847742.0372891,
-  "last_processed_ts": 1791855003.335,
+  "last_processed_ts": 1791880541.352,
   "last_event_ts": {
     "AAVEUSDT": 1790927491.155,
     "AVAXUSDT": 1790931116.133,
@@ -16,34 +16,7 @@
     "BNBUSDT": 1791339712.18,
     "BTCUSDT": 1791853973.783
   },
-  "pending": [
-    {
-      "id": "BTCUSDT:1791853973",
-      "symbol": "BTCUSDT",
-      "venue": "Bybit",
-      "ts": 1791853973.783,
-      "due_ts": 1791857573.783,
-      "compression_ratio": 0.4458646316353401,
-      "breakout_move_pct": 0.4869734808843784,
-      "entry": 81799.2,
-      "breakout_side": 1.0,
-      "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
-    },
-    {
-      "id": "SOLUSDT:1791854153",
-      "symbol": "SOLUSDT",
-      "venue": "Bybit",
-      "ts": 1791854153.98,
-      "due_ts": 1791857753.98,
-      "compression_ratio": 0.4304051101858864,
-      "breakout_move_pct": 0.42726780604749326,
-      "entry": 103.89,
-      "breakout_side": 1.0,
-      "fakeout_side": -1.0,
-      "round_trip_cost": 0.0012
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "AAVEUSDT:1790891434",
@@ -500,13 +473,51 @@
       "breakout_paper_equity": 99.91725065251819,
       "fakeout_net_return_pct": -0.23514104778354014,
       "fakeout_paper_equity": 99.7925570526227
+    },
+    {
+      "id": "BTCUSDT:1791853973",
+      "symbol": "BTCUSDT",
+      "venue": "Bybit",
+      "ts": 1791853973.783,
+      "due_ts": 1791857573.783,
+      "compression_ratio": 0.4458646316353401,
+      "breakout_move_pct": 0.4869734808843784,
+      "entry": 81799.2,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 83919.32,
+      "exit_ts": 1791877038.229,
+      "breakout_net_return_pct": 2.4718590890864567,
+      "breakout_paper_equity": 100.04074133460917,
+      "fakeout_net_return_pct": -2.711859089086457,
+      "fakeout_paper_equity": 99.65724537618954
+    },
+    {
+      "id": "SOLUSDT:1791854153",
+      "symbol": "SOLUSDT",
+      "venue": "Bybit",
+      "ts": 1791854153.98,
+      "due_ts": 1791857753.98,
+      "compression_ratio": 0.4304051101858864,
+      "breakout_move_pct": 0.42726780604749326,
+      "entry": 103.89,
+      "breakout_side": 1.0,
+      "fakeout_side": -1.0,
+      "round_trip_cost": 0.0012,
+      "exit": 108.645,
+      "exit_ts": 1791877037.453,
+      "breakout_net_return_pct": 4.45695639618827,
+      "breakout_paper_equity": 100.26367994559452,
+      "fakeout_net_return_pct": -4.69695639618827,
+      "fakeout_paper_equity": 99.42320250814144
     }
   ],
-  "breakout_equity": 99.91725065251819,
-  "breakout_peak": 100.25418084541269,
+  "breakout_equity": 100.26367994559452,
+  "breakout_peak": 100.26367994559452,
   "breakout_max_dd_pct": -0.43731008357105194,
-  "fakeout_equity": 99.7925570526227,
+  "fakeout_equity": 99.42320250814144,
   "fakeout_peak": 100.05081115577917,
-  "fakeout_max_dd_pct": -0.3484010016815642,
+  "fakeout_max_dd_pct": -0.6272899143821453,
   "last_new_events": 0
 }
