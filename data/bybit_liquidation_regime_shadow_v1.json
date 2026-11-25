@@ -1,17 +1,52 @@
 {
   "version": "BYBIT_LIQUIDATION_REGIME_V1",
   "rule_frozen_at": 1790832884.3502889,
-  "last_bucket": 29926270,
+  "last_bucket": 29926891,
   "last_signal_ts": {
     "BTCUSDT:BUY": 1791733260,
-    "BTCUSDT:SELL": 1791851580,
-    "ETHUSDT:SELL": 1791479280,
+    "BTCUSDT:SELL": 1795613520,
+    "ETHUSDT:SELL": 1795613520,
     "XRPUSDT:SELL": 1791338460,
     "AAVEUSDT:SELL": 1791338520,
     "SUIUSDT:SELL": 1791338520,
     "SOLUSDT:SELL": 1791852720
   },
-  "pending": [],
+  "pending": [
+    {
+      "id": "ETHUSDT:29926891:SELL",
+      "symbol": "ETHUSDT",
+      "ts": 1795613520,
+      "due_ts": 1795617120,
+      "pressure_side": "SELL",
+      "liquidation_notional": 601365.4689000003,
+      "liquidation_events": 87,
+      "oi_15m_pct": -1.0762814397130671,
+      "entry": 1634.18,
+      "continuation_side": -1.0,
+      "recovery_side": 1.0,
+      "funding_rate": 1.188e-05,
+      "next_funding_time": 1795622400000,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    },
+    {
+      "id": "BTCUSDT:29926891:SELL",
+      "symbol": "BTCUSDT",
+      "ts": 1795613520,
+      "due_ts": 1795617120,
+      "pressure_side": "SELL",
+      "liquidation_notional": 1280960.8734000004,
+      "liquidation_events": 191,
+      "oi_15m_pct": -0.322384537260878,
+      "entry": 58424.46,
+      "continuation_side": -1.0,
+      "recovery_side": 1.0,
+      "funding_rate": 3.332e-05,
+      "next_funding_time": 1795622400000,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05
+    }
+  ],
   "resolved": [
     {
       "id": "BTCUSDT:29848817:BUY",
