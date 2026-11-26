@@ -311,6 +311,6 @@
     "contracts": 23
   },
   "last_refresh": 1791910050.640977,
-  "last_attempt": 1795648738.0147913,
+  "last_attempt": 1795672196.4673963,
   "last_error": "MOEX_ISS_UNAVAILABLE: [Errno 2] No such file or directory: 'curl.exe'"
 }
