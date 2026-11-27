@@ -1,7 +1,7 @@
 {
   "version": "BYBIT_LIQUIDATION_REGIME_V1",
   "rule_frozen_at": 1790832884.3502889,
-  "last_bucket": 29929496,
+  "last_bucket": 29930076,
   "last_signal_ts": {
     "BTCUSDT:BUY": 1795767480,
     "BTCUSDT:SELL": 1795705740,
@@ -11,25 +11,7 @@
     "SUIUSDT:SELL": 1791338520,
     "SOLUSDT:SELL": 1791852720
   },
-  "pending": [
-    {
-      "id": "BTCUSDT:29929457:BUY",
-      "symbol": "BTCUSDT",
-      "ts": 1795767480,
-      "due_ts": 1795771080,
-      "pressure_side": "BUY",
-      "liquidation_notional": 815972.5749999997,
-      "liquidation_events": 54,
-      "oi_15m_pct": -3.447130091455397,
-      "entry": 62004.92,
-      "continuation_side": 1.0,
-      "recovery_side": -1.0,
-      "funding_rate": -0.00013753,
-      "next_funding_time": 1795795200000,
-      "round_trip_cost": 0.0012,
-      "allocation_fraction": 0.05
-    }
-  ],
+  "pending": [],
   "resolved": [
     {
       "id": "BTCUSDT:29848817:BUY",
@@ -404,13 +386,35 @@
       "funding_crossed": true,
       "continuation_net_return_pct": -0.8081816824069178,
       "recovery_net_return_pct": 0.5681816824069178
+    },
+    {
+      "id": "BTCUSDT:29929457:BUY",
+      "symbol": "BTCUSDT",
+      "ts": 1795767480,
+      "due_ts": 1795771080,
+      "pressure_side": "BUY",
+      "liquidation_notional": 815972.5749999997,
+      "liquidation_events": 54,
+      "oi_15m_pct": -3.447130091455397,
+      "entry": 62004.92,
+      "continuation_side": 1.0,
+      "recovery_side": -1.0,
+      "funding_rate": -0.00013753,
+      "next_funding_time": 1795795200000,
+      "round_trip_cost": 0.0012,
+      "allocation_fraction": 0.05,
+      "exit": 59849.99,
+      "exit_ts": 1795802757.459,
+      "funding_crossed": true,
+      "continuation_net_return_pct": -3.5816647571715285,
+      "recovery_net_return_pct": 3.3416647571715288
     }
   ],
-  "continuation_equity": 98.88810644710043,
+  "continuation_equity": 98.71101442421792,
   "continuation_peak": 100.06274936444612,
-  "continuation_max_dd_pct": -1.1739062986041215,
-  "recovery_equity": 100.9162208242835,
-  "recovery_peak": 100.9162208242835,
+  "continuation_max_dd_pct": -1.3508872670537353,
+  "recovery_equity": 101.08483491356121,
+  "recovery_peak": 101.08483491356121,
   "recovery_max_dd_pct": -0.16751152036488248,
   "last_new_events": 0
 }
